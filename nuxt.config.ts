@@ -1,9 +1,17 @@
 export default defineNuxtConfig({
   future: { compatibilityVersion: 4 },
+  ssr: true,
+  target: 'static',
+  nitro: {
+    prerender: {
+      // Pre-render the homepage
+      routes: ['/'],
+      // Then crawl all the links on the page
+    }
+  },
   components: true,
   // https://nuxt.com/modules
   modules: [
-    '@nuxthub/core',
     '@nuxt/eslint',
     '@nuxtjs/google-fonts',
     '@nuxtjs/i18n',

@@ -148,35 +148,43 @@ const languages = [
 
 // Обработка прокрутки
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 50
+  if (process.client) {
+    isScrolled.value = window.scrollY > 50
+  }
 }
 
 // Плавная прокрутка к секции
 const scrollToSection = (sectionId) => {
-  const element = document.getElementById(sectionId)
-  if (element) {
-    element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    })
+  if (process.client) {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+    closeMobileMenu()
   }
-  closeMobileMenu()
 }
 
 // Мобильное меню
 const toggleMobileMenu = () => {
-  isMobileMenuOpen.value = !isMobileMenuOpen.value
-  // Блокируем прокрутку при открытом меню
-  if (isMobileMenuOpen.value) {
-    document.body.style.overflow = 'hidden'
-  } else {
-    document.body.style.overflow = ''
+  if (process.client) {
+    isMobileMenuOpen.value = !isMobileMenuOpen.value
+    // Блокируем прокрутку при открытом меню
+    if (isMobileMenuOpen.value) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
   }
 }
 
 const closeMobileMenu = () => {
-  isMobileMenuOpen.value = false
-  document.body.style.overflow = ''
+  if (process.client) {
+    isMobileMenuOpen.value = false
+    document.body.style.overflow = ''
+  }
 }
 
 // Переключение языка
@@ -193,9 +201,11 @@ const switchLanguage = (language) => {
 
 // Промо-баннер
 const closePromoBanner = () => {
-  showPromoBanner.value = false
-  // Сохраняем в localStorage, чтобы не показывать снова
-  localStorage.setItem('promoBannerClosed', 'true')
+  if (process.client) {
+    showPromoBanner.value = false
+    // Сохраняем в localStorage, чтобы не показывать снова
+    localStorage.setItem('promoBannerClosed', 'true')
+  }
 }
 
 // Навигация
@@ -218,19 +228,23 @@ const handleClickOutside = (event) => {
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-  document.addEventListener('click', handleClickOutside)
+  if (process.client) {
+    window.addEventListener('scroll', handleScroll)
+    document.addEventListener('click', handleClickOutside)
 
-  // Проверяем, был ли закрыт промо-баннер
-  if (localStorage.getItem('promoBannerClosed')) {
-    showPromoBanner.value = false
+    // Проверяем, был ли закрыт промо-баннер
+    if (localStorage.getItem('promoBannerClosed')) {
+      showPromoBanner.value = false
+    }
   }
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-  document.removeEventListener('click', handleClickOutside)
-  document.body.style.overflow = ''
+  if (process.client) {
+    window.removeEventListener('scroll', handleScroll)
+    document.removeEventListener('click', handleClickOutside)
+    document.body.style.overflow = ''
+  }
 })
 </script>
 

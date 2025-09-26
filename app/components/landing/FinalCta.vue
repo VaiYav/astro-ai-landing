@@ -253,10 +253,12 @@ const animateNumber = (target, ref) => {
 
 // Методы
 const openDemo = () => {
-  // Логика открытия демо видео или перехода к демо секции
-  const demoSection = document.querySelector('.demo-section')
-  if (demoSection) {
-    demoSection.scrollIntoView({ behavior: 'smooth' })
+  if (process.client) {
+    // Логика открытия демо видео или перехода к демо секции
+    const demoSection = document.querySelector('.demo-section')
+    if (demoSection) {
+      demoSection.scrollIntoView({behavior: 'smooth'})
+    }
   }
 }
 

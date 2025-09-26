@@ -430,9 +430,11 @@ const trackDownload = (platform) => {
 }
 
 const scrollToDownload = () => {
-  const downloadSection = document.querySelector('.download-buttons')
-  if (downloadSection) {
-    downloadSection.scrollIntoView({ behavior: 'smooth' })
+  if (process.client) {
+    const downloadSection = document.querySelector('.download-buttons')
+    if (downloadSection) {
+      downloadSection.scrollIntoView({behavior: 'smooth'})
+    }
   }
 }
 

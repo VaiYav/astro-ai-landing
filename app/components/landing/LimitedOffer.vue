@@ -358,78 +358,86 @@ onUnmounted(() => {
 
 // Методы инициализации
 const initializeOffer = () => {
-  // Проверяем, не показывали ли уже сегодня
-  const lastShown = localStorage.getItem('offer-last-shown')
-  const today = new Date().toDateString()
+  if (process.client) {
+    // Проверяем, не показывали ли уже сегодня
+    const lastShown = localStorage.getItem('offer-last-shown')
+    const today = new Date().toDateString()
 
-  if (lastShown === today) {
-    return
+    if (lastShown === today) {
+      return
+    }
+
+    // Устанавливаем время окончания предложения
+    const endTime = localStorage.getItem('offer-end-time')
+    const now = Date.now()
+
+    if (endTime && now < parseInt(endTime)) {
+      timeLeft.value = Math.floor((parseInt(endTime) - now) / 1000)
+    } else {
+      const newEndTime = now + (currentOffer.value.duration * 1000)
+      localStorage.setItem('offer-end-time', newEndTime.toString())
+      timeLeft.value = currentOffer.value.duration
+    }
+
+    // Запускаем таймер
+    startTimer()
+
+    // Анимируем счетчики
+    animateCounters()
   }
-
-  // Устанавливаем время окончания предложения
-  const endTime = localStorage.getItem('offer-end-time')
-  const now = Date.now()
-
-  if (endTime && now < parseInt(endTime)) {
-    timeLeft.value = Math.floor((parseInt(endTime) - now) / 1000)
-  } else {
-    const newEndTime = now + (currentOffer.value.duration * 1000)
-    localStorage.setItem('offer-end-time', newEndTime.toString())
-    timeLeft.value = currentOffer.value.duration
-  }
-
-  // Запускаем таймер
-  startTimer()
-
-  // Анимируем счетчики
-  animateCounters()
 }
 
 const setupTriggers = () => {
-  switch (props.trigger) {
-    case 'auto':
-      setTimeout(() => {
-        showStickyBanner.value = true
+  if (process.client) {
+    switch (props.trigger) {
+      case 'auto':
         setTimeout(() => {
-          if (!isDismissed.value) {
-            showOfferModal.value = true
-          }
-        }, 5000)
-      }, 3000)
-      break
+          showStickyBanner.value = true
+          setTimeout(() => {
+            if (!isDismissed.value) {
+              showOfferModal.value = true
+            }
+          }, 5000)
+        }, 3000)
+        break
 
-    case 'scroll':
-      window.addEventListener('scroll', handleScroll)
-      break
+      case 'scroll':
+        window.addEventListener('scroll', handleScroll)
+        break
 
-    case 'time':
-      setTimeout(() => {
-        showOfferModal.value = true
-      }, 30000)
-      break
+      case 'time':
+        setTimeout(() => {
+          showOfferModal.value = true
+        }, 30000)
+        break
 
-    case 'exit':
-      document.addEventListener('mouseleave', handleExitIntent)
-      break
+      case 'exit':
+        document.addEventListener('mouseleave', handleExitIntent)
+        break
+    }
+
+    // Показываем floating widget через некоторое время
+    setTimeout(() => {
+      showFloatingWidget.value = true
+    }, 10000)
   }
-
-  // Показываем floating widget через некоторое время
-  setTimeout(() => {
-    showFloatingWidget.value = true
-  }, 10000)
 }
 
 const cleanupTriggers = () => {
+  if (process.client) {
   window.removeEventListener('scroll', handleScroll)
   document.removeEventListener('mouseleave', handleExitIntent)
+    }
 }
 
 // Обработчики событий
 const handleScroll = () => {
-  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+  if (process.client) {
+    const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
 
-  if (scrolled >= 50 && !showOfferModal.value) {
-    showOfferModal.value = true
+    if (scrolled >= 50 && !showOfferModal.value) {
+      showOfferModal.value = true
+    }
   }
 }
 
@@ -485,15 +493,17 @@ const formatTime = (time) => {
 
 // Управление модалами
 const dismissBanner = () => {
-  isDismissed.value = true
-  localStorage.setItem('offer-banner-dismissed', 'true')
+  if (process.client) {
+    isDismissed.value = true
+    localStorage.setItem('offer-banner-dismissed', 'true')
 
-  // Трекинг
-  if (typeof gtag !== 'undefined') {
-    gtag('event', 'offer_banner_dismissed', {
-      event_category: 'urgency',
-      offer_type: props.offerType
-    })
+    // Трекинг
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'offer_banner_dismissed', {
+        event_category: 'urgency',
+        offer_type: props.offerType
+      })
+    }
   }
 }
 

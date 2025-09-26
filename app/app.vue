@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useServerHead({
-  htmlAttrs: { lang: 'en' },
+  htmlAttrs: { lang: 'uk' },
 })
 useSeoMeta({
 })

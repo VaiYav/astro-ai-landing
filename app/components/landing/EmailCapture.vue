@@ -237,41 +237,47 @@ onUnmounted(() => {
 
 // Методы для настройки триггеров
 const setupTriggers = () => {
-  // Проверяем, не показывали ли уже попап
-  if (localStorage.getItem('email-popup-shown')) {
-    return
-  }
+  if (process.client) {
+    // Проверяем, не показывали ли уже попап
+    if (localStorage.getItem('email-popup-shown')) {
+      return
+    }
 
-  switch (props.trigger) {
-    case 'time':
-      setTimeout(() => {
-        if (!hasTriggered.value) {
-          showPopup()
-        }
-      }, props.delay)
-      break
+    switch (props.trigger) {
+      case 'time':
+        setTimeout(() => {
+          if (!hasTriggered.value) {
+            showPopup()
+          }
+        }, props.delay)
+        break
 
-    case 'scroll':
-      window.addEventListener('scroll', handleScroll)
-      break
+      case 'scroll':
+        window.addEventListener('scroll', handleScroll)
+        break
 
-    case 'exit':
-      document.addEventListener('mouseleave', handleExitIntent)
-      break
+      case 'exit':
+        document.addEventListener('mouseleave', handleExitIntent)
+        break
+    }
   }
 }
 
 const cleanupTriggers = () => {
-  window.removeEventListener('scroll', handleScroll)
-  document.removeEventListener('mouseleave', handleExitIntent)
+  if (process.client) {
+    window.removeEventListener('scroll', handleScroll)
+    document.removeEventListener('mouseleave', handleExitIntent)
+  }
 }
 
 // Обработчики триггеров
 const handleScroll = () => {
-  const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+  if (process.client) {
+    const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
 
-  if (scrolled >= props.scrollPercentage && !hasTriggered.value) {
-    showPopup()
+    if (scrolled >= props.scrollPercentage && !hasTriggered.value) {
+      showPopup()
+    }
   }
 }
 
@@ -323,67 +329,69 @@ const closePopup = () => {
 
 // Отправка формы
 const submitEmail = async () => {
-  if (!formData.value.email || !formData.value.name) return
+  if (process.client) {
+    if (!formData.value.email || !formData.value.name) return
 
-  isLoading.value = true
+    isLoading.value = true
 
-  try {
-    // Здесь должен быть реальный API вызов
-    const response = await fetch('/api/subscribe', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(formData.value)
-    })
+    try {
+      // Здесь должен быть реальный API вызов
+      const response = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData.value)
+      })
 
-    if (response.ok) {
-      // Успех
-      isVisible.value = false
-      showSuccess.value = true
+      if (response.ok) {
+        // Успех
+        isVisible.value = false
+        showSuccess.value = true
 
-      // Включаем скролл
-      document.body.style.overflow = ''
+        // Включаем скролл
+        document.body.style.overflow = ''
 
-      // Запоминаем, что подписались
-      localStorage.setItem('email-subscribed', 'true')
-      localStorage.setItem('email-popup-shown', 'true')
+        // Запоминаем, что подписались
+        localStorage.setItem('email-subscribed', 'true')
+        localStorage.setItem('email-popup-shown', 'true')
 
-      emit('success', formData.value)
+        emit('success', formData.value)
 
-      // Трекинг успешной подписки
+        // Трекинг успешной подписки
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'email_subscription_success', {
+            event_category: 'conversion',
+            value: 1
+          })
+        }
+
+        // Сброс формы
+        formData.value = {
+          name: '',
+          email: '',
+          birthDate: '',
+          source: 'popup',
+          trigger: props.trigger
+        }
+      } else {
+        throw new Error('Subscription failed')
+      }
+    } catch (error) {
+      console.error('Subscription error:', error)
+
+      // Показываем ошибку (в реальном проекте лучше toast notification)
+      alert(t('subscription_error'))
+
+      // Трекинг ошибки
       if (typeof gtag !== 'undefined') {
-        gtag('event', 'email_subscription_success', {
-          event_category: 'conversion',
-          value: 1
+        gtag('event', 'email_subscription_error', {
+          event_category: 'error'
         })
       }
-
-      // Сброс формы
-      formData.value = {
-        name: '',
-        email: '',
-        birthDate: '',
-        source: 'popup',
-        trigger: props.trigger
-      }
-    } else {
-      throw new Error('Subscription failed')
+    } finally {
+      isLoading.value = false
     }
-  } catch (error) {
-    console.error('Subscription error:', error)
-
-    // Показываем ошибку (в реальном проекте лучше toast notification)
-    alert(t('subscription_error'))
-
-    // Трекинг ошибки
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'email_subscription_error', {
-        event_category: 'error'
-      })
-    }
-  } finally {
-    isLoading.value = false
   }
 }
 

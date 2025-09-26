@@ -26,7 +26,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-const { t, tm } = useI18n()
+const { tm } = useI18n()
 
 // Отслеживаем, какой элемент аккордеона открыт
 const openItem = ref(null) // null означает, что все закрыты

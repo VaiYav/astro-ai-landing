@@ -17,7 +17,7 @@
 <!--    <BlogPreview />-->
     <Testimonials />
 <!--    <Partners />-->
-    <Faq />
+<!--    <Faq />-->
     <FinalCta />
 
   </div>

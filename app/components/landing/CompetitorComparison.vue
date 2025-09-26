@@ -455,9 +455,11 @@ const startTrial = () => {
 }
 
 const viewPricing = () => {
-  const element = document.getElementById('pricing')
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' })
+  if (process.client) {
+    const element = document.getElementById('pricing')
+    if (element) {
+      element.scrollIntoView({behavior: 'smooth'})
+    }
   }
 }
 </script>
