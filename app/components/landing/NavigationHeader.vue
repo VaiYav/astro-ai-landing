@@ -678,6 +678,7 @@ onUnmounted(() => {
   }
 
   .nav-menu.mobile-open {
+    height: 100vh;
     transform: translateX(0);
   }
 

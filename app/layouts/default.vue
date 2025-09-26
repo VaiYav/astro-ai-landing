@@ -22,7 +22,7 @@ import NavigationHeader from "~/components/landing/NavigationHeader.vue";
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 4rem 1rem 0;
   box-sizing: border-box;
 }
 main {
