@@ -5,10 +5,12 @@
       <slot />
     </main>
     <Footer />
+    <SpeedInsights/>
   </div>
 </template>
 
 <script setup>
+import { SpeedInsights } from '@vercel/speed-insights/nuxt'
 import Header from '~/components/common/Header.vue'
 import Footer from '~/components/common/Footer.vue'
 import NavigationHeader from "~/components/landing/NavigationHeader.vue";

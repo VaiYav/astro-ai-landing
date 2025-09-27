@@ -43,6 +43,7 @@
     "wrangler": "^4.40.2"
   },
   "dependencies": {
+    "@vercel/speed-insights": "^1.2.0",
     "@vueuse/motion": "^3.0.3"
   }
 }
