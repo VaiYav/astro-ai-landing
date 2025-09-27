@@ -266,5 +266,104 @@
   "first_horoscope_step": "Receive your first personalized horoscope",
   "upgrade_to_premium": "Upgrade to Premium",
   "continue_browsing": "Continue Browsing",
-  "subscription_error": "There was an error subscribing. Please try again."
+  "subscription_error": "There was an error subscribing. Please try again.",
+  "appName": "AI-Oracle",
+  "menu": {
+    "features": "Features",
+    "demo": "Demo",
+    "pricing": "Pricing",
+    "testimonials": "Testimonials",
+    "resources": {
+      "title": "Resources",
+      "blog": { "title": "Blog", "desc": "Astrology articles" },
+      "guides": { "title": "Guides", "desc": "Learning materials" },
+      "api": { "title": "API", "desc": "For developers" },
+      "help": { "title": "Help", "desc": "Support center" }
+    }
+  },
+  "actions": {
+    "login": "Login",
+    "signup": "Try for Free"
+  },
+  "promo": {
+    "text": "New Year Offer! 50% off all premium plans until December 31",
+    "cta": "Get it now"
+  },
+  "languages": {
+    "uk": "Ukrainian",
+    "en": "English",
+    "ru": "Russian"
+  },
+  "footer": {
+    "brand": {
+      "description": "A personal astrological assistant that helps you unlock your potential and find your path among the stars"
+    },
+    "social": {
+      "telegram": "Telegram",
+      "instagram": "Instagram",
+      "youtube": "YouTube",
+      "tiktok": "TikTok"
+    },
+    "navigation": { "title": "Navigation" },
+    "nav": {
+      "features": "Features",
+      "demo": "Demo",
+      "pricing": "Pricing",
+      "testimonials": "Testimonials",
+      "faq": "FAQ",
+      "blog": "Blog"
+    },
+    "services": {
+      "title": "Services",
+      "natal": "Natal Chart",
+      "daily": "Daily Horoscopes",
+      "compatibility": "Compatibility",
+      "consultations": "Consultations",
+      "business": "Business Astrology",
+      "api": "API for Developers"
+    },
+    "support": {
+      "title": "Support",
+      "help": "Help Center",
+      "contact": "Contact Us",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "refund": "Refunds",
+      "security": "Security"
+    },
+    "stayConnected": { "title": "Stay connected" },
+    "contact": {
+      "phone": "+1 (555) 123-4567",
+      "global": "Available worldwide"
+    },
+    "newsletter": {
+      "title": "Astrology updates",
+      "subtitle": "Get weekly forecasts and tips",
+      "placeholder": "Your email",
+      "subscribe": "Subscribe",
+      "success": "Thanks! You are subscribed.",
+      "error": "Subscription error. Please try again."
+    },
+    "awards": {
+      "title": "🏆 Awards & recognition",
+      "items": ["Best AI App 2024", "Top Astrology Service", "Editor's Choice"]
+    },
+    "stats": {
+      "title": "📊 Our achievements",
+      "usersCount": "50K+",
+      "usersLabel": "Users",
+      "chartsCount": "1M+",
+      "chartsLabel": "Charts generated",
+      "uptime": "99.9%",
+      "uptimeLabel": "Uptime"
+    },
+    "languages": { "title": "🌐 Languages" },
+    "copyright": "{year} AI-Oracle. All rights reserved.",
+    "disclaimer": "Astrological forecasts are for entertainment and personal growth purposes only.",
+    "certifications": {
+      "ssl": "SSL Secured",
+      "gdpr": "GDPR",
+      "pci": "PCI DSS"
+    }
+  }
 }

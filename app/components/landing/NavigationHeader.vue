@@ -6,7 +6,7 @@
         <div class="logo">
           <a href="/" class="logo-link">
             <div class="logo-icon">🔮</div>
-            <span class="logo-text">ИИ-Оракул</span>
+            <span class="logo-text">{{ $t('appName') }}</span>
           </a>
         </div>
 
@@ -14,84 +14,67 @@
         <div class="nav-menu" :class="{ 'mobile-open': isMobileMenuOpen }">
           <div class="nav-links">
             <a href="#features" class="nav-link" @click="scrollToSection('features')">
-              Возможности
+              {{ $t('menu.features') }}
             </a>
             <a href="#demo" class="nav-link" @click="scrollToSection('demo')">
-              Демо
+              {{ $t('menu.demo') }}
             </a>
             <a href="#pricing" class="nav-link" @click="scrollToSection('pricing')">
-              Тарифы
+              {{ $t('menu.pricing') }}
             </a>
             <a href="#testimonials" class="nav-link" @click="scrollToSection('testimonials')">
-              Отзывы
+              {{ $t('menu.testimonials') }}
             </a>
-<!--            <div class="nav-dropdown">-->
-<!--              <button class="nav-link dropdown-trigger">-->
-<!--                Ресурсы-->
-<!--                <span class="dropdown-arrow">▼</span>-->
-<!--              </button>-->
-<!--              <div class="dropdown-menu">-->
-<!--                <a href="/blog" class="dropdown-item">-->
-<!--                  <span class="item-icon">📖</span>-->
-<!--                  <div>-->
-<!--                    <span class="item-title">Блог</span>-->
-<!--                    <span class="item-desc">Статьи об астрологии</span>-->
-<!--                  </div>-->
-<!--                </a>-->
-<!--                <a href="/guides" class="dropdown-item">-->
-<!--                  <span class="item-icon">📚</span>-->
-<!--                  <div>-->
-<!--                    <span class="item-title">Гиды</span>-->
-<!--                    <span class="item-desc">Обучающие материалы</span>-->
-<!--                  </div>-->
-<!--                </a>-->
-<!--                <a href="/api" class="dropdown-item">-->
-<!--                  <span class="item-icon">⚙️</span>-->
-<!--                  <div>-->
-<!--                    <span class="item-title">API</span>-->
-<!--                    <span class="item-desc">Для разработчиков</span>-->
-<!--                  </div>-->
-<!--                </a>-->
-<!--                <a href="/help" class="dropdown-item">-->
-<!--                  <span class="item-icon">❓</span>-->
-<!--                  <div>-->
-<!--                    <span class="item-title">Помощь</span>-->
-<!--                    <span class="item-desc">Центр поддержки</span>-->
-<!--                  </div>-->
-<!--                </a>-->
-<!--              </div>-->
-<!--            </div>-->
+
+            <!-- Выпадающее меню (закомментировано, но переведено) -->
+            <!--            <div class="nav-dropdown">-->
+            <!--              <button class="nav-link dropdown-trigger">-->
+            <!--                {{ $t('menu.resources.title') }}-->
+            <!--                <span class="dropdown-arrow">▼</span>-->
+            <!--              </button>-->
+            <!--              <div class="dropdown-menu">-->
+            <!--                <a href="/blog" class="dropdown-item">-->
+            <!--                  <span class="item-icon">📖</span>-->
+            <!--                  <div>-->
+            <!--                    <span class="item-title">{{ $t('menu.resources.blog.title') }}</span>-->
+            <!--                    <span class="item-desc">{{ $t('menu.resources.blog.desc') }}</span>-->
+            <!--                  </div>-->
+            <!--                </a>-->
+            <!--                <a href="/guides" class="dropdown-item">-->
+            <!--                  <span class="item-icon">📚</span>-->
+            <!--                  <div>-->
+            <!--                    <span class="item-title">{{ $t('menu.resources.guides.title') }}</span>-->
+            <!--                    <span class="item-desc">{{ $t('menu.resources.guides.desc') }}</span>-->
+            <!--                  </div>-->
+            <!--                </a>-->
+            <!--                <a href="/api" class="dropdown-item">-->
+            <!--                  <span class="item-icon">⚙️</span>-->
+            <!--                  <div> -->
+            <!--                    <span class="item-title">{{ $t('menu.resources.api.title') }}</span>-->
+            <!--                    <span class="item-desc">{{ $t('menu.resources.api.desc') }}</span>-->
+            <!--                  </div>-->
+            <!--                </a>-->
+            <!--                <a href="/help" class="dropdown-item">-->
+            <!--                  <span class="item-icon">❓</span>-->
+            <!--                  <div>-->
+            <!--                    <span class="item-title">{{ $t('menu.resources.help.title') }}</span>-->
+            <!--                    <span class="item-desc">{{ $t('menu.resources.help.desc') }}</span>-->
+            <!--                  </div>-->
+            <!--                </a>-->
+            <!--              </div>-->
+            <!--            </div>-->
           </div>
 
           <!-- Переключатель языка -->
           <LangSwitcher />
-<!--          <div class="language-switcher">-->
-<!--            <button class="lang-button" @click="toggleLanguageMenu">-->
-<!--              <span class="current-lang-flag">{{ currentLanguage.flag }}</span>-->
-<!--              <span class="current-lang-code">{{ currentLanguage.code }}</span>-->
-<!--              <span class="lang-arrow">▼</span>-->
-<!--            </button>-->
-<!--            <div class="lang-menu" v-show="isLanguageMenuOpen">-->
-<!--              <button-->
-<!--                v-for="lang in languages"-->
-<!--                :key="lang.code"-->
-<!--                class="lang-option"-->
-<!--                :class="{ 'active': currentLanguage.code === lang.code }"-->
-<!--                @click="switchLanguage(lang)"-->
-<!--              >-->
-<!--                <span class="lang-flag">{{ lang.flag }}</span>-->
-<!--                <span class="lang-name">{{ lang.name }}</span>-->
-<!--              </button>-->
-<!--            </div>-->
-<!--          </div>-->
 
           <!-- Кнопки действий -->
           <div class="nav-actions">
             <button class="login-btn" @click="goToLogin">
-              Войти
+              {{ $t('actions.login') }}
             </button>
             <button class="signup-btn" @click="goToSignup">
-              Попробовать бесплатно
+              {{ $t('actions.signup') }}
             </button>
           </div>
         </div>
@@ -107,21 +90,21 @@
       </nav>
     </div>
 
-    <!-- Уведомление о промо-акции -->
-<!--    <div class="promo-banner" v-if="showPromoBanner">-->
-<!--      <div class="container">-->
-<!--        <div class="promo-content">-->
-<!--          <span class="promo-icon">🎉</span>-->
-<!--          <span class="promo-text">-->
-<!--            Новогодняя акция! Скидка 50% на все премиум планы до 31 декабря-->
-<!--          </span>-->
-<!--          <a href="#pricing" class="promo-link" @click="scrollToSection('pricing')">-->
-<!--            Воспользоваться-->
-<!--          </a>-->
-<!--          <button class="promo-close" @click="closePromoBanner">✕</button>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
+    <!-- Баннер акции (закомментирован, но переведён) -->
+    <!--    <div class="promo-banner" v-if="showPromoBanner">-->
+    <!--      <div class="container">-->
+    <!--        <div class="promo-content">-->
+    <!--          <span class="promo-icon">🎉</span>-->
+    <!--          <span class="promo-text">-->
+    <!--            {{ $t('promo.text') }}-->
+    <!--          </span>-->
+    <!--          <a href="#pricing" class="promo-link" @click="scrollToSection('pricing')">-->
+    <!--            {{ $t('promo.cta') }}-->
+    <!--          </a>-->
+    <!--          <button class="promo-close" @click="closePromoBanner">✕</button>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
   </header>
 </template>
 
