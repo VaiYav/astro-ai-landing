@@ -17,8 +17,8 @@
     <!--    <BlogPreview /> -->
     <Testimonials />
     <!--    <Partners /> -->
-    <!--    <Faq /> -->
-    <!--    <FinalCta /> -->
+    <Faq />
+    <FinalCta />
   </div>
 </template>
 
@@ -38,7 +38,7 @@ import HowItWorks from '~/components/Landing/HowItWorks.vue'
 import Testimonials from '~/components/Landing/Testimonials.vue'
 // import Partners from '~/components/Landing/Partners.vue'
 // import Faq from '~/components/Landing/Faq.vue'
-// import FinalCta from '~/components/Landing/FinalCta.vue'
+import FinalCta from '~/components/Landing/FinalCta.vue'
 // import ZodiacCalculator from '~/components/Landing/ZodiacCalculator.vue'
 import DemoChart from '~/components/Landing/DemoChart.vue'
 import EmailCapture from '~/components/Landing/EmailCapture.vue'

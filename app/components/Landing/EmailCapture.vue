@@ -65,7 +65,7 @@
           <!-- Форма подписки -->
           <form
             class="subscription-form"
-            :class="{ 'is-loading': isLoading }"
+            :class="{ 'is-loading': isLoading, 'has-error': hasError }"
             @submit.prevent="submitEmail"
           >
             <div class="form-row">
@@ -80,6 +80,7 @@
                   :placeholder="$t('placeholder_name')"
                   required
                   class="form-input"
+                  :disabled="isLoading"
                 >
               </div>
 
@@ -94,6 +95,7 @@
                   :placeholder="$t('placeholder_email')"
                   required
                   class="form-input"
+                  :disabled="isLoading"
                 >
               </div>
             </div>
@@ -113,6 +115,7 @@
                   type="date"
                   :placeholder="$t('placeholder_birth_date')"
                   class="form-input"
+                  :disabled="isLoading"
                 >
               </div>
             </div>
@@ -120,17 +123,30 @@
             <button
               type="button"
               class="toggle-optional"
+              :disabled="isLoading"
               @click="showOptionalFields = !showOptionalFields"
             >
               {{ showOptionalFields ? $t('hide_optional') : $t('personalize_more') }}
               <Icon :icon="showOptionalFields ? 'ph:caret-up-bold' : 'ph:caret-down-bold'" />
             </button>
 
+            <!-- Сообщения об ошибках -->
+            <Transition name="fade">
+              <div
+                v-if="hasError"
+                class="error-message"
+              >
+                <Icon icon="ph:warning-circle-bold" />
+                {{ errorMessage }}
+              </div>
+            </Transition>
+
             <!-- Submit button -->
             <button
               type="submit"
               class="submit-btn"
-              :disabled="isLoading"
+              :disabled="isLoading || !isFormValid"
+              :class="{ loading: isLoading }"
             >
               <span v-if="!isLoading">{{ $t('get_free_horoscope') }}</span>
               <span v-else>{{ $t('subscribing') }}...</span>
@@ -156,7 +172,7 @@
                   class="proof-avatar"
                 >
                 <div class="proof-count">
-                  +{{ subscriberCount }}
+                  +{{ formatSubscriberCount }}
                 </div>
               </div>
               <p class="proof-text">
@@ -234,12 +250,12 @@
           </div>
 
           <div class="success-actions">
-            <NuxtLink
-              to="/register"
-              class="upgrade-btn"
-            >
-              {{ $t('upgrade_to_premium') }}
-            </NuxtLink>
+            <!--            <NuxtLink -->
+            <!--              to="/register" -->
+            <!--              class="upgrade-btn" -->
+            <!--            > -->
+            <!--              {{ $t('upgrade_to_premium') }} -->
+            <!--            </NuxtLink> -->
             <button
               class="continue-btn"
               @click="closeSuccess"
@@ -257,7 +273,8 @@
 import { Icon } from '@iconify/vue'
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
-const { t } = useI18n()
+const { t, n } = useI18n()
+const { api, getErrorMessage } = useApi()
 
 // Props
 const props = defineProps({
@@ -273,6 +290,10 @@ const props = defineProps({
     type: Number,
     default: 70, // 70% страницы
   },
+  subscriptionType: {
+    type: String,
+    default: 'early-access',
+  },
 })
 
 // Emits
@@ -284,24 +305,38 @@ const showSuccess = ref(false)
 const isLoading = ref(false)
 const showOptionalFields = ref(false)
 const hasTriggered = ref(false)
+const hasError = ref(false)
+const errorMessage = ref('')
+const subscriberCount = ref(15247)
 
 // Данные формы
 const formData = ref({
   name: '',
   email: '',
   birthDate: '',
+  subscriptionType: props.subscriptionType,
   source: 'popup',
-  trigger: props.trigger,
 })
 
-// Статичные данные
-const subscriberCount = 15247
+// Computed
+const isFormValid = computed(() => {
+  return formData.value.email
+    && formData.value.name
+    && formData.value.email.includes('@')
+    && formData.value.email.includes('.')
+})
+
+const formatSubscriberCount = computed(() => {
+  return n(subscriberCount.value, { notation: 'compact' })
+})
+
 const hasSpecialOffer = computed(() => {
   // Показываем специальное предложение в зависимости от дня недели или времени
   const hour = new Date().getHours()
   return hour >= 18 || hour <= 9 // Вечером и утром
 })
 
+// Статичные данные
 const proofAvatars = [
   { id: 1, name: 'Anna', url: 'https://images.unsplash.com/photo-1494790108755-2616b2e0e4e9?w=40&h=40&fit=crop&crop=face' },
   { id: 2, name: 'Michael', url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face' },
@@ -312,6 +347,7 @@ const proofAvatars = [
 // Lifecycle hooks
 onMounted(() => {
   setupTriggers()
+  loadSubscriberStats()
 })
 
 onUnmounted(() => {
@@ -322,7 +358,7 @@ onUnmounted(() => {
 const setupTriggers = () => {
   if (import.meta.client) {
     // Проверяем, не показывали ли уже попап
-    if (localStorage.getItem('email-popup-shown')) {
+    if (localStorage.getItem('email-popup-shown') || localStorage.getItem('email-subscribed')) {
       return
     }
 
@@ -410,74 +446,109 @@ const closePopup = () => {
   }
 }
 
+// Загрузка статистики подписчиков
+const loadSubscriberStats = async () => {
+  try {
+    const response = await api.getSubscriptionStats()
+    if (response.success && response.data) {
+      subscriberCount.value = response.data.active || 15247
+    }
+  }
+  catch (error) {
+    // Используем значение по умолчанию при ошибке
+    console.warn('Failed to load subscriber stats:', error)
+  }
+}
+
+// Очистка ошибок
+const clearError = () => {
+  hasError.value = false
+  errorMessage.value = ''
+}
+
 // Отправка формы
 const submitEmail = async () => {
-  if (import.meta.client) {
-    if (!formData.value.email || !formData.value.name) return
+  if (!isFormValid.value || isLoading.value) return
 
-    isLoading.value = true
+  isLoading.value = true
+  clearError()
 
-    try {
-      // Здесь должен быть реальный API вызов
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData.value),
+  try {
+    const subscriptionData = {
+      email: formData.value.email.trim().toLowerCase(),
+      name: formData.value.name.trim(),
+      subscriptionType: formData.value.subscriptionType,
+      source: formData.value.source,
+    }
+
+    // Добавляем дату рождения если указана
+    if (formData.value.birthDate) {
+      subscriptionData.metadata = {
+        birthDate: formData.value.birthDate,
+      }
+    }
+
+    const response = await api.subscribeEmail(subscriptionData)
+
+    if (response.success) {
+      // Успех
+      isVisible.value = false
+      showSuccess.value = true
+
+      // Включаем скролл
+      document.body.style.overflow = ''
+
+      // Запоминаем, что подписались
+      localStorage.setItem('email-subscribed', 'true')
+      localStorage.setItem('email-popup-shown', 'true')
+
+      emit('success', {
+        ...subscriptionData,
+        isNew: response.isNew,
       })
 
-      if (response.ok) {
-        // Успех
-        isVisible.value = false
-        showSuccess.value = true
-
-        // Включаем скролл
-        document.body.style.overflow = ''
-
-        // Запоминаем, что подписались
-        localStorage.setItem('email-subscribed', 'true')
-        localStorage.setItem('email-popup-shown', 'true')
-
-        emit('success', formData.value)
-
-        // Трекинг успешной подписки
-        if (typeof gtag !== 'undefined') {
-          gtag('event', 'email_subscription_success', {
-            event_category: 'conversion',
-            value: 1,
-          })
-        }
-
-        // Сброс формы
-        formData.value = {
-          name: '',
-          email: '',
-          birthDate: '',
-          source: 'popup',
-          trigger: props.trigger,
-        }
+      // Сброс формы
+      formData.value = {
+        name: '',
+        email: '',
+        birthDate: '',
+        subscriptionType: props.subscriptionType,
+        source: 'popup',
       }
-      else {
-        throw new Error('Subscription failed')
+
+      // Обновляем счетчик подписчиков
+      if (response.isNew) {
+        subscriberCount.value += 1
       }
     }
-    catch (error) {
-      console.error('Subscription error:', error)
-
-      // Показываем ошибку (в реальном проекте лучше toast notification)
-      alert(t('subscription_error'))
-
-      // Трекинг ошибки
-      if (typeof gtag !== 'undefined') {
-        gtag('event', 'email_subscription_error', {
-          event_category: 'error',
-        })
-      }
+    else {
+      throw new Error(response.message || 'Subscription failed')
     }
-    finally {
-      isLoading.value = false
+  }
+  catch (error) {
+    console.error('Subscription error:', error)
+
+    hasError.value = true
+    errorMessage.value = getErrorMessage(error)
+
+    // Специальная обработка для часто встречающихся ошибок
+    if (error.response?.status === 409) {
+      errorMessage.value = t('validation.emailAlreadySubscribed')
     }
+    else if (error.response?.status === 429) {
+      errorMessage.value = t('validation.tooManyAttempts')
+    }
+
+    // Трекинг ошибки
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'email_subscription_error', {
+        event_category: 'error',
+        event_label: error.response?.status || 'unknown',
+      })
+    }
+  }
+  finally {
+    isLoading.value = false
   }
 }
 
@@ -488,19 +559,28 @@ const closeSuccess = () => {
 
 // Метод для ручного показа попапа (для использования в других компонентах)
 const show = () => {
-  showPopup()
+  if (!localStorage.getItem('email-subscribed')) {
+    showPopup()
+  }
 }
 
 // Expose метод для родительских компонентов
 defineExpose({
   show,
 })
+
+// Очистка ошибок при изменении полей
+watch([() => formData.value.email, () => formData.value.name], () => {
+  if (hasError.value) {
+    clearError()
+  }
+})
 </script>
 
 <style scoped lang="scss">
 .email-capture-overlay {
   position: fixed;
-  top: 40px;
+  top: 0;
   left: 0;
   width: 100%;
   height: 100%;
@@ -672,6 +752,11 @@ defineExpose({
         border-color: var(--accent-gold);
         box-shadow: 0 0 0 3px rgba(240, 195, 115, 0.2);
       }
+
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
     }
   }
 
@@ -696,8 +781,30 @@ defineExpose({
     transition: all 0.3s ease;
     font-family: var(--font-body);
 
-    &:hover {
+    &:hover:not(:disabled) {
       color: #fff;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .error-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+
+    svg {
+      flex-shrink: 0;
     }
   }
 
@@ -744,6 +851,12 @@ defineExpose({
   &.is-loading {
     .form-input {
       pointer-events: none;
+    }
+  }
+
+  &.has-error {
+    .form-input {
+      border-color: rgba(239, 68, 68, 0.5);
     }
   }
 }
@@ -969,6 +1082,15 @@ defineExpose({
 
 .success-enter-from, .success-leave-to {
   opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
 // Responsive

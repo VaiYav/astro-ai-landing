@@ -115,8 +115,6 @@ const changeLanguage = async (newLocale: Locale) => {
     dropdownOpen.value = false
 
     // Трекинг (без изменений)
-    if (import.meta.client && window.gtag) { /* ... */ }
-
     // 5. Исправляем ошибку в уведомлении
     if ('Notification' in window && Notification.permission === 'granted') {
       const newLocaleName = availableLocales.value.find(l => l.code === newLocale)?.name

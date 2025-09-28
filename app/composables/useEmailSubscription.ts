@@ -1,6 +1,8 @@
 // composables/useEmailSubscription.ts
 import { ref, computed } from 'vue'
-import { useApi, type EmailSubscriptionRequest, type ApiResponse, type EmailSubscriber } from '~/utils/api'
+import { useApi, type EmailSubscriptionRequest, type ApiResponse, type EmailSubscriber, type EmailSubscriptionResponse } from '~/utils/api'
+
+declare let gtag: (...args: any[]) => void
 
 interface I18nParams {
   t: (key: string, ...args: any[]) => string
@@ -8,8 +10,7 @@ interface I18nParams {
 }
 
 export const useEmailSubscription = () => {
-  const { api, getErrorMessage, isClientError, isServerError } = useApi()
-  // Он сам вызывает useI18n() для своих нужд (например, для сообщений об ошибках)
+  const { api, getErrorMessage, isClientError, isServerError, isRateLimitError } = useApi()
   const { t, locale } = useI18n()
 
   // Состояния
@@ -29,6 +30,12 @@ export const useEmailSubscription = () => {
   ) => {
     // Сброс предыдущих состояний
     clearStates()
+
+    // Проверка лимитов перед отправкой
+    if (!checkSubscriptionLimits()) {
+      return { success: false, error: error.value }
+    }
+
     isSubmitting.value = true
 
     try {
@@ -46,6 +53,14 @@ export const useEmailSubscription = () => {
         throw new Error(t('validation.temporaryEmail'))
       }
 
+      // Проверка на блокированные домены
+      if (isBlockedEmailDomain(email)) {
+        throw new Error(t('validation.emailDomainBlocked'))
+      }
+
+      // Увеличиваем счетчик попыток
+      incrementAttemptCount()
+
       // Собираем UTM параметры из URL
       const utmParams = getUtmParams()
 
@@ -58,27 +73,31 @@ export const useEmailSubscription = () => {
         name: options.name?.trim(),
         subscriptionType: options.subscriptionType || 'newsletter',
         source,
-        language: locale.value, // Добавляем текущий язык
+        language: locale.value,
         ...utmParams,
         ...options,
       }
 
       // Отправляем запрос
-      const response = await api.subscribeEmail(subscriptionData)
-
+      const response: EmailSubscriptionResponse = await api.subscribeEmail(subscriptionData)
+      console.log(response)
       if (response.success) {
         success.value = response.message || t('api.subscribed')
 
-        // Трекинг события в аналитике
-        trackSubscriptionEvent(subscriptionData)
+        // Сохраняем информацию об успешной подписке
+        saveSubscriptionSuccess(email, response.isNew)
 
-        // Обновляем счетчик подписчиков
-        await updateSubscribersCount()
+        // Трекинг события в аналитике
+        trackSubscriptionEvent('success', subscriptionData, response.isNew)
+
+        // Очищаем черновик после успешной подписки
+        clearEmailDraft()
 
         return {
           success: true,
-          data: response.data,
+          data: response.subscriber,
           message: response.message,
+          isNew: response.isNew,
         }
       }
       else {
@@ -88,12 +107,18 @@ export const useEmailSubscription = () => {
     catch (err: any) {
       console.error('Ошибка подписки:', err)
 
+      // Трекинг ошибки
+      trackSubscriptionEvent('error', undefined, false, err.message)
+
       // Обработка различных типов ошибок с локализацией
       if (err.response?.status === 409) {
         error.value = t('validation.emailExists')
       }
-      else if (err.response?.status === 429) {
+      else if (isRateLimitError(err)) {
         error.value = t('validation.tooManyAttempts')
+      }
+      else if (err.response?.status === 400 && err.response?.data?.message?.includes('blocked')) {
+        error.value = t('validation.emailDomainBlocked')
       }
       else if (isClientError(err)) {
         error.value = getErrorMessage(err)
@@ -131,11 +156,18 @@ export const useEmailSubscription = () => {
       const response = await api.unsubscribeEmail(email)
 
       if (response.success) {
-        success.value = t('api.unsubscribed')
+        success.value = response.message || t('api.unsubscribed')
+
+        // Очищаем localStorage
+        clearSubscriptionInfo()
+
+        // Трекинг отписки
+        trackSubscriptionEvent('unsubscribe', { email }, false)
+
         return { success: true, message: response.message }
       }
       else {
-        throw new Error(response.message || t('api.subscriptionError'))
+        throw new Error(response.message || t('api.unsubscribeError'))
       }
     }
     catch (err: any) {
@@ -149,39 +181,21 @@ export const useEmailSubscription = () => {
   }
 
   /**
-   * Получение статистики подписок
+   * Получение списка подписчиков (для админки)
    */
-  const getStats = async () => {
+  const getSubscribers = async (
+    page: number = 1,
+    limit: number = 20,
+    status?: string,
+    subscriptionType?: string,
+  ) => {
     try {
-      const response = await api.getSubscriptionStats()
-      if (response.success && response.data) {
-        subscribersCount.value = response.data.active
-        return response.data
-      }
-      return null
+      const response = await api.getSubscribers(page, limit, status, subscriptionType)
+      return response
     }
     catch (err) {
-      console.error('Ошибка получения статистики:', err)
+      console.error('Ошибка получения подписчиков:', err)
       return null
-    }
-  }
-
-  /**
-   * Обновление счетчика подписчиков
-   */
-  const updateSubscribersCount = async () => {
-    const stats = await getStats()
-    if (stats) {
-      subscribersCount.value = stats.active
-      // Сохраняем в localStorage для кеширования
-      if (import.meta.client) {
-        const cacheData = {
-          count: stats.active,
-          language: locale.value,
-          updatedAt: Date.now(),
-        }
-        localStorage.setItem('subscribersCount', JSON.stringify(cacheData))
-      }
     }
   }
 
@@ -208,9 +222,6 @@ export const useEmailSubscription = () => {
         console.warn('Ошибка чтения кеша счетчика:', error)
       }
     }
-
-    // Загружаем свежие данные
-    await updateSubscribersCount()
   }
 
   /**
@@ -237,11 +248,25 @@ export const useEmailSubscription = () => {
       'tempmail.org', '10minutemail.com', 'mailinator.com',
       'guerrillamail.com', 'throwaway.email', 'temp-mail.org',
       'yopmail.com', 'sharklasers.com', 'getnada.com',
+      'disposable.email', 'fake-mail.net', 'tempmail.ninja',
     ]
 
     const domain = email.split('@')[1]
     if (!domain) return false
     return tempDomains.includes(domain.toLowerCase())
+  }
+
+  /**
+   * Проверка на блокированные домены
+   */
+  const isBlockedEmailDomain = (email: string): boolean => {
+    const blockedDomains = [
+      'example.com', 'test.com', 'invalid.com',
+    ]
+
+    const domain = email.split('@')[1]
+    if (!domain) return false
+    return blockedDomains.includes(domain.toLowerCase())
   }
 
   /**
@@ -266,42 +291,168 @@ export const useEmailSubscription = () => {
 
     const path = window.location.pathname
 
-    if (path === '/') return 'Landing-home'
+    if (path === '/') return 'landing-home'
     if (path === '/coming-soon') return 'coming-soon'
     if (path.includes('/blog')) return 'blog'
     if (path.includes('/pricing')) return 'pricing'
+    if (document.referrer.includes('google')) return 'google-search'
+    if (document.referrer.includes('facebook')) return 'facebook'
+    if (document.referrer.includes('twitter')) return 'twitter'
 
-    return 'other'
+    return 'direct'
+  }
+
+  /**
+   * Проверка лимитов подписки
+   */
+  const checkSubscriptionLimits = (): boolean => {
+    if (!import.meta.client) return true
+
+    const attempts = localStorage.getItem('subscription-attempts')
+    const lastAttempt = localStorage.getItem('last-subscription-attempt')
+
+    if (attempts && lastAttempt) {
+      const attemptCount = parseInt(attempts)
+      const lastAttemptTime = new Date(lastAttempt).getTime()
+      const now = new Date().getTime()
+      const hoursSinceLastAttempt = (now - lastAttemptTime) / (1000 * 60 * 60)
+
+      // Лимит: не более 5 попыток в час
+      if (attemptCount >= 25 && hoursSinceLastAttempt < 1) {
+        error.value = t('validation.tooManyAttempts')
+        return false
+      }
+
+      // Сброс счетчика после часа
+      if (hoursSinceLastAttempt >= 1) {
+        localStorage.removeItem('subscription-attempts')
+        localStorage.removeItem('last-subscription-attempt')
+      }
+    }
+
+    return true
+  }
+
+  /**
+   * Увеличение счетчика попыток
+   */
+  const incrementAttemptCount = (): void => {
+    if (!import.meta.client) return
+
+    const attempts = localStorage.getItem('subscription-attempts')
+    const newCount = attempts ? parseInt(attempts) + 1 : 1
+
+    localStorage.setItem('subscription-attempts', newCount.toString())
+    localStorage.setItem('last-subscription-attempt', new Date().toISOString())
+  }
+
+  /**
+   * Сохранение информации об успешной подписке
+   */
+  const saveSubscriptionSuccess = (email: string, isNew: boolean): void => {
+    if (import.meta.client) {
+      const subscriptionInfo = {
+        email,
+        isNew,
+        language: locale.value,
+        subscribedAt: new Date().toISOString(),
+        source: detectSource(),
+      }
+
+      localStorage.setItem('email-subscribed', 'true')
+      localStorage.setItem('subscription-info', JSON.stringify(subscriptionInfo))
+
+      // Очищаем счетчики попыток после успеха
+      localStorage.removeItem('subscription-attempts')
+      localStorage.removeItem('last-subscription-attempt')
+    }
+  }
+
+  /**
+   * Получение информации о подписке
+   */
+  const getSubscriptionInfo = () => {
+    if (!import.meta.client) return null
+
+    try {
+      const info = localStorage.getItem('subscription-info')
+      return info ? JSON.parse(info) : null
+    }
+    catch (error) {
+      console.warn('Ошибка чтения информации о подписке:', error)
+      return null
+    }
+  }
+
+  /**
+   * Проверка, подписан ли уже пользователь
+   */
+  const isAlreadySubscribed = (): boolean => {
+    if (!import.meta.client) return false
+    return localStorage.getItem('email-subscribed') === 'true'
+  }
+
+  /**
+   * Очистка информации о подписке
+   */
+  const clearSubscriptionInfo = (): void => {
+    if (!import.meta.client) return
+
+    localStorage.removeItem('email-subscribed')
+    localStorage.removeItem('subscription-info')
+    localStorage.removeItem('subscription-attempts')
+    localStorage.removeItem('last-subscription-attempt')
+  }
+
+  /**
+   * Проверка, должен ли показываться popup
+   */
+  const shouldShowPopup = (): boolean => {
+    if (!import.meta.client) return false
+
+    const hasShown = localStorage.getItem('email-popup-shown')
+    const hasSubscribed = localStorage.getItem('email-subscribed')
+
+    return !hasShown && !hasSubscribed
+  }
+
+  /**
+   * Отметка, что popup был показан
+   */
+  const markPopupShown = (): void => {
+    if (import.meta.client) {
+      localStorage.setItem('email-popup-shown', 'true')
+    }
   }
 
   /**
    * Трекинг события подписки в аналитике
    */
-  const trackSubscriptionEvent = (data: EmailSubscriptionRequest) => {
+  const trackSubscriptionEvent = (
+    eventType: 'success' | 'error' | 'unsubscribe' | 'popup_shown' | 'popup_closed',
+    data?: Partial<EmailSubscriptionRequest>,
+    isNew?: boolean,
+    errorMessage?: string,
+  ) => {
     if (!import.meta.client) return
 
     try {
       // Google Analytics 4
-      if (window.gtag) {
-        window.gtag('event', 'email_subscription', {
-          event_category: 'engagement',
-          event_label: data.subscriptionType,
-          custom_parameter_source: data.source,
-          custom_parameter_language: data.language,
-          custom_parameter_utm_source: data.utmSource,
-          custom_parameter_utm_medium: data.utmMedium,
-          custom_parameter_utm_campaign: data.utmCampaign,
-        })
-      }
+      if (typeof gtag !== 'undefined') {
+        const eventData: any = {
+          event_category: 'email_subscription',
+          event_label: data?.subscriptionType || 'newsletter',
+          custom_parameter_source: data?.source,
+          custom_parameter_language: data?.language || locale.value,
+        }
 
-      // Facebook Pixel
-      if (window.fbq) {
-        window.fbq('track', 'Lead', {
-          content_name: 'Email Subscription',
-          content_category: data.subscriptionType,
-          source: data.source,
-          language: data.language,
-        })
+        if (data?.utmSource) eventData.custom_parameter_utm_source = data.utmSource
+        if (data?.utmMedium) eventData.custom_parameter_utm_medium = data.utmMedium
+        if (data?.utmCampaign) eventData.custom_parameter_utm_campaign = data.utmCampaign
+        if (isNew !== undefined) eventData.custom_parameter_is_new = isNew
+        if (errorMessage) eventData.custom_parameter_error = errorMessage
+
+        gtag('event', `email_subscription_${eventType}`, eventData)
       }
     }
     catch (err) {
@@ -332,8 +483,9 @@ export const useEmailSubscription = () => {
         const draft = localStorage.getItem('emailDraft')
         if (draft) {
           const draftData = JSON.parse(draft)
-          // Возвращаем черновик только если язык совпадает
-          if (draftData.language === locale.value) {
+          // Возвращаем черновик только если язык совпадает и он не старше суток
+          const draftAge = Date.now() - draftData.savedAt
+          if (draftData.language === locale.value && draftAge < 24 * 60 * 60 * 1000) {
             return draftData.email || ''
           }
         }
@@ -365,6 +517,7 @@ export const useEmailSubscription = () => {
       SERVER_ERROR: t('validation.serverError'),
       NETWORK_ERROR: t('validation.networkError'),
       TEMPORARY_EMAIL: t('validation.temporaryEmail'),
+      BLOCKED_DOMAIN: t('validation.emailDomainBlocked'),
     }
 
     return errorMessages[errorCode] || t('api.subscriptionError')
@@ -374,7 +527,42 @@ export const useEmailSubscription = () => {
    * Форматирование счетчика подписчиков с правильными окончаниями
    */
   const formatSubscribersCount = (count: number): string => {
-    return t('plurals.subscribers', count)
+    const { n } = useI18n()
+    return n(count, { notation: 'compact' })
+  }
+
+  /**
+   * Получение информации о подписчике по email (для админки)
+   */
+  const getSubscriberByEmail = async (email: string) => {
+    try {
+      // Этот метод требует админских прав
+      const response = await api.get(`/email-collection/subscriber/${encodeURIComponent(email)}`)
+      return response.data
+    }
+    catch (err) {
+      console.error('Ошибка получения информации о подписчике:', err)
+      return null
+    }
+  }
+
+  /**
+   * Экспорт подписчиков (для админки)
+   */
+  const exportSubscribers = async (format: 'csv' | 'xlsx' = 'csv', filters?: any) => {
+    try {
+      const params = new URLSearchParams({
+        format,
+        ...filters,
+      })
+
+      const response = await api.get(`/email-collection/export?${params}`)
+      return response.data
+    }
+    catch (err) {
+      console.error('Ошибка экспорта подписчиков:', err)
+      return null
+    }
   }
 
   // Вычисляемые свойства
@@ -396,37 +584,50 @@ export const useEmailSubscription = () => {
     isLoading,
     formattedSubscribersCount,
 
-    // Методы подписки
+    // Основные методы подписки
     subscribe,
     unsubscribe,
 
-    // Методы статистики
-    getStats,
-    updateSubscribersCount,
+    // Методы статистики и админки
+    getSubscribers,
+    getSubscriberByEmail,
+    exportSubscribers,
     loadSubscribersCount,
 
-    // Утилиты
-    clearStates,
+    // Утилиты валидации
     isValidEmail,
     isTemporaryEmail,
+    isBlockedEmailDomain,
+
+    // Управление состоянием
+    clearStates,
+    isAlreadySubscribed,
+    getSubscriptionInfo,
+    clearSubscriptionInfo,
+
+    // Работа с черновиками
     saveEmailDraft,
     getEmailDraft,
     clearEmailDraft,
-    getLocalizedErrorMessage,
-    formatSubscribersCount,
 
-    // Внутренние методы (для тестирования)
+    // Popup управление
+    shouldShowPopup,
+    markPopupShown,
+
+    // Лимиты и безопасность
+    checkSubscriptionLimits,
+    incrementAttemptCount,
+
+    // UTM и аналитика
     getUtmParams,
     detectSource,
     trackSubscriptionEvent,
-  }
-}
 
-// Глобальные типы для аналитики
-declare global {
-  interface Window {
-    gtag?: (...args: any[]) => void
-    ym?: (id: number, method: string, goal?: string, params?: any) => void
-    fbq?: (...args: any[]) => void
+    // Локализация
+    getLocalizedErrorMessage,
+    formatSubscribersCount,
+
+    // Внутренние методы
+    saveSubscriptionSuccess,
   }
 }

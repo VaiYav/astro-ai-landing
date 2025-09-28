@@ -78,6 +78,9 @@
         "twitter": "Twitter"
       },
       "successModal": {
+        "checkEmail": "Check your email",
+        "enableNotifications": "Enable notifications",
+        "share": "Share",
         "title": "Thank you for subscribing!",
         "description": "We'll send you a notification as soon as the app is launched",
         "button": "Great"

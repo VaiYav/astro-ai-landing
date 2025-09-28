@@ -123,6 +123,7 @@
 
           <form
             class="email-form"
+            :class="{ 'is-loading': isSubmitting, 'has-error': hasError }"
             @submit.prevent="submitEmail"
           >
             <div class="input-group">
@@ -142,9 +143,9 @@
               <button
                 type="submit"
                 class="submit-button"
-                :disabled="isSubmitting || !isValidEmail"
+                :disabled="isSubmitting || !isValidEmailAddress || isAlreadySubscribed()"
                 :class="{ loading: isSubmitting }"
-                :title="t('comingSoon.emailButton')"
+                :title="submitButtonTitle"
               >
                 <Icon
                   v-if="isSubmitting"
@@ -152,10 +153,14 @@
                   class="loading-icon"
                 />
                 <Icon
+                  v-else-if="isAlreadySubscribed()"
+                  icon="ph:check-circle"
+                />
+                <Icon
                   v-else
                   icon="ph:paper-plane-tilt"
                 />
-                {{ t('comingSoon.emailButton') }}
+                {{ submitButtonText }}
               </button>
             </div>
 
@@ -166,7 +171,7 @@
                 class="message error-message"
               >
                 <Icon icon="ph:warning-circle" />
-                {{ emailError }}
+                {{ error }}
               </div>
             </transition>
 
@@ -176,15 +181,46 @@
                 class="message success-message"
               >
                 <Icon icon="ph:check-circle" />
-                {{ emailSuccess }}
+                {{ success }}
               </div>
             </transition>
+
+            <!-- Подсказки для пользователя -->
+            <!--            <div -->
+            <!--              v-if="showHints" -->
+            <!--              class="email-hints" -->
+            <!--            > -->
+            <!--              <div class="hint-item"> -->
+            <!--                <Icon -->
+            <!--                  icon="ph:shield-check" -->
+            <!--                  class="hint-icon" -->
+            <!--                /> -->
+            <!--                <span>{{ t('comingSoon.hints.noSpam') }}</span> -->
+            <!--              </div> -->
+            <!--              <div class="hint-item"> -->
+            <!--                <Icon -->
+            <!--                  icon="ph:gift" -->
+            <!--                  class="hint-icon" -->
+            <!--                /> -->
+            <!--                <span>{{ t('comingSoon.hints.firstFree') }}</span> -->
+            <!--              </div> -->
+            <!--              <div class="hint-item"> -->
+            <!--                <Icon -->
+            <!--                  icon="ph:clock" -->
+            <!--                  class="hint-icon" -->
+            <!--                /> -->
+            <!--                <span>{{ t('comingSoon.hints.weeklyUpdates') }}</span> -->
+            <!--              </div> -->
+            <!--            </div> -->
           </form>
 
           <!-- Счетчик подписчиков -->
-          <!--          <div class="subscribers-count"> -->
+          <!--          <div -->
+          <!--            v-if="formatSubscribersCount" -->
+          <!--            class="subscribers-count" -->
+          <!--          > -->
           <!--            <Icon icon="ph:users-three" /> -->
-          <!--            <span>{{ t('plurals.subscribers', subscribersCount) }}</span> -->
+          <!--            <span>{{ t('comingSoon.subscribersCount', { count: formatSubscribersCount }) }}</span> -->
           <!--          </div> -->
         </div>
 
@@ -240,12 +276,39 @@
           </div>
           <h3>{{ t('comingSoon.successModal.title') }}</h3>
           <p>{{ t('comingSoon.successModal.description') }}</p>
-          <button
-            class="modal-button"
-            @click="closeModal"
-          >
-            {{ t('comingSoon.successModal.button') }}
-          </button>
+
+          <!-- Следующие шаги -->
+          <div class="next-steps">
+            <div class="step-item">
+              <Icon
+                icon="ph:envelope-open"
+                class="step-icon"
+              />
+              <span>{{ t('comingSoon.successModal.checkEmail') }}</span>
+            </div>
+            <div class="step-item">
+              <Icon
+                icon="ph:bell"
+                class="step-icon"
+              />
+              <span>{{ t('comingSoon.successModal.enableNotifications') }}</span>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button
+              class="modal-button primary"
+              @click="closeModal"
+            >
+              {{ t('comingSoon.successModal.button') }}
+            </button>
+            <button
+              class="modal-button secondary"
+              @click="shareSubscription"
+            >
+              {{ t('comingSoon.successModal.share') }}
+            </button>
+          </div>
         </div>
       </div>
     </transition>
@@ -253,7 +316,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { Icon } from '@iconify/vue'
 
 // Локализация
@@ -281,25 +344,45 @@ const email = ref('')
 const showSuccessModal = ref(false)
 const developmentProgress = ref(78)
 const languageDropdownOpen = ref(false)
+const showHints = ref(true)
 
 // Используем состояния из composable
 const {
   isSubmitting,
-  error: emailError,
-  success: emailSuccess,
-  subscribersCount,
+  error,
+  success,
   hasError,
   hasSuccess,
+  subscribe,
+  isValidEmail,
+  clearStates,
+  getEmailDraft,
+  saveEmailDraft,
+  clearEmailDraft,
+  isAlreadySubscribed,
+  trackSubscriptionEvent,
 } = emailSubscription
 
 // Вычисляемые свойства
-const isValidEmail = computed(() => emailSubscription.isValidEmail(email.value))
+const isValidEmailAddress = computed(() => email.value ? isValidEmail(email.value) : false)
+
+const submitButtonText = computed(() => {
+  if (isSubmitting.value) return t('comingSoon.emailButtonLoading')
+  if (isAlreadySubscribed()) return t('comingSoon.emailButtonSubscribed')
+  return t('comingSoon.emailButton')
+})
+
+const submitButtonTitle = computed(() => {
+  if (isAlreadySubscribed()) return t('comingSoon.emailButtonSubscribedHint')
+  if (!isValidEmailAddress.value && email.value) return t('comingSoon.emailButtonInvalidHint')
+  return t('comingSoon.emailButtonHint')
+})
 
 // Локализованные данные
 const localizedFeatures = computed(() => [
   { name: t('comingSoon.progressFeatures.natalChart'), completed: true },
   { name: t('comingSoon.progressFeatures.aiInterpretation'), completed: true },
-  { name: t('comingSoon.progressFeatures.forecasts'), completed: false },
+  { name: t('comingSoon.progressFeatures.forecasts'), completed: true },
   { name: t('comingSoon.progressFeatures.compatibility'), completed: false },
   { name: t('comingSoon.progressFeatures.mobileApp'), completed: false },
 ])
@@ -342,36 +425,76 @@ const changeLanguage = (newLocale) => {
   languageDropdownOpen.value = false
 
   // Трекинг смены языка
-  if (import.meta.client && window.gtag) {
-    window.gtag('event', 'language_change', {
-      event_category: 'engagement',
-      event_label: newLocale,
-      custom_parameter_page: 'coming_soon',
-    })
-  }
+  trackSubscriptionEvent('language_change', {
+    from_language: locale.value,
+    to_language: newLocale,
+    page: 'coming_soon',
+  })
 }
 
 const submitEmail = async () => {
-  const result = await emailSubscription.subscribe(email.value, {
-    subscriptionType: 'early-access',
-    source: 'coming-soon-page',
-    language: locale.value, // Добавляем язык в данные подписки
-    name: undefined,
-  })
+  if (!isValidEmailAddress.value || isSubmitting.value || isAlreadySubscribed()) {
+    return
+  }
 
-  if (result.success) {
-    showSuccessModal.value = true
-    email.value = ''
-    emailSubscription.clearEmailDraft()
+  try {
+    const result = await subscribe(email.value, {
+      subscriptionType: 'early-access',
+      source: 'coming-soon-page',
+      language: locale.value,
+      name: undefined,
+    })
 
-    // Обновляем счетчик подписчиков
-    await emailSubscription.updateSubscribersCount()
+    if (result.success) {
+      showSuccessModal.value = true
+      email.value = ''
+      clearEmailDraft()
+
+      // Трекинг успешной подписки
+      trackSubscriptionEvent('email_subscription_success', {
+        subscription_type: 'early-access',
+        source: 'coming-soon-page',
+        is_new: result.isNew,
+      })
+    }
+  }
+  catch (error) {
+    console.error('Subscription error:', error)
+
+    // Трекинг ошибки
+    trackSubscriptionEvent('email_subscription_error', {
+      error_message: error.message,
+      source: 'coming-soon-page',
+    })
   }
 }
 
 const closeModal = () => {
   showSuccessModal.value = false
-  emailSubscription.clearStates()
+  clearStates()
+}
+
+const shareSubscription = () => {
+  if (import.meta.client && navigator.share) {
+    navigator.share({
+      title: t('comingSoon.share.title'),
+      text: t('comingSoon.share.text'),
+      url: window.location.href,
+    }).catch(console.error)
+  }
+  else {
+    // Fallback для копирования в буфер обмена
+    if (import.meta.client) {
+      navigator.clipboard.writeText(window.location.href).then(() => {
+        // Показать уведомление о копировании
+        // Можно добавить toast notification
+      }).catch(console.error)
+    }
+  }
+
+  trackSubscriptionEvent('subscription_shared', {
+    method: navigator.share ? 'native_share' : 'clipboard',
+  })
 }
 
 const getStarStyle = (index) => {
@@ -440,16 +563,25 @@ onMounted(async () => {
   animateProgress()
 
   // Загружаем счетчик подписчиков
-  await emailSubscription.loadSubscribersCount()
+  // await emailSubscription.loadSubscribersCount()
 
   // Восстанавливаем черновик email, если есть
-  const draft = emailSubscription.getEmailDraft()
+  const draft = getEmailDraft()
   if (draft) {
     email.value = draft
   }
 
   // Добавляем слушатель для закрытия дропдауна
-  document.addEventListener('click', handleClickOutside)
+  if (import.meta.client) {
+    document.addEventListener('click', handleClickOutside)
+  }
+
+  // Трекинг загрузки страницы
+  trackSubscriptionEvent('coming_soon_page_viewed', {
+    language: locale.value,
+    has_email_draft: !!draft,
+    is_already_subscribed: isAlreadySubscribed(),
+  })
 })
 
 onUnmounted(() => {
@@ -460,19 +592,35 @@ onUnmounted(() => {
 
 // Очистка ошибок при вводе и сохранение черновика
 watch(email, (newEmail) => {
-  emailSubscription.clearStates()
+  if (hasError.value || hasSuccess.value) {
+    clearStates()
+  }
 
   // Сохраняем черновик с задержкой
-  if (newEmail) {
+  if (newEmail && newEmail.length > 3) {
     setTimeout(() => {
-      emailSubscription.saveEmailDraft(newEmail)
+      saveEmailDraft(newEmail)
     }, 500)
   }
 })
 
 // Отслеживаем изменения состояний из composable
-watch([hasError, hasSuccess], () => {
-  // Можно добавить дополнительную логику при изменении состояний
+watch([hasError, hasSuccess], ([newHasError, newHasSuccess]) => {
+  // Скрываем подсказки при ошибке или успехе
+  if (newHasError || newHasSuccess) {
+    showHints.value = false
+  }
+  else {
+    showHints.value = true
+  }
+})
+
+// Отслеживаем смену локали для обновления мета-тегов
+watch(locale, (newLocale) => {
+  trackSubscriptionEvent('locale_changed', {
+    new_locale: newLocale,
+    page: 'coming_soon',
+  })
 })
 </script>
 
@@ -831,6 +979,11 @@ watch([hasError, hasSuccess], () => {
 
 .email-form {
   margin-bottom: 1.5rem;
+
+  &.has-error .email-input {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  }
 }
 
 .input-group {
@@ -838,8 +991,7 @@ watch([hasError, hasSuccess], () => {
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
-  gap: 20px;
-  flex-direction: column;
+  gap: 12px;
 }
 
 .input-icon {
@@ -851,7 +1003,7 @@ watch([hasError, hasSuccess], () => {
 }
 
 .email-input {
-  width: 100%;
+  flex: 1;
   padding: 1rem 1rem 1rem 3rem;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -859,7 +1011,6 @@ watch([hasError, hasSuccess], () => {
   color: #e0e6ed;
   font-size: 1rem;
   transition: all 0.3s ease;
-  padding-right: 4rem;
 }
 
 .email-input::placeholder {
@@ -881,20 +1032,22 @@ watch([hasError, hasSuccess], () => {
 }
 
 .submit-button {
-  padding: 20px;
+  padding: 1rem 2rem;
   height: 3rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border: none;
-  border-radius: 38px;
+  border-radius: 50px;
   color: white;
   cursor: pointer;
-  display: flex
-;
+  display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s
-  ease;
-  font-size: 1.2rem;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  min-width: 160px;
 }
 
 .submit-button:hover:not(:disabled) {
@@ -938,6 +1091,31 @@ watch([hasError, hasSuccess], () => {
   border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
+.email-hints {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.hint-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #b8c5d1;
+}
+
+.hint-icon {
+  color: #667eea;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
 .subscribers-count {
   display: flex;
   align-items: center;
@@ -945,6 +1123,7 @@ watch([hasError, hasSuccess], () => {
   gap: 0.5rem;
   color: #b8c5d1;
   font-size: 0.9rem;
+  margin-top: 1rem;
 }
 
 /* Превью функций */
@@ -1059,7 +1238,7 @@ watch([hasError, hasSuccess], () => {
   border-radius: 20px;
   padding: 3rem;
   text-align: center;
-  max-width: 400px;
+  max-width: 500px;
   width: 90%;
 }
 
@@ -1081,15 +1260,54 @@ watch([hasError, hasSuccess], () => {
   line-height: 1.6;
 }
 
+.next-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(102, 126, 234, 0.05);
+  border-radius: 12px;
+}
+
+.step-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #e0e6ed;
+}
+
+.step-icon {
+  color: #667eea;
+  font-size: 1.2rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .modal-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
   padding: 0.75rem 2rem;
   border: none;
   border-radius: 25px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.modal-button.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.modal-button.secondary {
+  background: transparent;
+  color: #667eea;
+  border: 2px solid #667eea;
 }
 
 .modal-button:hover {
@@ -1099,11 +1317,12 @@ watch([hasError, hasSuccess], () => {
 
 /* Анимации */
 .fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
+  transform: translateY(-10px);
 }
 
 .modal-enter-active, .modal-leave-active {
@@ -1165,6 +1384,27 @@ watch([hasError, hasSuccess], () => {
     flex-direction: column;
     align-items: center;
   }
+
+  .input-group {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .email-input {
+    padding-left: 1rem;
+  }
+
+  .input-icon {
+    display: none;
+  }
+
+  .submit-button {
+    width: 100%;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1178,6 +1418,11 @@ watch([hasError, hasSuccess], () => {
 
   .modal-content {
     padding: 2rem;
+  }
+
+  .email-hints {
+    margin-top: 1rem;
+    padding: 0.75rem;
   }
 }
 </style>
