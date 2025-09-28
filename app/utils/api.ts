@@ -102,8 +102,8 @@ export class ApiClient {
 
     instance.interceptors.request.use((config) => {
       if (import.meta.client) {
-        config.headers['Accept-Language'] = this.i18n.locale.value
-        config.headers['X-User-Language'] = this.i18n.locale.value
+        config.headers['Accept-Language'] = String(this.i18n.locale.value)
+        config.headers['X-User-Language'] = String(this.i18n.locale.value)
 
         const urlParams = new URLSearchParams(window.location.search)
         const utmSource = urlParams.get('utm_source')
