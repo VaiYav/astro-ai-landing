@@ -14,6 +14,8 @@ export default defineNuxtConfig({
     '@nuxtjs/seo',
     '@pinia/nuxt',
     '@vite-pwa/nuxt',
+    '@zadigetvoltaire/nuxt-gtm',
+    '@nuxtjs/sitemap',
   ],
   ssr: true,
 
@@ -89,6 +91,9 @@ export default defineNuxtConfig({
 
   // CSS
   css: ['@/assets/scss/main.scss'],
+  site: {
+    url: 'https://astro-ai-landing.vercel.app/', // <-- ЗАМЕНИТЕ НА ВАШ РЕАЛЬНЫЙ ДОМЕН
+  },
 
   // Runtime Config
   runtimeConfig: {
@@ -150,6 +155,10 @@ export default defineNuxtConfig({
     },
     display: 'swap',
     preload: true,
+  },
+  gtm: {
+    id: 'GTM-NSN2VZPZ',
+    enabled: true,
   },
 
   // i18n
