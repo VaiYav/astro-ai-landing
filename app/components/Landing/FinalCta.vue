@@ -3,134 +3,339 @@
     <div class="container">
       <!-- Floating constellation background -->
       <div class="constellation-bg">
-        <svg class="constellation-svg" viewBox="0 0 1200 600">
+        <svg
+          class="constellation-svg"
+          viewBox="0 0 1200 600"
+        >
           <!-- Созвездие линии -->
           <g class="constellation-lines">
-            <line x1="100" y1="100" x2="200" y2="150" stroke="rgba(240, 195, 115, 0.3)" stroke-width="1" />
-            <line x1="200" y1="150" x2="300" y2="120" stroke="rgba(240, 195, 115, 0.3)" stroke-width="1" />
-            <line x1="300" y1="120" x2="400" y2="180" stroke="rgba(240, 195, 115, 0.3)" stroke-width="1" />
-            <line x1="500" y1="200" x2="600" y2="160" stroke="rgba(240, 195, 115, 0.3)" stroke-width="1" />
-            <line x1="600" y1="160" x2="700" y2="220" stroke="rgba(240, 195, 115, 0.3)" stroke-width="1" />
-            <line x1="800" y1="300" x2="900" y2="280" stroke="rgba(240, 195, 115, 0.3)" stroke-width="1" />
-            <line x1="900" y1="280" x2="1000" y2="320" stroke="rgba(240, 195, 115, 0.3)" stroke-width="1" />
+            <line
+              x1="100"
+              y1="100"
+              x2="200"
+              y2="150"
+              stroke="rgba(240, 195, 115, 0.3)"
+              stroke-width="1"
+            />
+            <line
+              x1="200"
+              y1="150"
+              x2="300"
+              y2="120"
+              stroke="rgba(240, 195, 115, 0.3)"
+              stroke-width="1"
+            />
+            <line
+              x1="300"
+              y1="120"
+              x2="400"
+              y2="180"
+              stroke="rgba(240, 195, 115, 0.3)"
+              stroke-width="1"
+            />
+            <line
+              x1="500"
+              y1="200"
+              x2="600"
+              y2="160"
+              stroke="rgba(240, 195, 115, 0.3)"
+              stroke-width="1"
+            />
+            <line
+              x1="600"
+              y1="160"
+              x2="700"
+              y2="220"
+              stroke="rgba(240, 195, 115, 0.3)"
+              stroke-width="1"
+            />
+            <line
+              x1="800"
+              y1="300"
+              x2="900"
+              y2="280"
+              stroke="rgba(240, 195, 115, 0.3)"
+              stroke-width="1"
+            />
+            <line
+              x1="900"
+              y1="280"
+              x2="1000"
+              y2="320"
+              stroke="rgba(240, 195, 115, 0.3)"
+              stroke-width="1"
+            />
           </g>
 
           <!-- Звезды созвездия -->
           <g class="constellation-stars">
-            <circle cx="100" cy="100" r="3" fill="var(--accent-gold)" opacity="0.8">
-              <animate attributeName="opacity" values="0.8;1;0.8" dur="3s" repeatCount="indefinite" />
+            <circle
+              cx="100"
+              cy="100"
+              r="3"
+              fill="var(--accent-gold)"
+              opacity="0.8"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.8;1;0.8"
+                dur="3s"
+                repeatCount="indefinite"
+              />
             </circle>
-            <circle cx="200" cy="150" r="2" fill="var(--accent-gold)" opacity="0.6">
-              <animate attributeName="opacity" values="0.6;1;0.6" dur="2.5s" repeatCount="indefinite" begin="0.5s" />
+            <circle
+              cx="200"
+              cy="150"
+              r="2"
+              fill="var(--accent-gold)"
+              opacity="0.6"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.6;1;0.6"
+                dur="2.5s"
+                repeatCount="indefinite"
+                begin="0.5s"
+              />
             </circle>
-            <circle cx="300" cy="120" r="4" fill="var(--accent-gold)" opacity="0.9">
-              <animate attributeName="opacity" values="0.9;1;0.9" dur="3.5s" repeatCount="indefinite" begin="1s" />
+            <circle
+              cx="300"
+              cy="120"
+              r="4"
+              fill="var(--accent-gold)"
+              opacity="0.9"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.9;1;0.9"
+                dur="3.5s"
+                repeatCount="indefinite"
+                begin="1s"
+              />
             </circle>
-            <circle cx="400" cy="180" r="2.5" fill="var(--accent-gold)" opacity="0.7">
-              <animate attributeName="opacity" values="0.7;1;0.7" dur="2.8s" repeatCount="indefinite" begin="1.5s" />
+            <circle
+              cx="400"
+              cy="180"
+              r="2.5"
+              fill="var(--accent-gold)"
+              opacity="0.7"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.7;1;0.7"
+                dur="2.8s"
+                repeatCount="indefinite"
+                begin="1.5s"
+              />
             </circle>
-            <circle cx="500" cy="200" r="3" fill="var(--accent-gold)" opacity="0.8">
-              <animate attributeName="opacity" values="0.8;1;0.8" dur="3.2s" repeatCount="indefinite" begin="2s" />
+            <circle
+              cx="500"
+              cy="200"
+              r="3"
+              fill="var(--accent-gold)"
+              opacity="0.8"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.8;1;0.8"
+                dur="3.2s"
+                repeatCount="indefinite"
+                begin="2s"
+              />
             </circle>
-            <circle cx="600" cy="160" r="2" fill="var(--accent-gold)" opacity="0.6">
-              <animate attributeName="opacity" values="0.6;1;0.6" dur="2.7s" repeatCount="indefinite" begin="0.3s" />
+            <circle
+              cx="600"
+              cy="160"
+              r="2"
+              fill="var(--accent-gold)"
+              opacity="0.6"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.6;1;0.6"
+                dur="2.7s"
+                repeatCount="indefinite"
+                begin="0.3s"
+              />
             </circle>
-            <circle cx="700" cy="220" r="3.5" fill="var(--accent-gold)" opacity="0.9">
-              <animate attributeName="opacity" values="0.9;1;0.9" dur="3.8s" repeatCount="indefinite" begin="0.8s" />
+            <circle
+              cx="700"
+              cy="220"
+              r="3.5"
+              fill="var(--accent-gold)"
+              opacity="0.9"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.9;1;0.9"
+                dur="3.8s"
+                repeatCount="indefinite"
+                begin="0.8s"
+              />
             </circle>
-            <circle cx="800" cy="300" r="2" fill="var(--accent-gold)" opacity="0.5">
-              <animate attributeName="opacity" values="0.5;1;0.5" dur="2.2s" repeatCount="indefinite" begin="1.2s" />
+            <circle
+              cx="800"
+              cy="300"
+              r="2"
+              fill="var(--accent-gold)"
+              opacity="0.5"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.5;1;0.5"
+                dur="2.2s"
+                repeatCount="indefinite"
+                begin="1.2s"
+              />
             </circle>
-            <circle cx="900" cy="280" r="3" fill="var(--accent-gold)" opacity="0.8">
-              <animate attributeName="opacity" values="0.8;1;0.8" dur="3.1s" repeatCount="indefinite" begin="1.7s" />
+            <circle
+              cx="900"
+              cy="280"
+              r="3"
+              fill="var(--accent-gold)"
+              opacity="0.8"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.8;1;0.8"
+                dur="3.1s"
+                repeatCount="indefinite"
+                begin="1.7s"
+              />
             </circle>
-            <circle cx="1000" cy="320" r="2.5" fill="var(--accent-gold)" opacity="0.7">
-              <animate attributeName="opacity" values="0.7;1;0.7" dur="2.9s" repeatCount="indefinite" begin="2.2s" />
+            <circle
+              cx="1000"
+              cy="320"
+              r="2.5"
+              fill="var(--accent-gold)"
+              opacity="0.7"
+            >
+              <animate
+                attributeName="opacity"
+                values="0.7;1;0.7"
+                dur="2.9s"
+                repeatCount="indefinite"
+                begin="2.2s"
+              />
             </circle>
           </g>
         </svg>
       </div>
 
-      <div class="cta-content" v-motion
-           :initial="{ opacity: 0, y: 50 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200 } }">
-
+      <div
+        v-motion
+        class="cta-content"
+        :initial="{ opacity: 0, y: 50 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200 } }"
+      >
         <!-- Главный заголовок -->
         <div class="main-heading">
           <h2>{{ $t('final_cta_title') }}</h2>
           <div class="heading-decoration">
-            <div class="decoration-line"></div>
-            <Icon name="ph:sparkle-fill" class="decoration-icon" />
-            <div class="decoration-line"></div>
+            <div class="decoration-line" />
+            <Icon
+              icon="ph:sparkle-fill"
+              class="decoration-icon"
+            />
+            <div class="decoration-line" />
           </div>
         </div>
 
         <!-- Подзаголовок -->
-        <p class="cta-subtitle">{{ $t('final_cta_subtitle') }}</p>
+        <p class="cta-subtitle">
+          {{ $t('final_cta_subtitle') }}
+        </p>
 
         <!-- Ключевые преимущества -->
-        <div class="key-benefits" v-motion
-             :initial="{ opacity: 0, y: 30 }"
-             :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 400 } }">
-          <div v-for="(benefit, index) in keyBenefits"
-               :key="benefit.id"
-               class="benefit-item"
-               v-motion
-               :initial="{ opacity: 0, x: -30 }"
-               :visibleOnce="{
-                 opacity: 1,
-                 x: 0,
-                 transition: {
-                   duration: 500,
-                   delay: 600 + index * 100
-                 }
-               }">
-            <Icon :name="benefit.icon" class="benefit-icon" />
+        <div
+          v-motion
+          class="key-benefits"
+          :initial="{ opacity: 0, y: 30 }"
+          :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 400 } }"
+        >
+          <div
+            v-for="(benefit, index) in keyBenefits"
+            :key="benefit.id"
+            v-motion
+            class="benefit-item"
+            :initial="{ opacity: 0, x: -30 }"
+            :visibleOnce="{
+              opacity: 1,
+              x: 0,
+              transition: {
+                duration: 500,
+                delay: 600 + index * 100,
+              },
+            }"
+          >
+            <Icon
+              :icon="benefit.icon"
+              class="benefit-icon"
+            />
             <span>{{ $t(benefit.text) }}</span>
           </div>
         </div>
 
         <!-- Основные CTA кнопки -->
-        <div class="cta-buttons" v-motion
-             :initial="{ opacity: 0, y: 30 }"
-             :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 800 } }">
+        <div
+          v-motion
+          class="cta-buttons"
+          :initial="{ opacity: 0, y: 30 }"
+          :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 800 } }"
+        >
+          <!--          <NuxtLink to="/register" class="primary-cta-button"> -->
+          <!--            <span class="button-text">{{ $t('cta_button') }}</span> -->
+          <!--            <Icon icon="ph:arrow-right-bold" class="button-icon" /> -->
+          <!--            <div class="button-shine"></div> -->
+          <!--          </NuxtLink> -->
 
-          <NuxtLink to="/register" class="primary-cta-button">
-            <span class="button-text">{{ $t('cta_button') }}</span>
-            <Icon name="ph:arrow-right-bold" class="button-icon" />
-            <div class="button-shine"></div>
-          </NuxtLink>
-
-          <button class="secondary-cta-button" @click="openDemo">
-            <Icon name="ph:play-circle-bold" class="play-icon" />
+          <button
+            class="secondary-cta-button"
+            @click="openDemo"
+          >
+            <Icon
+              icon="ph:play-circle-bold"
+              class="play-icon"
+            />
             <span>{{ $t('watch_demo') }}</span>
           </button>
         </div>
 
         <!-- Социальные доказательства -->
-        <div class="social-proof" v-motion
-             :initial="{ opacity: 0, y: 20 }"
-             :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1000 } }">
-
+        <div
+          v-motion
+          class="social-proof"
+          :initial="{ opacity: 0, y: 20 }"
+          :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1000 } }"
+        >
           <div class="proof-stats">
             <div class="stat-item">
-              <Icon name="ph:users-three-fill" class="stat-icon" />
+              <Icon
+                icon="ph:users-three-fill"
+                class="stat-icon"
+              />
               <span class="stat-number">{{ animatedUsers }}+</span>
               <span class="stat-label">{{ $t('happy_users') }}</span>
             </div>
 
-            <div class="stat-divider"></div>
+            <div class="stat-divider" />
 
             <div class="stat-item">
-              <Icon name="ph:star-fill" class="stat-icon" />
+              <Icon
+                icon="ph:star-fill"
+                class="stat-icon"
+              />
               <span class="stat-number">4.9</span>
               <span class="stat-label">{{ $t('rating') }}</span>
             </div>
 
-            <div class="stat-divider"></div>
+            <div class="stat-divider" />
 
             <div class="stat-item">
-              <Icon name="ph:chart-line-up-bold" class="stat-icon" />
+              <Icon
+                icon="ph:chart-line-up-bold"
+                class="stat-icon"
+              />
               <span class="stat-number">{{ animatedCharts }}+</span>
               <span class="stat-label">{{ $t('charts_created') }}</span>
             </div>
@@ -138,15 +343,25 @@
 
           <!-- Отзывы в мини формате -->
           <div class="mini-testimonials">
-            <div v-for="testimonial in miniTestimonials"
-                 :key="testimonial.id"
-                 class="mini-testimonial">
+            <div
+              v-for="testimonial in miniTestimonials"
+              :key="testimonial.id"
+              class="mini-testimonial"
+            >
               <div class="testimonial-avatar">
-                <img :src="testimonial.avatar" :alt="testimonial.name" />
+                <img
+                  :src="testimonial.avatar"
+                  :alt="testimonial.name"
+                >
               </div>
               <div class="testimonial-content">
                 <div class="testimonial-stars">
-                  <Icon v-for="star in 5" :key="star" name="ph:star-fill" class="star" />
+                  <Icon
+                    v-for="star in 5"
+                    :key="star"
+                    icon="ph:star-fill"
+                    class="star"
+                  />
                 </div>
                 <p>"{{ $t(testimonial.text) }}"</p>
                 <span class="testimonial-author">{{ testimonial.name }}</span>
@@ -156,30 +371,48 @@
         </div>
 
         <!-- Гарантии и безопасность -->
-        <div class="guarantees-line" v-motion
-             :initial="{ opacity: 0, y: 20 }"
-             :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1200 } }">
+        <div
+          v-motion
+          class="guarantees-line"
+          :initial="{ opacity: 0, y: 20 }"
+          :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1200 } }"
+        >
           <div class="guarantee-item">
-            <Icon name="ph:shield-check-fill" class="guarantee-icon" />
+            <Icon
+              icon="ph:shield-check-fill"
+              class="guarantee-icon"
+            />
             <span>{{ $t('data_secure') }}</span>
           </div>
 
           <div class="guarantee-item">
-            <Icon name="ph:clock-bold" class="guarantee-icon" />
+            <Icon
+              icon="ph:clock-bold"
+              class="guarantee-icon"
+            />
             <span>{{ $t('instant_results') }}</span>
           </div>
 
           <div class="guarantee-item">
-            <Icon name="ph:heart-fill" class="guarantee-icon" />
+            <Icon
+              icon="ph:heart-fill"
+              class="guarantee-icon"
+            />
             <span>{{ $t('money_back_guarantee') }}</span>
           </div>
         </div>
 
         <!-- Countdown или urgency элемент -->
-        <div class="urgency-element" v-motion
-             :initial="{ opacity: 0, scale: 0.9 }"
-             :visibleOnce="{ opacity: 1, scale: 1, transition: { duration: 600, delay: 1400 } }">
-          <Icon name="ph:lightning-fill" class="urgency-icon" />
+        <div
+          v-motion
+          class="urgency-element"
+          :initial="{ opacity: 0, scale: 0.9 }"
+          :visibleOnce="{ opacity: 1, scale: 1, transition: { duration: 600, delay: 1400 } }"
+        >
+          <Icon
+            icon="ph:lightning-fill"
+            class="urgency-icon"
+          />
           <span>{{ $t('limited_time_bonus') }}</span>
         </div>
       </div>
@@ -187,13 +420,19 @@
 
     <!-- Animated particles -->
     <div class="animated-particles">
-      <div v-for="i in 20" :key="`particle-${i}`" class="particle" :style="getParticleStyle(i)"></div>
+      <div
+        v-for="i in 20"
+        :key="`particle-${i}`"
+        class="particle"
+        :style="getParticleStyle(i)"
+      />
     </div>
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { Icon } from '@iconify/vue'
 
 const { t } = useI18n()
 
@@ -206,18 +445,18 @@ const keyBenefits = [
   {
     id: 1,
     icon: 'ph:lightning-bold',
-    text: 'benefit_instant_analysis'
+    text: 'benefit_instant_analysis',
   },
   {
     id: 2,
     icon: 'ph:brain-bold',
-    text: 'benefit_ai_powered'
+    text: 'benefit_ai_powered',
   },
   {
     id: 3,
     icon: 'ph:shield-check-bold',
-    text: 'benefit_accurate_data'
-  }
+    text: 'benefit_accurate_data',
+  },
 ]
 
 // Мини отзывы
@@ -226,14 +465,14 @@ const miniTestimonials = [
     id: 1,
     name: 'Анна К.',
     text: 'mini_testimonial_1',
-    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b2e0e4e9?w=60&h=60&fit=crop&crop=face'
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b2e0e4e9?w=60&h=60&fit=crop&crop=face',
   },
   {
     id: 2,
     name: 'Михаил В.',
     text: 'mini_testimonial_2',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face'
-  }
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=60&h=60&fit=crop&crop=face',
+  },
 ]
 
 // Анимация чисел при загрузке
@@ -253,11 +492,11 @@ const animateNumber = (target, ref) => {
 
 // Методы
 const openDemo = () => {
-  if (process.client) {
+  if (import.meta.client) {
     // Логика открытия демо видео или перехода к демо секции
     const demoSection = document.querySelector('.demo-section')
     if (demoSection) {
-      demoSection.scrollIntoView({behavior: 'smooth'})
+      demoSection.scrollIntoView({ behavior: 'smooth' })
     }
   }
 }
@@ -273,7 +512,7 @@ const getParticleStyle = (index) => {
     top: `${top}%`,
     left: `${left}%`,
     animationDelay: `${delay}s`,
-    animationDuration: `${duration}s`
+    animationDuration: `${duration}s`,
   }
 }
 </script>

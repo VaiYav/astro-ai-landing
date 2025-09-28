@@ -3,17 +3,27 @@
     <!-- Навигация -->
     <nav class="article-nav">
       <div class="container">
-        <NuxtLink to="/blog" class="back-link">
-          <Icon name="ph:arrow-left" />
+        <NuxtLink
+          to="/blog"
+          class="back-link"
+        >
+          <Icon icon="ph:arrow-left" />
           Назад к блогу
         </NuxtLink>
         <div class="article-actions">
-          <button @click="shareArticle" class="share-btn">
-            <Icon name="ph:share-network" />
+          <button
+            class="share-btn"
+            @click="shareArticle"
+          >
+            <Icon icon="ph:share-network" />
             Поделиться
           </button>
-          <button @click="toggleBookmark" class="bookmark-btn" :class="{ active: isBookmarked }">
-            <Icon name="ph:bookmark" />
+          <button
+            class="bookmark-btn"
+            :class="{ active: isBookmarked }"
+            @click="toggleBookmark"
+          >
+            <Icon icon="ph:bookmark" />
           </button>
         </div>
       </div>
@@ -27,14 +37,26 @@
           <time :datetime="article.publishedAt">{{ formatDate(article.publishedAt) }}</time>
           <span class="reading-time">{{ article.readingTime }} мин чтения</span>
         </div>
-        <h1 class="article-title">{{ article.title }}</h1>
-        <p class="article-subtitle">{{ article.subtitle }}</p>
+        <h1 class="article-title">
+          {{ article.title }}
+        </h1>
+        <p class="article-subtitle">
+          {{ article.subtitle }}
+        </p>
 
         <div class="author-info">
-          <img :src="article.author.avatar" :alt="article.author.name" class="author-avatar" />
+          <img
+            :src="article.author.avatar"
+            :alt="article.author.name"
+            class="author-avatar"
+          >
           <div class="author-details">
-            <h3 class="author-name">{{ article.author.name }}</h3>
-            <p class="author-title">{{ article.author.title }}</p>
+            <h3 class="author-name">
+              {{ article.author.name }}
+            </h3>
+            <p class="author-title">
+              {{ article.author.title }}
+            </p>
           </div>
         </div>
       </div>
@@ -42,7 +64,10 @@
 
     <!-- Изображение статьи -->
     <div class="article-image">
-      <img :src="article.featuredImage" :alt="article.title" />
+      <img
+        :src="article.featuredImage"
+        :alt="article.title"
+      >
     </div>
 
     <!-- Контент статьи -->
@@ -51,13 +76,20 @@
         <div class="content-grid">
           <!-- Основной контент -->
           <div class="main-content">
-            <div class="prose" v-html="article.content"></div>
+            <div
+              class="prose"
+              v-html="article.content"
+            />
 
             <!-- Теги -->
             <div class="article-tags">
               <h4>Теги:</h4>
               <div class="tags-list">
-                <span v-for="tag in article.tags" :key="tag" class="tag">
+                <span
+                  v-for="tag in article.tags"
+                  :key="tag"
+                  class="tag"
+                >
                   #{{ tag }}
                 </span>
               </div>
@@ -68,7 +100,10 @@
               <div class="cta-content">
                 <h3>Готовы узнать больше о своей судьбе?</h3>
                 <p>Получите персональный анализ натальной карты с помощью ИИ</p>
-                <NuxtLink to="/register" class="cta-button">
+                <NuxtLink
+                  to="/register"
+                  class="cta-button"
+                >
                   Создать карту бесплатно
                 </NuxtLink>
               </div>
@@ -81,8 +116,14 @@
             <div class="table-of-contents">
               <h4>Содержание</h4>
               <ul>
-                <li v-for="heading in tableOfContents" :key="heading.id">
-                  <a :href="`#${heading.id}`" @click="scrollToHeading(heading.id)">
+                <li
+                  v-for="heading in tableOfContents"
+                  :key="heading.id"
+                >
+                  <a
+                    :href="`#${heading.id}`"
+                    @click="scrollToHeading(heading.id)"
+                  >
                     {{ heading.text }}
                   </a>
                 </li>
@@ -93,9 +134,16 @@
             <div class="related-articles">
               <h4>Похожие статьи</h4>
               <div class="related-list">
-                <article v-for="related in relatedArticles" :key="related.id" class="related-item">
+                <article
+                  v-for="related in relatedArticles"
+                  :key="related.id"
+                  class="related-item"
+                >
                   <NuxtLink :to="`/blog/${related.slug}`">
-                    <img :src="related.image" :alt="related.title" />
+                    <img
+                      :src="related.image"
+                      :alt="related.title"
+                    >
                     <div class="related-content">
                       <h5>{{ related.title }}</h5>
                       <span class="related-date">{{ formatDate(related.publishedAt) }}</span>
@@ -109,14 +157,20 @@
             <div class="newsletter-widget">
               <h4>Астрологические инсайты</h4>
               <p>Получайте еженедельные прогнозы и советы астрологов</p>
-              <form @submit.prevent="subscribeNewsletter" class="newsletter-form">
+              <form
+                class="newsletter-form"
+                @submit.prevent="subscribeNewsletter"
+              >
                 <input
-                  type="email"
                   v-model="newsletterEmail"
+                  type="email"
                   placeholder="Ваш email"
                   required
-                />
-                <button type="submit" :disabled="isSubscribing">
+                >
+                <button
+                  type="submit"
+                  :disabled="isSubscribing"
+                >
                   {{ isSubscribing ? 'Подписываем...' : 'Подписаться' }}
                 </button>
               </form>
@@ -136,37 +190,69 @@
           <h4>Оставить комментарий</h4>
           <form @submit.prevent="submitComment">
             <div class="form-row">
-              <input type="text" v-model="newComment.name" placeholder="Ваше имя" required />
-              <input type="email" v-model="newComment.email" placeholder="Email" required />
+              <input
+                v-model="newComment.name"
+                type="text"
+                placeholder="Ваше имя"
+                required
+              >
+              <input
+                v-model="newComment.email"
+                type="email"
+                placeholder="Email"
+                required
+              >
             </div>
             <textarea
               v-model="newComment.text"
               placeholder="Ваш комментарий..."
               rows="4"
               required
-            ></textarea>
-            <button type="submit" class="submit-btn">Отправить комментарий</button>
+            />
+            <button
+              type="submit"
+              class="submit-btn"
+            >
+              Отправить комментарий
+            </button>
           </form>
         </div>
 
         <!-- Список комментариев -->
         <div class="comments-list">
-          <div v-for="comment in comments" :key="comment.id" class="comment">
+          <div
+            v-for="comment in comments"
+            :key="comment.id"
+            class="comment"
+          >
             <div class="comment-avatar">
-              <img :src="comment.avatar" :alt="comment.name" />
+              <img
+                :src="comment.avatar"
+                :alt="comment.name"
+              >
             </div>
             <div class="comment-content">
               <div class="comment-header">
-                <h5 class="comment-author">{{ comment.name }}</h5>
+                <h5 class="comment-author">
+                  {{ comment.name }}
+                </h5>
                 <time class="comment-date">{{ formatDate(comment.createdAt) }}</time>
               </div>
-              <p class="comment-text">{{ comment.text }}</p>
+              <p class="comment-text">
+                {{ comment.text }}
+              </p>
               <div class="comment-actions">
-                <button @click="likeComment(comment.id)" class="like-btn">
-                  <Icon name="ph:heart" />
+                <button
+                  class="like-btn"
+                  @click="likeComment(comment.id)"
+                >
+                  <Icon icon="ph:heart" />
                   {{ comment.likes }}
                 </button>
-                <button @click="replyToComment(comment.id)" class="reply-btn">
+                <button
+                  class="reply-btn"
+                  @click="replyToComment(comment.id)"
+                >
                   Ответить
                 </button>
               </div>
@@ -181,9 +267,16 @@
       <div class="container">
         <h3>Читайте также</h3>
         <div class="articles-grid">
-          <article v-for="article in moreArticles" :key="article.id" class="article-card">
+          <article
+            v-for="article in moreArticles"
+            :key="article.id"
+            class="article-card"
+          >
             <NuxtLink :to="`/blog/${article.slug}`">
-              <img :src="article.image" :alt="article.title" />
+              <img
+                :src="article.image"
+                :alt="article.title"
+              >
               <div class="card-content">
                 <span class="category">{{ article.category }}</span>
                 <h4>{{ article.title }}</h4>
@@ -202,6 +295,8 @@
 </template>
 
 <script setup>
+import { Icon } from '@iconify/vue'
+
 const route = useRoute()
 const { slug } = route.params
 
@@ -212,7 +307,7 @@ useSeoMeta({
   ogTitle: () => article.value?.title,
   ogDescription: () => article.value?.subtitle,
   ogImage: () => article.value?.featuredImage,
-  twitterCard: 'summary_large_image'
+  twitterCard: 'summary_large_image',
 })
 
 // Данные статьи
@@ -227,7 +322,7 @@ const isSubscribing = ref(false)
 const newComment = ref({
   name: '',
   email: '',
-  text: ''
+  text: '',
 })
 const comments = ref([
   {
@@ -236,7 +331,7 @@ const comments = ref([
     avatar: '/avatars/anna.jpg',
     text: 'Очень интересная статья! Особенно понравилось объяснение влияния Луны на эмоциональное состояние.',
     createdAt: '2024-01-15T10:30:00Z',
-    likes: 5
+    likes: 5,
   },
   {
     id: 2,
@@ -244,8 +339,8 @@ const comments = ref([
     avatar: '/avatars/mikhail.jpg',
     text: 'Спасибо за подробный разбор! Теперь лучше понимаю свою натальную карту.',
     createdAt: '2024-01-14T15:45:00Z',
-    likes: 3
-  }
+    likes: 3,
+  },
 ])
 
 // Содержание статьи
@@ -263,7 +358,7 @@ const tableOfContents = computed(() => {
     headings.push({
       id,
       text: heading.textContent,
-      level: parseInt(heading.tagName.charAt(1))
+      level: parseInt(heading.tagName.charAt(1)),
     })
   })
 
@@ -275,7 +370,7 @@ const formatDate = (date) => {
   return new Date(date).toLocaleDateString('ru-RU', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   })
 }
 
@@ -285,12 +380,14 @@ const shareArticle = async () => {
       await navigator.share({
         title: article.value.title,
         text: article.value.subtitle,
-        url: window.location.href
+        url: window.location.href,
       })
-    } catch (err) {
+    }
+    catch (err) {
       console.log('Ошибка при попытке поделиться:', err)
     }
-  } else {
+  }
+  else {
     // Fallback для браузеров без Web Share API
     await navigator.clipboard.writeText(window.location.href)
     // Показать уведомление о копировании
@@ -311,13 +408,15 @@ const subscribeNewsletter = async () => {
   try {
     await $fetch('/api/newsletter/subscribe', {
       method: 'POST',
-      body: { email: newsletterEmail.value }
+      body: { email: newsletterEmail.value },
     })
     newsletterEmail.value = ''
     // Показать уведомление об успешной подписке
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Ошибка подписки:', error)
-  } finally {
+  }
+  finally {
     isSubscribing.value = false
   }
 }
@@ -326,11 +425,12 @@ const submitComment = async () => {
   try {
     const comment = await $fetch(`/api/blog/${slug}/comments`, {
       method: 'POST',
-      body: newComment.value
+      body: newComment.value,
     })
     comments.value.unshift(comment)
     newComment.value = { name: '', email: '', text: '' }
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Ошибка отправки комментария:', error)
   }
 }

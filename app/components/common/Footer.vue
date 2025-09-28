@@ -130,12 +130,14 @@
     <div class="footer-bottom">
       <div class="container">
         <div class="bottom-content">
-          <div class="copyright">
-            <p>{{ $t('footer.copyright', { year: currentYear }) }}</p>
-            <p class="disclaimer">
-              {{ $t('footer.disclaimer') }}
-            </p>
-          </div>
+          <ClientOnly>
+            <div class="copyright">
+              <p>{{ $t('footer.copyright', { year: currentYear }) }}</p>
+              <p class="disclaimer">
+                {{ $t('footer.disclaimer') }}
+              </p>
+            </div>
+          </ClientOnly>
 
           <!--
           <div class="certifications">

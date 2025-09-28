@@ -1,43 +1,51 @@
 <template>
   <section class="how-it-works-section">
     <div class="container">
-      <h2 v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500 } }">
+      <h2
+        v-motion
+        :initial="{ opacity: 0, y: 50 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500 } }"
+      >
         {{ $t('how_it_works_title') }}
       </h2>
 
       <div class="steps-container">
-        <div class="timeline-line"></div>
+        <div class="timeline-line" />
 
-        <div v-for="(step, index) in steps"
-             :key="step.title"
-             class="step-item"
-             v-motion
-             :initial="{ opacity: 0, y: 50, scale: 0.9 }"
-             :visibleOnce="{
-               opacity: 1,
-               y: 0,
-               scale: 1,
-               transition: {
-                 duration: 600,
-                 delay: index * 200,
-                 type: 'spring',
-                 stiffness: 100
-               }
-             }">
-
+        <div
+          v-for="(step, index) in steps"
+          :key="step.title"
+          v-motion
+          class="step-item"
+          :initial="{ opacity: 0, y: 50, scale: 0.9 }"
+          :visibleOnce="{
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: {
+              duration: 600,
+              delay: index * 200,
+              type: 'spring',
+              stiffness: 100,
+            },
+          }"
+        >
           <div class="step-header">
             <div class="step-number-container">
-              <div class="step-number-bg"></div>
-              <div class="step-number">{{ index + 1 }}</div>
-              <div class="step-number-glow"></div>
+              <div class="step-number-bg" />
+              <div class="step-number">
+                {{ index + 1 }}
+              </div>
+              <div class="step-number-glow" />
             </div>
 
             <div class="step-icon-container">
-              <div class="step-icon-bg"></div>
-              <Icon :name="step.icon" class="step-icon" />
-              <div class="step-icon-pulse"></div>
+              <div class="step-icon-bg" />
+              <Icon
+                :icon="step.icon"
+                class="step-icon"
+              />
+              <div class="step-icon-pulse" />
             </div>
           </div>
 
@@ -47,45 +55,62 @@
 
             <!-- Дополнительные детали для каждого шага -->
             <div class="step-details">
-              <div v-for="detail in step.details" :key="detail" class="step-detail">
-                <Icon name="ph:arrow-right-bold" class="detail-arrow" />
+              <div
+                v-for="detail in step.details"
+                :key="detail"
+                class="step-detail"
+              >
+                <Icon
+                  icon="ph:arrow-right-bold"
+                  class="detail-arrow"
+                />
                 <span>{{ $t(detail) }}</span>
               </div>
             </div>
 
             <!-- Время выполнения -->
             <div class="step-time">
-              <Icon name="ph:clock-bold" class="time-icon" />
+              <Icon
+                icon="ph:clock-bold"
+                class="time-icon"
+              />
               <span>{{ $t(step.time) }}</span>
             </div>
           </div>
 
           <!-- Connecting line to next step -->
-          <div v-if="index < steps.length - 1" class="connecting-line">
+          <div
+            v-if="index < steps.length - 1"
+            class="connecting-line"
+          >
             <div class="line-arrow">
-              <Icon name="ph:arrow-down-bold" />
+              <Icon icon="ph:arrow-down-bold" />
             </div>
           </div>
         </div>
       </div>
 
       <!-- Interactive demo preview -->
-      <div class="demo-preview" v-motion
-           :initial="{ opacity: 0, y: 30 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 800 } }">
+      <div
+        v-motion
+        class="demo-preview"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 800 } }"
+      >
         <div class="demo-content">
           <h3>{{ $t('preview_title') }}</h3>
           <p>{{ $t('preview_subtitle') }}</p>
 
           <div class="preview-screens">
-            <div v-for="(screen, index) in previewScreens"
-                 :key="screen.id"
-                 class="preview-screen"
-                 :class="{ active: activeScreen === screen.id }"
-                 @click="activeScreen = screen.id">
-
+            <div
+              v-for="(screen, index) in previewScreens"
+              :key="screen.id"
+              class="preview-screen"
+              :class="{ active: activeScreen === screen.id }"
+              @click="activeScreen = screen.id"
+            >
               <div class="screen-header">
-                <Icon :name="screen.icon" />
+                <Icon :icon="screen.icon" />
                 <span>{{ $t(screen.title) }}</span>
               </div>
 
@@ -94,31 +119,40 @@
                   <!-- Мокап интерфейса -->
                   <div class="mockup-header">
                     <div class="mockup-dots">
-                      <span></span><span></span><span></span>
+                      <span /><span /><span />
                     </div>
                   </div>
                   <div class="mockup-content">
-                    <div v-if="screen.id === 'form'" class="form-mockup">
-                      <div class="input-line"></div>
-                      <div class="input-line short"></div>
-                      <div class="input-line medium"></div>
-                      <div class="button-mockup"></div>
+                    <div
+                      v-if="screen.id === 'form'"
+                      class="form-mockup"
+                    >
+                      <div class="input-line" />
+                      <div class="input-line short" />
+                      <div class="input-line medium" />
+                      <div class="button-mockup" />
                     </div>
-                    <div v-else-if="screen.id === 'chart'" class="chart-mockup">
+                    <div
+                      v-else-if="screen.id === 'chart'"
+                      class="chart-mockup"
+                    >
                       <div class="circle-chart">
-                        <div class="chart-center"></div>
+                        <div class="chart-center" />
                       </div>
                       <div class="chart-details">
-                        <div class="detail-line"></div>
-                        <div class="detail-line"></div>
-                        <div class="detail-line"></div>
+                        <div class="detail-line" />
+                        <div class="detail-line" />
+                        <div class="detail-line" />
                       </div>
                     </div>
-                    <div v-else-if="screen.id === 'analysis'" class="analysis-mockup">
-                      <div class="analysis-header"></div>
-                      <div class="analysis-text"></div>
-                      <div class="analysis-text short"></div>
-                      <div class="analysis-text medium"></div>
+                    <div
+                      v-else-if="screen.id === 'analysis'"
+                      class="analysis-mockup"
+                    >
+                      <div class="analysis-header" />
+                      <div class="analysis-text" />
+                      <div class="analysis-text short" />
+                      <div class="analysis-text medium" />
                     </div>
                   </div>
                 </div>
@@ -129,36 +163,61 @@
       </div>
 
       <!-- Статистика процесса -->
-      <div class="process-stats" v-motion
-           :initial="{ opacity: 0, y: 30 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1000 } }">
+      <div
+        v-motion
+        class="process-stats"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1000 } }"
+      >
         <div class="stat-group">
-          <div class="stat-value">{{ animatedCharts }}</div>
-          <div class="stat-label">{{ $t('charts_processed') }}</div>
+          <div class="stat-value">
+            {{ animatedCharts }}
+          </div>
+          <div class="stat-label">
+            {{ $t('charts_processed') }}
+          </div>
         </div>
         <div class="stat-group">
-          <div class="stat-value">30s</div>
-          <div class="stat-label">{{ $t('average_time') }}</div>
+          <div class="stat-value">
+            30s
+          </div>
+          <div class="stat-label">
+            {{ $t('average_time') }}
+          </div>
         </div>
         <div class="stat-group">
-          <div class="stat-value">99.9%</div>
-          <div class="stat-label">{{ $t('accuracy_rate') }}</div>
+          <div class="stat-value">
+            99.9%
+          </div>
+          <div class="stat-label">
+            {{ $t('accuracy_rate') }}
+          </div>
         </div>
         <div class="stat-group">
-          <div class="stat-value">24/7</div>
-          <div class="stat-label">{{ $t('availability') }}</div>
+          <div class="stat-value">
+            24/7
+          </div>
+          <div class="stat-label">
+            {{ $t('availability') }}
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Floating particles for atmosphere -->
     <div class="floating-particles">
-      <div v-for="i in 12" :key="`particle-${i}`" class="particle" :style="getParticleStyle(i)"></div>
+      <div
+        v-for="i in 12"
+        :key="`particle-${i}`"
+        class="particle"
+        :style="getParticleStyle(i)"
+      />
     </div>
   </section>
 </template>
 
 <script setup>
+import { Icon } from '@iconify/vue'
 import { ref, onMounted } from 'vue'
 
 const { t } = useI18n()
@@ -176,22 +235,22 @@ const steps = [
     title: 'step_1_title',
     desc: 'step_1_desc',
     time: 'step_1_time',
-    details: ['step_1_detail_1', 'step_1_detail_2', 'step_1_detail_3']
+    details: ['step_1_detail_1', 'step_1_detail_2', 'step_1_detail_3'],
   },
   {
     icon: 'ph:planet-bold',
     title: 'step_2_title',
     desc: 'step_2_desc',
     time: 'step_2_time',
-    details: ['step_2_detail_1', 'step_2_detail_2', 'step_2_detail_3']
+    details: ['step_2_detail_1', 'step_2_detail_2', 'step_2_detail_3'],
   },
   {
     icon: 'ph:magic-wand-bold',
     title: 'step_3_title',
     desc: 'step_3_desc',
     time: 'step_3_time',
-    details: ['step_3_detail_1', 'step_3_detail_2', 'step_3_detail_3']
-  }
+    details: ['step_3_detail_1', 'step_3_detail_2', 'step_3_detail_3'],
+  },
 ]
 
 // Превью экранов
@@ -199,18 +258,18 @@ const previewScreens = [
   {
     id: 'form',
     icon: 'ph:text-columns-bold',
-    title: 'preview_form_title'
+    title: 'preview_form_title',
   },
   {
     id: 'chart',
     icon: 'ph:chart-pie-slice-bold',
-    title: 'preview_chart_title'
+    title: 'preview_chart_title',
   },
   {
     id: 'analysis',
     icon: 'ph:brain-bold',
-    title: 'preview_analysis_title'
-  }
+    title: 'preview_analysis_title',
+  },
 ]
 
 // Анимация чисел
@@ -241,12 +300,12 @@ const getParticleStyle = (index) => {
     { top: '15%', left: '70%' },
     { top: '35%', right: '40%' },
     { top: '65%', left: '60%' },
-    { top: '85%', right: '35%' }
+    { top: '85%', right: '35%' },
   ]
 
   return {
     ...positions[index % positions.length],
-    animationDelay: `${index * 0.3}s`
+    animationDelay: `${index * 0.3}s`,
   }
 }
 </script>

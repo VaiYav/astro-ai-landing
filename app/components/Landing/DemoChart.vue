@@ -1,34 +1,46 @@
 <template>
-  <section class="demo-section">
+  <section
+    id="demo"
+    class="demo-section"
+  >
     <div class="container">
-      <h2 v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500 } }">
+      <h2
+        v-motion
+        :initial="{ opacity: 0, y: 50 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500 } }"
+      >
         {{ $t('demo_title') }}
       </h2>
 
-      <p class="demo-subtitle" v-motion
-         :initial="{ opacity: 0, y: 30 }"
-         :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500, delay: 200 } }">
+      <p
+        v-motion
+        class="demo-subtitle"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500, delay: 200 } }"
+      >
         {{ $t('demo_subtitle') }}
       </p>
 
       <div class="demo-container">
         <!-- Левая сторона - натальная карта -->
-        <div class="chart-side" v-motion
-             :initial="{ opacity: 0, x: -50 }"
-             :visibleOnce="{ opacity: 1, x: 0, transition: { duration: 600, delay: 400 } }">
-
+        <div
+          v-motion
+          class="chart-side"
+          :initial="{ opacity: 0, x: -50 }"
+          :visibleOnce="{ opacity: 1, x: 0, transition: { duration: 600, delay: 400 } }"
+        >
           <div class="chart-container">
             <div class="zodiac-wheel-demo">
               <!-- Внешний круг с знаками зодиака -->
               <div class="zodiac-signs">
-                <div v-for="(sign, index) in zodiacSigns"
-                     :key="sign.name"
-                     class="zodiac-sign"
-                     :style="getSignPosition(index)"
-                     @mouseenter="highlightSign(sign)"
-                     @mouseleave="clearHighlight">
+                <div
+                  v-for="(sign, index) in zodiacSigns"
+                  :key="sign.name"
+                  class="zodiac-sign"
+                  :style="getSignPosition(index)"
+                  @mouseenter="highlightSign(sign)"
+                  @mouseleave="clearHighlight"
+                >
                   <span class="sign-symbol">{{ sign.symbol }}</span>
                   <span class="sign-name">{{ sign.name }}</span>
                 </div>
@@ -36,14 +48,21 @@
 
               <!-- Планеты -->
               <div class="planets">
-                <div v-for="planet in demoPlanets"
-                     :key="planet.name"
-                     class="planet-position"
-                     :style="getPlanetPosition(planet.position)"
-                     @click="selectPlanet(planet)"
-                     :class="{ active: selectedPlanet?.name === planet.name }">
-                  <div class="planet-symbol">{{ planet.symbol }}</div>
-                  <div class="planet-tooltip" v-if="selectedPlanet?.name === planet.name">
+                <div
+                  v-for="planet in demoPlanets"
+                  :key="planet.name"
+                  class="planet-position"
+                  :style="getPlanetPosition(planet.position)"
+                  :class="{ active: selectedPlanet?.name === planet.name }"
+                  @click="selectPlanet(planet)"
+                >
+                  <div class="planet-symbol">
+                    {{ planet.symbol }}
+                  </div>
+                  <div
+                    v-if="selectedPlanet?.name === planet.name"
+                    class="planet-tooltip"
+                  >
                     <strong>{{ planet.name }}</strong><br>
                     {{ planet.sign }} {{ planet.degree }}°<br>
                     <small>{{ planet.interpretation }}</small>
@@ -52,23 +71,37 @@
               </div>
 
               <!-- Аспектные линии -->
-              <svg class="aspect-lines" viewBox="0 0 300 300">
-                <g v-for="aspect in demoAspects" :key="`${aspect.planet1}-${aspect.planet2}`">
-                  <line :x1="getAspectLineStart(aspect).x"
-                        :y1="getAspectLineStart(aspect).y"
-                        :x2="getAspectLineEnd(aspect).x"
-                        :y2="getAspectLineEnd(aspect).y"
-                        :class="`aspect-line aspect-${aspect.type}`"
-                        :stroke-dasharray="aspect.type === 'square' ? '5,5' : 'none'" />
+              <svg
+                class="aspect-lines"
+                viewBox="0 0 300 300"
+              >
+                <g
+                  v-for="aspect in demoAspects"
+                  :key="`${aspect.planet1}-${aspect.planet2}`"
+                >
+                  <line
+                    :x1="getAspectLineStart(aspect).x"
+                    :y1="getAspectLineStart(aspect).y"
+                    :x2="getAspectLineEnd(aspect).x"
+                    :y2="getAspectLineEnd(aspect).y"
+                    :class="`aspect-line aspect-${aspect.type}`"
+                    :stroke-dasharray="aspect.type === 'square' ? '5,5' : 'none'"
+                  />
                 </g>
               </svg>
 
               <!-- Центральная область -->
               <div class="chart-center">
                 <div class="chart-info">
-                  <div class="chart-title">{{ $t('demo_chart_title') }}</div>
-                  <div class="chart-date">{{ demoDate }}</div>
-                  <div class="chart-location">{{ demoLocation }}</div>
+                  <div class="chart-title">
+                    {{ $t('demo_chart_title') }}
+                  </div>
+                  <div class="chart-date">
+                    {{ demoDate }}
+                  </div>
+                  <div class="chart-location">
+                    {{ demoLocation }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -76,28 +109,41 @@
         </div>
 
         <!-- Правая сторона - интерпретация -->
-        <div class="interpretation-side" v-motion
-             :initial="{ opacity: 0, x: 50 }"
-             :visibleOnce="{ opacity: 1, x: 0, transition: { duration: 600, delay: 600 } }">
-
+        <div
+          v-motion
+          class="interpretation-side"
+          :initial="{ opacity: 0, x: 50 }"
+          :visibleOnce="{ opacity: 1, x: 0, transition: { duration: 600, delay: 600 } }"
+        >
           <div class="interpretation-tabs">
-            <button v-for="tab in interpretationTabs"
-                    :key="tab.id"
-                    class="tab-button"
-                    :class="{ active: activeTab === tab.id }"
-                    @click="activeTab = tab.id">
-              <Icon :name="tab.icon" />
+            <button
+              v-for="tab in interpretationTabs"
+              :key="tab.id"
+              class="tab-button"
+              :class="{ active: activeTab === tab.id }"
+              @click="activeTab = tab.id"
+            >
+              <Icon :icon="tab.icon" />
               {{ $t(tab.label) }}
             </button>
           </div>
 
           <div class="interpretation-content">
-            <Transition name="fade" mode="out-in">
-              <div v-if="activeTab === 'personality'" class="tab-content">
+            <Transition
+              name="fade"
+              mode="out-in"
+            >
+              <div
+                v-if="activeTab === 'personality'"
+                class="tab-content"
+              >
                 <h3>{{ $t('demo_personality_title') }}</h3>
                 <div class="content-block">
                   <div class="highlight-box">
-                    <Icon name="ph:sun-bold" class="content-icon" />
+                    <Icon
+                      icon="ph:sun-bold"
+                      class="content-icon"
+                    />
                     <div>
                       <strong>{{ $t('demo_sun_title') }}</strong>
                       <p>{{ $t('demo_sun_content') }}</p>
@@ -105,7 +151,10 @@
                   </div>
 
                   <div class="highlight-box">
-                    <Icon name="ph:moon-bold" class="content-icon" />
+                    <Icon
+                      icon="ph:moon-bold"
+                      class="content-icon"
+                    />
                     <div>
                       <strong>{{ $t('demo_moon_title') }}</strong>
                       <p>{{ $t('demo_moon_content') }}</p>
@@ -113,7 +162,10 @@
                   </div>
 
                   <div class="highlight-box">
-                    <Icon name="ph:star-bold" class="content-icon" />
+                    <Icon
+                      icon="ph:star-bold"
+                      class="content-icon"
+                    />
                     <div>
                       <strong>{{ $t('demo_rising_title') }}</strong>
                       <p>{{ $t('demo_rising_content') }}</p>
@@ -122,20 +174,32 @@
                 </div>
               </div>
 
-              <div v-else-if="activeTab === 'aspects'" class="tab-content">
+              <div
+                v-else-if="activeTab === 'aspects'"
+                class="tab-content"
+              >
                 <h3>{{ $t('demo_aspects_title') }}</h3>
                 <div class="aspects-list">
-                  <div v-for="aspect in demoAspects" :key="`${aspect.planet1}-${aspect.planet2}`" class="aspect-item">
+                  <div
+                    v-for="aspect in demoAspects"
+                    :key="`${aspect.planet1}-${aspect.planet2}`"
+                    class="aspect-item"
+                  >
                     <div class="aspect-header">
                       <span class="aspect-planets">{{ aspect.planet1 }} {{ getAspectSymbol(aspect.type) }} {{ aspect.planet2 }}</span>
                       <span class="aspect-orb">{{ aspect.orb }}°</span>
                     </div>
-                    <p class="aspect-interpretation">{{ aspect.interpretation }}</p>
+                    <p class="aspect-interpretation">
+                      {{ aspect.interpretation }}
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <div v-else-if="activeTab === 'forecast'" class="tab-content">
+              <div
+                v-else-if="activeTab === 'forecast'"
+                class="tab-content"
+              >
                 <h3>{{ $t('demo_forecast_title') }}</h3>
                 <div class="forecast-content">
                   <div class="forecast-period">
@@ -165,13 +229,13 @@
           </div>
 
           <!-- CTA в демо -->
-          <div class="demo-cta">
-            <p>{{ $t('demo_cta_text') }}</p>
-            <NuxtLink to="/register" class="demo-cta-button">
-              {{ $t('demo_cta_button') }}
-              <Icon name="ph:arrow-right-bold" />
-            </NuxtLink>
-          </div>
+          <!--          <div class="demo-cta"> -->
+          <!--            <p>{{ $t('demo_cta_text') }}</p> -->
+          <!--            <NuxtLink to="/register" class="demo-cta-button"> -->
+          <!--              {{ $t('demo_cta_button') }} -->
+          <!--              <Icon icon="ph:arrow-right-bold" /> -->
+          <!--            </NuxtLink> -->
+          <!--          </div> -->
         </div>
       </div>
     </div>
@@ -179,6 +243,7 @@
 </template>
 
 <script setup>
+import { Icon } from '@iconify/vue'
 import { ref, computed } from 'vue'
 
 const { t } = useI18n()
@@ -204,7 +269,7 @@ const zodiacSigns = [
   { name: 'Sagittarius', symbol: '♐' },
   { name: 'Capricorn', symbol: '♑' },
   { name: 'Aquarius', symbol: '♒' },
-  { name: 'Pisces', symbol: '♓' }
+  { name: 'Pisces', symbol: '♓' },
 ]
 
 // Планеты для демо
@@ -213,21 +278,21 @@ const demoPlanets = [
   { name: 'Moon', symbol: '☽', position: 120, sign: 'Leo', degree: 15, interpretation: 'Эмоциональная щедрость и драматизм' },
   { name: 'Mercury', symbol: '☿', position: 310, sign: 'Aquarius', degree: 8, interpretation: 'Оригинальный способ мышления' },
   { name: 'Venus', symbol: '♀', position: 280, sign: 'Capricorn', degree: 20, interpretation: 'Серьезный подход к отношениям' },
-  { name: 'Mars', symbol: '♂', position: 45, sign: 'Taurus', degree: 12, interpretation: 'Настойчивость в действиях' }
+  { name: 'Mars', symbol: '♂', position: 45, sign: 'Taurus', degree: 12, interpretation: 'Настойчивость в действиях' },
 ]
 
 // Аспекты для демо
 const demoAspects = [
   { planet1: 'Sun', planet2: 'Moon', type: 'trine', orb: 2.5, interpretation: 'Гармония между сознанием и эмоциями' },
   { planet1: 'Venus', planet2: 'Mars', type: 'square', orb: 3.2, interpretation: 'Напряжение между любовью и действием' },
-  { planet1: 'Mercury', planet2: 'Venus', type: 'conjunction', orb: 1.8, interpretation: 'Красота в общении и мышлении' }
+  { planet1: 'Mercury', planet2: 'Venus', type: 'conjunction', orb: 1.8, interpretation: 'Красота в общении и мышлении' },
 ]
 
 // Табы интерпретации
 const interpretationTabs = [
   { id: 'personality', label: 'demo_tab_personality', icon: 'ph:user-circle-bold' },
   { id: 'aspects', label: 'demo_tab_aspects', icon: 'ph:intersect-bold' },
-  { id: 'forecast', label: 'demo_tab_forecast', icon: 'ph:crystal-ball-bold' }
+  { id: 'forecast', label: 'demo_tab_forecast', icon: 'ph:crystal-ball-bold' },
 ]
 
 // Методы для позиционирования элементов
@@ -238,7 +303,7 @@ const getSignPosition = (index) => {
   const y = Math.sin((angle * Math.PI) / 180) * radius
 
   return {
-    transform: `translate(${x}px, ${y}px)`
+    transform: `translate(${x}px, ${y}px)`,
   }
 }
 
@@ -249,7 +314,7 @@ const getPlanetPosition = (position) => {
   const y = Math.sin((angle * Math.PI) / 180) * radius
 
   return {
-    transform: `translate(${x}px, ${y}px)`
+    transform: `translate(${x}px, ${y}px)`,
   }
 }
 
@@ -259,7 +324,7 @@ const getAspectLineStart = (aspect) => {
   const radius = 100
   return {
     x: 150 + Math.cos((angle1 * Math.PI) / 180) * radius,
-    y: 150 + Math.sin((angle1 * Math.PI) / 180) * radius
+    y: 150 + Math.sin((angle1 * Math.PI) / 180) * radius,
   }
 }
 
@@ -269,7 +334,7 @@ const getAspectLineEnd = (aspect) => {
   const radius = 100
   return {
     x: 150 + Math.cos((angle2 * Math.PI) / 180) * radius,
-    y: 150 + Math.sin((angle2 * Math.PI) / 180) * radius
+    y: 150 + Math.sin((angle2 * Math.PI) / 180) * radius,
   }
 }
 
@@ -279,7 +344,7 @@ const getAspectSymbol = (type) => {
     opposition: '☍',
     square: '□',
     trine: '△',
-    sextile: '⚹'
+    sextile: '⚹',
   }
   return symbols[type] || '○'
 }

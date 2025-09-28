@@ -1,10 +1,16 @@
 <template>
   <!-- Sticky notification banner -->
   <Transition name="slide-down">
-    <div v-if="showStickyBanner && !isDismissed" class="sticky-offer-banner">
+    <div
+      v-if="showStickyBanner && !isDismissed"
+      class="sticky-offer-banner"
+    >
       <div class="banner-content">
         <div class="offer-icon">
-          <Icon name="ph:fire-bold" class="fire-icon" />
+          <Icon
+            icon="ph:fire-bold"
+            class="fire-icon"
+          />
         </div>
 
         <div class="offer-text">
@@ -13,16 +19,22 @@
         </div>
 
         <div class="countdown-mini">
-          <Icon name="ph:clock-bold" />
+          <Icon icon="ph:clock-bold" />
           <span>{{ formatTime(timeLeft) }}</span>
         </div>
 
-        <NuxtLink :to="currentOffer.ctaLink" class="banner-cta">
+        <NuxtLink
+          :to="currentOffer.ctaLink"
+          class="banner-cta"
+        >
           {{ currentOffer.ctaText }}
         </NuxtLink>
 
-        <button @click="dismissBanner" class="dismiss-btn">
-          <Icon name="ph:x-bold" />
+        <button
+          class="dismiss-btn"
+          @click="dismissBanner"
+        >
+          <Icon icon="ph:x-bold" />
         </button>
       </div>
     </div>
@@ -31,50 +43,84 @@
   <!-- Main offer modal -->
   <Teleport to="body">
     <Transition name="modal">
-      <div v-if="showOfferModal" class="offer-modal-overlay" @click.self="closeModal">
-        <div class="offer-modal" v-motion
-             :initial="{ opacity: 0, scale: 0.8, rotateY: 20 }"
-             :enter="{ opacity: 1, scale: 1, rotateY: 0, transition: { duration: 600, type: 'spring' } }">
-
+      <div
+        v-if="showOfferModal"
+        class="offer-modal-overlay"
+        @click.self="closeModal"
+      >
+        <div
+          v-motion
+          class="offer-modal"
+          :initial="{ opacity: 0, scale: 0.8, rotateY: 20 }"
+          :enter="{ opacity: 1, scale: 1, rotateY: 0, transition: { duration: 600, type: 'spring' } }"
+        >
           <!-- Modal header -->
           <div class="modal-header">
             <div class="urgency-indicator">
-              <Icon name="ph:lightning-bold" class="lightning-icon" />
+              <Icon
+                icon="ph:lightning-bold"
+                class="lightning-icon"
+              />
               <span class="urgency-text">{{ $t('limited_time_only') }}</span>
             </div>
 
-            <button @click="closeModal" class="modal-close">
-              <Icon name="ph:x-bold" />
+            <button
+              class="modal-close"
+              @click="closeModal"
+            >
+              <Icon icon="ph:x-bold" />
             </button>
           </div>
 
           <!-- Offer content -->
           <div class="modal-content">
             <div class="offer-badge">
-              <Icon name="ph:percent-bold" />
+              <Icon icon="ph:percent-bold" />
               <span>{{ currentOffer.discount }}% OFF</span>
             </div>
 
-            <h2 class="offer-title">{{ $t(currentOffer.title) }}</h2>
-            <p class="offer-description">{{ $t(currentOffer.description) }}</p>
+            <h2 class="offer-title">
+              {{ $t(currentOffer.title) }}
+            </h2>
+            <p class="offer-description">
+              {{ $t(currentOffer.description) }}
+            </p>
 
             <!-- Countdown timer -->
             <div class="countdown-timer">
-              <div class="countdown-label">{{ $t('offer_expires_in') }}</div>
+              <div class="countdown-label">
+                {{ $t('offer_expires_in') }}
+              </div>
               <div class="countdown-display">
                 <div class="time-unit">
-                  <div class="time-number">{{ hours }}</div>
-                  <div class="time-label">{{ $t('hours') }}</div>
+                  <div class="time-number">
+                    {{ hours }}
+                  </div>
+                  <div class="time-label">
+                    {{ $t('hours') }}
+                  </div>
                 </div>
-                <div class="time-separator">:</div>
-                <div class="time-unit">
-                  <div class="time-number">{{ minutes }}</div>
-                  <div class="time-label">{{ $t('minutes') }}</div>
+                <div class="time-separator">
+                  :
                 </div>
-                <div class="time-separator">:</div>
                 <div class="time-unit">
-                  <div class="time-number">{{ seconds }}</div>
-                  <div class="time-label">{{ $t('seconds') }}</div>
+                  <div class="time-number">
+                    {{ minutes }}
+                  </div>
+                  <div class="time-label">
+                    {{ $t('minutes') }}
+                  </div>
+                </div>
+                <div class="time-separator">
+                  :
+                </div>
+                <div class="time-unit">
+                  <div class="time-number">
+                    {{ seconds }}
+                  </div>
+                  <div class="time-label">
+                    {{ $t('seconds') }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -82,12 +128,12 @@
             <!-- Social proof -->
             <div class="social-proof">
               <div class="proof-counter">
-                <Icon name="ph:users-bold" />
+                <Icon icon="ph:users-bold" />
                 <span>{{ $t('people_claimed_today', { count: claimedToday }) }}</span>
               </div>
 
               <div class="proof-urgency">
-                <Icon name="ph:warning-bold" />
+                <Icon icon="ph:warning-bold" />
                 <span>{{ $t('spots_remaining', { count: spotsLeft }) }}</span>
               </div>
             </div>
@@ -96,32 +142,49 @@
             <div class="offer-includes">
               <h3>{{ $t('whats_included') }}</h3>
               <div class="includes-grid">
-                <div v-for="feature in currentOffer.features"
-                     :key="feature"
-                     class="include-item">
-                  <Icon name="ph:check-circle-bold" class="check-icon" />
+                <div
+                  v-for="feature in currentOffer.features"
+                  :key="feature"
+                  class="include-item"
+                >
+                  <Icon
+                    icon="ph:check-circle-bold"
+                    class="check-icon"
+                  />
                   <span>{{ $t(feature) }}</span>
                 </div>
               </div>
             </div>
 
             <!-- Bonus items -->
-            <div class="bonus-items" v-if="currentOffer.bonuses?.length">
+            <div
+              v-if="currentOffer.bonuses?.length"
+              class="bonus-items"
+            >
               <div class="bonus-header">
-                <Icon name="ph:gift-bold" class="gift-icon" />
+                <Icon
+                  icon="ph:gift-bold"
+                  class="gift-icon"
+                />
                 <h3>{{ $t('exclusive_bonuses') }}</h3>
               </div>
 
               <div class="bonus-list">
-                <div v-for="bonus in currentOffer.bonuses"
-                     :key="bonus.name"
-                     class="bonus-item">
+                <div
+                  v-for="bonus in currentOffer.bonuses"
+                  :key="bonus.name"
+                  class="bonus-item"
+                >
                   <div class="bonus-icon">
-                    <Icon :name="bonus.icon" />
+                    <Icon icon="bonus.icon" />
                   </div>
                   <div class="bonus-content">
-                    <div class="bonus-name">{{ $t(bonus.name) }}</div>
-                    <div class="bonus-value">{{ $t('value') }}: ${{ bonus.value }}</div>
+                    <div class="bonus-name">
+                      {{ $t(bonus.name) }}
+                    </div>
+                    <div class="bonus-value">
+                      {{ $t('value') }}: ${{ bonus.value }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -145,19 +208,28 @@
 
             <!-- CTA buttons -->
             <div class="modal-actions">
-              <NuxtLink :to="currentOffer.ctaLink" class="claim-offer-btn">
-                <Icon name="ph:lightning-fill" />
+              <NuxtLink
+                :to="currentOffer.ctaLink"
+                class="claim-offer-btn"
+              >
+                <Icon icon="ph:lightning-fill" />
                 {{ $t('claim_offer_now') }}
               </NuxtLink>
 
-              <button @click="showDenialModal = true" class="decline-btn">
+              <button
+                class="decline-btn"
+                @click="showDenialModal = true"
+              >
                 {{ $t('maybe_later') }}
               </button>
             </div>
 
             <!-- Guarantee -->
             <div class="guarantee">
-              <Icon name="ph:shield-check-bold" class="guarantee-icon" />
+              <Icon
+                icon="ph:shield-check-bold"
+                class="guarantee-icon"
+              />
               <span>{{ $t('money_back_guarantee') }}</span>
             </div>
           </div>
@@ -169,7 +241,11 @@
   <!-- Denial/Exit intent modal -->
   <Teleport to="body">
     <Transition name="modal">
-      <div v-if="showDenialModal" class="denial-modal-overlay" @click.self="closeDenialModal">
+      <div
+        v-if="showDenialModal"
+        class="denial-modal-overlay"
+        @click.self="closeDenialModal"
+      >
         <div class="denial-modal">
           <div class="denial-header">
             <h3>{{ $t('wait_dont_miss_out') }}</h3>
@@ -179,7 +255,7 @@
           <div class="denial-content">
             <div class="smaller-offer">
               <div class="smaller-offer-badge">
-                <Icon name="ph:percent-bold" />
+                <Icon icon="ph:percent-bold" />
                 <span>{{ denialOffer.discount }}% OFF</span>
               </div>
 
@@ -187,17 +263,23 @@
               <p>{{ $t(denialOffer.description) }}</p>
 
               <div class="smaller-countdown">
-                <Icon name="ph:clock-bold" />
+                <Icon icon="ph:clock-bold" />
                 <span>{{ $t('expires_in_minutes', { minutes: 15 }) }}</span>
               </div>
             </div>
 
             <div class="denial-actions">
-              <NuxtLink :to="denialOffer.ctaLink" class="accept-smaller-btn">
+              <NuxtLink
+                :to="denialOffer.ctaLink"
+                class="accept-smaller-btn"
+              >
                 {{ $t('accept_this_offer') }}
               </NuxtLink>
 
-              <button @click="closeDenialModal" class="final-decline-btn">
+              <button
+                class="final-decline-btn"
+                @click="closeDenialModal"
+              >
                 {{ $t('no_thanks_continue') }}
               </button>
             </div>
@@ -209,25 +291,32 @@
 
   <!-- Floating urgency widget -->
   <Transition name="float-in">
-    <div v-if="showFloatingWidget && !showOfferModal"
-         class="floating-urgency-widget"
-         @click="showOfferModal = true">
+    <div
+      v-if="showFloatingWidget && !showOfferModal"
+      class="floating-urgency-widget"
+      @click="showOfferModal = true"
+    >
       <div class="widget-content">
         <div class="widget-icon">
-          <Icon name="ph:fire-bold" />
+          <Icon icon="ph:fire-bold" />
         </div>
         <div class="widget-text">
-          <div class="widget-title">{{ currentOffer.discount }}% OFF</div>
-          <div class="widget-timer">{{ formatTime(timeLeft) }}</div>
+          <div class="widget-title">
+            {{ currentOffer.discount }}% OFF
+          </div>
+          <div class="widget-timer">
+            {{ formatTime(timeLeft) }}
+          </div>
         </div>
       </div>
-      <div class="widget-pulse"></div>
+      <div class="widget-pulse" />
     </div>
   </Transition>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { Icon } from '@iconify/vue'
 
 const { t } = useI18n()
 
@@ -235,12 +324,12 @@ const { t } = useI18n()
 const props = defineProps({
   trigger: {
     type: String,
-    default: 'auto' // 'auto', 'scroll', 'time', 'exit'
+    default: 'auto', // 'auto', 'scroll', 'time', 'exit'
   },
   offerType: {
     type: String,
-    default: 'premium' // 'premium', 'flash', 'weekend'
-  }
+    default: 'premium', // 'premium', 'flash', 'weekend'
+  },
 })
 
 // Состояние
@@ -275,25 +364,25 @@ const offers = {
       'daily_weekly_monthly_horoscopes',
       'compatibility_reports',
       'transit_notifications',
-      'priority_support'
+      'priority_support',
     ],
     bonuses: [
       {
         name: 'bonus_astrology_course',
         icon: 'ph:graduation-cap-bold',
-        value: 97
+        value: 97,
       },
       {
         name: 'bonus_meditation_guide',
         icon: 'ph:flower-lotus-bold',
-        value: 47
+        value: 47,
       },
       {
         name: 'bonus_crystal_guide',
         icon: 'ph:diamond-bold',
-        value: 29
-      }
-    ]
+        value: 29,
+      },
+    ],
   },
   flash: {
     title: 'offer_flash_title',
@@ -309,8 +398,8 @@ const offers = {
       'multiple_profiles',
       'business_astrology',
       'api_access',
-      'white_label_reports'
-    ]
+      'white_label_reports',
+    ],
   },
   weekend: {
     title: 'offer_weekend_title',
@@ -322,16 +411,16 @@ const offers = {
     ctaLink: '/subscribe?discount=40',
     duration: 172800, // 48 часов
     features: [
-      'weekend_special_features'
-    ]
-  }
+      'weekend_special_features',
+    ],
+  },
 }
 
 const denialOffer = {
   title: 'denial_offer_title',
   description: 'denial_offer_description',
   discount: 25,
-  ctaLink: '/subscribe/premium?discount=25'
+  ctaLink: '/subscribe/premium?discount=25',
 }
 
 // Текущее предложение
@@ -358,7 +447,7 @@ onUnmounted(() => {
 
 // Методы инициализации
 const initializeOffer = () => {
-  if (process.client) {
+  if (import.meta.client) {
     // Проверяем, не показывали ли уже сегодня
     const lastShown = localStorage.getItem('offer-last-shown')
     const today = new Date().toDateString()
@@ -373,7 +462,8 @@ const initializeOffer = () => {
 
     if (endTime && now < parseInt(endTime)) {
       timeLeft.value = Math.floor((parseInt(endTime) - now) / 1000)
-    } else {
+    }
+    else {
       const newEndTime = now + (currentOffer.value.duration * 1000)
       localStorage.setItem('offer-end-time', newEndTime.toString())
       timeLeft.value = currentOffer.value.duration
@@ -388,7 +478,7 @@ const initializeOffer = () => {
 }
 
 const setupTriggers = () => {
-  if (process.client) {
+  if (import.meta.client) {
     switch (props.trigger) {
       case 'auto':
         setTimeout(() => {
@@ -424,15 +514,15 @@ const setupTriggers = () => {
 }
 
 const cleanupTriggers = () => {
-  if (process.client) {
-  window.removeEventListener('scroll', handleScroll)
-  document.removeEventListener('mouseleave', handleExitIntent)
-    }
+  if (import.meta.client) {
+    window.removeEventListener('scroll', handleScroll)
+    document.removeEventListener('mouseleave', handleExitIntent)
+  }
 }
 
 // Обработчики событий
 const handleScroll = () => {
-  if (process.client) {
+  if (import.meta.client) {
     const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
 
     if (scrolled >= 50 && !showOfferModal.value) {
@@ -452,7 +542,8 @@ const startTimer = () => {
   const interval = setInterval(() => {
     if (timeLeft.value > 0) {
       timeLeft.value--
-    } else {
+    }
+    else {
       clearInterval(interval)
       // Предложение истекло
       showOfferModal.value = false
@@ -493,7 +584,7 @@ const formatTime = (time) => {
 
 // Управление модалами
 const dismissBanner = () => {
-  if (process.client) {
+  if (import.meta.client) {
     isDismissed.value = true
     localStorage.setItem('offer-banner-dismissed', 'true')
 
@@ -501,7 +592,7 @@ const dismissBanner = () => {
     if (typeof gtag !== 'undefined') {
       gtag('event', 'offer_banner_dismissed', {
         event_category: 'urgency',
-        offer_type: props.offerType
+        offer_type: props.offerType,
       })
     }
   }
@@ -514,7 +605,7 @@ const closeModal = () => {
   if (typeof gtag !== 'undefined') {
     gtag('event', 'offer_modal_closed', {
       event_category: 'urgency',
-      offer_type: props.offerType
+      offer_type: props.offerType,
     })
   }
 }
@@ -530,7 +621,7 @@ const closeDenialModal = () => {
   if (typeof gtag !== 'undefined') {
     gtag('event', 'offer_finally_declined', {
       event_category: 'urgency',
-      offer_type: props.offerType
+      offer_type: props.offerType,
     })
   }
 }

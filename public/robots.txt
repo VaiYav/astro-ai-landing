@@ -1,0 +1,39 @@
+User-agent: *
+Allow: /
+Allow: /coming-soon
+Allow: /*.css
+Allow: /*.js
+Allow: /*.svg
+Allow: /*.png
+Allow: /*.jpg
+Allow: /*.webp
+
+# Запретить индексацию админки (когда будет готова)
+Disallow: /admin/
+Disallow: /api/
+
+# Временно разрешить все для coming soon страницы
+Allow: /
+
+# Sitemap
+Sitemap: https://astro-ai-landing.vercel.app/sitemap.xml
+
+# Специальные правила для разных ботов
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Блокировка нежелательных ботов
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

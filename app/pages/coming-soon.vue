@@ -14,7 +14,7 @@
           <span class="language-flag">{{ localeInfo.flag }}</span>
           <span class="language-name">{{ localeInfo.nativeName }}</span>
           <Icon
-            name="ph:caret-down"
+            icon="caret-down"
             class="language-caret"
           />
         </button>
@@ -61,7 +61,7 @@
         <div class="header-section">
           <div class="logo-container">
             <Icon
-              name="ph:planet"
+              icon="ph:planet"
               class="logo-icon"
             />
             <h1 class="logo-text">
@@ -106,7 +106,7 @@
               class="feature-item"
               :class="{ completed: feature.completed }"
             >
-              <Icon :name="feature.completed ? 'ph:check-circle-fill' : 'ph:circle'" />
+              <Icon :icon="feature.completed ? 'ph:check-circle-fill' : 'ph:circle'" />
               <span>{{ feature.name }}</span>
             </div>
           </div>
@@ -127,7 +127,7 @@
           >
             <div class="input-group">
               <Icon
-                name="ph:envelope"
+                icon="ph:envelope"
                 class="input-icon"
               />
               <input
@@ -148,12 +148,12 @@
               >
                 <Icon
                   v-if="isSubmitting"
-                  name="ph:circle-notch"
+                  icon="ph:circle-notch"
                   class="loading-icon"
                 />
                 <Icon
                   v-else
-                  name="ph:paper-plane-tilt"
+                  icon="ph:paper-plane-tilt"
                 />
                 {{ t('comingSoon.emailButton') }}
               </button>
@@ -165,7 +165,7 @@
                 v-if="hasError"
                 class="message error-message"
               >
-                <Icon name="ph:warning-circle" />
+                <Icon icon="ph:warning-circle" />
                 {{ emailError }}
               </div>
             </transition>
@@ -175,7 +175,7 @@
                 v-if="hasSuccess"
                 class="message success-message"
               >
-                <Icon name="ph:check-circle" />
+                <Icon icon="ph:check-circle" />
                 {{ emailSuccess }}
               </div>
             </transition>
@@ -183,7 +183,7 @@
 
           <!-- Счетчик подписчиков -->
           <!--          <div class="subscribers-count"> -->
-          <!--            <Icon name="ph:users-three" /> -->
+          <!--            <Icon icon="ph:users-three" /> -->
           <!--            <span>{{ t('plurals.subscribers', subscribersCount) }}</span> -->
           <!--          </div> -->
         </div>
@@ -198,7 +198,7 @@
               class="feature-card"
             >
               <div class="feature-icon">
-                <Icon :name="preview.icon" />
+                <Icon :icon="preview.icon" />
               </div>
               <h4>{{ preview.title }}</h4>
               <p>{{ preview.description }}</p>
@@ -216,7 +216,7 @@
         <!--              href="#" -->
         <!--              class="social-link" -->
         <!--            > -->
-        <!--              <Icon :name="social.icon" /> -->
+        <!--              <Icon :icon="social.icon" /> -->
         <!--              <span>{{ social.name }}</span> -->
         <!--            </a> -->
         <!--          </div> -->
@@ -236,7 +236,7 @@
           @click.stop
         >
           <div class="modal-icon">
-            <Icon name="ph:check-circle-fill" />
+            <Icon icon="ph:check-circle-fill" />
           </div>
           <h3>{{ t('comingSoon.successModal.title') }}</h3>
           <p>{{ t('comingSoon.successModal.description') }}</p>
@@ -254,6 +254,7 @@
 
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue'
+import { Icon } from '@iconify/vue'
 
 // Локализация
 const { t, locale, localeInfo, availableLocales, setLocale } = useI18n()

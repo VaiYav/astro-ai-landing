@@ -21,7 +21,7 @@
           class="language-name"
         >{{ localeInfo.nativeName }}</span>
         <Icon
-          name="ph:caret-down"
+          icon="ph:caret-down"
           class="language-caret"
         />
       </button>
@@ -44,7 +44,7 @@
             <span class="language-code">{{ availableLocale.code.toUpperCase() }}</span>
             <Icon
               v-if="availableLocale.code === locale"
-              name="ph:check"
+              icon="ph:check"
               class="check-icon"
             />
           </button>
@@ -55,6 +55,7 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import type { LocaleObject } from '@nuxtjs/i18n'
 

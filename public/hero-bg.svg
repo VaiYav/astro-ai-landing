@@ -1,0 +1,141 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Градиенты для космического фона -->
+    <radialGradient id="cosmicGradient" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f0f23;stop-opacity:1" />
+    </radialGradient>
+
+    <!-- Градиент для туманности -->
+    <radialGradient id="nebula1" cx="30%" cy="20%" r="40%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.3" />
+      <stop offset="50%" style="stop-color:#764ba2;stop-opacity:0.2" />
+      <stop offset="100%" style="stop-color:transparent;stop-opacity:0" />
+    </radialGradient>
+
+    <radialGradient id="nebula2" cx="70%" cy="80%" r="30%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:0.2" />
+      <stop offset="50%" style="stop-color:#ec4899;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:transparent;stop-opacity:0" />
+    </radialGradient>
+
+    <!-- Анимация мерцания звезд -->
+    <animate id="twinkle1" attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+    <animate id="twinkle2" attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+    <animate id="twinkle3" attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite"/>
+  </defs>
+
+  <!-- Основной фон -->
+  <rect width="1920" height="1080" fill="url(#cosmicGradient)"/>
+
+  <!-- Туманности -->
+  <ellipse cx="576" cy="216" rx="400" ry="200" fill="url(#nebula1)" opacity="0.6"/>
+  <ellipse cx="1344" cy="864" rx="300" ry="150" fill="url(#nebula2)" opacity="0.4"/>
+
+  <!-- Звезды разных размеров -->
+  <!-- Большие звезды -->
+  <circle cx="200" cy="150" r="2" fill="#ffffff" opacity="0.8">
+    <use href="#twinkle1"/>
+  </circle>
+  <circle cx="800" cy="100" r="1.5" fill="#667eea" opacity="0.9">
+    <use href="#twinkle2"/>
+  </circle>
+  <circle cx="1500" cy="200" r="2" fill="#8b5cf6" opacity="0.7">
+    <use href="#twinkle3"/>
+  </circle>
+  <circle cx="1200" cy="300" r="1.5" fill="#ffffff" opacity="0.8">
+    <use href="#twinkle1"/>
+  </circle>
+  <circle cx="400" cy="400" r="2" fill="#ec4899" opacity="0.6">
+    <use href="#twinkle2"/>
+  </circle>
+
+  <!-- Средние звезды -->
+  <circle cx="300" cy="250" r="1" fill="#ffffff" opacity="0.6">
+    <use href="#twinkle3"/>
+  </circle>
+  <circle cx="950" cy="180" r="1" fill="#667eea" opacity="0.7">
+    <use href="#twinkle1"/>
+  </circle>
+  <circle cx="1600" cy="350" r="1" fill="#ffffff" opacity="0.5">
+    <use href="#twinkle2"/>
+  </circle>
+  <circle cx="150" cy="500" r="1" fill="#8b5cf6" opacity="0.6">
+    <use href="#twinkle3"/>
+  </circle>
+  <circle cx="1100" cy="450" r="1" fill="#ffffff" opacity="0.7">
+    <use href="#twinkle1"/>
+  </circle>
+  <circle cx="650" cy="600" r="1" fill="#ec4899" opacity="0.5">
+    <use href="#twinkle2"/>
+  </circle>
+  <circle cx="1750" cy="500" r="1" fill="#ffffff" opacity="0.6">
+    <use href="#twinkle3"/>
+  </circle>
+
+  <!-- Малые звезды -->
+  <circle cx="100" cy="80" r="0.5" fill="#ffffff" opacity="0.4"/>
+  <circle cx="250" cy="120" r="0.5" fill="#667eea" opacity="0.5"/>
+  <circle cx="450" cy="90" r="0.5" fill="#ffffff" opacity="0.3"/>
+  <circle cx="600" cy="140" r="0.5" fill="#8b5cf6" opacity="0.4"/>
+  <circle cx="750" cy="70" r="0.5" fill="#ffffff" opacity="0.5"/>
+  <circle cx="900" cy="110" r="0.5" fill="#ec4899" opacity="0.3"/>
+  <circle cx="1050" cy="80" r="0.5" fill="#ffffff" opacity="0.4"/>
+  <circle cx="1200" cy="130" r="0.5" fill="#667eea" opacity="0.5"/>
+  <circle cx="1350" cy="60" r="0.5" fill="#ffffff" opacity="0.3"/>
+  <circle cx="1500" cy="120" r="0.5" fill="#8b5cf6" opacity="0.4"/>
+  <circle cx="1650" cy="90" r="0.5" fill="#ffffff" opacity="0.5"/>
+  <circle cx="1800" cy="110" r="0.5" fill="#ec4899" opacity="0.3"/>
+
+  <!-- Больше звезд в нижней части -->
+  <circle cx="180" cy="700" r="1" fill="#ffffff" opacity="0.5">
+    <use href="#twinkle2"/>
+  </circle>
+  <circle cx="420" cy="800" r="0.5" fill="#667eea" opacity="0.4"/>
+  <circle cx="680" cy="750" r="1" fill="#ffffff" opacity="0.6">
+    <use href="#twinkle1"/>
+  </circle>
+  <circle cx="880" cy="850" r="0.5" fill="#8b5cf6" opacity="0.5"/>
+  <circle cx="1120" cy="780" r="1" fill="#ffffff" opacity="0.4">
+    <use href="#twinkle3"/>
+  </circle>
+  <circle cx="1380" cy="820" r="0.5" fill="#ec4899" opacity="0.6"/>
+  <circle cx="1580" cy="750" r="1" fill="#ffffff" opacity="0.5">
+    <use href="#twinkle2"/>
+  </circle>
+  <circle cx="1780" cy="800" r="0.5" fill="#667eea" opacity="0.4"/>
+
+  <!-- Созвездия (линии между звездами) -->
+  <g stroke="#667eea" stroke-width="0.5" opacity="0.3" fill="none">
+    <!-- Созвездие 1 -->
+    <path d="M200,150 L300,250 L400,400 L200,150"/>
+    <!-- Созвездие 2 -->
+    <path d="M800,100 L950,180 L1100,450 L800,100"/>
+    <!-- Созвездие 3 -->
+    <path d="M1500,200 L1600,350 L1750,500 L1500,200"/>
+  </g>
+
+  <!-- Мерцающие частицы -->
+  <g opacity="0.3">
+    <circle cx="350" cy="350" r="0.3" fill="#ffffff">
+      <animate attributeName="opacity" values="0;1;0" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="750" cy="550" r="0.3" fill="#667eea">
+      <animate attributeName="opacity" values="1;0;1" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1250" cy="650" r="0.3" fill="#8b5cf6">
+      <animate attributeName="opacity" values="0;1;0" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="550" cy="750" r="0.3" fill="#ec4899">
+      <animate attributeName="opacity" values="1;0;1" dur="6s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+
+  <!-- Планеты на заднем плане -->
+  <g opacity="0.1">
+    <circle cx="1700" cy="150" r="20" fill="#667eea"/>
+    <circle cx="100" cy="900" r="15" fill="#8b5cf6"/>
+    <circle cx="1800" cy="950" r="25" fill="#ec4899"/>
+  </g>
+</svg>

@@ -1,34 +1,42 @@
 <template>
-  <section class="testimonials-section" id="testimonials">
+  <section
+    id="testimonials"
+    class="testimonials-section"
+  >
     <div class="container">
-      <h2 v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500 } }">
+      <h2
+        v-motion
+        :initial="{ opacity: 0, y: 50 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500 } }"
+      >
         {{ $t('testimonials_title') }}
       </h2>
 
       <div class="testimonials-grid">
-        <div v-for="(testimonial, index) in testimonials"
-             :key="index"
-             class="testimonial-card"
-             v-motion
-             :initial="{ opacity: 0, y: 50, rotateX: 20 }"
-             :visibleOnce="{
-               opacity: 1,
-               y: 0,
-               rotateX: 0,
-               transition: {
-                 duration: 600,
-                 delay: index * 100
-               }
-             }">
-
+        <div
+          v-for="(testimonial, index) in testimonials"
+          :key="index"
+          v-motion
+          class="testimonial-card"
+          :initial="{ opacity: 0, y: 50, rotateX: 20 }"
+          :visibleOnce="{
+            opacity: 1,
+            y: 0,
+            rotateX: 0,
+            transition: {
+              duration: 600,
+              delay: index * 100,
+            },
+          }"
+        >
           <!-- Рейтинг звездочками -->
           <div class="rating">
-            <Icon v-for="star in 5"
-                  :key="star"
-                  name="ph:star-fill"
-                  class="star-icon" />
+            <Icon
+              v-for="star in 5"
+              :key="star"
+              icon="ph:star-fill"
+              class="star-icon"
+            />
           </div>
 
           <!-- Текст отзыва -->
@@ -39,54 +47,90 @@
           <!-- Информация об авторе -->
           <div class="author-info">
             <div class="author-avatar">
-              <img :src="testimonial.avatar" :alt="$t(testimonial.name)" />
+              <img
+                :src="testimonial.avatar"
+                :alt="$t(testimonial.name)"
+              >
             </div>
             <div class="author-details">
-              <div class="author-name">{{ $t(testimonial.name) }}</div>
-              <div class="author-title">{{ $t(testimonial.title) }}</div>
-              <div class="author-location">{{ $t(testimonial.location) }}</div>
+              <div class="author-name">
+                {{ $t(testimonial.name) }}
+              </div>
+              <div class="author-title">
+                {{ $t(testimonial.title) }}
+              </div>
+              <div class="author-location">
+                {{ $t(testimonial.location) }}
+              </div>
             </div>
           </div>
 
           <!-- Астрологическая информация -->
           <div class="astrological-info">
-            <Icon name="ph:planet-bold" class="planet-icon" />
+            <Icon
+              icon="ph:planet-bold"
+              class="planet-icon"
+            />
             <span>{{ $t(testimonial.sign) }}</span>
           </div>
 
           <!-- Декоративные кавычки -->
           <div class="quote-decoration">
-            <Icon name="ph:quotes-fill" />
+            <Icon icon="ph:quotes-fill" />
           </div>
         </div>
       </div>
 
       <!-- Доверительные индикаторы -->
-      <div class="trust-section" v-motion
-           :initial="{ opacity: 0, y: 30 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 600 } }">
+      <div
+        v-motion
+        class="trust-section"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 600 } }"
+      >
         <div class="trust-grid">
           <div class="trust-item">
-            <Icon name="ph:shield-checkered-fill" class="trust-icon" />
+            <Icon
+              icon="ph:shield-checkered-fill"
+              class="trust-icon"
+            />
             <div>
-              <div class="trust-title">{{ $t('trust_secure_title') }}</div>
-              <div class="trust-desc">{{ $t('trust_secure_desc') }}</div>
+              <div class="trust-title">
+                {{ $t('trust_secure_title') }}
+              </div>
+              <div class="trust-desc">
+                {{ $t('trust_secure_desc') }}
+              </div>
             </div>
           </div>
 
           <div class="trust-item">
-            <Icon name="ph:certificate-fill" class="trust-icon" />
+            <Icon
+              icon="ph:certificate-fill"
+              class="trust-icon"
+            />
             <div>
-              <div class="trust-title">{{ $t('trust_certified_title') }}</div>
-              <div class="trust-desc">{{ $t('trust_certified_desc') }}</div>
+              <div class="trust-title">
+                {{ $t('trust_certified_title') }}
+              </div>
+              <div class="trust-desc">
+                {{ $t('trust_certified_desc') }}
+              </div>
             </div>
           </div>
 
           <div class="trust-item">
-            <Icon name="ph:users-three-fill" class="trust-icon" />
+            <Icon
+              icon="ph:users-three-fill"
+              class="trust-icon"
+            />
             <div>
-              <div class="trust-title">{{ $t('trust_community_title') }}</div>
-              <div class="trust-desc">{{ $t('trust_community_desc') }}</div>
+              <div class="trust-title">
+                {{ $t('trust_community_title') }}
+              </div>
+              <div class="trust-desc">
+                {{ $t('trust_community_desc') }}
+              </div>
             </div>
           </div>
         </div>
@@ -95,14 +139,22 @@
 
     <!-- Фоновые декоративные элементы -->
     <div class="background-stars">
-      <div v-for="i in 8" :key="`bg-star-${i}`" class="bg-star" :style="getBgStarStyle(i)"></div>
+      <div
+        v-for="i in 8"
+        :key="`bg-star-${i}`"
+        class="bg-star"
+        :style="getBgStarStyle(i)"
+      />
     </div>
   </section>
 </template>
 
 <script setup>
-const { t } = useI18n()
+import { Icon } from '@iconify/vue'
 
+defineOptions({
+  name: 'Testimonials',
+})
 // Моковые отзывы (в реальном проекте можно загружать из API)
 const testimonials = [
   {
@@ -111,7 +163,7 @@ const testimonials = [
     title: 'testimonial_1_title',
     location: 'testimonial_1_location',
     sign: 'testimonial_1_sign',
-    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b2e0e4e9?w=150&h=150&fit=crop&crop=face'
+    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b2e0e4e9?w=150&h=150&fit=crop&crop=face',
   },
   {
     text: 'testimonial_2_text',
@@ -119,7 +171,7 @@ const testimonials = [
     title: 'testimonial_2_title',
     location: 'testimonial_2_location',
     sign: 'testimonial_2_sign',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face'
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face',
   },
   {
     text: 'testimonial_3_text',
@@ -127,8 +179,8 @@ const testimonials = [
     title: 'testimonial_3_title',
     location: 'testimonial_3_location',
     sign: 'testimonial_3_sign',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face'
-  }
+    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
+  },
 ]
 
 // Стили для фоновых звезд
@@ -141,12 +193,12 @@ const getBgStarStyle = (index) => {
     { top: '75%', left: '25%' },
     { top: '35%', right: '8%' },
     { top: '55%', left: '85%' },
-    { top: '85%', right: '12%' }
+    { top: '85%', right: '12%' },
   ]
 
   return {
     ...positions[index % positions.length],
-    animationDelay: `${index * 0.5}s`
+    animationDelay: `${index * 0.5}s`,
   }
 }
 </script>

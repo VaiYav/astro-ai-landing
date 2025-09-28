@@ -4,7 +4,9 @@
     <section class="blog-header">
       <div class="container">
         <div class="header-content">
-          <h1 class="blog-title">Астрологический Блог</h1>
+          <h1 class="blog-title">
+            Астрологический Блог
+          </h1>
           <p class="blog-subtitle">
             Глубокие знания, современные интерпретации и практические советы от наших экспертов
           </p>
@@ -31,29 +33,53 @@
           <div class="search-box">
             <Icon name="ph:magnifying-glass" />
             <input
-              type="text"
               v-model="searchQuery"
+              type="text"
               placeholder="Поиск по статьям..."
               @input="debouncedSearch"
-            />
-            <button v-if="searchQuery" @click="clearSearch" class="clear-btn">
+            >
+            <button
+              v-if="searchQuery"
+              class="clear-btn"
+              @click="clearSearch"
+            >
               <Icon name="ph:x" />
             </button>
           </div>
 
           <div class="filters">
-            <select v-model="selectedCategory" @change="filterArticles">
-              <option value="">Все категории</option>
-              <option v-for="category in categories" :key="category.slug" :value="category.slug">
+            <select
+              v-model="selectedCategory"
+              @change="filterArticles"
+            >
+              <option value="">
+                Все категории
+              </option>
+              <option
+                v-for="category in categories"
+                :key="category.slug"
+                :value="category.slug"
+              >
                 {{ category.name }}
               </option>
             </select>
 
-            <select v-model="sortBy" @change="sortArticles">
-              <option value="newest">Сначала новые</option>
-              <option value="oldest">Сначала старые</option>
-              <option value="popular">По популярности</option>
-              <option value="trending">Тренды</option>
+            <select
+              v-model="sortBy"
+              @change="sortArticles"
+            >
+              <option value="newest">
+                Сначала новые
+              </option>
+              <option value="oldest">
+                Сначала старые
+              </option>
+              <option value="popular">
+                По популярности
+              </option>
+              <option value="trending">
+                Тренды
+              </option>
             </select>
           </div>
         </div>
@@ -72,7 +98,7 @@
             :style="{ '--category-color': category.color }"
           >
             <div class="category-icon">
-              <Icon :name="category.icon" />
+              <Icon icon="category.icon" />
             </div>
             <h3>{{ category.name }}</h3>
             <p>{{ category.description }}</p>
@@ -83,12 +109,20 @@
     </section>
 
     <!-- Рекомендуемая статья -->
-    <section v-if="featuredArticle" class="featured-section">
+    <section
+      v-if="featuredArticle"
+      class="featured-section"
+    >
       <div class="container">
         <div class="featured-article">
           <div class="featured-image">
-            <img :src="featuredArticle.featuredImage" :alt="featuredArticle.title" />
-            <div class="featured-badge">Рекомендуем</div>
+            <img
+              :src="featuredArticle.featuredImage"
+              :alt="featuredArticle.title"
+            >
+            <div class="featured-badge">
+              Рекомендуем
+            </div>
           </div>
           <div class="featured-content">
             <div class="featured-meta">
@@ -98,13 +132,19 @@
             <h2>{{ featuredArticle.title }}</h2>
             <p>{{ featuredArticle.excerpt }}</p>
             <div class="featured-author">
-              <img :src="featuredArticle.author.avatar" :alt="featuredArticle.author.name" />
+              <img
+                :src="featuredArticle.author.avatar"
+                :alt="featuredArticle.author.name"
+              >
               <div>
                 <strong>{{ featuredArticle.author.name }}</strong>
                 <span>{{ featuredArticle.author.title }}</span>
               </div>
             </div>
-            <NuxtLink :to="`/blog/${featuredArticle.slug}`" class="read-more-btn">
+            <NuxtLink
+              :to="`/blog/${featuredArticle.slug}`"
+              class="read-more-btn"
+            >
               Читать полностью
               <Icon name="ph:arrow-right" />
             </NuxtLink>
@@ -127,41 +167,57 @@
             <button
               v-for="filter in quickFilters"
               :key="filter.key"
-              @click="applyQuickFilter(filter.key)"
               class="quick-filter"
               :class="{ active: activeQuickFilter === filter.key }"
+              @click="applyQuickFilter(filter.key)"
             >
-              <Icon :name="filter.icon" />
+              <Icon icon="filter.icon" />
               {{ filter.label }}
             </button>
           </div>
         </div>
 
         <!-- Сетка статей -->
-        <div v-if="isLoading" class="loading-state">
+        <div
+          v-if="isLoading"
+          class="loading-state"
+        >
           <div class="loading-grid">
-            <div v-for="n in 6" :key="n" class="article-skeleton">
-              <div class="skeleton-image"></div>
+            <div
+              v-for="n in 6"
+              :key="n"
+              class="article-skeleton"
+            >
+              <div class="skeleton-image" />
               <div class="skeleton-content">
-                <div class="skeleton-category"></div>
-                <div class="skeleton-title"></div>
-                <div class="skeleton-excerpt"></div>
-                <div class="skeleton-author"></div>
+                <div class="skeleton-category" />
+                <div class="skeleton-title" />
+                <div class="skeleton-excerpt" />
+                <div class="skeleton-author" />
               </div>
             </div>
           </div>
         </div>
 
-        <div v-else-if="filteredArticles.length === 0" class="empty-state">
+        <div
+          v-else-if="filteredArticles.length === 0"
+          class="empty-state"
+        >
           <Icon name="ph:article" />
           <h3>Статьи не найдены</h3>
           <p>Попробуйте изменить критерии поиска или очистить фильтры</p>
-          <button @click="clearAllFilters" class="clear-filters-btn">
+          <button
+            class="clear-filters-btn"
+            @click="clearAllFilters"
+          >
             Очистить фильтры
           </button>
         </div>
 
-        <div v-else class="articles-grid">
+        <div
+          v-else
+          class="articles-grid"
+        >
           <article
             v-for="article in paginatedArticles"
             :key="article.id"
@@ -169,10 +225,16 @@
             @click="navigateToArticle(article.slug)"
           >
             <div class="article-image">
-              <img :src="article.featuredImage" :alt="article.title" />
+              <img
+                :src="article.featuredImage"
+                :alt="article.title"
+              >
               <div class="article-overlay">
-                <button @click.stop="toggleBookmark(article.id)" class="bookmark-btn">
-                  <Icon :name="article.isBookmarked ? 'ph:bookmark-simple-fill' : 'ph:bookmark-simple'" />
+                <button
+                  class="bookmark-btn"
+                  @click.stop="toggleBookmark(article.id)"
+                >
+                  <Icon :icon="article.isBookmarked ? 'ph:bookmark-simple-fill' : 'ph:bookmark-simple'" />
                 </button>
                 <span class="reading-time">{{ article.readingTime }} мин</span>
               </div>
@@ -180,18 +242,28 @@
 
             <div class="article-content">
               <div class="article-meta">
-                <span class="category" :style="{ '--category-color': getCategoryColor(article.category) }">
+                <span
+                  class="category"
+                  :style="{ '--category-color': getCategoryColor(article.category) }"
+                >
                   {{ article.category }}
                 </span>
                 <time>{{ formatDate(article.publishedAt) }}</time>
               </div>
 
-              <h3 class="article-title">{{ article.title }}</h3>
-              <p class="article-excerpt">{{ article.excerpt }}</p>
+              <h3 class="article-title">
+                {{ article.title }}
+              </h3>
+              <p class="article-excerpt">
+                {{ article.excerpt }}
+              </p>
 
               <div class="article-footer">
                 <div class="author-info">
-                  <img :src="article.author.avatar" :alt="article.author.name" />
+                  <img
+                    :src="article.author.avatar"
+                    :alt="article.author.name"
+                  >
                   <span>{{ article.author.name }}</span>
                 </div>
 
@@ -211,11 +283,14 @@
         </div>
 
         <!-- Пагинация -->
-        <div v-if="totalPages > 1" class="pagination">
+        <div
+          v-if="totalPages > 1"
+          class="pagination"
+        >
           <button
-            @click="goToPage(currentPage - 1)"
             :disabled="currentPage === 1"
             class="pagination-btn"
+            @click="goToPage(currentPage - 1)"
           >
             <Icon name="ph:caret-left" />
             Предыдущая
@@ -225,18 +300,18 @@
             <button
               v-for="page in visiblePages"
               :key="page"
-              @click="goToPage(page)"
               class="page-number"
               :class="{ active: page === currentPage }"
+              @click="goToPage(page)"
             >
               {{ page }}
             </button>
           </div>
 
           <button
-            @click="goToPage(currentPage + 1)"
             :disabled="currentPage === totalPages"
             class="pagination-btn"
+            @click="goToPage(currentPage + 1)"
           >
             Следующая
             <Icon name="ph:caret-right" />
@@ -254,14 +329,20 @@
             <p>Получайте еженедельную подборку лучших материалов по астрологии</p>
           </div>
 
-          <form @submit.prevent="subscribeNewsletter" class="newsletter-form">
+          <form
+            class="newsletter-form"
+            @submit.prevent="subscribeNewsletter"
+          >
             <input
-              type="email"
               v-model="newsletterEmail"
+              type="email"
               placeholder="Ваш email"
               required
-            />
-            <button type="submit" :disabled="isSubscribing">
+            >
+            <button
+              type="submit"
+              :disabled="isSubscribing"
+            >
               {{ isSubscribing ? 'Подписываем...' : 'Подписаться' }}
             </button>
           </form>
@@ -272,6 +353,8 @@
 </template>
 
 <script setup>
+import { Icon } from '@iconify/vue'
+
 // SEO
 useSeoMeta({
   title: 'Астрологический Блог - AI-Оракул | Статьи по астрологии',
@@ -279,7 +362,7 @@ useSeoMeta({
   ogTitle: 'Астрологический Блог - AI-Оракул',
   ogDescription: 'Глубокие знания астрологии от экспертов: натальные карты, планетарные транзиты, персональные прогнозы.',
   ogImage: '/blog-og-image.jpg',
-  twitterCard: 'summary_large_image'
+  twitterCard: 'summary_large_image',
 })
 
 // Реактивные данные
@@ -310,7 +393,7 @@ const featuredCategories = [
     description: 'Глубокий анализ личности через звезды',
     icon: 'ph:chart-line',
     color: '#8b5cf6',
-    articleCount: 45
+    articleCount: 45,
   },
   {
     slug: 'planetary-transits',
@@ -318,7 +401,7 @@ const featuredCategories = [
     description: 'Влияние планетарных движений на жизнь',
     icon: 'ph:planet',
     color: '#ec4899',
-    articleCount: 32
+    articleCount: 32,
   },
   {
     slug: 'zodiac-signs',
@@ -326,7 +409,7 @@ const featuredCategories = [
     description: 'Характеристики и совместимость знаков',
     icon: 'ph:star',
     color: '#f59e0b',
-    articleCount: 28
+    articleCount: 28,
   },
   {
     slug: 'astrology-basics',
@@ -334,7 +417,7 @@ const featuredCategories = [
     description: 'Начальные знания для новичков',
     icon: 'ph:book-open',
     color: '#10b981',
-    articleCount: 22
+    articleCount: 22,
   },
   {
     slug: 'predictions',
@@ -342,7 +425,7 @@ const featuredCategories = [
     description: 'Астрологические прогнозы на будущее',
     icon: 'ph:crystal-ball',
     color: '#3b82f6',
-    articleCount: 19
+    articleCount: 19,
   },
   {
     slug: 'lunar-cycles',
@@ -350,15 +433,15 @@ const featuredCategories = [
     description: 'Влияние Луны на эмоции и энергию',
     icon: 'ph:moon',
     color: '#6366f1',
-    articleCount: 15
-  }
+    articleCount: 15,
+  },
 ]
 
 const quickFilters = [
   { key: 'trending', label: 'Тренды', icon: 'ph:trending-up' },
   { key: 'beginner', label: 'Для новичков', icon: 'ph:student' },
   { key: 'advanced', label: 'Для экспертов', icon: 'ph:graduation-cap' },
-  { key: 'this-week', label: 'За неделю', icon: 'ph:calendar' }
+  { key: 'this-week', label: 'За неделю', icon: 'ph:calendar' },
 ]
 
 // Вычисляемые свойства
@@ -369,16 +452,16 @@ const filteredArticles = computed(() => {
   if (searchQuery.value) {
     const query = searchQuery.value.toLowerCase()
     filtered = filtered.filter(article =>
-      article.title.toLowerCase().includes(query) ||
-      article.excerpt.toLowerCase().includes(query) ||
-      article.tags.some(tag => tag.toLowerCase().includes(query))
+      article.title.toLowerCase().includes(query)
+      || article.excerpt.toLowerCase().includes(query)
+      || article.tags.some(tag => tag.toLowerCase().includes(query)),
     )
   }
 
   // Фильтр по категории
   if (selectedCategory.value) {
     filtered = filtered.filter(article =>
-      article.category.toLowerCase() === selectedCategory.value.toLowerCase()
+      article.category.toLowerCase() === selectedCategory.value.toLowerCase(),
     )
   }
 
@@ -399,7 +482,7 @@ const filteredArticles = computed(() => {
         break
       case 'this-week':
         filtered = filtered.filter(article =>
-          new Date(article.publishedAt) >= weekAgo
+          new Date(article.publishedAt) >= weekAgo,
         )
         break
     }
@@ -425,7 +508,7 @@ const filteredArticles = computed(() => {
 })
 
 const totalPages = computed(() =>
-  Math.ceil(filteredArticles.value.length / articlesPerPage)
+  Math.ceil(filteredArticles.value.length / articlesPerPage),
 )
 
 const paginatedArticles = computed(() => {
@@ -443,12 +526,15 @@ const visiblePages = computed(() => {
     for (let i = 1; i <= total; i++) {
       pages.push(i)
     }
-  } else {
+  }
+  else {
     if (current <= 4) {
       pages.push(1, 2, 3, 4, 5, '...', total)
-    } else if (current >= total - 3) {
+    }
+    else if (current >= total - 3) {
       pages.push(1, '...', total - 4, total - 3, total - 2, total - 1, total)
-    } else {
+    }
+    else {
       pages.push(1, '...', current - 1, current, current + 1, '...', total)
     }
   }
@@ -473,7 +559,8 @@ const sortArticles = () => {
 const applyQuickFilter = (filter) => {
   if (activeQuickFilter.value === filter) {
     activeQuickFilter.value = ''
-  } else {
+  }
+  else {
     activeQuickFilter.value = filter
     selectedCategory.value = ''
     currentPage.value = 1
@@ -513,9 +600,10 @@ const toggleBookmark = async (articleId) => {
     try {
       await $fetch(`/api/blog/${articleId}/bookmark`, {
         method: 'POST',
-        body: { bookmarked: article.isBookmarked }
+        body: { bookmarked: article.isBookmarked },
       })
-    } catch (error) {
+    }
+    catch (error) {
       // Откатываем изменение при ошибке
       article.isBookmarked = !article.isBookmarked
       console.error('Ошибка при сохранении закладки:', error)
@@ -528,13 +616,15 @@ const subscribeNewsletter = async () => {
   try {
     await $fetch('/api/newsletter/subscribe', {
       method: 'POST',
-      body: { email: newsletterEmail.value }
+      body: { email: newsletterEmail.value },
     })
     newsletterEmail.value = ''
     // Показать уведомление об успешной подписке
-  } catch (error) {
+  }
+  catch (error) {
     console.error('Ошибка подписки:', error)
-  } finally {
+  }
+  finally {
     isSubscribing.value = false
   }
 }
@@ -544,7 +634,7 @@ const formatDate = (date) => {
   return new Date(date).toLocaleDateString('ru-RU', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   })
 }
 
@@ -557,7 +647,7 @@ const formatNumber = (num) => {
 
 const getCategoryColor = (category) => {
   const categoryData = featuredCategories.find(c =>
-    c.name.toLowerCase() === category.toLowerCase()
+    c.name.toLowerCase() === category.toLowerCase(),
   )
   return categoryData?.color || '#6b7280'
 }

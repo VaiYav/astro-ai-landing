@@ -81,7 +81,7 @@
         :initial="{ opacity: 0, y: 20 }"
         :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 100 } }"
       >
-        <Icon name="ph:sparkle-fill" />
+        <Icon icon="ph:sparkle-fill" />
         <span>{{ $t('hero_badge') }}</span>
       </div>
 
@@ -115,22 +115,22 @@
         >
           <span>{{ $t('cta_button') }}</span>
           <Icon
-            name="ph:arrow-right-bold"
+            icon="ph:arrow-right-bold"
             class="cta-icon"
           />
         </NuxtLink>
 
         <div class="trust-indicators">
           <div class="trust-item">
-            <Icon name="ph:shield-check-fill" />
+            <Icon icon="ph:shield-check-fill" />
             <span>{{ $t('trust_secure') }}</span>
           </div>
           <div class="trust-item">
-            <Icon name="ph:lightning-fill" />
+            <Icon icon="ph:lightning-fill" />
             <span>{{ $t('trust_fast') }}</span>
           </div>
           <div class="trust-item">
-            <Icon name="ph:target-fill" />
+            <Icon icon="ph:target-fill" />
             <span>{{ $t('trust_accurate') }}</span>
           </div>
         </div>
@@ -143,9 +143,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-
-const { t } = useI18n()
+import { Icon } from '@iconify/vue'
 
 // Массив астрологических символов для анимации
 const floatingSymbols = ['☾', '☿', '♀', '♂', '♃', '♄', '♅', '♆']

@@ -1,4 +1,30 @@
-{  "name": "AI Oracle",
-   "short_name": "AI Oracle",
-   "description": "Your Personal Natal Chart Online, powered by AI.",
-"icons":[{"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#ffffff","background_color":"#ffffff","display":"standalone"}
+{
+  "name": "AI Oracle",
+  "short_name": "AI Oracle",
+  "description": "Your Personal Natal Chart Online, powered by AI.",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "lang": "uk",
+  "categories": ["lifestyle", "personalization", "astrology"],
+  "screenshots": [
+    {
+      "src": "/demo-chart.svg",
+      "sizes": "500x500",
+      "type": "image/svg+xml",
+      "label": "Пример натальной карты"
+    }
+  ]
+}

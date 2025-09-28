@@ -1,21 +1,19 @@
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-
   // Модули
   modules: [
     '@nuxt/eslint',
     '@nuxtjs/google-fonts',
     '@nuxtjs/i18n',
     '@vueuse/motion/nuxt',
-    'nuxt-icon',
-    'unplugin-icons/nuxt',
-    'nuxt-seo-utils',
     '@nuxtjs/seo',
     '@pinia/nuxt',
     '@vite-pwa/nuxt',
-    '@zadigetvoltaire/nuxt-gtm',
     '@nuxtjs/sitemap',
+  ],
+  plugins: [
+    '~/plugins/iconify.client.ts',
   ],
   ssr: true,
 
@@ -112,7 +110,6 @@ export default defineNuxtConfig({
   },
 
   // Build
-  build: { transpile: ['@phosphor-icons/vue'] },
 
   // Optimization
   optimization: {
@@ -155,10 +152,6 @@ export default defineNuxtConfig({
     },
     display: 'swap',
     preload: true,
-  },
-  gtm: {
-    id: 'GTM-NSN2VZPZ',
-    enabled: true,
   },
 
   // i18n

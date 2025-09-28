@@ -1,32 +1,42 @@
 <template>
   <section class="pricing-section">
     <div class="container">
-      <h2 v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500 } }">
+      <h2
+        v-motion
+        :initial="{ opacity: 0, y: 50 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500 } }"
+      >
         {{ $t('pricing_title') }}
       </h2>
 
-      <p class="pricing-subtitle" v-motion
-         :initial="{ opacity: 0, y: 30 }"
-         :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500, delay: 200 } }">
+      <p
+        v-motion
+        class="pricing-subtitle"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500, delay: 200 } }"
+      >
         {{ $t('pricing_subtitle') }}
       </p>
 
       <!-- Переключатель месячных/годовых планов -->
-      <div class="billing-toggle" v-motion
-           :initial="{ opacity: 0, y: 30 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500, delay: 300 } }">
+      <div
+        v-motion
+        class="billing-toggle"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500, delay: 300 } }"
+      >
         <button
           class="toggle-option"
           :class="{ active: billingCycle === 'monthly' }"
-          @click="billingCycle = 'monthly'">
+          @click="billingCycle = 'monthly'"
+        >
           {{ $t('monthly') }}
         </button>
         <button
           class="toggle-option"
           :class="{ active: billingCycle === 'yearly' }"
-          @click="billingCycle = 'yearly'">
+          @click="billingCycle = 'yearly'"
+        >
           {{ $t('yearly') }}
           <span class="discount-badge">{{ $t('save_20') }}</span>
         </button>
@@ -34,37 +44,41 @@
 
       <!-- Тарифные планы -->
       <div class="pricing-grid">
-        <div v-for="(plan, index) in pricingPlans"
-             :key="plan.id"
-             class="pricing-card"
-             :class="{
-               popular: plan.popular,
-               premium: plan.id === 'premium'
-             }"
-             v-motion
-             :initial="{ opacity: 0, y: 50, scale: 0.95 }"
-             :visibleOnce="{
-               opacity: 1,
-               y: 0,
-               scale: 1,
-               transition: {
-                 duration: 600,
-                 delay: 400 + index * 150,
-                 type: 'spring',
-                 stiffness: 100
-               }
-             }">
-
+        <div
+          v-for="(plan, index) in pricingPlans"
+          :key="plan.id"
+          v-motion
+          class="pricing-card"
+          :class="{
+            popular: plan.popular,
+            premium: plan.id === 'premium',
+          }"
+          :initial="{ opacity: 0, y: 50, scale: 0.95 }"
+          :visibleOnce="{
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: {
+              duration: 600,
+              delay: 400 + index * 150,
+              type: 'spring',
+              stiffness: 100,
+            },
+          }"
+        >
           <!-- Популярный план badge -->
-          <div v-if="plan.popular" class="popular-badge">
-            <Icon name="ph:star-fill" />
+          <div
+            v-if="plan.popular"
+            class="popular-badge"
+          >
+            <Icon icon="ph:star-fill" />
             <span>{{ $t('most_popular') }}</span>
           </div>
 
           <!-- Заголовок плана -->
           <div class="plan-header">
             <div class="plan-icon">
-              <Icon :name="plan.icon" />
+              <Icon icon="plan.icon" />
             </div>
             <h3>{{ $t(plan.name) }}</h3>
             <p>{{ $t(plan.description) }}</p>
@@ -78,7 +92,10 @@
               <span class="period">{{ billingCycle === 'monthly' ? $t('per_month') : $t('per_year') }}</span>
             </div>
 
-            <div v-if="billingCycle === 'yearly' && plan.id !== 'free'" class="yearly-savings">
+            <div
+              v-if="billingCycle === 'yearly' && plan.id !== 'free'"
+              class="yearly-savings"
+            >
               {{ $t('yearly_savings', { amount: getYearlySavings(plan) }) }}
             </div>
           </div>
@@ -87,28 +104,49 @@
           <NuxtLink
             :to="plan.id === 'free' ? '/register' : `/subscribe/${plan.id}`"
             class="subscribe-button"
-            :class="plan.id">
+            :class="plan.id"
+          >
             {{ $t(plan.buttonText) }}
-            <Icon name="ph:arrow-right-bold" class="button-icon" />
+            <Icon
+              icon="ph:arrow-right-bold"
+              class="button-icon"
+            />
           </NuxtLink>
 
           <!-- Особенности плана -->
           <div class="plan-features">
             <h4>{{ $t('included_features') }}</h4>
             <ul>
-              <li v-for="feature in plan.features" :key="feature" class="feature-item">
-                <Icon name="ph:check-circle-fill" class="check-icon" />
+              <li
+                v-for="feature in plan.features"
+                :key="feature"
+                class="feature-item"
+              >
+                <Icon
+                  icon="ph:check-circle-fill"
+                  class="check-icon"
+                />
                 <span>{{ $t(feature) }}</span>
               </li>
             </ul>
           </div>
 
           <!-- Дополнительные преимущества для премиум планов -->
-          <div v-if="plan.bonuses && plan.bonuses.length > 0" class="plan-bonuses">
+          <div
+            v-if="plan.bonuses && plan.bonuses.length > 0"
+            class="plan-bonuses"
+          >
             <h4>{{ $t('bonus_features') }}</h4>
             <ul>
-              <li v-for="bonus in plan.bonuses" :key="bonus" class="bonus-item">
-                <Icon name="ph:gift-fill" class="bonus-icon" />
+              <li
+                v-for="bonus in plan.bonuses"
+                :key="bonus"
+                class="bonus-item"
+              >
+                <Icon
+                  icon="ph:gift-fill"
+                  class="bonus-icon"
+                />
                 <span>{{ $t(bonus) }}</span>
               </li>
             </ul>
@@ -117,15 +155,24 @@
           <!-- Лимиты использования -->
           <div class="plan-limits">
             <div class="limit-item">
-              <Icon name="ph:calendar-blank-bold" class="limit-icon" />
+              <Icon
+                icon="ph:calendar-blank-bold"
+                class="limit-icon"
+              />
               <span>{{ $t(plan.limits.daily) }}</span>
             </div>
             <div class="limit-item">
-              <Icon name="ph:chart-line-bold" class="limit-icon" />
+              <Icon
+                icon="ph:chart-line-bold"
+                class="limit-icon"
+              />
               <span>{{ $t(plan.limits.charts) }}</span>
             </div>
             <div class="limit-item">
-              <Icon name="ph:headset-bold" class="limit-icon" />
+              <Icon
+                icon="ph:headset-bold"
+                class="limit-icon"
+              />
               <span>{{ $t(plan.limits.support) }}</span>
             </div>
           </div>
@@ -133,12 +180,19 @@
       </div>
 
       <!-- FAQ по ценам -->
-      <div class="pricing-faq" v-motion
-           :initial="{ opacity: 0, y: 30 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1000 } }">
+      <div
+        v-motion
+        class="pricing-faq"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1000 } }"
+      >
         <h3>{{ $t('pricing_faq_title') }}</h3>
         <div class="faq-grid">
-          <div v-for="faq in pricingFaqs" :key="faq.question" class="faq-item">
+          <div
+            v-for="faq in pricingFaqs"
+            :key="faq.question"
+            class="faq-item"
+          >
             <h4>{{ $t(faq.question) }}</h4>
             <p>{{ $t(faq.answer) }}</p>
           </div>
@@ -146,12 +200,18 @@
       </div>
 
       <!-- Гарантии -->
-      <div class="guarantees" v-motion
-           :initial="{ opacity: 0, y: 30 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1200 } }">
+      <div
+        v-motion
+        class="guarantees"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1200 } }"
+      >
         <div class="guarantee-grid">
           <div class="guarantee-item">
-            <Icon name="ph:shield-check-fill" class="guarantee-icon" />
+            <Icon
+              icon="ph:shield-check-fill"
+              class="guarantee-icon"
+            />
             <div>
               <h4>{{ $t('money_back_title') }}</h4>
               <p>{{ $t('money_back_desc') }}</p>
@@ -159,7 +219,10 @@
           </div>
 
           <div class="guarantee-item">
-            <Icon name="ph:lock-fill" class="guarantee-icon" />
+            <Icon
+              icon="ph:lock-fill"
+              class="guarantee-icon"
+            />
             <div>
               <h4>{{ $t('secure_payment_title') }}</h4>
               <p>{{ $t('secure_payment_desc') }}</p>
@@ -167,7 +230,10 @@
           </div>
 
           <div class="guarantee-item">
-            <Icon name="ph:heart-fill" class="guarantee-icon" />
+            <Icon
+              icon="ph:heart-fill"
+              class="guarantee-icon"
+            />
             <div>
               <h4>{{ $t('cancel_anytime_title') }}</h4>
               <p>{{ $t('cancel_anytime_desc') }}</p>
@@ -179,10 +245,12 @@
 
     <!-- Floating zodiac symbols -->
     <div class="floating-zodiac">
-      <div v-for="(symbol, index) in zodiacSymbols"
-           :key="symbol"
-           class="zodiac-symbol"
-           :style="getZodiacStyle(index)">
+      <div
+        v-for="(symbol, index) in zodiacSymbols"
+        :key="symbol"
+        class="zodiac-symbol"
+        :style="getZodiacStyle(index)"
+      >
         {{ symbol }}
       </div>
     </div>
@@ -191,6 +259,7 @@
 
 <script setup>
 import { ref, computed } from 'vue'
+import { Icon } from '@iconify/vue'
 
 const { t } = useI18n()
 
@@ -214,13 +283,13 @@ const pricingPlans = [
     features: [
       'feature_basic_chart',
       'feature_basic_interpretation',
-      'feature_daily_horoscope_limited'
+      'feature_daily_horoscope_limited',
     ],
     limits: {
       daily: 'limit_1_daily',
       charts: 'limit_1_chart',
-      support: 'limit_email_support'
-    }
+      support: 'limit_email_support',
+    },
   },
   {
     id: 'premium',
@@ -237,18 +306,18 @@ const pricingPlans = [
       'feature_daily_weekly_monthly',
       'feature_personalized_forecasts',
       'feature_astro_journal',
-      'feature_transit_alerts'
+      'feature_transit_alerts',
     ],
     bonuses: [
       'bonus_priority_support',
       'bonus_exclusive_content',
-      'bonus_early_access'
+      'bonus_early_access',
     ],
     limits: {
       daily: 'limit_unlimited_daily',
       charts: 'limit_unlimited_charts',
-      support: 'limit_priority_support'
-    }
+      support: 'limit_priority_support',
+    },
   },
   {
     id: 'professional',
@@ -265,39 +334,39 @@ const pricingPlans = [
       'feature_compatibility_reports',
       'feature_advanced_transits',
       'feature_business_astrology',
-      'feature_api_access'
+      'feature_api_access',
     ],
     bonuses: [
       'bonus_white_label',
       'bonus_custom_reports',
-      'bonus_dedicated_manager'
+      'bonus_dedicated_manager',
     ],
     limits: {
       daily: 'limit_unlimited_everything',
       charts: 'limit_unlimited_profiles',
-      support: 'limit_dedicated_support'
-    }
-  }
+      support: 'limit_dedicated_support',
+    },
+  },
 ]
 
 // FAQ по ценам
 const pricingFaqs = [
   {
     question: 'pricing_faq_1_q',
-    answer: 'pricing_faq_1_a'
+    answer: 'pricing_faq_1_a',
   },
   {
     question: 'pricing_faq_2_q',
-    answer: 'pricing_faq_2_a'
+    answer: 'pricing_faq_2_a',
   },
   {
     question: 'pricing_faq_3_q',
-    answer: 'pricing_faq_3_a'
+    answer: 'pricing_faq_3_a',
   },
   {
     question: 'pricing_faq_4_q',
-    answer: 'pricing_faq_4_a'
-  }
+    answer: 'pricing_faq_4_a',
+  },
 ]
 
 // Вычисляемые свойства
@@ -325,12 +394,12 @@ const getZodiacStyle = (index) => {
     { top: '45%', left: '90%' },
     { top: '60%', right: '92%' },
     { top: '75%', left: '88%' },
-    { top: '90%', right: '85%' }
+    { top: '90%', right: '85%' },
   ]
 
   return {
     ...positions[index % positions.length],
-    animationDelay: `${index * 0.5}s`
+    animationDelay: `${index * 0.5}s`,
   }
 }
 </script>

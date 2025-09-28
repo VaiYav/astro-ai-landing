@@ -1,36 +1,45 @@
 <template>
-  <section class="features-section" id="features">
+  <section
+    id="features"
+    class="features-section"
+  >
     <div class="container">
-      <h2 v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500 } }">
+      <h2
+        v-motion
+        :initial="{ opacity: 0, y: 50 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500 } }"
+      >
         {{ $t('features_title') }}
       </h2>
 
       <div class="features-grid">
-        <div v-for="(feature, index) in features"
-             :key="feature.title"
-             class="feature-card"
-             v-motion
-             :initial="{ opacity: 0, y: 50, scale: 0.9 }"
-             :visibleOnce="{
-               opacity: 1,
-               y: 0,
-               scale: 1,
-               transition: {
-                 duration: 600,
-                 delay: index * 150,
-                 type: 'spring',
-                 stiffness: 100
-               }
-             }"
-             @mouseenter="onCardHover(index)"
-             @mouseleave="onCardLeave(index)">
-
+        <div
+          v-for="(feature, index) in features"
+          :key="feature.title"
+          v-motion
+          class="feature-card"
+          :initial="{ opacity: 0, y: 50, scale: 0.9 }"
+          :visibleOnce="{
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            transition: {
+              duration: 600,
+              delay: index * 150,
+              type: 'spring',
+              stiffness: 100,
+            },
+          }"
+          @mouseenter="onCardHover(index)"
+          @mouseleave="onCardLeave(index)"
+        >
           <div class="feature-icon-container">
-            <div class="feature-icon-bg"></div>
-            <Icon :name="feature.icon" class="feature-icon" />
-            <div class="feature-glow"></div>
+            <div class="feature-icon-bg" />
+            <Icon
+              :icon="feature.icon"
+              class="feature-icon"
+            />
+            <div class="feature-glow" />
           </div>
 
           <div class="feature-content">
@@ -39,8 +48,15 @@
 
             <!-- Дополнительные детали для каждой фичи -->
             <div class="feature-details">
-              <div v-for="detail in feature.details" :key="detail" class="feature-detail">
-                <Icon name="ph:check-circle-fill" class="check-icon" />
+              <div
+                v-for="detail in feature.details"
+                :key="detail"
+                class="feature-detail"
+              >
+                <Icon
+                  icon="ph:check-circle-fill"
+                  class="check-icon"
+                />
                 <span>{{ $t(detail) }}</span>
               </div>
             </div>
@@ -48,27 +64,42 @@
 
           <!-- Декоративные элементы -->
           <div class="card-decoration">
-            <div class="decoration-line"></div>
-            <div class="decoration-dot"></div>
+            <div class="decoration-line" />
+            <div class="decoration-dot" />
           </div>
         </div>
       </div>
 
       <!-- Статистика -->
-      <div class="stats-section" v-motion
-           :initial="{ opacity: 0, y: 30 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 800 } }">
+      <div
+        v-motion
+        class="stats-section"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 800 } }"
+      >
         <div class="stat-item">
-          <div class="stat-number">{{ animatedUsers }}</div>
-          <div class="stat-label">{{ $t('stats_users') }}</div>
+          <div class="stat-number">
+            {{ animatedUsers }}
+          </div>
+          <div class="stat-label">
+            {{ $t('stats_users') }}
+          </div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">{{ animatedCharts }}</div>
-          <div class="stat-label">{{ $t('stats_charts') }}</div>
+          <div class="stat-number">
+            {{ animatedCharts }}
+          </div>
+          <div class="stat-label">
+            {{ $t('stats_charts') }}
+          </div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">99.9%</div>
-          <div class="stat-label">{{ $t('stats_accuracy') }}</div>
+          <div class="stat-number">
+            99.9%
+          </div>
+          <div class="stat-label">
+            {{ $t('stats_accuracy') }}
+          </div>
         </div>
       </div>
     </div>
@@ -77,6 +108,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { Icon } from '@iconify/vue'
 
 const { t } = useI18n()
 
@@ -86,20 +118,20 @@ const features = [
     icon: 'ph:brain-bold',
     title: 'feature_1_title',
     desc: 'feature_1_desc',
-    details: ['feature_1_detail_1', 'feature_1_detail_2', 'feature_1_detail_3']
+    details: ['feature_1_detail_1', 'feature_1_detail_2', 'feature_1_detail_3'],
   },
   {
     icon: 'ph:notebook-bold',
     title: 'feature_2_title',
     desc: 'feature_2_desc',
-    details: ['feature_2_detail_1', 'feature_2_detail_2', 'feature_2_detail_3']
+    details: ['feature_2_detail_1', 'feature_2_detail_2', 'feature_2_detail_3'],
   },
   {
     icon: 'ph:graph-bold',
     title: 'feature_3_title',
     desc: 'feature_3_desc',
-    details: ['feature_3_detail_1', 'feature_3_detail_2', 'feature_3_detail_3']
-  }
+    details: ['feature_3_detail_1', 'feature_3_detail_2', 'feature_3_detail_3'],
+  },
 ]
 
 // Анимированные числа для статистики

@@ -18,14 +18,14 @@
             class="close-btn"
             @click="closePopup"
           >
-            <Icon name="ph:x-bold" />
+            <Icon icon="ph:x-bold" />
           </button>
 
           <!-- Магнит контент -->
           <div class="popup-header">
             <div class="magic-crystal">
               <Icon
-                name="ph:crystal-ball-bold"
+                icon="ph:crystal-ball-bold"
                 class="crystal-icon"
               />
               <div class="crystal-glow" />
@@ -41,21 +41,21 @@
           <div class="benefits-preview">
             <div class="benefit-item">
               <Icon
-                name="ph:calendar-check-bold"
+                icon="ph:calendar-check-bold"
                 class="benefit-icon"
               />
               <span>{{ $t('benefit_weekly_horoscope') }}</span>
             </div>
             <div class="benefit-item">
               <Icon
-                name="ph:heart-straight-bold"
+                icon="ph:heart-straight-bold"
                 class="benefit-icon"
               />
               <span>{{ $t('benefit_love_forecast') }}</span>
             </div>
             <div class="benefit-item">
               <Icon
-                name="ph:trending-up-bold"
+                icon="ph:trending-up-bold"
                 class="benefit-icon"
               />
               <span>{{ $t('benefit_success_tips') }}</span>
@@ -71,7 +71,7 @@
             <div class="form-row">
               <div class="input-group">
                 <Icon
-                  name="ph:user-bold"
+                  icon="ph:user-bold"
                   class="input-icon"
                 />
                 <input
@@ -85,7 +85,7 @@
 
               <div class="input-group">
                 <Icon
-                  name="ph:envelope-bold"
+                  icon="ph:envelope-bold"
                   class="input-icon"
                 />
                 <input
@@ -105,7 +105,7 @@
             >
               <div class="input-group">
                 <Icon
-                  name="ph:calendar-blank-bold"
+                  icon="ph:calendar-blank-bold"
                   class="input-icon"
                 />
                 <input
@@ -123,7 +123,7 @@
               @click="showOptionalFields = !showOptionalFields"
             >
               {{ showOptionalFields ? $t('hide_optional') : $t('personalize_more') }}
-              <Icon :name="showOptionalFields ? 'ph:caret-up-bold' : 'ph:caret-down-bold'" />
+              <Icon :icon="showOptionalFields ? 'ph:caret-up-bold' : 'ph:caret-down-bold'" />
             </button>
 
             <!-- Submit button -->
@@ -136,7 +136,7 @@
               <span v-else>{{ $t('subscribing') }}...</span>
               <Icon
                 v-if="!isLoading"
-                name="ph:arrow-right-bold"
+                icon="ph:arrow-right-bold"
                 class="btn-icon"
               />
               <div
@@ -169,21 +169,21 @@
           <div class="guarantees">
             <div class="guarantee-item">
               <Icon
-                name="ph:shield-check-bold"
+                icon="ph:shield-check-bold"
                 class="guarantee-icon"
               />
               <span>{{ $t('no_spam_guarantee') }}</span>
             </div>
             <div class="guarantee-item">
               <Icon
-                name="ph:sign-out-bold"
+                icon="ph:sign-out-bold"
                 class="guarantee-icon"
               />
               <span>{{ $t('unsubscribe_anytime') }}</span>
             </div>
             <div class="guarantee-item">
               <Icon
-                name="ph:lock-bold"
+                icon="ph:lock-bold"
                 class="guarantee-icon"
               />
               <span>{{ $t('data_secure') }}</span>
@@ -196,7 +196,7 @@
             class="special-offer"
           >
             <div class="offer-badge">
-              <Icon name="ph:gift-bold" />
+              <Icon icon="ph:gift-bold" />
               <span>{{ $t('limited_bonus') }}</span>
             </div>
             <p>{{ $t('special_offer_text') }}</p>
@@ -216,7 +216,7 @@
       >
         <div class="success-modal">
           <div class="success-icon">
-            <Icon name="ph:check-circle-bold" />
+            <Icon icon="ph:check-circle-bold" />
           </div>
           <h3>{{ $t('subscription_success_title') }}</h3>
           <p>{{ $t('subscription_success_message') }}</p>
@@ -224,11 +224,11 @@
           <!-- Следующие шаги -->
           <div class="next-steps">
             <div class="step">
-              <Icon name="ph:envelope-open-bold" />
+              <Icon icon="ph:envelope-open-bold" />
               <span>{{ $t('check_email_step') }}</span>
             </div>
             <div class="step">
-              <Icon name="ph:calendar-plus-bold" />
+              <Icon icon="ph:calendar-plus-bold" />
               <span>{{ $t('first_horoscope_step') }}</span>
             </div>
           </div>
@@ -254,6 +254,7 @@
 </template>
 
 <script setup>
+import { Icon } from '@iconify/vue'
 import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const { t } = useI18n()

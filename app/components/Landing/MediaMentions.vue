@@ -2,59 +2,73 @@
   <section class="media-mentions-section">
     <div class="container">
       <!-- Заголовок секции -->
-      <div class="section-header" v-motion
-           :initial="{ opacity: 0, y: 30 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600 } }">
+      <div
+        v-motion
+        class="section-header"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600 } }"
+      >
         <h2>{{ $t('media_mentions_title') }}</h2>
         <p>{{ $t('media_mentions_subtitle') }}</p>
       </div>
 
       <!-- Логотипы медиа -->
-      <div class="media-logos" v-motion
-           :initial="{ opacity: 0, y: 40 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 200 } }">
-        <div v-for="(media, index) in mediaLogos"
-             :key="media.name"
-             class="media-logo"
-             v-motion
-             :initial="{ opacity: 0, scale: 0.8 }"
-             :visibleOnce="{
-               opacity: 1,
-               scale: 1,
-               transition: {
-                 duration: 400,
-                 delay: 300 + index * 100
-               }
-             }">
-          <img :src="media.logo" :alt="media.name" />
+      <div
+        v-motion
+        class="media-logos"
+        :initial="{ opacity: 0, y: 40 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 200 } }"
+      >
+        <div
+          v-for="(media, index) in mediaLogos"
+          :key="media.name"
+          v-motion
+          class="media-logo"
+          :initial="{ opacity: 0, scale: 0.8 }"
+          :visibleOnce="{
+            opacity: 1,
+            scale: 1,
+            transition: {
+              duration: 400,
+              delay: 300 + index * 100,
+            },
+          }"
+        >
+          <img
+            :src="media.logo"
+            :alt="media.name"
+          >
           <span class="media-name">{{ media.name }}</span>
         </div>
       </div>
 
       <!-- Цитаты из прессы -->
-      <div class="press-quotes" v-motion
-           :initial="{ opacity: 0, y: 50 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 600 } }">
-
+      <div
+        v-motion
+        class="press-quotes"
+        :initial="{ opacity: 0, y: 50 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 600 } }"
+      >
         <div class="quotes-grid">
-          <div v-for="(quote, index) in pressQuotes"
-               :key="index"
-               class="quote-card"
-               v-motion
-               :initial="{ opacity: 0, y: 40, rotateY: 10 }"
-               :visibleOnce="{
-                 opacity: 1,
-                 y: 0,
-                 rotateY: 0,
-                 transition: {
-                   duration: 500,
-                   delay: 700 + index * 150
-                 }
-               }">
-
+          <div
+            v-for="(quote, index) in pressQuotes"
+            :key="index"
+            v-motion
+            class="quote-card"
+            :initial="{ opacity: 0, y: 40, rotateY: 10 }"
+            :visibleOnce="{
+              opacity: 1,
+              y: 0,
+              rotateY: 0,
+              transition: {
+                duration: 500,
+                delay: 700 + index * 150,
+              },
+            }"
+          >
             <div class="quote-content">
               <div class="quote-mark">
-                <Icon name="ph:quotes-fill" />
+                <Icon icon="ph:quotes-fill" />
               </div>
 
               <blockquote>
@@ -62,7 +76,11 @@
               </blockquote>
 
               <div class="quote-source">
-                <img :src="quote.media.logo" :alt="quote.media.name" class="source-logo" />
+                <img
+                  :src="quote.media.logo"
+                  :alt="quote.media.name"
+                  class="source-logo"
+                >
                 <div class="source-info">
                   <cite class="source-name">{{ quote.media.name }}</cite>
                   <span class="source-author">{{ quote.author }}</span>
@@ -71,19 +89,30 @@
             </div>
 
             <!-- Рейтинг или награда -->
-            <div v-if="quote.rating" class="quote-rating">
+            <div
+              v-if="quote.rating"
+              class="quote-rating"
+            >
               <div class="rating-stars">
-                <Icon v-for="star in 5"
-                      :key="star"
-                      name="ph:star-fill"
-                      class="star"
-                      :class="{ active: star <= quote.rating }" />
+                <Icon
+                  v-for="star in 5"
+                  :key="star"
+                  name="ph:star-fill"
+                  class="star"
+                  :class="{ active: star <= quote.rating }"
+                />
               </div>
               <span class="rating-text">{{ quote.rating }}/5</span>
             </div>
 
-            <div v-if="quote.award" class="quote-award">
-              <Icon name="ph:trophy-fill" class="award-icon" />
+            <div
+              v-if="quote.award"
+              class="quote-award"
+            >
+              <Icon
+                icon="ph:trophy-fill"
+                class="award-icon"
+              />
               <span>{{ $t(quote.award) }}</span>
             </div>
           </div>
@@ -91,71 +120,103 @@
       </div>
 
       <!-- Достижения и цифры -->
-      <div class="achievements" v-motion
-           :initial="{ opacity: 0, y: 30 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1000 } }">
-
+      <div
+        v-motion
+        class="achievements"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1000 } }"
+      >
         <div class="achievements-grid">
-          <div v-for="(achievement, index) in achievements"
-               :key="achievement.title"
-               class="achievement-item"
-               v-motion
-               :initial="{ opacity: 0, scale: 0.9 }"
-               :visibleOnce="{
-                 opacity: 1,
-                 scale: 1,
-                 transition: {
-                   duration: 400,
-                   delay: 1100 + index * 100
-                 }
-               }">
-
+          <div
+            v-for="(achievement, index) in achievements"
+            :key="achievement.title"
+            v-motion
+            class="achievement-item"
+            :initial="{ opacity: 0, scale: 0.9 }"
+            :visibleOnce="{
+              opacity: 1,
+              scale: 1,
+              transition: {
+                duration: 400,
+                delay: 1100 + index * 100,
+              },
+            }"
+          >
             <div class="achievement-icon">
-              <Icon :name="achievement.icon" />
+              <Icon icon="achievement.icon" />
             </div>
 
             <div class="achievement-content">
-              <div class="achievement-number">{{ animatedNumbers[index] }}</div>
-              <div class="achievement-title">{{ $t(achievement.title) }}</div>
-              <div class="achievement-desc">{{ $t(achievement.description) }}</div>
+              <div class="achievement-number">
+                {{ animatedNumbers[index] }}
+              </div>
+              <div class="achievement-title">
+                {{ $t(achievement.title) }}
+              </div>
+              <div class="achievement-desc">
+                {{ $t(achievement.description) }}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Официальные партнерства -->
-      <div class="partnerships" v-motion
-           :initial="{ opacity: 0, y: 30 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1200 } }">
-
+      <div
+        v-motion
+        class="partnerships"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1200 } }"
+      >
         <h3>{{ $t('partnerships_title') }}</h3>
 
         <div class="partners-grid">
-          <div v-for="partner in partnerships"
-               :key="partner.name"
-               class="partner-item">
-            <img :src="partner.logo" :alt="partner.name" class="partner-logo" />
+          <div
+            v-for="partner in partnerships"
+            :key="partner.name"
+            class="partner-item"
+          >
+            <img
+              :src="partner.logo"
+              :alt="partner.name"
+              class="partner-logo"
+            >
             <div class="partner-info">
-              <div class="partner-name">{{ partner.name }}</div>
-              <div class="partner-status">{{ $t(partner.status) }}</div>
+              <div class="partner-name">
+                {{ partner.name }}
+              </div>
+              <div class="partner-status">
+                {{ $t(partner.status) }}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Trust badges -->
-      <div class="trust-badges" v-motion
-           :initial="{ opacity: 0, y: 30 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1400 } }">
-
+      <div
+        v-motion
+        class="trust-badges"
+        :initial="{ opacity: 0, y: 30 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 600, delay: 1400 } }"
+      >
         <div class="badges-grid">
-          <div v-for="badge in trustBadges"
-               :key="badge.name"
-               class="trust-badge">
-            <Icon :name="badge.icon" class="badge-icon" />
+          <div
+            v-for="badge in trustBadges"
+            :key="badge.name"
+            class="trust-badge"
+          >
+            <Icon
+              :name="badge.icon"
+              class="badge-icon"
+            />
             <div class="badge-text">
-              <div class="badge-title">{{ $t(badge.title) }}</div>
-              <div class="badge-desc">{{ $t(badge.description) }}</div>
+              <div class="badge-title">
+                {{ $t(badge.title) }}
+              </div>
+              <div class="badge-desc">
+                {{ $t(badge.description) }}
+              </div>
             </div>
           </div>
         </div>
@@ -164,10 +225,13 @@
 
     <!-- Floating elements -->
     <div class="floating-elements">
-      <div v-for="i in 8" :key="`float-${i}`"
-           class="floating-element"
-           :style="getFloatingStyle(i)">
-        <Icon :name="floatingIcons[i % floatingIcons.length]" />
+      <div
+        v-for="i in 8"
+        :key="`float-${i}`"
+        class="floating-element"
+        :style="getFloatingStyle(i)"
+      >
+        <Icon icon="floatingIcons[i % floatingIcons.length]" />
       </div>
     </div>
   </section>
@@ -175,6 +239,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { Icon } from '@iconify/vue'
 
 const { t } = useI18n()
 
@@ -185,28 +250,28 @@ const animatedNumbers = ref([0, 0, 0, 0])
 const mediaLogos = [
   {
     name: 'TechCrunch',
-    logo: '/media/techcrunch-logo.svg'
+    logo: '/media/techcrunch-logo.svg',
   },
   {
     name: 'Product Hunt',
-    logo: '/media/product-hunt-logo.svg'
+    logo: '/media/product-hunt-logo.svg',
   },
   {
     name: 'Forbes',
-    logo: '/media/forbes-logo.svg'
+    logo: '/media/forbes-logo.svg',
   },
   {
     name: 'Wired',
-    logo: '/media/wired-logo.svg'
+    logo: '/media/wired-logo.svg',
   },
   {
     name: 'The Next Web',
-    logo: '/media/tnw-logo.svg'
+    logo: '/media/tnw-logo.svg',
   },
   {
     name: 'VentureBeat',
-    logo: '/media/venturebeat-logo.svg'
-  }
+    logo: '/media/venturebeat-logo.svg',
+  },
 ]
 
 // Цитаты из прессы
@@ -216,28 +281,28 @@ const pressQuotes = [
     author: 'Sarah Johnson',
     media: {
       name: 'TechCrunch',
-      logo: '/media/techcrunch-logo.svg'
+      logo: '/media/techcrunch-logo.svg',
     },
-    rating: 5
+    rating: 5,
   },
   {
     text: 'press_quote_2',
     author: 'Michael Chen',
     media: {
       name: 'Forbes',
-      logo: '/media/forbes-logo.svg'
+      logo: '/media/forbes-logo.svg',
     },
-    award: 'innovation_award_2024'
+    award: 'innovation_award_2024',
   },
   {
     text: 'press_quote_3',
     author: 'Emma Davis',
     media: {
       name: 'Wired',
-      logo: '/media/wired-logo.svg'
+      logo: '/media/wired-logo.svg',
     },
-    rating: 5
-  }
+    rating: 5,
+  },
 ]
 
 // Достижения
@@ -246,26 +311,26 @@ const achievements = [
     icon: 'ph:users-three-bold',
     title: 'achievement_users',
     description: 'achievement_users_desc',
-    number: 50000
+    number: 50000,
   },
   {
     icon: 'ph:chart-line-up-bold',
     title: 'achievement_accuracy',
     description: 'achievement_accuracy_desc',
-    number: 99.8
+    number: 99.8,
   },
   {
     icon: 'ph:globe-hemisphere-west-bold',
     title: 'achievement_countries',
     description: 'achievement_countries_desc',
-    number: 127
+    number: 127,
   },
   {
     icon: 'ph:trophy-bold',
     title: 'achievement_awards',
     description: 'achievement_awards_desc',
-    number: 15
-  }
+    number: 15,
+  },
 ]
 
 // Партнерства
@@ -273,18 +338,18 @@ const partnerships = [
   {
     name: 'Swiss Ephemeris',
     logo: '/partners/swiss-ephemeris-logo.svg',
-    status: 'official_partner'
+    status: 'official_partner',
   },
   {
     name: 'International Astrology Association',
     logo: '/partners/iaa-logo.svg',
-    status: 'certified_member'
+    status: 'certified_member',
   },
   {
     name: 'NASA JPL',
     logo: '/partners/nasa-jpl-logo.svg',
-    status: 'data_provider'
-  }
+    status: 'data_provider',
+  },
 ]
 
 // Trust badges
@@ -292,23 +357,23 @@ const trustBadges = [
   {
     icon: 'ph:shield-check-bold',
     title: 'trust_security',
-    description: 'trust_security_desc'
+    description: 'trust_security_desc',
   },
   {
     icon: 'ph:certificate-bold',
     title: 'trust_certification',
-    description: 'trust_certification_desc'
+    description: 'trust_certification_desc',
   },
   {
     icon: 'ph:lock-bold',
     title: 'trust_privacy',
-    description: 'trust_privacy_desc'
+    description: 'trust_privacy_desc',
   },
   {
     icon: 'ph:clock-clockwise-bold',
     title: 'trust_uptime',
-    description: 'trust_uptime_desc'
-  }
+    description: 'trust_uptime_desc',
+  },
 ]
 
 // Floating icons
@@ -320,7 +385,7 @@ const floatingIcons = [
   'ph:sparkle-bold',
   'ph:diamond-bold',
   'ph:crown-bold',
-  'ph:trophy-bold'
+  'ph:trophy-bold',
 ]
 
 // Методы
@@ -343,12 +408,12 @@ const getFloatingStyle = (index) => {
     { top: '80%', left: '7%' },
     { top: '15%', right: '25%' },
     { top: '75%', right: '30%' },
-    { top: '45%', left: '85%' }
+    { top: '45%', left: '85%' },
   ]
 
   return {
     ...positions[index % positions.length],
-    animationDelay: `${index * 0.5}s`
+    animationDelay: `${index * 0.5}s`,
   }
 }
 

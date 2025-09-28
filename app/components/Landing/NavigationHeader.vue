@@ -36,13 +36,13 @@
             >
               {{ $t('menu.demo') }}
             </a>
-            <a
-              href="/#pricing"
-              class="nav-link"
-              @click="scrollToSection('pricing')"
-            >
-              {{ $t('menu.pricing') }}
-            </a>
+            <!--            <a -->
+            <!--              href="/#pricing" -->
+            <!--              class="nav-link" -->
+            <!--              @click="scrollToSection('pricing')" -->
+            <!--            > -->
+            <!--              {{ $t('menu.pricing') }} -->
+            <!--            </a> -->
             <a
               href="/#testimonials"
               class="nav-link"
@@ -231,11 +231,11 @@ const closePromoBanner = () => {
 
 // Навигация
 const goToLogin = () => {
-  router.push('/login')
+  // router.push('/login')
 }
 
 const goToSignup = () => {
-  router.push('/register')
+  // router.push('/register')
 }
 
 // Закрытие меню при клике вне его

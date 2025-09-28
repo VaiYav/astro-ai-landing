@@ -1,22 +1,36 @@
 <template>
   <section class="faq-section">
-    <h2 v-motion
-        :initial="{ opacity: 0, y: 50 }"
-        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500 } }"
+    <h2
+      v-motion
+      :initial="{ opacity: 0, y: 50 }"
+      :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500 } }"
     >
       {{ $t('faq_title') }}
     </h2>
     <div class="faq-list">
-      <div v-for="(item, index) in faqItems" :key="index" class="faq-item"
-           v-motion
-           :initial="{ opacity: 0, y: 50 }"
-           :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500, delay: index * 150 } }"
+      <div
+        v-for="(item, index) in faqItems"
+        :key="index"
+        v-motion
+        class="faq-item"
+        :initial="{ opacity: 0, y: 50 }"
+        :visibleOnce="{ opacity: 1, y: 0, transition: { duration: 500, delay: index * 150 } }"
       >
-        <button @click="toggleItem(index)" class="faq-question">
+        <button
+          class="faq-question"
+          @click="toggleItem(index)"
+        >
           <span>{{ item.q.body.static }}</span>
-          <Icon name="ph:plus-bold" class="icon" :class="{ 'is-open': openItem === index }" />
+          <Icon
+            icon="ph:plus-bold"
+            class="icon"
+            :class="{ 'is-open': openItem === index }"
+          />
         </button>
-        <div v-if="openItem === index" class="faq-answer">
+        <div
+          v-if="openItem === index"
+          class="faq-answer"
+        >
           <p>{{ item.a.body.static }}</p>
         </div>
       </div>
@@ -25,7 +39,9 @@
 </template>
 
 <script setup>
+import { Icon } from '@iconify/vue'
 import { ref, computed } from 'vue'
+
 const { tm } = useI18n()
 
 // Отслеживаем, какой элемент аккордеона открыт

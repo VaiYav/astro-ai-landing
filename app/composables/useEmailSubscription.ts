@@ -266,7 +266,7 @@ export const useEmailSubscription = () => {
 
     const path = window.location.pathname
 
-    if (path === '/') return 'landing-home'
+    if (path === '/') return 'Landing-home'
     if (path === '/coming-soon') return 'coming-soon'
     if (path.includes('/blog')) return 'blog'
     if (path.includes('/pricing')) return 'pricing'
