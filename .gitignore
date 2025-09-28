@@ -16,4 +16,4 @@ public/workbox-sw*.js*
 
 .data
 
-.env
+utils/.env
