@@ -273,7 +273,7 @@ useHead({
 })
 
 // Composable для работы с email подписками
-const emailSubscription = useEmailSubscription()
+const emailSubscription = useEmailSubscription({ t, locale })
 
 // Реактивные данные
 const email = ref('')

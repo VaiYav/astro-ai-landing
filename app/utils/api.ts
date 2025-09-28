@@ -1,5 +1,6 @@
 // utils/api.ts
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios'
+import type { Composer } from 'vue-i18n' // Импортируем тип Composer
 
 /** --- Типы API --- **/
 export interface ApiResponse<T = any> {
@@ -70,6 +71,11 @@ export interface SubscriptionStats {
 /** --- ApiClient --- **/
 export class ApiClient {
   private instance: AxiosInstance | null = null
+  private i18n: Composer // Храним экземпляр i18n
+
+  constructor(i18n: Composer) {
+    this.i18n = i18n // Сохраняем переданный i18n
+  }
 
   /** Инициализация экземпляра Axios */
   private initInstance() {
@@ -96,9 +102,8 @@ export class ApiClient {
 
     instance.interceptors.request.use((config) => {
       if (import.meta.client) {
-        const { locale } = useI18n()
-        config.headers['Accept-Language'] = locale.value
-        config.headers['X-User-Language'] = locale.value
+        config.headers['Accept-Language'] = this.i18n.locale.value
+        config.headers['X-User-Language'] = this.i18n.locale.value
 
         const urlParams = new URLSearchParams(window.location.search)
         const utmSource = urlParams.get('utm_source')
@@ -160,8 +165,7 @@ export class ApiClient {
   /** --- Email Collection API --- **/
   async subscribeEmail(data: EmailSubscriptionRequest): Promise<ApiResponse<EmailSubscriber>> {
     if (import.meta.client && !data.language) {
-      const { locale } = useI18n()
-      data.language = locale.value
+      data.language = this.i18n.locale.value
     }
     return this.post('/email-collection/subscribe', data)
   }
@@ -259,38 +263,34 @@ export class ApiClient {
   }
 }
 
-/** --- Singleton / composable --- **/
-export const apiClient = new ApiClient()
-
 export const useApi = () => {
-  const api = apiClient
+  const i18n = useI18n()
+
+  const api = new ApiClient(i18n)
 
   return {
     api,
     getErrorMessage: (error: any): string => {
-      const { t } = useI18n()
       if (error.response?.data?.message) return error.response.data.message
       if (error.response?.status) {
         switch (error.response.status) {
-          case 400: return t('validation.emailInvalid')
-          case 401: return t('api.unauthorized')
-          case 403: return t('api.forbidden')
-          case 404: return t('api.notFound')
-          case 409: return t('validation.emailExists')
-          case 429: return t('validation.tooManyAttempts')
-          case 500: return t('validation.serverError')
-          default: return t('validation.serverError')
+          case 400: return i18n.t('validation.emailInvalid')
+          case 401: return i18n.t('api.unauthorized')
+          case 403: return i18n.t('api.forbidden')
+          case 404: return i18n.t('api.notFound')
+          case 409: return i18n.t('validation.emailExists')
+          case 429: return i18n.t('validation.tooManyAttempts')
+          case 500: return i18n.t('validation.serverError')
+          default: return i18n.t('validation.serverError')
         }
       }
-      return error.message || t('validation.serverError')
+      return error.message || i18n.t('validation.serverError')
     },
     formatApiDate: (dateString: string): string => {
-      const { d } = useI18n()
-      return d(new Date(dateString), 'short')
+      return i18n.d(new Date(dateString), 'short')
     },
     formatApiNumber: (number: number, options: Intl.NumberFormatOptions = {}): string => {
-      const { n } = useI18n()
-      return n(number, options)
+      return i18n.n(number, options)
     },
     isNetworkError: (error: any): boolean => {
       return !error.response && error.request

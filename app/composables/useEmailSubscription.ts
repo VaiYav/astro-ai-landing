@@ -2,8 +2,14 @@
 import { ref, computed } from 'vue'
 import { useApi, type EmailSubscriptionRequest, type ApiResponse, type EmailSubscriber } from '~/utils/api'
 
+interface I18nParams {
+  t: (key: string, ...args: any[]) => string
+  locale: Ref<string>
+}
+
 export const useEmailSubscription = () => {
   const { api, getErrorMessage, isClientError, isServerError } = useApi()
+  // Он сам вызывает useI18n() для своих нужд (например, для сообщений об ошибках)
   const { t, locale } = useI18n()
 
   // Состояния
