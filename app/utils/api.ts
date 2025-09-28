@@ -165,7 +165,8 @@ export class ApiClient {
   /** --- Email Collection API --- **/
   async subscribeEmail(data: EmailSubscriptionRequest): Promise<ApiResponse<EmailSubscriber>> {
     if (import.meta.client && !data.language) {
-      data.language = String(this.i18n.locale.value)
+      const locale = this.i18n.locale.value
+      data = { ...data, language: typeof locale === 'string' ? locale : undefined }
     }
     return this.post('/email-collection/subscribe', data)
   }
