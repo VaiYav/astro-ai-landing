@@ -9,7 +9,6 @@ export default defineNuxtConfig({
     '@vueuse/motion/nuxt',
     '@nuxtjs/seo',
     '@pinia/nuxt',
-    '@vite-pwa/nuxt',
     '@nuxtjs/sitemap',
   ],
   plugins: [
@@ -193,22 +192,6 @@ export default defineNuxtConfig({
       useCookie: true, // Использовать cookie для сохранения выбора
       cookieKey: 'i18n_redirected',
       redirectOn: 'root', // Редиректить только с главной страницы
-    },
-  },
-
-  // PWA
-  pwa: {
-    manifest: {
-      name: 'AstroPersonal',
-      short_name: 'AstroPersonal',
-      description: 'Персональная астрология на основе ИИ',
-      theme_color: '#667eea',
-      background_color: '#0f0f23',
-      lang: 'uk',
-      icons: [
-        { src: '/icon-192x192.png', sizes: '192x192', type: 'image/png' },
-        { src: '/icon-512x512.png', sizes: '512x512', type: 'image/png' },
-      ],
     },
   },
 })
