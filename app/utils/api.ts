@@ -143,22 +143,22 @@ export class ApiClient {
 
   /** --- HTTP методы --- **/
   async get<T = any>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
-    const response = await this.getInstance().get(url, config)
+    const response: AxiosResponse<ApiResponse<T>> = await this.getInstance().get(url, config)
     return response.data
   }
 
   async post<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
-    const response = await this.getInstance().post(url, data, config)
+    const response: AxiosResponse<ApiResponse<T>> = await this.getInstance().post(url, data, config)
     return response.data
   }
 
   async put<T = any>(url: string, data?: any, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
-    const response = await this.getInstance().put(url, data, config)
+    const response: AxiosResponse<ApiResponse<T>> = await this.getInstance().put(url, data, config)
     return response.data
   }
 
   async delete<T = any>(url: string, config?: AxiosRequestConfig): Promise<ApiResponse<T>> {
-    const response = await this.getInstance().delete(url, config)
+    const response: AxiosResponse<ApiResponse<T>> = await this.getInstance().delete(url, config)
     return response.data
   }
 
