@@ -1,369 +1,510 @@
 {
-  "welcome_title": "Decode the message of the stars.",
-  "welcome_subtitle": "Your personal AI oracle analyzes unique aspects of your personality, talents, and life path based on your exact birth time",
-  "cta_button": "Calculate Your Chart for Free",
-  "hero_badge": "Using Swiss Ephemeris — the most accurate calculations",
-  "trust_secure": "Data Protected",
-  "trust_fast": "Results in 30 seconds",
-  "trust_accurate": "99.9% calculation accuracy",
-
-  "features_title": "Unlock the secrets of your natal chart",
-  "feature_1_title": "Deep AI Analysis",
-  "feature_1_desc": "Get personalized interpretations based on your unique data, not generic phrases from magazines.",
-  "feature_1_detail_1": "Individual approach to each chart",
-  "feature_1_detail_2": "Analysis of all planetary aspects",
-  "feature_1_detail_3": "Deep psychological insights",
-
-  "feature_2_title": "Astro Journal",
-  "feature_2_desc": "Keep a record of events and track how the movement of the planets affects your life in real time.",
-  "feature_2_detail_1": "Daily astrological forecasts",
-  "feature_2_detail_2": "Personal cycle tracking",
-  "feature_2_detail_3": "History of changes and trends",
-
-  "feature_3_title": "Chart Visualization",
-  "feature_3_desc": "An interactive graphic chart will show you all aspects of your personality in a beautiful and clear way.",
-  "feature_3_detail_1": "Interactive zodiac wheel",
-  "feature_3_detail_2": "Aspect lines and connections",
-  "feature_3_detail_3": "Detailed planet information",
-
-  "stats_users": "Active Users",
-  "stats_charts": "Charts Calculated",
-  "stats_accuracy": "Calculation Accuracy",
-
-  "how_it_works_title": "Just 3 steps to your universe",
-  "step_1_title": "Enter Your Data",
-  "step_1_desc": "Provide your exact date, time, and place of birth for maximum calculation accuracy.",
-  "step_1_time": "1 minute",
-  "step_1_detail_1": "Exact date and time of birth",
-  "step_1_detail_2": "Birth place with coordinates",
-  "step_1_detail_3": "Timezone automatically",
-
-  "step_2_title": "Receive Your Chart",
-  "step_2_desc": "Our algorithms will instantly build your unique natal chart based on Swiss Ephemeris.",
-  "step_2_time": "30 seconds",
-  "step_2_detail_1": "Swiss Ephemeris calculations",
-  "step_2_detail_2": "All planet positions",
-  "step_2_detail_3": "Aspects and houses",
-
-  "step_3_title": "Read the Insights",
-  "step_3_desc": "Our AI oracle will analyze your chart and provide deep, personalized interpretations.",
-  "step_3_time": "2 minutes",
-  "step_3_detail_1": "AI personality analysis",
-  "step_3_detail_2": "Personal recommendations",
-  "step_3_detail_3": "Detailed interpretation",
-
-  "preview_title": "See the interface",
-  "preview_subtitle": "Simple and clear chart creation process",
-  "preview_form_title": "Input Form",
-  "preview_chart_title": "Natal Chart",
-  "preview_analysis_title": "AI Analysis",
-
-  "charts_processed": "Charts Processed",
-  "average_time": "Average Time",
-  "accuracy_rate": "Accuracy Rate",
-  "availability": "Availability",
-
-  "testimonials_title": "What our users say",
-  "testimonial_1_text": "Never thought astrology could be so accurate! The AI analysis revealed aspects of my personality I didn't even know about.",
-  "testimonial_1_name": "Maria Petrenko",
-  "testimonial_1_title": "Psychologist",
-  "testimonial_1_location": "Kyiv, Ukraine",
-  "testimonial_1_sign": "Scorpio with Leo Rising",
-
-  "testimonial_2_text": "Using it for six months now. Daily forecasts really help plan important decisions. The accuracy is amazing!",
-  "testimonial_2_name": "Alexey Ivanenko",
-  "testimonial_2_title": "IT Entrepreneur",
-  "testimonial_2_location": "Lviv, Ukraine",
-  "testimonial_2_sign": "Gemini with Aquarius Rising",
-
-  "testimonial_3_text": "The best astrological app I've ever used. The chart visualization is simply incredible!",
-  "testimonial_3_name": "Anna Kovalenko",
-  "testimonial_3_title": "Astrologer-Consultant",
-  "testimonial_3_location": "Odesa, Ukraine",
-  "testimonial_3_sign": "Pisces with Virgo Rising",
-
-  "trust_secure_title": "Complete Security",
-  "trust_secure_desc": "Your personal data is under reliable protection",
-  "trust_certified_title": "Certified Calculations",
-  "trust_certified_desc": "Using Swiss Ephemeris — the world standard",
-  "trust_community_title": "Community",
-  "trust_community_desc": "More than 15,000 users trust us",
-
-  "demo_title": "See what awaits you",
-  "demo_subtitle": "Interactive example of a natal chart with full AI analysis",
-  "demo_chart_title": "Natal Chart",
-  "demo_march": "March",
-
-  "demo_tab_personality": "Personality",
-  "demo_tab_aspects": "Aspects",
-  "demo_tab_forecast": "Forecast",
-
-  "demo_personality_title": "Foundations of your personality",
-  "demo_sun_title": "Sun in Pisces",
-  "demo_sun_content": "You are a creative, intuitive personality with a deep emotional world. Your empathy and ability to understand others make you a natural healer.",
-  "demo_moon_title": "Moon in Leo",
-  "demo_moon_content": "Your emotional nature needs recognition and applause. You generously share your feelings with those around you.",
-  "demo_rising_title": "Ascendant in Sagittarius",
-  "demo_rising_content": "You appear as an optimistic, adventure-open personality. Others perceive you as a wise teacher and traveler.",
-
-  "demo_aspects_title": "Key aspects of your chart",
-  "demo_forecast_title": "Personal forecast",
-  "demo_this_week": "This week",
-  "demo_week_forecast": "Favorable time for creative projects. Venus trine to your Sun brings harmony to relationships.",
-  "demo_this_month": "This month",
-  "demo_month_forecast": "Mars in your 10th house activates career opportunities. Time for important professional decisions.",
-  "demo_important_dates": "Important dates",
-  "demo_important_transit": "Full Moon - important decisions",
-  "demo_favorable_day": "Favorable day for beginnings",
-
-  "demo_cta_text": "Want to get your own detailed chart with personal forecasts?",
-  "demo_cta_button": "Create my chart",
-
-  "pricing_title": "Choose your development plan",
-  "pricing_subtitle": "From free introduction to professional astrological consulting",
-  "monthly": "Monthly",
-  "yearly": "Yearly",
-  "save_20": "Save 20%",
-  "most_popular": "Most Popular",
-  "per_month": "/month",
-  "per_year": "/year",
-  "yearly_savings": "Save ${amount} per year",
-  "included_features": "What's included",
-  "bonus_features": "Bonus features",
-
-  "plan_free_name": "Introduction",
-  "plan_free_desc": "Free introduction to possibilities",
-  "start_free": "Try for free",
-
-  "plan_premium_name": "Premium",
-  "plan_premium_desc": "Full access to all AI astrologer features",
-  "start_premium": "Start Premium",
-
-  "plan_pro_name": "Professional",
-  "plan_pro_desc": "For professional astrologers and consultants",
-  "start_professional": "Go Professional",
-
-  "feature_basic_chart": "Basic natal chart",
-  "feature_basic_interpretation": "Basic interpretation",
-  "feature_daily_horoscope_limited": "1 daily horoscope",
-  "feature_unlimited_charts": "Unlimited charts",
-  "feature_advanced_interpretation": "Advanced interpretation",
-  "feature_daily_weekly_monthly": "Daily, weekly, monthly forecasts",
-  "feature_personalized_forecasts": "Personalized forecasts",
-  "feature_astro_journal": "Astro journal",
-  "feature_transit_alerts": "Transit notifications",
-  "feature_everything_premium": "Everything from premium plan",
-  "feature_multiple_profiles": "Multiple profiles",
-  "feature_compatibility_reports": "Compatibility reports",
-  "feature_advanced_transits": "Advanced transits",
-  "feature_business_astrology": "Business astrology",
-  "feature_api_access": "API access",
-
-  "bonus_priority_support": "Priority support",
-  "bonus_exclusive_content": "Exclusive content",
-  "bonus_early_access": "Early access to new features",
-  "bonus_white_label": "White-label solution",
-  "bonus_custom_reports": "Custom reports",
-  "bonus_dedicated_manager": "Dedicated manager",
-
-  "limit_1_daily": "1 daily horoscope",
-  "limit_1_chart": "1 natal chart",
-  "limit_email_support": "Email support",
-  "limit_unlimited_daily": "Unlimited horoscopes",
-  "limit_unlimited_charts": "Unlimited charts",
-  "limit_priority_support": "Priority support",
-  "limit_unlimited_everything": "Unlimited everything",
-  "limit_unlimited_profiles": "Unlimited profiles",
-  "limit_dedicated_support": "Dedicated support",
-
-  "pricing_faq_title": "Pricing FAQ",
-  "pricing_faq_1_q": "Can I change my plan?",
-  "pricing_faq_1_a": "Yes, you can change your plan anytime. When upgrading, you pay the difference.",
-  "pricing_faq_2_q": "Is there a free trial?",
-  "pricing_faq_2_a": "Yes, all paid plans have a 7-day free trial period.",
-  "pricing_faq_3_q": "How does yearly billing work?",
-  "pricing_faq_3_a": "With yearly billing, you save 20% and get 2 months free.",
-  "pricing_faq_4_q": "Can I cancel my subscription?",
-  "pricing_faq_4_a": "Yes, you can cancel your subscription anytime without additional fees.",
-
-  "money_back_title": "Money-back guarantee",
-  "money_back_desc": "30 days to return money with no questions asked",
-  "secure_payment_title": "Secure payments",
-  "secure_payment_desc": "Protected by SSL and PCI DSS certificates",
-  "cancel_anytime_title": "Cancel anytime",
-  "cancel_anytime_desc": "No additional fees or obligations",
-
-  "final_cta_title": "Your unique natal chart awaits you",
-  "final_cta_subtitle": "Join thousands of people who have already discovered the secrets of their personality with our AI astrologer",
-  "watch_demo": "Watch Demo",
-  "benefit_instant_analysis": "Instant analysis",
-  "benefit_ai_powered": "AI-powered",
-  "benefit_accurate_data": "Accurate data",
-
-  "happy_users": "Happy users",
-  "rating": "Rating",
-  "charts_created": "Charts created",
-
-  "mini_testimonial_1": "Amazing accuracy!",
-  "mini_testimonial_2": "Changed my life",
-
-  "data_secure": "Data secure",
-  "instant_results": "Instant results",
-  "money_back_guarantee": "Money-back guarantee",
-  "limited_time_bonus": "Limited offer: +1 month free",
-
-  "faq_title": "Still have questions?",
-  "faq_items": [
-    {
-      "q": "How accurate are your astrological calculations?",
-      "a": "We use Swiss Ephemeris — the most accurate astronomical data recognized by professional astrologers worldwide. Accuracy is our top priority."
+    "common": {
+      "email": "Email",
+      "name": "Name",
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "close": "Close",
+      "loading": "Loading...",
+      "error": "Error",
+      "success": "Success",
+      "tryAgain": "Try again",
+      "backToHome": "Back to home",
+      "learnMore": "Learn more",
+      "getStarted": "Get started",
+      "comingSoon": "Coming soon",
+      "yes": "Yes",
+      "no": "No",
+      "changeLanguage": "Change language",
+      "currentLanguage": "Current language: {language}",
+      "switchToLanguage": "Switch to {language}",
+      "languageChanged": "Language changed",
+      "languageChangedTo": "Language changed to {language}"
     },
-    {
-      "q": "How are AI interpretations better than regular ones?",
-      "a": "Unlike generic horoscopes, our AI creates a unique interpretation based on all of your chart's data: the positions of planets, houses, and the aspects between them. This is a deeply personalized analysis."
-    },
-    {
-      "q": "Is my birth data secure?",
-      "a": "Yes. We take privacy seriously. Your data is used exclusively for calculations within the app and is never shared with third parties."
-    }
-  ],
-
-  "meta_title": "AI Oracle | Your Personal Natal Chart",
-  "meta_description": "Calculate your natal chart online and get a deep analysis of your personality, talents, and destiny with the help of artificial intelligence. Discover what the stars say!",
-  "meta": {
-    "title": "AI Oracle | Your Personal Natal Chart Online",
-    "description": "Calculate your natal chart online and get a deep analysis of your personality, talents, and destiny with the help of Artificial Intelligence. Discover what the stars say!",
-    "keywords": "natal chart, astrology, AI astrologer, horoscope, personal forecast, astrological analysis, compatibility, transits",
-    "author": "AI-Oracle"
-  },
-  "offer_free_name": "Free Plan",
-  "offer_free_desc": "Basic natal chart and daily horoscope",
-  "offer_premium_name": "Premium Plan",
-  "offer_premium_desc": "Full astrological analysis and personal forecasts",
-  "review_1_author": "Anna Mikhailova",
-  "review_1_body": "Incredibly accurate analysis! The natal chart helped me understand my strengths.",
-  "email_capture_title": "Get Your Free Horoscope",
-  "email_capture_subtitle": "Subscribe to receive personalized predictions",
-  "benefit_weekly_horoscope": "Weekly Horoscope",
-  "benefit_love_forecast": "Love Forecast",
-  "benefit_success_tips": "Success Tips",
-  "placeholder_name": "Your Name",
-  "placeholder_email": "Your Email",
-  "placeholder_birth_date": "Your Birth Date",
-  "hide_optional": "Hide Optional Fields",
-  "personalize_more": "Personalize More",
-  "get_free_horoscope": "Get Free Horoscope",
-  "subscribing": "Subscribing",
-  "social_proof_text": "Join thousands of subscribers who already enjoy our horoscopes",
-  "no_spam_guarantee": "No Spam – We Respect Your Privacy",
-  "unsubscribe_anytime": "Unsubscribe Anytime",
-  "data_secure": "Your Data is Secure",
-  "limited_bonus": "Limited Bonus",
-  "special_offer_text": "Sign up now and receive an exclusive weekly guide!",
-  "subscription_success_title": "Subscription Successful!",
-  "subscription_success_message": "Thank you for subscribing. Check your email for your first horoscope.",
-  "check_email_step": "Check your email inbox",
-  "first_horoscope_step": "Receive your first personalized horoscope",
-  "upgrade_to_premium": "Upgrade to Premium",
-  "continue_browsing": "Continue Browsing",
-  "subscription_error": "There was an error subscribing. Please try again.",
-  "appName": "AI-Oracle",
-  "menu": {
-    "features": "Features",
-    "demo": "Demo",
-    "pricing": "Pricing",
-    "testimonials": "Testimonials",
-    "resources": {
-      "title": "Resources",
-      "blog": { "title": "Blog", "desc": "Astrology articles" },
-      "guides": { "title": "Guides", "desc": "Learning materials" },
-      "api": { "title": "API", "desc": "For developers" },
-      "help": { "title": "Help", "desc": "Support center" }
-    }
-  },
-  "actions": {
-    "login": "Login",
-    "signup": "Try for Free"
-  },
-  "promo": {
-    "text": "New Year Offer! 50% off all premium plans until December 31",
-    "cta": "Get it now"
-  },
-  "languages": {
-    "uk": "Ukrainian",
-    "en": "English",
-    "ru": "Russian"
-  },
-  "footer": {
-    "brand": {
-      "description": "A personal astrological assistant that helps you unlock your potential and find your path among the stars"
-    },
-    "social": {
-      "telegram": "Telegram",
-      "instagram": "Instagram",
-      "youtube": "YouTube",
-      "tiktok": "TikTok"
-    },
-    "navigation": { "title": "Navigation" },
     "nav": {
+      "home": "Home",
+      "about": "About",
+      "features": "Features",
+      "pricing": "Pricing",
+      "blog": "Blog",
+      "contact": "Contact",
+      "login": "Login",
+      "register": "Sign up"
+    },
+    "comingSoon": {
+      "logoText": "AstroPersonal",
+      "status": "In development",
+      "title": "Coming soon",
+      "titleAccent": "personal astrology",
+      "subtitle": "We are creating a unique platform for deep exploration of your natal chart using AI and modern astrological methods",
+      "progressLabel": "Development progress",
+      "progressFeatures": {
+        "natalChart": "Natal chart",
+        "aiInterpretation": "AI interpretation",
+        "forecasts": "Forecasts",
+        "compatibility": "Compatibility",
+        "mobileApp": "Mobile app"
+      },
+      "emailTitle": "Be the first to know about the launch",
+      "emailDescription": "Leave your email and we'll send you a notification as soon as the app is launched",
+      "emailPlaceholder": "Enter your email",
+      "emailButton": "Subscribe",
+      "emailSuccess": "Email successfully added to the waiting list!",
+      "emailError": "Please enter a valid email address",
+      "subscribersCount": "{count} people are already waiting for the launch",
+      "featuresTitle": "What awaits you:",
+      "features": {
+        "natalChart": {
+          "title": "Natal chart",
+          "description": "Interactive chart with detailed interpretations"
+        },
+        "aiAnalysis": {
+          "title": "AI analysis",
+          "description": "Personal recommendations based on neural networks"
+        },
+        "forecasts": {
+          "title": "Forecasts",
+          "description": "Accurate predictions for any period"
+        },
+        "compatibility": {
+          "title": "Compatibility",
+          "description": "Relationship and partnership analysis"
+        }
+      },
+      "socialTitle": "Follow updates:",
+      "social": {
+        "telegram": "Telegram",
+        "instagram": "Instagram",
+        "twitter": "Twitter"
+      },
+      "successModal": {
+        "title": "Thank you for subscribing!",
+        "description": "We'll send you a notification as soon as the app is launched",
+        "button": "Great"
+      }
+    },
+    "validation": {
+      "required": "This field is required",
+      "emailInvalid": "Please enter a valid email address",
+      "emailExists": "This email is already subscribed to notifications",
+      "tooManyAttempts": "Too many attempts. Please try later",
+      "serverError": "A technical error occurred. Please try later",
+      "networkError": "Network issues. Check your connection",
+      "temporaryEmail": "Temporary email addresses are not allowed"
+    },
+    "api": {
+      "subscribed": "You have successfully subscribed to notifications!",
+      "unsubscribed": "You have successfully unsubscribed from the mailing list",
+      "emailSent": "Email sent!",
+      "subscriptionExists": "This email is already subscribed",
+      "subscriptionError": "An error occurred during subscription",
+      "requestTimeout": "Request timeout",
+      "rateLimitExceeded": "Rate limit exceeded",
+      "unauthorized": "Unauthorized",
+      "forbidden": "Forbidden",
+      "notFound": "Not found"
+    },
+    "meta": {
+      "title": "AstroPersonal - Personal Astrology",
+      "description": "Personal astrological forecasts and natal charts based on artificial intelligence",
+      "keywords": "astrology, natal chart, horoscope, AI, personal forecasts",
+      "ogTitle": "AstroPersonal - Coming soon",
+      "ogDescription": "Discover your future with personal astrological forecasts"
+    },
+    "components": {
+      "subscriptionForm": {
+        "title": "Subscribe to updates",
+        "placeholder": "Your email",
+        "button": "Subscribe",
+        "terms": "By subscribing, you agree to our terms of use"
+      },
+      "countdown": {
+        "days": "days",
+        "hours": "hours",
+        "minutes": "minutes",
+        "seconds": "seconds"
+      },
+      "progressBar": {
+        "completed": "Completed",
+        "inProgress": "In progress",
+        "planned": "Planned"
+      }
+    },
+    "datetime": {
+      "months": [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ],
+      "monthsShort": [
+        "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+      ],
+      "weekdays": [
+        "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+      ],
+      "weekdaysShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "tomorrow": "Tomorrow",
+      "now": "Now",
+      "readingTime": "{minutes} min read"
+    },
+    "plurals": {
+      "subscribers": {
+        "one": "{count} person is already waiting for the launch",
+        "other": "{count} people are already waiting for the launch"
+      },
+      "days": {
+        "one": "{count} day",
+        "other": "{count} days"
+      },
+      "minutes": {
+        "one": "{count} minute",
+        "other": "{count} minutes"
+      }
+    },
+    "welcome_title": "Decode the message of the stars.",
+    "welcome_subtitle": "Your personal AI oracle analyzes unique aspects of your personality, talents, and life path based on your exact birth time",
+    "cta_button": "Calculate Your Chart for Free",
+    "hero_badge": "Using Swiss Ephemeris — the most accurate calculations",
+    "trust_secure": "Data Protected",
+    "trust_fast": "Results in 30 seconds",
+    "trust_accurate": "99.9% calculation accuracy",
+    "features_title": "Unlock the secrets of your natal chart",
+    "feature_1_title": "Deep AI Analysis",
+    "feature_1_desc": "Get personalized interpretations based on your unique data, not generic phrases from magazines.",
+    "feature_1_detail_1": "Individual approach to each chart",
+    "feature_1_detail_2": "Analysis of all planetary aspects",
+    "feature_1_detail_3": "Deep psychological insights",
+    "feature_2_title": "Astro Journal",
+    "feature_2_desc": "Keep a record of events and track how the movement of the planets affects your life in real time.",
+    "feature_2_detail_1": "Daily astrological forecasts",
+    "feature_2_detail_2": "Personal cycle tracking",
+    "feature_2_detail_3": "History of changes and trends",
+    "feature_3_title": "Chart Visualization",
+    "feature_3_desc": "An interactive graphic chart will show you all aspects of your personality in a beautiful and clear way.",
+    "feature_3_detail_1": "Interactive zodiac wheel",
+    "feature_3_detail_2": "Aspect lines and connections",
+    "feature_3_detail_3": "Detailed planet information",
+    "stats_users": "Active Users",
+    "stats_charts": "Charts Calculated",
+    "stats_accuracy": "Calculation Accuracy",
+    "how_it_works_title": "Just 3 steps to your universe",
+    "step_1_title": "Enter Your Data",
+    "step_1_desc": "Provide your exact date, time, and place of birth for maximum calculation accuracy.",
+    "step_1_time": "1 minute",
+    "step_1_detail_1": "Exact date and time of birth",
+    "step_1_detail_2": "Birth place with coordinates",
+    "step_1_detail_3": "Timezone automatically",
+    "step_2_title": "Receive Your Chart",
+    "step_2_desc": "Our algorithms will instantly build your unique natal chart based on Swiss Ephemeris.",
+    "step_2_time": "30 seconds",
+    "step_2_detail_1": "Swiss Ephemeris calculations",
+    "step_2_detail_2": "All planet positions",
+    "step_2_detail_3": "Aspects and houses",
+    "step_3_title": "Read the Insights",
+    "step_3_desc": "Our AI oracle will analyze your chart and provide deep, personalized interpretations.",
+    "step_3_time": "2 minutes",
+    "step_3_detail_1": "AI personality analysis",
+    "step_3_detail_2": "Personal recommendations",
+    "step_3_detail_3": "Detailed interpretation",
+    "preview_title": "See the interface",
+    "preview_subtitle": "Simple and clear chart creation process",
+    "preview_form_title": "Input Form",
+    "preview_chart_title": "Natal Chart",
+    "preview_analysis_title": "AI Analysis",
+    "charts_processed": "Charts Processed",
+    "average_time": "Average Time",
+    "accuracy_rate": "Accuracy Rate",
+    "availability": "Availability",
+    "testimonials_title": "What our users say",
+    "testimonial_1_text": "Never thought astrology could be so accurate! The AI analysis revealed aspects of my personality I didn't even know about.",
+    "testimonial_1_name": "Maria Petrenko",
+    "testimonial_1_title": "Psychologist",
+    "testimonial_1_location": "Kyiv, Ukraine",
+    "testimonial_1_sign": "Scorpio with Leo Rising",
+    "testimonial_2_text": "Using it for six months now. Daily forecasts really help plan important decisions. The accuracy is amazing!",
+    "testimonial_2_name": "Alexey Ivanenko",
+    "testimonial_2_title": "IT Entrepreneur",
+    "testimonial_2_location": "Lviv, Ukraine",
+    "testimonial_2_sign": "Gemini with Aquarius Rising",
+    "testimonial_3_text": "The best astrological app I've ever used. The chart visualization is simply incredible!",
+    "testimonial_3_name": "Anna Kovalenko",
+    "testimonial_3_title": "Astrologer-Consultant",
+    "testimonial_3_location": "Odesa, Ukraine",
+    "testimonial_3_sign": "Pisces with Virgo Rising",
+    "trust_secure_title": "Complete Security",
+    "trust_secure_desc": "Your personal data is under reliable protection",
+    "trust_certified_title": "Certified Calculations",
+    "trust_certified_desc": "Using Swiss Ephemeris — the world standard",
+    "trust_community_title": "Community",
+    "trust_community_desc": "More than 15,000 users trust us",
+    "demo_title": "See what awaits you",
+    "demo_subtitle": "Interactive example of a natal chart with full AI analysis",
+    "demo_chart_title": "Natal Chart",
+    "demo_march": "March",
+    "demo_tab_personality": "Personality",
+    "demo_tab_aspects": "Aspects",
+    "demo_tab_forecast": "Forecast",
+    "demo_personality_title": "Foundations of your personality",
+    "demo_sun_title": "Sun in Pisces",
+    "demo_sun_content": "You are a creative, intuitive personality with a deep emotional world. Your empathy and ability to understand others make you a natural healer.",
+    "demo_moon_title": "Moon in Leo",
+    "demo_moon_content": "Your emotional nature needs recognition and applause. You generously share your feelings with those around you.",
+    "demo_rising_title": "Ascendant in Sagittarius",
+    "demo_rising_content": "You appear as an optimistic, adventure-open personality. Others perceive you as a wise teacher and traveler.",
+    "demo_aspects_title": "Key aspects of your chart",
+    "demo_forecast_title": "Personal forecast",
+    "demo_this_week": "This week",
+    "demo_week_forecast": "Favorable time for creative projects. Venus trine to your Sun brings harmony to relationships.",
+    "demo_this_month": "This month",
+    "demo_month_forecast": "Mars in your 10th house activates career opportunities. Time for important professional decisions.",
+    "demo_important_dates": "Important dates",
+    "demo_important_transit": "Full Moon - important decisions",
+    "demo_favorable_day": "Favorable day for beginnings",
+    "demo_cta_text": "Want to get your own detailed chart with personal forecasts?",
+    "demo_cta_button": "Create my chart",
+    "pricing_title": "Choose your development plan",
+    "pricing_subtitle": "From free introduction to professional astrological consulting",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "save_20": "Save 20%",
+    "most_popular": "Most Popular",
+    "per_month": "/month",
+    "per_year": "/year",
+    "yearly_savings": "Save ${amount} per year",
+    "included_features": "What's included",
+    "bonus_features": "Bonus features",
+    "plan_free_name": "Introduction",
+    "plan_free_desc": "Free introduction to possibilities",
+    "start_free": "Try for free",
+    "plan_premium_name": "Premium",
+    "plan_premium_desc": "Full access to all AI astrologer features",
+    "start_premium": "Start Premium",
+    "plan_pro_name": "Professional",
+    "plan_pro_desc": "For professional astrologers and consultants",
+    "start_professional": "Go Professional",
+    "feature_basic_chart": "Basic natal chart",
+    "feature_basic_interpretation": "Basic interpretation",
+    "feature_daily_horoscope_limited": "1 daily horoscope",
+    "feature_unlimited_charts": "Unlimited charts",
+    "feature_advanced_interpretation": "Advanced interpretation",
+    "feature_daily_weekly_monthly": "Daily, weekly, monthly forecasts",
+    "feature_personalized_forecasts": "Personalized forecasts",
+    "feature_astro_journal": "Astro journal",
+    "feature_transit_alerts": "Transit notifications",
+    "feature_everything_premium": "Everything from premium plan",
+    "feature_multiple_profiles": "Multiple profiles",
+    "feature_compatibility_reports": "Compatibility reports",
+    "feature_advanced_transits": "Advanced transits",
+    "feature_business_astrology": "Business astrology",
+    "feature_api_access": "API access",
+    "bonus_priority_support": "Priority support",
+    "bonus_exclusive_content": "Exclusive content",
+    "bonus_early_access": "Early access to new features",
+    "bonus_white_label": "White-label solution",
+    "bonus_custom_reports": "Custom reports",
+    "bonus_dedicated_manager": "Dedicated manager",
+    "limit_1_daily": "1 daily horoscope",
+    "limit_1_chart": "1 natal chart",
+    "limit_email_support": "Email support",
+    "limit_unlimited_daily": "Unlimited horoscopes",
+    "limit_unlimited_charts": "Unlimited charts",
+    "limit_priority_support": "Priority support",
+    "limit_unlimited_everything": "Unlimited everything",
+    "limit_unlimited_profiles": "Unlimited profiles",
+    "limit_dedicated_support": "Dedicated support",
+    "pricing_faq_title": "Pricing FAQ",
+    "pricing_faq_1_q": "Can I change my plan?",
+    "pricing_faq_1_a": "Yes, you can change your plan anytime. When upgrading, you pay the difference.",
+    "pricing_faq_2_q": "Is there a free trial?",
+    "pricing_faq_2_a": "Yes, all paid plans have a 7-day free trial period.",
+    "pricing_faq_3_q": "How does yearly billing work?",
+    "pricing_faq_3_a": "With yearly billing, you save 20% and get 2 months free.",
+    "pricing_faq_4_q": "Can I cancel my subscription?",
+    "pricing_faq_4_a": "Yes, you can cancel your subscription anytime without additional fees.",
+    "money_back_title": "Money-back guarantee",
+    "money_back_desc": "30 days to return money with no questions asked",
+    "secure_payment_title": "Secure payments",
+    "secure_payment_desc": "Protected by SSL and PCI DSS certificates",
+    "cancel_anytime_title": "Cancel anytime",
+    "cancel_anytime_desc": "No additional fees or obligations",
+    "final_cta_title": "Your unique natal chart awaits you",
+    "final_cta_subtitle": "Join thousands of people who have already discovered the secrets of their personality with our AI astrologer",
+    "watch_demo": "Watch Demo",
+    "benefit_instant_analysis": "Instant analysis",
+    "benefit_ai_powered": "AI-powered",
+    "benefit_accurate_data": "Accurate data",
+    "happy_users": "Happy users",
+    "rating": "Rating",
+    "charts_created": "Charts created",
+    "mini_testimonial_1": "Amazing accuracy!",
+    "mini_testimonial_2": "Changed my life",
+    "data_secure": "Data secure",
+    "instant_results": "Instant results",
+    "money_back_guarantee": "Money-back guarantee",
+    "limited_time_bonus": "Limited offer: +1 month free",
+    "faq_title": "Still have questions?",
+    "faq_items": [
+      {
+        "q": "How accurate are your astrological calculations?",
+        "a": "We use Swiss Ephemeris — the most accurate astronomical data recognized by professional astrologers worldwide. Accuracy is our top priority."
+      },
+      {
+        "q": "How are AI interpretations better than regular ones?",
+        "a": "Unlike generic horoscopes, our AI creates a unique interpretation based on all of your chart's data: the positions of planets, houses, and the aspects between them. This is a deeply personalized analysis."
+      },
+      {
+        "q": "Is my birth data secure?",
+        "a": "Yes. We take privacy seriously. Your data is used exclusively for calculations within the app and is never shared with third parties."
+      }
+    ],
+    "meta_title": "AI Oracle | Your Personal Natal Chart",
+    "meta_description": "Calculate your natal chart online and get a deep analysis of your personality, talents, and destiny with the help of artificial intelligence. Discover what the stars say!",
+    "meta": {
+      "title": "AI Oracle | Your Personal Natal Chart Online",
+      "description": "Calculate your natal chart online and get a deep analysis of your personality, talents, and destiny with the help of Artificial Intelligence. Discover what the stars say!",
+      "keywords": "natal chart, astrology, AI astrologer, horoscope, personal forecast, astrological analysis, compatibility, transits",
+      "author": "AI-Oracle"
+    },
+    "offer_free_name": "Free Plan",
+    "offer_free_desc": "Basic natal chart and daily horoscope",
+    "offer_premium_name": "Premium Plan",
+    "offer_premium_desc": "Full astrological analysis and personal forecasts",
+    "review_1_author": "Anna Mikhailova",
+    "review_1_body": "Incredibly accurate analysis! The natal chart helped me understand my strengths.",
+    "email_capture_title": "Get Your Free Horoscope",
+    "email_capture_subtitle": "Subscribe to receive personalized predictions",
+    "benefit_weekly_horoscope": "Weekly Horoscope",
+    "benefit_love_forecast": "Love Forecast",
+    "benefit_success_tips": "Success Tips",
+    "placeholder_name": "Your Name",
+    "placeholder_email": "Your Email",
+    "placeholder_birth_date": "Your Birth Date",
+    "hide_optional": "Hide Optional Fields",
+    "personalize_more": "Personalize More",
+    "get_free_horoscope": "Get Free Horoscope",
+    "subscribing": "Subscribing",
+    "social_proof_text": "Join thousands of subscribers who already enjoy our horoscopes",
+    "no_spam_guarantee": "No Spam – We Respect Your Privacy",
+    "unsubscribe_anytime": "Unsubscribe Anytime",
+    "limited_bonus": "Limited Bonus",
+    "special_offer_text": "Sign up now and receive an exclusive weekly guide!",
+    "subscription_success_title": "Subscription Successful!",
+    "subscription_success_message": "Thank you for subscribing. Check your email for your first horoscope.",
+    "check_email_step": "Check your email inbox",
+    "first_horoscope_step": "Receive your first personalized horoscope",
+    "upgrade_to_premium": "Upgrade to Premium",
+    "continue_browsing": "Continue Browsing",
+    "subscription_error": "There was an error subscribing. Please try again.",
+    "appName": "AI-Oracle",
+    "menu": {
       "features": "Features",
       "demo": "Demo",
       "pricing": "Pricing",
       "testimonials": "Testimonials",
-      "faq": "FAQ",
-      "blog": "Blog"
+      "resources": {
+        "title": "Resources",
+        "blog": { "title": "Blog", "desc": "Astrology articles" },
+        "guides": { "title": "Guides", "desc": "Learning materials" },
+        "api": { "title": "API", "desc": "For developers" },
+        "help": { "title": "Help", "desc": "Support center" }
+      }
     },
-    "services": {
-      "title": "Services",
-      "natal": "Natal Chart",
-      "daily": "Daily Horoscopes",
-      "compatibility": "Compatibility",
-      "consultations": "Consultations",
-      "business": "Business Astrology",
-      "api": "API for Developers"
+    "actions": {
+      "login": "Login",
+      "signup": "Try for Free"
     },
-    "support": {
-      "title": "Support",
-      "help": "Help Center",
-      "contact": "Contact Us",
-      "privacy": "Privacy Policy",
-      "terms": "Terms of Use",
-      "refund": "Refunds",
-      "security": "Security"
+    "promo": {
+      "text": "New Year Offer! 50% off all premium plans until December 31",
+      "cta": "Get it now"
     },
-    "stayConnected": { "title": "Stay connected" },
-    "contact": {
-      "phone": "+1 (555) 123-4567",
-      "global": "Available worldwide"
+    "languages": {
+      "uk": "Ukrainian",
+      "en": "English",
+      "ru": "Russian"
     },
-    "newsletter": {
-      "title": "Astrology updates",
-      "subtitle": "Get weekly forecasts and tips",
-      "placeholder": "Your email",
-      "subscribe": "Subscribe",
-      "success": "Thanks! You are subscribed.",
-      "error": "Subscription error. Please try again."
-    },
-    "awards": {
-      "title": "🏆 Awards & recognition",
-      "items": ["Best AI App 2024", "Top Astrology Service", "Editor's Choice"]
-    },
-    "stats": {
-      "title": "📊 Our achievements",
-      "usersCount": "50K+",
-      "usersLabel": "Users",
-      "chartsCount": "1M+",
-      "chartsLabel": "Charts generated",
-      "uptime": "99.9%",
-      "uptimeLabel": "Uptime"
-    },
-    "languages": { "title": "🌐 Languages" },
-    "copyright": "{year} AI-Oracle. All rights reserved.",
-    "disclaimer": "Astrological forecasts are for entertainment and personal growth purposes only.",
-    "certifications": {
-      "ssl": "SSL Secured",
-      "gdpr": "GDPR",
-      "pci": "PCI DSS"
+    "footer": {
+      "brand": {
+        "description": "A personal astrological assistant that helps you unlock your potential and find your path among the stars"
+      },
+      "social": {
+        "telegram": "Telegram",
+        "instagram": "Instagram",
+        "youtube": "YouTube",
+        "tiktok": "TikTok"
+      },
+      "navigation": {
+        "title": "Navigation"
+      },
+      "nav": {
+        "features": "Features",
+        "demo": "Demo",
+        "pricing": "Pricing",
+        "testimonials": "Testimonials",
+        "faq": "FAQ",
+        "blog": "Blog"
+      },
+      "services": {
+        "title": "Services",
+        "natal": "Natal Chart",
+        "daily": "Daily Horoscopes",
+        "compatibility": "Compatibility",
+        "consultations": "Consultations",
+        "business": "Business Astrology",
+        "api": "API for Developers"
+      },
+      "support": {
+        "title": "Support",
+        "help": "Help Center",
+        "contact": "Contact Us",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Use",
+        "refund": "Refunds",
+        "security": "Security"
+      },
+      "stayConnected": {
+        "title": "Stay connected"
+      },
+      "contact": {
+        "phone": "+1 (555) 123-4567",
+        "global": "Available worldwide"
+      },
+      "newsletter": {
+        "title": "Astrology updates",
+        "subtitle": "Get weekly forecasts and tips",
+        "placeholder": "Your email",
+        "subscribe": "Subscribe",
+        "success": "Thanks! You are subscribed.",
+        "error": "Subscription error. Please try again."
+      },
+      "awards": {
+        "title": "🏆 Awards & recognition",
+        "items": [
+          "Best AI App 2024",
+          "Top Astrology Service",
+          "Editor's Choice"
+        ]
+      },
+      "stats": {
+        "title": "📊 Our achievements",
+        "usersCount": "50K+",
+        "usersLabel": "Users",
+        "chartsCount": "1M+",
+        "chartsLabel": "Charts generated",
+        "uptime": "99.9%",
+        "uptimeLabel": "Uptime"
+      },
+      "languages": {
+        "title": "🌐 Languages"
+      },
+      "copyright": "{year} AI-Oracle. All rights reserved.",
+      "disclaimer": "Astrological forecasts are for entertainment and personal growth purposes only.",
+      "certifications": {
+        "ssl": "SSL Secured",
+        "gdpr": "GDPR",
+        "pci": "PCI DSS"
+      }
     }
-  }
 }
+

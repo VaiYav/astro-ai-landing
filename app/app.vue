@@ -11,4 +11,3 @@ useSeoMeta({
     <NuxtPage />
   </NuxtLayout>
 </template>
-

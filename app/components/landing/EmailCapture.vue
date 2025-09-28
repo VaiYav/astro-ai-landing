@@ -2,127 +2,199 @@
   <!-- Email Capture Popup -->
   <Teleport to="body">
     <Transition name="popup">
-      <div v-if="isVisible" class="email-capture-overlay" @click.self="closePopup">
-        <div class="email-capture-popup" v-motion
-             :initial="{ opacity: 0, scale: 0.8, y: 50 }"
-             :enter="{ opacity: 1, scale: 1, y: 0, transition: { duration: 500, type: 'spring' } }">
-
+      <div
+        v-if="isVisible"
+        class="email-capture-overlay"
+        @click.self="closePopup"
+      >
+        <div
+          v-motion
+          class="email-capture-popup"
+          :initial="{ opacity: 0, scale: 0.8, y: 50 }"
+          :enter="{ opacity: 1, scale: 1, y: 0, transition: { duration: 500, type: 'spring' } }"
+        >
           <!-- Close button -->
-          <button @click="closePopup" class="close-btn">
+          <button
+            class="close-btn"
+            @click="closePopup"
+          >
             <Icon name="ph:x-bold" />
           </button>
 
           <!-- Магнит контент -->
           <div class="popup-header">
             <div class="magic-crystal">
-              <Icon name="ph:crystal-ball-bold" class="crystal-icon" />
-              <div class="crystal-glow"></div>
+              <Icon
+                name="ph:crystal-ball-bold"
+                class="crystal-icon"
+              />
+              <div class="crystal-glow" />
             </div>
 
             <h2>{{ $t('email_capture_title') }}</h2>
-            <p class="subtitle">{{ $t('email_capture_subtitle') }}</p>
+            <p class="subtitle">
+              {{ $t('email_capture_subtitle') }}
+            </p>
           </div>
 
           <!-- Что получит пользователь -->
           <div class="benefits-preview">
             <div class="benefit-item">
-              <Icon name="ph:calendar-check-bold" class="benefit-icon" />
+              <Icon
+                name="ph:calendar-check-bold"
+                class="benefit-icon"
+              />
               <span>{{ $t('benefit_weekly_horoscope') }}</span>
             </div>
             <div class="benefit-item">
-              <Icon name="ph:heart-straight-bold" class="benefit-icon" />
+              <Icon
+                name="ph:heart-straight-bold"
+                class="benefit-icon"
+              />
               <span>{{ $t('benefit_love_forecast') }}</span>
             </div>
             <div class="benefit-item">
-              <Icon name="ph:trending-up-bold" class="benefit-icon" />
+              <Icon
+                name="ph:trending-up-bold"
+                class="benefit-icon"
+              />
               <span>{{ $t('benefit_success_tips') }}</span>
             </div>
           </div>
 
           <!-- Форма подписки -->
-          <form @submit.prevent="submitEmail" class="subscription-form" :class="{ 'is-loading': isLoading }">
+          <form
+            class="subscription-form"
+            :class="{ 'is-loading': isLoading }"
+            @submit.prevent="submitEmail"
+          >
             <div class="form-row">
               <div class="input-group">
-                <Icon name="ph:user-bold" class="input-icon" />
+                <Icon
+                  name="ph:user-bold"
+                  class="input-icon"
+                />
                 <input
-                  type="text"
                   v-model="formData.name"
+                  type="text"
                   :placeholder="$t('placeholder_name')"
                   required
-                  class="form-input" />
+                  class="form-input"
+                >
               </div>
 
               <div class="input-group">
-                <Icon name="ph:envelope-bold" class="input-icon" />
+                <Icon
+                  name="ph:envelope-bold"
+                  class="input-icon"
+                />
                 <input
-                  type="email"
                   v-model="formData.email"
+                  type="email"
                   :placeholder="$t('placeholder_email')"
                   required
-                  class="form-input" />
+                  class="form-input"
+                >
               </div>
             </div>
 
             <!-- Опциональные поля для персонализации -->
-            <div class="optional-fields" v-if="showOptionalFields">
+            <div
+              v-if="showOptionalFields"
+              class="optional-fields"
+            >
               <div class="input-group">
-                <Icon name="ph:calendar-blank-bold" class="input-icon" />
+                <Icon
+                  name="ph:calendar-blank-bold"
+                  class="input-icon"
+                />
                 <input
-                  type="date"
                   v-model="formData.birthDate"
+                  type="date"
                   :placeholder="$t('placeholder_birth_date')"
-                  class="form-input" />
+                  class="form-input"
+                >
               </div>
             </div>
 
             <button
               type="button"
+              class="toggle-optional"
               @click="showOptionalFields = !showOptionalFields"
-              class="toggle-optional">
+            >
               {{ showOptionalFields ? $t('hide_optional') : $t('personalize_more') }}
               <Icon :name="showOptionalFields ? 'ph:caret-up-bold' : 'ph:caret-down-bold'" />
             </button>
 
             <!-- Submit button -->
-            <button type="submit" class="submit-btn" :disabled="isLoading">
+            <button
+              type="submit"
+              class="submit-btn"
+              :disabled="isLoading"
+            >
               <span v-if="!isLoading">{{ $t('get_free_horoscope') }}</span>
               <span v-else>{{ $t('subscribing') }}...</span>
-              <Icon name="ph:arrow-right-bold" class="btn-icon" v-if="!isLoading" />
-              <div v-else class="loading-spinner"></div>
+              <Icon
+                v-if="!isLoading"
+                name="ph:arrow-right-bold"
+                class="btn-icon"
+              />
+              <div
+                v-else
+                class="loading-spinner"
+              />
             </button>
 
             <!-- Социальная проверка -->
             <div class="social-proof">
               <div class="proof-avatars">
-                <img v-for="avatar in proofAvatars"
-                     :key="avatar.id"
-                     :src="avatar.url"
-                     :alt="avatar.name"
-                     class="proof-avatar" />
-                <div class="proof-count">+{{ subscriberCount }}</div>
+                <img
+                  v-for="avatar in proofAvatars"
+                  :key="avatar.id"
+                  :src="avatar.url"
+                  :alt="avatar.name"
+                  class="proof-avatar"
+                >
+                <div class="proof-count">
+                  +{{ subscriberCount }}
+                </div>
               </div>
-              <p class="proof-text">{{ $t('social_proof_text') }}</p>
+              <p class="proof-text">
+                {{ $t('social_proof_text') }}
+              </p>
             </div>
           </form>
 
           <!-- Гарантии и безопасность -->
           <div class="guarantees">
             <div class="guarantee-item">
-              <Icon name="ph:shield-check-bold" class="guarantee-icon" />
+              <Icon
+                name="ph:shield-check-bold"
+                class="guarantee-icon"
+              />
               <span>{{ $t('no_spam_guarantee') }}</span>
             </div>
             <div class="guarantee-item">
-              <Icon name="ph:sign-out-bold" class="guarantee-icon" />
+              <Icon
+                name="ph:sign-out-bold"
+                class="guarantee-icon"
+              />
               <span>{{ $t('unsubscribe_anytime') }}</span>
             </div>
             <div class="guarantee-item">
-              <Icon name="ph:lock-bold" class="guarantee-icon" />
+              <Icon
+                name="ph:lock-bold"
+                class="guarantee-icon"
+              />
               <span>{{ $t('data_secure') }}</span>
             </div>
           </div>
 
           <!-- Специальное предложение -->
-          <div class="special-offer" v-if="hasSpecialOffer">
+          <div
+            v-if="hasSpecialOffer"
+            class="special-offer"
+          >
             <div class="offer-badge">
               <Icon name="ph:gift-bold" />
               <span>{{ $t('limited_bonus') }}</span>
@@ -137,7 +209,11 @@
   <!-- Success Modal -->
   <Teleport to="body">
     <Transition name="success">
-      <div v-if="showSuccess" class="success-overlay" @click.self="closeSuccess">
+      <div
+        v-if="showSuccess"
+        class="success-overlay"
+        @click.self="closeSuccess"
+      >
         <div class="success-modal">
           <div class="success-icon">
             <Icon name="ph:check-circle-bold" />
@@ -158,10 +234,16 @@
           </div>
 
           <div class="success-actions">
-            <NuxtLink to="/register" class="upgrade-btn">
+            <NuxtLink
+              to="/register"
+              class="upgrade-btn"
+            >
               {{ $t('upgrade_to_premium') }}
             </NuxtLink>
-            <button @click="closeSuccess" class="continue-btn">
+            <button
+              class="continue-btn"
+              @click="closeSuccess"
+            >
               {{ $t('continue_browsing') }}
             </button>
           </div>
@@ -180,16 +262,16 @@ const { t } = useI18n()
 const props = defineProps({
   trigger: {
     type: String,
-    default: 'time' // 'time', 'scroll', 'exit', 'manual'
+    default: 'time', // 'time', 'scroll', 'exit', 'manual'
   },
   delay: {
     type: Number,
-    default: 30000 // 30 секунд
+    default: 30000, // 30 секунд
   },
   scrollPercentage: {
     type: Number,
-    default: 70 // 70% страницы
-  }
+    default: 70, // 70% страницы
+  },
 })
 
 // Emits
@@ -208,7 +290,7 @@ const formData = ref({
   email: '',
   birthDate: '',
   source: 'popup',
-  trigger: props.trigger
+  trigger: props.trigger,
 })
 
 // Статичные данные
@@ -223,7 +305,7 @@ const proofAvatars = [
   { id: 1, name: 'Anna', url: 'https://images.unsplash.com/photo-1494790108755-2616b2e0e4e9?w=40&h=40&fit=crop&crop=face' },
   { id: 2, name: 'Michael', url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop&crop=face' },
   { id: 3, name: 'Sofia', url: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop&crop=face' },
-  { id: 4, name: 'David', url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face' }
+  { id: 4, name: 'David', url: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop&crop=face' },
 ]
 
 // Lifecycle hooks
@@ -237,7 +319,7 @@ onUnmounted(() => {
 
 // Методы для настройки триггеров
 const setupTriggers = () => {
-  if (process.client) {
+  if (import.meta.client) {
     // Проверяем, не показывали ли уже попап
     if (localStorage.getItem('email-popup-shown')) {
       return
@@ -264,7 +346,7 @@ const setupTriggers = () => {
 }
 
 const cleanupTriggers = () => {
-  if (process.client) {
+  if (import.meta.client) {
     window.removeEventListener('scroll', handleScroll)
     document.removeEventListener('mouseleave', handleExitIntent)
   }
@@ -272,7 +354,7 @@ const cleanupTriggers = () => {
 
 // Обработчики триггеров
 const handleScroll = () => {
-  if (process.client) {
+  if (import.meta.client) {
     const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
 
     if (scrolled >= props.scrollPercentage && !hasTriggered.value) {
@@ -301,7 +383,7 @@ const showPopup = () => {
   if (typeof gtag !== 'undefined') {
     gtag('event', 'email_popup_shown', {
       event_category: 'engagement',
-      trigger_type: props.trigger
+      trigger_type: props.trigger,
     })
   }
 }
@@ -322,14 +404,14 @@ const closePopup = () => {
   // Трекинг
   if (typeof gtag !== 'undefined') {
     gtag('event', 'email_popup_closed', {
-      event_category: 'engagement'
+      event_category: 'engagement',
     })
   }
 }
 
 // Отправка формы
 const submitEmail = async () => {
-  if (process.client) {
+  if (import.meta.client) {
     if (!formData.value.email || !formData.value.name) return
 
     isLoading.value = true
@@ -339,9 +421,9 @@ const submitEmail = async () => {
       const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData.value)
+        body: JSON.stringify(formData.value),
       })
 
       if (response.ok) {
@@ -362,7 +444,7 @@ const submitEmail = async () => {
         if (typeof gtag !== 'undefined') {
           gtag('event', 'email_subscription_success', {
             event_category: 'conversion',
-            value: 1
+            value: 1,
           })
         }
 
@@ -372,12 +454,14 @@ const submitEmail = async () => {
           email: '',
           birthDate: '',
           source: 'popup',
-          trigger: props.trigger
+          trigger: props.trigger,
         }
-      } else {
+      }
+      else {
         throw new Error('Subscription failed')
       }
-    } catch (error) {
+    }
+    catch (error) {
       console.error('Subscription error:', error)
 
       // Показываем ошибку (в реальном проекте лучше toast notification)
@@ -386,10 +470,11 @@ const submitEmail = async () => {
       // Трекинг ошибки
       if (typeof gtag !== 'undefined') {
         gtag('event', 'email_subscription_error', {
-          event_category: 'error'
+          event_category: 'error',
         })
       }
-    } finally {
+    }
+    finally {
       isLoading.value = false
     }
   }
@@ -407,14 +492,14 @@ const show = () => {
 
 // Expose метод для родительских компонентов
 defineExpose({
-  show
+  show,
 })
 </script>
 
 <style scoped lang="scss">
 .email-capture-overlay {
   position: fixed;
-  top: 0;
+  top: 40px;
   left: 0;
   width: 100%;
   height: 100%;
@@ -436,7 +521,7 @@ defineExpose({
   padding: 3rem 2.5rem;
   max-width: 500px;
   width: 100%;
-  max-height: 90vh;
+  max-height: 85vh;
   overflow-y: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }

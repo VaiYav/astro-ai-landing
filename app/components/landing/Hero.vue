@@ -2,60 +2,122 @@
   <section class="hero-section">
     <!-- Анимированный звездный фон -->
     <div class="stars-background">
-      <div v-for="i in 20" :key="`star-${i}`" class="star" :style="getStarStyle(i)"></div>
+      <div
+        v-for="i in 20"
+        :key="`star-${i}`"
+        class="star"
+        :style="getStarStyle(i)"
+      />
     </div>
 
     <!-- Зодиакальное колесо как декор -->
     <div class="zodiac-wheel">
-      <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1">
-        <circle cx="100" cy="100" r="80"/>
-        <circle cx="100" cy="100" r="60"/>
-        <circle cx="100" cy="100" r="40"/>
+      <svg
+        viewBox="0 0 200 200"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1"
+      >
+        <circle
+          cx="100"
+          cy="100"
+          r="80"
+        />
+        <circle
+          cx="100"
+          cy="100"
+          r="60"
+        />
+        <circle
+          cx="100"
+          cy="100"
+          r="40"
+        />
         <g stroke="rgba(240, 195, 115, 0.3)">
-          <line x1="100" y1="20" x2="100" y2="180"/>
-          <line x1="20" y1="100" x2="180" y2="100"/>
-          <line x1="41.5" y1="41.5" x2="158.5" y2="158.5"/>
-          <line x1="158.5" y1="41.5" x2="41.5" y2="158.5"/>
+          <line
+            x1="100"
+            y1="20"
+            x2="100"
+            y2="180"
+          />
+          <line
+            x1="20"
+            y1="100"
+            x2="180"
+            y2="100"
+          />
+          <line
+            x1="41.5"
+            y1="41.5"
+            x2="158.5"
+            y2="158.5"
+          />
+          <line
+            x1="158.5"
+            y1="41.5"
+            x2="41.5"
+            y2="158.5"
+          />
         </g>
       </svg>
     </div>
 
     <!-- Плавающие астрологические символы -->
     <div class="floating-symbols">
-      <div v-for="(symbol, index) in floatingSymbols"
-           :key="`symbol-${index}`"
-           class="floating-symbol"
-           :style="getSymbolStyle(index)">
+      <div
+        v-for="(symbol, index) in floatingSymbols"
+        :key="`symbol-${index}`"
+        class="floating-symbol"
+        :style="getSymbolStyle(index)"
+      >
         {{ symbol }}
       </div>
     </div>
 
     <div class="hero-content">
-      <div class="hero-badge" v-motion
-           :initial="{ opacity: 0, y: 20 }"
-           :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 100 } }">
+      <div
+        v-motion
+        class="hero-badge"
+        :initial="{ opacity: 0, y: 20 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 100 } }"
+      >
         <Icon name="ph:sparkle-fill" />
         <span>{{ $t('hero_badge') }}</span>
       </div>
 
-      <h1 class="hero-title" v-motion
-          :initial="{ opacity: 0, y: 50 }"
-          :enter="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200 } }">
+      <h1
+        v-motion
+        class="hero-title"
+        :initial="{ opacity: 0, y: 50 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200 } }"
+      >
         {{ $t('welcome_title') }}
       </h1>
 
-      <p class="hero-subtitle" v-motion
-         :initial="{ opacity: 0, y: 30 }"
-         :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 400 } }">
+      <p
+        v-motion
+        class="hero-subtitle"
+        :initial="{ opacity: 0, y: 30 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 400 } }"
+      >
         {{ $t('welcome_subtitle') }}
       </p>
 
-      <div class="cta-container" v-motion
-           :initial="{ opacity: 0, y: 30 }"
-           :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 600 } }">
-        <NuxtLink to="/register" class="cta-button">
+      <div
+        v-motion
+        class="cta-container"
+        :initial="{ opacity: 0, y: 30 }"
+        :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 600 } }"
+      >
+        <NuxtLink
+          to="/coming-soon"
+          class="cta-button"
+        >
           <span>{{ $t('cta_button') }}</span>
-          <Icon name="ph:arrow-right-bold" class="cta-icon" />
+          <Icon
+            name="ph:arrow-right-bold"
+            class="cta-icon"
+          />
         </NuxtLink>
 
         <div class="trust-indicators">
@@ -76,7 +138,7 @@
     </div>
 
     <!-- Gradient overlay for better text readability -->
-    <div class="gradient-overlay"></div>
+    <div class="gradient-overlay" />
   </section>
 </template>
 
@@ -100,7 +162,7 @@ const getStarStyle = (index) => {
     left: `${left}%`,
     width: `${size}px`,
     height: `${size}px`,
-    animationDelay: `${delay}s`
+    animationDelay: `${delay}s`,
   }
 }
 
@@ -114,12 +176,12 @@ const getSymbolStyle = (index) => {
     { top: '35%', right: '25%' },
     { top: '80%', left: '70%' },
     { top: '45%', left: '90%' },
-    { top: '20%', left: '75%' }
+    { top: '20%', left: '75%' },
   ]
 
   return {
     ...positions[index % positions.length],
-    animationDelay: `${index * 0.8}s`
+    animationDelay: `${index * 0.8}s`,
   }
 }
 </script>

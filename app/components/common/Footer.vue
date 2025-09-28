@@ -7,7 +7,9 @@
           <!-- Колонка с брендом -->
           <div class="footer-brand">
             <div class="brand-logo">
-              <div class="logo-icon">🔮</div>
+              <div class="logo-icon">
+                🔮
+              </div>
               <h3>{{ $t('appName') }}</h3>
             </div>
             <p class="brand-description">
@@ -16,79 +18,85 @@
           </div>
 
           <!-- Навигация -->
-          <div class="footer-section">
-            <h4>{{ $t('footer.navigation.title') }}</h4>
-            <ul class="footer-links">
-              <li><a href="#features">{{ $t('footer.nav.features') }}</a></li>
-              <li><a href="#demo">{{ $t('footer.nav.demo') }}</a></li>
-              <li><a href="#pricing">{{ $t('footer.nav.pricing') }}</a></li>
-              <li><a href="#testimonials">{{ $t('footer.nav.testimonials') }}</a></li>
-              <li><a href="#faq">{{ $t('footer.nav.faq') }}</a></li>
-              <li><a href="/blog">{{ $t('footer.nav.blog') }}</a></li>
-            </ul>
-          </div>
+          <!--          <div class="footer-section"> -->
+          <!--            <h4>{{ $t('footer.navigation.title') }}</h4> -->
+          <!--            <ul class="footer-links"> -->
+          <!--              <li><a href="#features">{{ $t('footer.nav.features') }}</a></li> -->
+          <!--              <li><a href="#demo">{{ $t('footer.nav.demo') }}</a></li> -->
+          <!--              <li><a href="#pricing">{{ $t('footer.nav.pricing') }}</a></li> -->
+          <!--              <li><a href="#testimonials">{{ $t('footer.nav.testimonials') }}</a></li> -->
+          <!--              <li><a href="#faq">{{ $t('footer.nav.faq') }}</a></li> -->
+          <!--              <li><a href="/blog">{{ $t('footer.nav.blog') }}</a></li> -->
+          <!--            </ul> -->
+          <!--          </div> -->
 
           <!-- Услуги -->
-          <div class="footer-section">
-            <h4>{{ $t('footer.services.title') }}</h4>
-            <ul class="footer-links">
-              <li><a href="/natal-chart">{{ $t('footer.services.natal') }}</a></li>
-              <li><a href="/daily-horoscope">{{ $t('footer.services.daily') }}</a></li>
-              <li><a href="/compatibility">{{ $t('footer.services.compatibility') }}</a></li>
-              <li><a href="/consultations">{{ $t('footer.services.consultations') }}</a></li>
-              <li><a href="/business-astrology">{{ $t('footer.services.business') }}</a></li>
-              <li><a href="/api">{{ $t('footer.services.api') }}</a></li>
-            </ul>
-          </div>
+          <!--          <div class="footer-section"> -->
+          <!--            <h4>{{ $t('footer.services.title') }}</h4> -->
+          <!--            <ul class="footer-links"> -->
+          <!--              <li><a href="/natal-chart">{{ $t('footer.services.natal') }}</a></li> -->
+          <!--              <li><a href="/daily-horoscope">{{ $t('footer.services.daily') }}</a></li> -->
+          <!--              <li><a href="/compatibility">{{ $t('footer.services.compatibility') }}</a></li> -->
+          <!--              <li><a href="/consultations">{{ $t('footer.services.consultations') }}</a></li> -->
+          <!--              <li><a href="/business-astrology">{{ $t('footer.services.business') }}</a></li> -->
+          <!--              <li><a href="/api">{{ $t('footer.services.api') }}</a></li> -->
+          <!--            </ul> -->
+          <!--          </div> -->
 
           <!-- Поддержка -->
-          <div class="footer-section">
-            <h4>{{ $t('footer.support.title') }}</h4>
-            <ul class="footer-links">
-              <li><a href="/help">{{ $t('footer.support.help') }}</a></li>
-              <li><a href="/contact">{{ $t('footer.support.contact') }}</a></li>
-              <li><a href="/privacy">{{ $t('footer.support.privacy') }}</a></li>
-              <li><a href="/terms">{{ $t('footer.support.terms') }}</a></li>
-              <li><a href="/refund">{{ $t('footer.support.refund') }}</a></li>
-              <li><a href="/security">{{ $t('footer.support.security') }}</a></li>
-            </ul>
-          </div>
+          <!--          <div class="footer-section"> -->
+          <!--            <h4>{{ $t('footer.support.title') }}</h4> -->
+          <!--            <ul class="footer-links"> -->
+          <!--              <li><a href="/help">{{ $t('footer.support.help') }}</a></li> -->
+          <!--              <li><a href="/contact">{{ $t('footer.support.contact') }}</a></li> -->
+          <!--              <li><a href="/privacy">{{ $t('footer.support.privacy') }}</a></li> -->
+          <!--              <li><a href="/terms">{{ $t('footer.support.terms') }}</a></li> -->
+          <!--              <li><a href="/refund">{{ $t('footer.support.refund') }}</a></li> -->
+          <!--              <li><a href="/security">{{ $t('footer.support.security') }}</a></li> -->
+          <!--            </ul> -->
+          <!--          </div> -->
 
           <!-- Контакты и подписка -->
-          <div class="footer-section">
-            <h4>{{ $t('footer.stayConnected.title') }}</h4>
-            <div class="contact-info">
-              <div class="contact-item">
-                <span class="contact-icon">📧</span>
-                <span>support@astro-ai.com"</span>
-              </div>
-              <div class="contact-item">
-                <span class="contact-icon">📱</span>
-                <span>{{ $t('footer.contact.phone') }}</span>
-              </div>
-              <div class="contact-item">
-                <span class="contact-icon">🌍</span>
-                <span>{{ $t('footer.contact.global') }}</span>
-              </div>
-            </div>
+          <!--          <div class="footer-section"> -->
+          <!--            <h4>{{ $t('footer.stayConnected.title') }}</h4> -->
+          <!--            <div class="contact-info"> -->
+          <!--              <div class="contact-item"> -->
+          <!--                <span class="contact-icon">📧</span> -->
+          <!--                <span>support@astro-ai.com"</span> -->
+          <!--              </div> -->
+          <!--              <div class="contact-item"> -->
+          <!--                <span class="contact-icon">📱</span> -->
+          <!--                <span>{{ $t('footer.contact.phone') }}</span> -->
+          <!--              </div> -->
+          <!--              <div class="contact-item"> -->
+          <!--                <span class="contact-icon">🌍</span> -->
+          <!--                <span>{{ $t('footer.contact.global') }}</span> -->
+          <!--              </div> -->
+          <!--            </div> -->
 
-            <!-- Подписка на новости -->
-            <div class="newsletter">
-              <h5>{{ $t('footer.newsletter.title') }}</h5>
-              <p>{{ $t('footer.newsletter.subtitle') }}</p>
-              <form class="newsletter-form" @submit.prevent="subscribeNewsletter">
-                <input
-                  type="email"
-                  v-model="email"
-                  :placeholder="$t('footer.newsletter.placeholder')"
-                  required
-                />
-                <button type="submit" class="subscribe-btn">
-                  {{ $t('footer.newsletter.subscribe') }}
-                </button>
-              </form>
-            </div>
-          </div>
+          <!--            &lt;!&ndash; Подписка на новости &ndash;&gt; -->
+          <!--            <div class="newsletter"> -->
+          <!--              <h5>{{ $t('footer.newsletter.title') }}</h5> -->
+          <!--              <p>{{ $t('footer.newsletter.subtitle') }}</p> -->
+          <!--              <form -->
+          <!--                class="newsletter-form" -->
+          <!--                @submit.prevent="subscribeNewsletter" -->
+          <!--              > -->
+          <!--                <input -->
+          <!--                  v-model="email" -->
+          <!--                  type="email" -->
+          <!--                  :placeholder="$t('footer.newsletter.placeholder')" -->
+          <!--                  required -->
+          <!--                > -->
+          <!--                <button -->
+          <!--                  type="submit" -->
+          <!--                  class="subscribe-btn" -->
+          <!--                > -->
+          <!--                  {{ $t('footer.newsletter.subscribe') }} -->
+          <!--                </button> -->
+          <!--              </form> -->
+          <!--            </div> -->
+          <!--          </div> -->
         </div>
       </div>
     </div>
@@ -123,7 +131,7 @@
       <div class="container">
         <div class="bottom-content">
           <div class="copyright">
-            <p>{{$t('footer.copyright', { year: currentYear })}}</p>
+            <p>{{ $t('footer.copyright', { year: currentYear }) }}</p>
             <p class="disclaimer">
               {{ $t('footer.disclaimer') }}
             </p>
@@ -151,10 +159,30 @@
 
     <!-- Плавающие астрологические элементы -->
     <div class="floating-elements">
-      <div class="floating-star" style="top: 10%; left: 5%; animation-delay: 0s;">✨</div>
-      <div class="floating-star" style="top: 20%; right: 10%; animation-delay: 1s;">🌟</div>
-      <div class="floating-star" style="bottom: 30%; left: 8%; animation-delay: 2s;">💫</div>
-      <div class="floating-star" style="bottom: 15%; right: 5%; animation-delay: 3s;">⭐</div>
+      <div
+        class="floating-star"
+        style="top: 10%; left: 5%; animation-delay: 0s;"
+      >
+        ✨
+      </div>
+      <div
+        class="floating-star"
+        style="top: 20%; right: 10%; animation-delay: 1s;"
+      >
+        🌟
+      </div>
+      <div
+        class="floating-star"
+        style="bottom: 30%; left: 8%; animation-delay: 2s;"
+      >
+        💫
+      </div>
+      <div
+        class="floating-star"
+        style="bottom: 15%; right: 5%; animation-delay: 3s;"
+      >
+        ⭐
+      </div>
     </div>
   </footer>
 </template>
@@ -170,7 +198,7 @@ const currentYear = computed(() => new Date().getFullYear())
 const languages = [
   { code: 'ru', name: 'Русский', flag: '🇷🇺' },
   { code: 'uk', name: 'Українська', flag: '🇺🇦' },
-  { code: 'en', name: 'English', flag: '🇺🇸' }
+  { code: 'en', name: 'English', flag: '🇺🇸' },
 ]
 
 const subscribeNewsletter = () => {

@@ -5,7 +5,7 @@
       <slot />
     </main>
     <Footer />
-    <SpeedInsights/>
+    <SpeedInsights />
   </div>
 </template>
 
@@ -13,7 +13,7 @@
 import { SpeedInsights } from '@vercel/speed-insights/nuxt'
 import Header from '~/components/common/Header.vue'
 import Footer from '~/components/common/Footer.vue'
-import NavigationHeader from "~/components/landing/NavigationHeader.vue";
+import NavigationHeader from '~/components/landing/NavigationHeader.vue'
 </script>
 
 <style scoped>
@@ -22,9 +22,8 @@ import NavigationHeader from "~/components/landing/NavigationHeader.vue";
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
-  padding: 4rem 1rem 0;
+  padding: 4rem 0 0;
   box-sizing: border-box;
 }
 main {

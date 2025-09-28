@@ -1,7 +1,10 @@
 <template>
   <header>
     <div class="header-content">
-      <NuxtLink to="/" class="logo-link">
+      <NuxtLink
+        to="/"
+        class="logo-link"
+      >
         <h1>AI-Оракул</h1>
       </NuxtLink>
       <LangSwitcher />

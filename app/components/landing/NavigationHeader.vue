@@ -1,68 +1,93 @@
 <template>
-  <header class="navigation-header" :class="{ 'scrolled': isScrolled }">
+  <header
+    class="navigation-header"
+    :class="{ scrolled: isScrolled }"
+  >
     <div class="container">
       <nav class="nav-content">
         <!-- Логотип -->
         <div class="logo">
-          <a href="/" class="logo-link">
+          <a
+            href="/"
+            class="logo-link"
+          >
             <div class="logo-icon">🔮</div>
             <span class="logo-text">{{ $t('appName') }}</span>
           </a>
         </div>
 
         <!-- Основное меню -->
-        <div class="nav-menu" :class="{ 'mobile-open': isMobileMenuOpen }">
+        <div
+          class="nav-menu"
+          :class="{ 'mobile-open': isMobileMenuOpen }"
+        >
           <div class="nav-links">
-            <a href="#features" class="nav-link" @click="scrollToSection('features')">
+            <a
+              href="/#features"
+              class="nav-link"
+              @click="scrollToSection('features')"
+            >
               {{ $t('menu.features') }}
             </a>
-            <a href="#demo" class="nav-link" @click="scrollToSection('demo')">
+            <a
+              href="/#demo"
+              class="nav-link"
+              @click="scrollToSection('demo')"
+            >
               {{ $t('menu.demo') }}
             </a>
-            <a href="#pricing" class="nav-link" @click="scrollToSection('pricing')">
+            <a
+              href="/#pricing"
+              class="nav-link"
+              @click="scrollToSection('pricing')"
+            >
               {{ $t('menu.pricing') }}
             </a>
-            <a href="#testimonials" class="nav-link" @click="scrollToSection('testimonials')">
+            <a
+              href="/#testimonials"
+              class="nav-link"
+              @click="scrollToSection('testimonials')"
+            >
               {{ $t('menu.testimonials') }}
             </a>
 
             <!-- Выпадающее меню (закомментировано, но переведено) -->
-            <!--            <div class="nav-dropdown">-->
-            <!--              <button class="nav-link dropdown-trigger">-->
-            <!--                {{ $t('menu.resources.title') }}-->
-            <!--                <span class="dropdown-arrow">▼</span>-->
-            <!--              </button>-->
-            <!--              <div class="dropdown-menu">-->
-            <!--                <a href="/blog" class="dropdown-item">-->
-            <!--                  <span class="item-icon">📖</span>-->
-            <!--                  <div>-->
-            <!--                    <span class="item-title">{{ $t('menu.resources.blog.title') }}</span>-->
-            <!--                    <span class="item-desc">{{ $t('menu.resources.blog.desc') }}</span>-->
-            <!--                  </div>-->
-            <!--                </a>-->
-            <!--                <a href="/guides" class="dropdown-item">-->
-            <!--                  <span class="item-icon">📚</span>-->
-            <!--                  <div>-->
-            <!--                    <span class="item-title">{{ $t('menu.resources.guides.title') }}</span>-->
-            <!--                    <span class="item-desc">{{ $t('menu.resources.guides.desc') }}</span>-->
-            <!--                  </div>-->
-            <!--                </a>-->
-            <!--                <a href="/api" class="dropdown-item">-->
-            <!--                  <span class="item-icon">⚙️</span>-->
+            <!--            <div class="nav-dropdown"> -->
+            <!--              <button class="nav-link dropdown-trigger"> -->
+            <!--                {{ $t('menu.resources.title') }} -->
+            <!--                <span class="dropdown-arrow">▼</span> -->
+            <!--              </button> -->
+            <!--              <div class="dropdown-menu"> -->
+            <!--                <a href="/blog" class="dropdown-item"> -->
+            <!--                  <span class="item-icon">📖</span> -->
             <!--                  <div> -->
-            <!--                    <span class="item-title">{{ $t('menu.resources.api.title') }}</span>-->
-            <!--                    <span class="item-desc">{{ $t('menu.resources.api.desc') }}</span>-->
-            <!--                  </div>-->
-            <!--                </a>-->
-            <!--                <a href="/help" class="dropdown-item">-->
-            <!--                  <span class="item-icon">❓</span>-->
-            <!--                  <div>-->
-            <!--                    <span class="item-title">{{ $t('menu.resources.help.title') }}</span>-->
-            <!--                    <span class="item-desc">{{ $t('menu.resources.help.desc') }}</span>-->
-            <!--                  </div>-->
-            <!--                </a>-->
-            <!--              </div>-->
-            <!--            </div>-->
+            <!--                    <span class="item-title">{{ $t('menu.resources.blog.title') }}</span> -->
+            <!--                    <span class="item-desc">{{ $t('menu.resources.blog.desc') }}</span> -->
+            <!--                  </div> -->
+            <!--                </a> -->
+            <!--                <a href="/guides" class="dropdown-item"> -->
+            <!--                  <span class="item-icon">📚</span> -->
+            <!--                  <div> -->
+            <!--                    <span class="item-title">{{ $t('menu.resources.guides.title') }}</span> -->
+            <!--                    <span class="item-desc">{{ $t('menu.resources.guides.desc') }}</span> -->
+            <!--                  </div> -->
+            <!--                </a> -->
+            <!--                <a href="/api" class="dropdown-item"> -->
+            <!--                  <span class="item-icon">⚙️</span> -->
+            <!--                  <div> -->
+            <!--                    <span class="item-title">{{ $t('menu.resources.api.title') }}</span> -->
+            <!--                    <span class="item-desc">{{ $t('menu.resources.api.desc') }}</span> -->
+            <!--                  </div> -->
+            <!--                </a> -->
+            <!--                <a href="/help" class="dropdown-item"> -->
+            <!--                  <span class="item-icon">❓</span> -->
+            <!--                  <div> -->
+            <!--                    <span class="item-title">{{ $t('menu.resources.help.title') }}</span> -->
+            <!--                    <span class="item-desc">{{ $t('menu.resources.help.desc') }}</span> -->
+            <!--                  </div> -->
+            <!--                </a> -->
+            <!--              </div> -->
+            <!--            </div> -->
           </div>
 
           <!-- Переключатель языка -->
@@ -70,48 +95,60 @@
 
           <!-- Кнопки действий -->
           <div class="nav-actions">
-            <button class="login-btn" @click="goToLogin">
-              {{ $t('actions.login') }}
-            </button>
-            <button class="signup-btn" @click="goToSignup">
-              {{ $t('actions.signup') }}
-            </button>
+            <!--            <button -->
+            <!--              class="login-btn" -->
+            <!--              @click="goToLogin" -->
+            <!--            > -->
+            <!--              {{ $t('actions.login') }} -->
+            <!--            </button> -->
+            <!--            <button -->
+            <!--              class="signup-btn" -->
+            <!--              @click="goToSignup" -->
+            <!--            > -->
+            <!--              {{ $t('actions.signup') }} -->
+            <!--            </button> -->
           </div>
         </div>
 
         <!-- Мобильное меню кнопка -->
-        <button class="mobile-menu-btn" @click="toggleMobileMenu">
-          <span class="hamburger" :class="{ 'active': isMobileMenuOpen }">
-            <span></span>
-            <span></span>
-            <span></span>
+        <button
+          class="mobile-menu-btn"
+          @click="toggleMobileMenu"
+        >
+          <span
+            class="hamburger"
+            :class="{ active: isMobileMenuOpen }"
+          >
+            <span />
+            <span />
+            <span />
           </span>
         </button>
       </nav>
     </div>
 
     <!-- Баннер акции (закомментирован, но переведён) -->
-    <!--    <div class="promo-banner" v-if="showPromoBanner">-->
-    <!--      <div class="container">-->
-    <!--        <div class="promo-content">-->
-    <!--          <span class="promo-icon">🎉</span>-->
-    <!--          <span class="promo-text">-->
-    <!--            {{ $t('promo.text') }}-->
-    <!--          </span>-->
-    <!--          <a href="#pricing" class="promo-link" @click="scrollToSection('pricing')">-->
-    <!--            {{ $t('promo.cta') }}-->
-    <!--          </a>-->
-    <!--          <button class="promo-close" @click="closePromoBanner">✕</button>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--    </div>-->
+    <!--    <div class="promo-banner" v-if="showPromoBanner"> -->
+    <!--      <div class="container"> -->
+    <!--        <div class="promo-content"> -->
+    <!--          <span class="promo-icon">🎉</span> -->
+    <!--          <span class="promo-text"> -->
+    <!--            {{ $t('promo.text') }} -->
+    <!--          </span> -->
+    <!--          <a href="#pricing" class="promo-link" @click="scrollToSection('pricing')"> -->
+    <!--            {{ $t('promo.cta') }} -->
+    <!--          </a> -->
+    <!--          <button class="promo-close" @click="closePromoBanner">✕</button> -->
+    <!--        </div> -->
+    <!--      </div> -->
+    <!--    </div> -->
   </header>
 </template>
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useRouter } from 'vue-router'
-import LangSwitcher from "~/components/common/LangSwitcher.vue";
+import LangSwitcher from '~/components/common/LangSwitcher.vue'
 
 const router = useRouter()
 
@@ -126,24 +163,24 @@ const currentLanguage = ref({ code: 'RU', name: 'Русский', flag: '🇷�
 const languages = [
   { code: 'RU', name: 'Русский', flag: '🇷🇺' },
   { code: 'UK', name: 'Українська', flag: '🇺🇦' },
-  { code: 'EN', name: 'English', flag: '🇺🇸' }
+  { code: 'EN', name: 'English', flag: '🇺🇸' },
 ]
 
 // Обработка прокрутки
 const handleScroll = () => {
-  if (process.client) {
+  if (import.meta.client) {
     isScrolled.value = window.scrollY > 50
   }
 }
 
 // Плавная прокрутка к секции
 const scrollToSection = (sectionId) => {
-  if (process.client) {
+  if (import.meta.client) {
     const element = document.getElementById(sectionId)
     if (element) {
       element.scrollIntoView({
         behavior: 'smooth',
-        block: 'start'
+        block: 'start',
       })
     }
     closeMobileMenu()
@@ -152,19 +189,20 @@ const scrollToSection = (sectionId) => {
 
 // Мобильное меню
 const toggleMobileMenu = () => {
-  if (process.client) {
+  if (import.meta.client) {
     isMobileMenuOpen.value = !isMobileMenuOpen.value
     // Блокируем прокрутку при открытом меню
     if (isMobileMenuOpen.value) {
       document.body.style.overflow = 'hidden'
-    } else {
+    }
+    else {
       document.body.style.overflow = ''
     }
   }
 }
 
 const closeMobileMenu = () => {
-  if (process.client) {
+  if (import.meta.client) {
     isMobileMenuOpen.value = false
     document.body.style.overflow = ''
   }
@@ -184,7 +222,7 @@ const switchLanguage = (language) => {
 
 // Промо-баннер
 const closePromoBanner = () => {
-  if (process.client) {
+  if (import.meta.client) {
     showPromoBanner.value = false
     // Сохраняем в localStorage, чтобы не показывать снова
     localStorage.setItem('promoBannerClosed', 'true')
@@ -211,7 +249,7 @@ const handleClickOutside = (event) => {
 }
 
 onMounted(() => {
-  if (process.client) {
+  if (import.meta.client) {
     window.addEventListener('scroll', handleScroll)
     document.addEventListener('click', handleClickOutside)
 
@@ -223,7 +261,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  if (process.client) {
+  if (import.meta.client) {
     window.removeEventListener('scroll', handleScroll)
     document.removeEventListener('click', handleClickOutside)
     document.body.style.overflow = ''
