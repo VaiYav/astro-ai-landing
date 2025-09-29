@@ -32,6 +32,7 @@
       "register": "Реєстрація"
     },
     "comingSoon": {
+      "emailButtonSubscribed": "Ви вже підписані",
       "emailButtonHint": "Підпишіться, щоб отримати ранній доступ",
       "emailButtonSubscribedHint": "Ви вже підписані",
       "emailButtonInvalidHint": "Будь ласка, введіть правильну адресу електронної пошти",

@@ -32,6 +32,7 @@
       "register": "Sign up"
     },
     "comingSoon": {
+      "emailButtonSubscribed": "You are already subscribed",
       "emailButtonHint": "Subscribe to get early access",
       "emailButtonSubscribedHint": "You are already subscribed",
       "emailButtonInvalidHint": "Please enter a valid email address",
@@ -112,10 +113,10 @@
       "notFound": "Not found"
     },
     "meta": {
-      "title": "AI Oracle – Personal Natal Chart Online",
+      "title": "My Zodiac AI – Personal Natal Chart Online",
       "description": "Create your personal natal chart online with AI assistance.",
       "keywords": "astrology, natal chart, AI, horoscope, online",
-      "ogTitle": "AI Oracle – Personal Natal Chart",
+      "ogTitle": "My Zodiac AI – Personal Natal Chart",
       "ogDescription": "Create your personal natal chart online with AI assistance."
     },
     "components": {
@@ -171,7 +172,7 @@
       }
     },
     "welcome_title": "Decode the message of the stars.",
-    "welcome_subtitle": "Your personal AI oracle analyzes unique aspects of your personality, talents, and life path based on your exact birth time",
+    "welcome_subtitle": "Your personal My Zodiac AI analyzes unique aspects of your personality, talents, and life path based on your exact birth time",
     "cta_button": "Calculate Your Chart for Free",
     "hero_badge": "Using Swiss Ephemeris — the most accurate calculations",
     "trust_secure": "Data Protected",
@@ -210,7 +211,7 @@
     "step_2_detail_2": "All planet positions",
     "step_2_detail_3": "Aspects and houses",
     "step_3_title": "Read the Insights",
-    "step_3_desc": "Our AI oracle will analyze your chart and provide deep, personalized interpretations.",
+    "step_3_desc": "Our My Zodiac AI will analyze your chart and provide deep, personalized interpretations.",
     "step_3_time": "2 minutes",
     "step_3_detail_1": "AI personality analysis",
     "step_3_detail_2": "Personal recommendations",
@@ -366,7 +367,7 @@
         "a": "Yes. We take privacy seriously. Your data is used exclusively for calculations within the app and is never shared with third parties."
       }
     ],
-    "meta_title": "AI Oracle | Your Personal Natal Chart",
+    "meta_title": "My Zodiac AI | Your Personal Natal Chart",
     "meta_description": "Calculate your natal chart online and get a deep analysis of your personality, talents, and destiny with the help of artificial intelligence. Discover what the stars say!",
     "offer_free_name": "Free Plan",
     "offer_free_desc": "Basic natal chart and daily horoscope",

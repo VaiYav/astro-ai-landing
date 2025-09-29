@@ -35,6 +35,7 @@
       "emailButtonHint": "Подпишитесь, чтобы получить ранний доступ",
       "emailButtonSubscribedHint": "Вы уже подписаны",
       "emailButtonInvalidHint": "Пожалуйста, введите корректный email",
+      "emailButtonSubscribed": "Вы уже подписаны",
 
       "logoText": "My Zodiac AI",
       "status": "В разработке",
