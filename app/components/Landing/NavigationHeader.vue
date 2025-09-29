@@ -11,8 +11,13 @@
             href="/"
             class="logo-link"
           >
-            <div class="logo-icon">🔮</div>
-            <span class="logo-text">{{ $t('appName') }}</span>
+            <div class="logo-icon">
+              <img
+                src="~/assets/logo.svg"
+                alt="logo"
+              >
+            </div>
+            <!--            <span class="logo-text">{{ $t('appName') }}</span> -->
           </a>
         </div>
 
@@ -315,10 +320,8 @@ onUnmounted(() => {
 }
 
 .logo-icon {
-  font-size: 2rem;
-  background: linear-gradient(135deg, #8b5cf6, #ec4899);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
 }
 
 .logo-text {

@@ -5,7 +5,7 @@
         to="/"
         class="logo-link"
       >
-        <h1>AI-Оракул</h1>
+        <h1>My Zodiac AI</h1>
       </NuxtLink>
       <LangSwitcher />
     </div>

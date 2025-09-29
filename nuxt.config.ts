@@ -27,7 +27,7 @@ export default defineNuxtConfig({
   // Настройки head (SEO, мета, JSON-LD)
   app: {
     head: {
-      title: 'AstroPersonal - Персональная Астрология',
+      title: 'My Zodiac AI - Персональная Астрология',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -37,7 +37,7 @@ export default defineNuxtConfig({
 
         // Open Graph
         { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: 'AstroPersonal - Персональная Астрология' },
+        { property: 'og:title', content: 'My Zodiac AI - Персональная Астрология' },
         { property: 'og:description', content: 'Узнайте свое будущее с помощью персональных астрологических прогнозов' },
         { property: 'og:image', content: '/og-image.jpg' },
         { property: 'og:locale', content: 'uk_UA' },
@@ -46,7 +46,7 @@ export default defineNuxtConfig({
 
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'AstroPersonal - Персональная Астрология' },
+        { name: 'twitter:title', content: 'My Zodiac AI - Персональная Астрология' },
         { name: 'twitter:description', content: 'Персональные астрологические прогнозы на основе ИИ' },
         { name: 'twitter:image', content: '/twitter-card.jpg' },
       ],
@@ -66,7 +66,7 @@ export default defineNuxtConfig({
           innerHTML: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
-            'name': 'AstroPersonal',
+            'name': 'My Zodiac AI',
             'description': 'Персональные астрологические прогнозы и натальные карты на основе ИИ',
             'url': process.env.NUXT_PUBLIC_SITE_URL,
             'potentialAction': {

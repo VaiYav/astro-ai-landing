@@ -32,7 +32,11 @@
       "register": "Sign up"
     },
     "comingSoon": {
-      "logoText": "AstroPersonal",
+      "emailButtonHint": "Subscribe to get early access",
+      "emailButtonSubscribedHint": "You are already subscribed",
+      "emailButtonInvalidHint": "Please enter a valid email address",
+
+      "logoText": "My Zodiac AI",
       "status": "In development",
       "title": "Coming soon",
       "titleAccent": "personal astrology",
@@ -394,7 +398,7 @@
     "upgrade_to_premium": "Upgrade to Premium",
     "continue_browsing": "Continue Browsing",
     "subscription_error": "There was an error subscribing. Please try again.",
-    "appName": "AI-Oracle",
+    "appName": "My Zodiac AI",
     "menu": {
       "features": "Features",
       "demo": "Demo",
@@ -495,7 +499,7 @@
       "languages": {
         "title": "🌐 Languages"
       },
-      "copyright": "{year} AI-Oracle. All rights reserved.",
+      "copyright": "{year} My Zodiac AI. All rights reserved.",
       "disclaimer": "Astrological forecasts are for entertainment and personal growth purposes only.",
       "certifications": {
         "ssl": "SSL Secured",

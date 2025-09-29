@@ -465,7 +465,7 @@ const miniTestimonials = [
     id: 1,
     name: 'Анна К.',
     text: 'mini_testimonial_1',
-    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b2e0e4e9?w=60&h=60&fit=crop&crop=face',
+    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=60&h=60&fit=crop&crop=face',
   },
   {
     id: 2,

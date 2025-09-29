@@ -7,10 +7,14 @@
           <!-- Колонка с брендом -->
           <div class="footer-brand">
             <div class="brand-logo">
-              <div class="logo-icon">
-                🔮
-              </div>
-              <h3>{{ $t('appName') }}</h3>
+              <img
+                src="~/assets/logo.svg"
+                alt="logo"
+              >
+              <!--              <div class="logo-icon"> -->
+              <!--                🔮 -->
+              <!--              </div> -->
+              <!--              <h3>{{ $t('appName') }}</h3> -->
             </div>
             <p class="brand-description">
               {{ $t('footer.brand.description') }}
