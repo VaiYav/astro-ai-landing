@@ -104,7 +104,7 @@ useHead(() => ({
     },
     {
       name: 'author',
-      content: 'ИИ-Оракул',
+      content: 'My Zodiac AI',
     },
     {
       name: 'viewport',
@@ -165,7 +165,7 @@ useHead({
           'url': 'https://astro-ai.com',
           'creator': {
             '@type': 'Organization',
-            'name': 'ИИ-Оракул',
+            'name': 'My Zodiac AI',
             'url': 'https://astro-ai.com',
             'logo': 'https://astro-ai.com/logo.png',
           },

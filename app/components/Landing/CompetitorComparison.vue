@@ -11,7 +11,7 @@
       <div class="view-switcher">
         <button
           class="view-btn"
-          :class="{ 'active': viewMode === 'table' }"
+          :class="{ active: viewMode === 'table' }"
           @click="setViewMode('table')"
         >
           <span class="view-icon">📊</span>
@@ -19,7 +19,7 @@
         </button>
         <button
           class="view-btn"
-          :class="{ 'active': viewMode === 'cards' }"
+          :class="{ active: viewMode === 'cards' }"
           @click="setViewMode('cards')"
         >
           <span class="view-icon">🏆</span>
@@ -28,61 +28,95 @@
       </div>
 
       <!-- Табличное сравнение -->
-      <div v-if="viewMode === 'table'" class="comparison-table-container">
+      <div
+        v-if="viewMode === 'table'"
+        class="comparison-table-container"
+      >
         <div class="table-wrapper">
           <table class="comparison-table">
             <thead>
-            <tr>
-              <th class="feature-column">Возможности</th>
-              <th class="our-service highlighted">
-                <div class="service-header">
-                  <div class="service-logo">🔮</div>
-                  <div class="service-info">
-                    <h3>ИИ-Оракул</h3>
-                    <span class="service-badge">Рекомендуем</span>
+              <tr>
+                <th class="feature-column">
+                  Возможности
+                </th>
+                <th class="our-service highlighted">
+                  <div class="service-header">
+                    <div class="service-logo">
+                      🔮
+                    </div>
+                    <div class="service-info">
+                      <h3>My Zodiac AI</h3>
+                      <span class="service-badge">Рекомендуем</span>
+                    </div>
                   </div>
-                </div>
-              </th>
-              <th v-for="competitor in competitors" :key="competitor.id" class="competitor-column">
-                <div class="service-header">
-                  <div class="service-logo">{{ competitor.logo }}</div>
-                  <div class="service-info">
-                    <h3>{{ competitor.name }}</h3>
-                    <span class="service-price">${{ competitor.price }}/мес</span>
+                </th>
+                <th
+                  v-for="competitor in competitors"
+                  :key="competitor.id"
+                  class="competitor-column"
+                >
+                  <div class="service-header">
+                    <div class="service-logo">
+                      {{ competitor.logo }}
+                    </div>
+                    <div class="service-info">
+                      <h3>{{ competitor.name }}</h3>
+                      <span class="service-price">${{ competitor.price }}/мес</span>
+                    </div>
                   </div>
-                </div>
-              </th>
-            </tr>
+                </th>
+              </tr>
             </thead>
             <tbody>
-            <tr v-for="feature in comparisonFeatures" :key="feature.id" class="feature-row">
-              <td class="feature-name">
-                <div class="feature-content">
-                  <span class="feature-icon">{{ feature.icon }}</span>
-                  <div>
-                    <strong>{{ feature.name }}</strong>
-                    <p class="feature-description">{{ feature.description }}</p>
+              <tr
+                v-for="feature in comparisonFeatures"
+                :key="feature.id"
+                class="feature-row"
+              >
+                <td class="feature-name">
+                  <div class="feature-content">
+                    <span class="feature-icon">{{ feature.icon }}</span>
+                    <div>
+                      <strong>{{ feature.name }}</strong>
+                      <p class="feature-description">
+                        {{ feature.description }}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td class="our-value highlighted">
-                <div class="value-cell">
-                    <span class="value-icon" :class="getValueClass(feature.ourValue)">
+                </td>
+                <td class="our-value highlighted">
+                  <div class="value-cell">
+                    <span
+                      class="value-icon"
+                      :class="getValueClass(feature.ourValue)"
+                    >
                       {{ getValueIcon(feature.ourValue) }}
                     </span>
-                  <span class="value-text">{{ feature.ourValue }}</span>
-                </div>
-                <div v-if="feature.ourBonus" class="bonus-text">{{ feature.ourBonus }}</div>
-              </td>
-              <td v-for="competitor in competitors" :key="`${feature.id}-${competitor.id}`" class="competitor-value">
-                <div class="value-cell">
-                    <span class="value-icon" :class="getValueClass(feature.competitors[competitor.id])">
+                    <span class="value-text">{{ feature.ourValue }}</span>
+                  </div>
+                  <div
+                    v-if="feature.ourBonus"
+                    class="bonus-text"
+                  >
+                    {{ feature.ourBonus }}
+                  </div>
+                </td>
+                <td
+                  v-for="competitor in competitors"
+                  :key="`${feature.id}-${competitor.id}`"
+                  class="competitor-value"
+                >
+                  <div class="value-cell">
+                    <span
+                      class="value-icon"
+                      :class="getValueClass(feature.competitors[competitor.id])"
+                    >
                       {{ getValueIcon(feature.competitors[competitor.id]) }}
                     </span>
-                  <span class="value-text">{{ feature.competitors[competitor.id] }}</span>
-                </div>
-              </td>
-            </tr>
+                    <span class="value-text">{{ feature.competitors[competitor.id] }}</span>
+                  </div>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -91,22 +125,35 @@
         <div class="comparison-summary">
           <div class="summary-card our-summary">
             <div class="summary-header">
-              <h3>🏆 ИИ-Оракул</h3>
+              <h3>🏆 My Zodiac AI</h3>
               <span class="summary-score">95/100</span>
             </div>
             <div class="summary-features">
-              <div class="summary-feature">✅ ИИ-анализ</div>
-              <div class="summary-feature">✅ Swiss Ephemeris</div>
-              <div class="summary-feature">✅ Персональные прогнозы</div>
-              <div class="summary-feature">✅ Мгновенные результаты</div>
+              <div class="summary-feature">
+                ✅ ИИ-анализ
+              </div>
+              <div class="summary-feature">
+                ✅ Swiss Ephemeris
+              </div>
+              <div class="summary-feature">
+                ✅ Персональные прогнозы
+              </div>
+              <div class="summary-feature">
+                ✅ Мгновенные результаты
+              </div>
             </div>
-            <button class="choose-btn">Выбрать план</button>
+            <button class="choose-btn">
+              Выбрать план
+            </button>
           </div>
         </div>
       </div>
 
       <!-- Карточки преимуществ -->
-      <div v-else class="advantages-grid">
+      <div
+        v-else
+        class="advantages-grid"
+      >
         <div
           v-for="advantage in advantages"
           :key="advantage.id"
@@ -114,17 +161,29 @@
           :class="advantage.featured ? 'featured' : ''"
         >
           <div class="advantage-header">
-            <div class="advantage-icon">{{ advantage.icon }}</div>
+            <div class="advantage-icon">
+              {{ advantage.icon }}
+            </div>
             <h3>{{ advantage.title }}</h3>
-            <span v-if="advantage.featured" class="featured-badge">Эксклюзивно</span>
+            <span
+              v-if="advantage.featured"
+              class="featured-badge"
+            >Эксклюзивно</span>
           </div>
 
-          <p class="advantage-description">{{ advantage.description }}</p>
+          <p class="advantage-description">
+            {{ advantage.description }}
+          </p>
 
           <div class="advantage-details">
             <h4>Что это означает для вас:</h4>
             <ul>
-              <li v-for="benefit in advantage.benefits" :key="benefit">{{ benefit }}</li>
+              <li
+                v-for="benefit in advantage.benefits"
+                :key="benefit"
+              >
+                {{ benefit }}
+              </li>
             </ul>
           </div>
 
@@ -139,7 +198,10 @@
             </div>
           </div>
 
-          <div v-if="advantage.proof" class="advantage-proof">
+          <div
+            v-if="advantage.proof"
+            class="advantage-proof"
+          >
             <span class="proof-icon">📊</span>
             <span class="proof-text">{{ advantage.proof }}</span>
           </div>
@@ -158,7 +220,10 @@
             <div class="testimonial-content">
               <blockquote>"{{ testimonial.text }}"</blockquote>
               <div class="testimonial-author">
-                <img :src="testimonial.avatar" :alt="testimonial.name" />
+                <img
+                  :src="testimonial.avatar"
+                  :alt="testimonial.name"
+                >
                 <div>
                   <h4>{{ testimonial.name }}</h4>
                   <p>{{ testimonial.title }}</p>
@@ -176,12 +241,18 @@
       <div class="comparison-cta">
         <div class="cta-content">
           <h3>Готовы убедиться в наших преимуществах?</h3>
-          <p>Попробуйте ИИ-Оракул бесплатно и сравните качество с другими сервисами</p>
+          <p>Попробуйте My Zodiac AI бесплатно и сравните качество с другими сервисами</p>
           <div class="cta-actions">
-            <button class="primary-cta" @click="startTrial">
+            <button
+              class="primary-cta"
+              @click="startTrial"
+            >
               Попробовать бесплатно
             </button>
-            <button class="secondary-cta" @click="viewPricing">
+            <button
+              class="secondary-cta"
+              @click="viewPricing"
+            >
               Посмотреть тарифы
             </button>
           </div>
@@ -205,20 +276,20 @@ const competitors = [
     id: 'astro-com',
     name: 'Astro.com',
     logo: '⭐',
-    price: 29
+    price: 29,
   },
   {
     id: 'cafe-astrology',
     name: 'Cafe Astrology',
     logo: '☕',
-    price: 15
+    price: 15,
   },
   {
     id: 'astro-seek',
     name: 'Astro-Seek',
     logo: '🔍',
-    price: 25
-  }
+    price: 25,
+  },
 ]
 
 const comparisonFeatures = [
@@ -232,8 +303,8 @@ const comparisonFeatures = [
     competitors: {
       'astro-com': 'Нет',
       'cafe-astrology': 'Нет',
-      'astro-seek': 'Нет'
-    }
+      'astro-seek': 'Нет',
+    },
   },
   {
     id: 'accuracy',
@@ -245,8 +316,8 @@ const comparisonFeatures = [
     competitors: {
       'astro-com': 'Собственная библиотека',
       'cafe-astrology': 'Базовые расчеты',
-      'astro-seek': 'Средняя точность'
-    }
+      'astro-seek': 'Средняя точность',
+    },
   },
   {
     id: 'speed',
@@ -258,8 +329,8 @@ const comparisonFeatures = [
     competitors: {
       'astro-com': '5-10 минут',
       'cafe-astrology': '2-3 минуты',
-      'astro-seek': '1-2 минуты'
-    }
+      'astro-seek': '1-2 минуты',
+    },
   },
   {
     id: 'daily-horoscopes',
@@ -271,8 +342,8 @@ const comparisonFeatures = [
     competitors: {
       'astro-com': 'Ограниченно',
       'cafe-astrology': 'Общие прогнозы',
-      'astro-seek': 'Базовые'
-    }
+      'astro-seek': 'Базовые',
+    },
   },
   {
     id: 'compatibility',
@@ -284,8 +355,8 @@ const comparisonFeatures = [
     competitors: {
       'astro-com': 'Базовый',
       'cafe-astrology': 'Простой',
-      'astro-seek': 'Ограниченный'
-    }
+      'astro-seek': 'Ограниченный',
+    },
   },
   {
     id: 'mobile-app',
@@ -297,8 +368,8 @@ const comparisonFeatures = [
     competitors: {
       'astro-com': 'Только веб',
       'cafe-astrology': 'Нет',
-      'astro-seek': 'Нет'
-    }
+      'astro-seek': 'Нет',
+    },
   },
   {
     id: 'support',
@@ -310,8 +381,8 @@ const comparisonFeatures = [
     competitors: {
       'astro-com': 'Рабочие часы',
       'cafe-astrology': 'Email только',
-      'astro-seek': 'Ограниченная'
-    }
+      'astro-seek': 'Ограниченная',
+    },
   },
   {
     id: 'price',
@@ -323,9 +394,9 @@ const comparisonFeatures = [
     competitors: {
       'astro-com': '$29/мес',
       'cafe-astrology': '$15/мес',
-      'astro-seek': '$25/мес'
-    }
-  }
+      'astro-seek': '$25/мес',
+    },
+  },
 ]
 
 const advantages = [
@@ -339,11 +410,11 @@ const advantages = [
       'Анализ 1000+ астрологических факторов одновременно',
       'Выявление скрытых паттернов в вашей карте',
       'Персонализированные рекомендации на основе ИИ',
-      'Постоянное улучшение точности прогнозов'
+      'Постоянное улучшение точности прогнозов',
     ],
     ourApproach: 'Искусственный интеллект анализирует миллионы астрологических данных и находит уникальные паттерны в вашей карте',
     othersApproach: 'Используют устаревшие статичные интерпретации без учета индивидуальных особенностей',
-    proof: '95% пользователей отмечают высокую точность ИИ-анализа'
+    proof: '95% пользователей отмечают высокую точность ИИ-анализа',
   },
   {
     id: 'professional-accuracy',
@@ -355,11 +426,11 @@ const advantages = [
       'Точность расчетов до угловой секунды',
       'Учет всех астрономических факторов',
       'Корректировка на прецессию и нутацию',
-      'Данные проверены астрономическими обсерваториями'
+      'Данные проверены астрономическими обсерваториями',
     ],
     ourApproach: 'Swiss Ephemeris - золотой стандарт астрономических расчетов, используемый NASA',
     othersApproach: 'Упрощенные расчеты с погрешностями до нескольких градусов',
-    proof: '99.9% точность подтверждена астрономическими тестами'
+    proof: '99.9% точность подтверждена астрономическими тестами',
   },
   {
     id: 'instant-results',
@@ -371,11 +442,11 @@ const advantages = [
       'Экономия времени - результат сразу',
       'Не нужно ждать астролога',
       'Мгновенное обновление прогнозов',
-      'Быстрое сравнение совместимости'
+      'Быстрое сравнение совместимости',
     ],
     ourApproach: 'Облачные вычисления и оптимизированные алгоритмы обеспечивают мгновенную обработку',
     othersApproach: 'Ручная обработка или медленные алгоритмы требуют минут или часов ожидания',
-    proof: 'Средний время генерации карты: 28 секунд'
+    proof: 'Средний время генерации карты: 28 секунд',
   },
   {
     id: 'comprehensive-analysis',
@@ -387,12 +458,12 @@ const advantages = [
       'Анализ личности и характера',
       'Карьерные рекомендации',
       'Советы по отношениям',
-      'Прогнозы и благоприятные периоды'
+      'Прогнозы и благоприятные периоды',
     ],
     ourApproach: 'Комплексный подход: соединяем астрологию, психологию и практические советы',
     othersApproach: 'Фокусируются только на одном аспекте или дают общие интерпретации',
-    proof: 'Анализируем 15+ сфер жизни в каждой карте'
-  }
+    proof: 'Анализируем 15+ сфер жизни в каждой карте',
+  },
 ]
 
 const advantageTestimonials = [
@@ -402,7 +473,7 @@ const advantageTestimonials = [
     name: 'Елена Васильева',
     title: 'Психолог',
     avatar: '/testimonials/elena.jpg',
-    advantage: 'ИИ-анализ'
+    advantage: 'ИИ-анализ',
   },
   {
     id: 2,
@@ -410,7 +481,7 @@ const advantageTestimonials = [
     name: 'Мария Петрова',
     title: 'Астролог',
     avatar: '/testimonials/maria.jpg',
-    advantage: 'Точность расчетов'
+    advantage: 'Точность расчетов',
   },
   {
     id: 3,
@@ -418,8 +489,8 @@ const advantageTestimonials = [
     name: 'Анна Коваленко',
     title: 'IT-менеджер',
     avatar: '/testimonials/anna.jpg',
-    advantage: 'Скорость'
-  }
+    advantage: 'Скорость',
+  },
 ]
 
 const setViewMode = (mode) => {
@@ -455,10 +526,10 @@ const startTrial = () => {
 }
 
 const viewPricing = () => {
-  if (process.client) {
+  if (import.meta.client) {
     const element = document.getElementById('pricing')
     if (element) {
-      element.scrollIntoView({behavior: 'smooth'})
+      element.scrollIntoView({ behavior: 'smooth' })
     }
   }
 }

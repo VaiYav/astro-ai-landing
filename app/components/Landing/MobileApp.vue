@@ -13,7 +13,10 @@
           <div class="phone-mockup main-phone">
             <div class="phone-frame">
               <div class="phone-screen">
-                <img :src="screens[currentScreen].image" :alt="screens[currentScreen].title" />
+                <img
+                  :src="screens[currentScreen].image"
+                  :alt="screens[currentScreen].title"
+                >
                 <div class="screen-overlay">
                   <div class="screen-info">
                     <h3>{{ screens[currentScreen].title }}</h3>
@@ -30,11 +33,14 @@
               v-for="(screen, index) in screens"
               :key="screen.id"
               class="mini-phone"
-              :class="{ 'active': currentScreen === index }"
+              :class="{ active: currentScreen === index }"
               @click="setCurrentScreen(index)"
             >
               <div class="mini-frame">
-                <img :src="screen.image" :alt="screen.title" />
+                <img
+                  :src="screen.image"
+                  :alt="screen.title"
+                >
               </div>
             </div>
           </div>
@@ -50,7 +56,9 @@
                 :key="feature.id"
                 class="feature-item"
               >
-                <div class="feature-icon">{{ feature.icon }}</div>
+                <div class="feature-icon">
+                  {{ feature.icon }}
+                </div>
                 <div class="feature-content">
                   <h4>{{ feature.title }}</h4>
                   <p>{{ feature.description }}</p>
@@ -62,41 +70,57 @@
           <!-- Статистика приложения -->
           <div class="app-stats">
             <div class="stat-item">
-              <div class="stat-number">4.8</div>
-              <div class="stat-label">Рейтинг в App Store</div>
-              <div class="stars">★★★★★</div>
+              <div class="stat-number">
+                4.8
+              </div>
+              <div class="stat-label">
+                Рейтинг в App Store
+              </div>
+              <div class="stars">
+                ★★★★★
+              </div>
             </div>
             <div class="stat-item">
-              <div class="stat-number">50K+</div>
-              <div class="stat-label">Скачиваний</div>
+              <div class="stat-number">
+                50K+
+              </div>
+              <div class="stat-label">
+                Скачиваний
+              </div>
             </div>
             <div class="stat-item">
-              <div class="stat-number">4.9</div>
-              <div class="stat-label">Google Play</div>
-              <div class="stars">★★★★★</div>
+              <div class="stat-number">
+                4.9
+              </div>
+              <div class="stat-label">
+                Google Play
+              </div>
+              <div class="stars">
+                ★★★★★
+              </div>
             </div>
           </div>
 
           <!-- Кнопки скачивания -->
-<!--          <div class="download-buttons">-->
-<!--            <a href="#" class="download-btn app-store" @click="trackDownload('ios')">-->
-<!--              <img src="/download/app-store.svg" alt="Download on App Store" />-->
-<!--            </a>-->
-<!--            <a href="#" class="download-btn google-play" @click="trackDownload('android')">-->
-<!--              <img src="/download/google-play.svg" alt="Get it on Google Play" />-->
-<!--            </a>-->
-<!--          </div>-->
+          <!--          <div class="download-buttons"> -->
+          <!--            <a href="#" class="download-btn app-store" @click="trackDownload('ios')"> -->
+          <!--              <img src="/download/app-store.svg" alt="Download on App Store" /> -->
+          <!--            </a> -->
+          <!--            <a href="#" class="download-btn google-play" @click="trackDownload('android')"> -->
+          <!--              <img src="/download/google-play.svg" alt="Get it on Google Play" /> -->
+          <!--            </a> -->
+          <!--          </div> -->
 
           <!-- QR код -->
-<!--          <div class="qr-section">-->
-<!--            <div class="qr-code">-->
-<!--              <img src="/qr-code-app.svg" alt="QR Code" />-->
-<!--            </div>-->
-<!--            <div class="qr-info">-->
-<!--              <h4>📱 Быстрое скачивание</h4>-->
-<!--              <p>Отсканируйте QR-код камерой телефона</p>-->
-<!--            </div>-->
-<!--          </div>-->
+          <!--          <div class="qr-section"> -->
+          <!--            <div class="qr-code"> -->
+          <!--              <img src="/qr-code-app.svg" alt="QR Code" /> -->
+          <!--            </div> -->
+          <!--            <div class="qr-info"> -->
+          <!--              <h4>📱 Быстрое скачивание</h4> -->
+          <!--              <p>Отсканируйте QR-код камерой телефона</p> -->
+          <!--            </div> -->
+          <!--          </div> -->
         </div>
       </div>
 
@@ -105,7 +129,9 @@
         <h3>Эксклюзивно в мобильном приложении</h3>
         <div class="exclusive-features">
           <div class="exclusive-item">
-            <div class="exclusive-icon">🔔</div>
+            <div class="exclusive-icon">
+              🔔
+            </div>
             <h4>Push-уведомления</h4>
             <p>Получайте важные астрологические события и благоприятные моменты в реальном времени</p>
             <div class="notification-preview">
@@ -120,7 +146,9 @@
           </div>
 
           <div class="exclusive-item">
-            <div class="exclusive-icon">📍</div>
+            <div class="exclusive-icon">
+              📍
+            </div>
             <h4>Геолокация</h4>
             <p>Автоматическое определение вашего местоположения для точных астрологических расчетов</p>
             <div class="location-preview">
@@ -135,7 +163,9 @@
           </div>
 
           <div class="exclusive-item">
-            <div class="exclusive-icon">⚡</div>
+            <div class="exclusive-icon">
+              ⚡
+            </div>
             <h4>Оффлайн режим</h4>
             <p>Просматривайте сохраненные карты и прогнозы даже без интернета</p>
             <div class="offline-preview">
@@ -147,13 +177,19 @@
           </div>
 
           <div class="exclusive-item">
-            <div class="exclusive-icon">🎨</div>
+            <div class="exclusive-icon">
+              🎨
+            </div>
             <h4>Темная тема</h4>
             <p>Удобное использование приложения в любое время суток</p>
             <div class="theme-preview">
               <div class="theme-switcher">
-                <div class="theme-option light">☀️</div>
-                <div class="theme-option dark active">🌙</div>
+                <div class="theme-option light">
+                  ☀️
+                </div>
+                <div class="theme-option dark active">
+                  🌙
+                </div>
               </div>
             </div>
           </div>
@@ -168,26 +204,43 @@
             v-for="review in appReviews"
             :key="review.id"
             class="review-card"
-            :class="{ 'featured': review.featured }"
+            :class="{ featured: review.featured }"
           >
             <div class="review-header">
               <div class="reviewer-info">
-                <img :src="review.avatar" :alt="review.name" />
+                <img
+                  :src="review.avatar"
+                  :alt="review.name"
+                >
                 <div>
                   <h4>{{ review.name }}</h4>
                   <div class="review-rating">
-                    <span v-for="n in review.rating" :key="n" class="star">★</span>
+                    <span
+                      v-for="n in review.rating"
+                      :key="n"
+                      class="star"
+                    >★</span>
                   </div>
                 </div>
               </div>
               <div class="review-platform">
-                <img :src="review.platform.icon" :alt="review.platform.name" />
+                <img
+                  :src="review.platform.icon"
+                  :alt="review.platform.name"
+                >
                 <span>{{ review.platform.name }}</span>
               </div>
             </div>
             <blockquote>{{ review.text }}</blockquote>
-            <div class="review-date">{{ review.date }}</div>
-            <div v-if="review.featured" class="featured-badge">⭐ Рекомендуемый отзыв</div>
+            <div class="review-date">
+              {{ review.date }}
+            </div>
+            <div
+              v-if="review.featured"
+              class="featured-badge"
+            >
+              ⭐ Рекомендуемый отзыв
+            </div>
           </div>
         </div>
       </div>
@@ -197,9 +250,15 @@
         <h3>Веб-версия vs Мобильное приложение</h3>
         <div class="comparison-grid">
           <div class="comparison-header">
-            <div class="comparison-item">Возможности</div>
-            <div class="comparison-item">🌐 Веб-версия</div>
-            <div class="comparison-item featured">📱 Мобильное приложение</div>
+            <div class="comparison-item">
+              Возможности
+            </div>
+            <div class="comparison-item">
+              🌐 Веб-версия
+            </div>
+            <div class="comparison-item featured">
+              📱 Мобильное приложение
+            </div>
           </div>
           <div
             v-for="comparison in featureComparisons"
@@ -230,19 +289,31 @@
       <div class="app-cta">
         <div class="cta-content">
           <h3>Готовы погрузиться в мир мобильной астрологии?</h3>
-          <p>Скачайте приложение бесплатно и получите доступ ко всем возможностям ИИ-Оракула</p>
+          <p>Скачайте приложение бесплатно и получите доступ ко всем возможностям My Zodiac AIа</p>
           <div class="cta-buttons">
-            <button class="primary-cta" @click="scrollToDownload">
+            <button
+              class="primary-cta"
+              @click="scrollToDownload"
+            >
               Скачать приложение
             </button>
-            <button class="secondary-cta" @click="sendAppLink">
+            <button
+              class="secondary-cta"
+              @click="sendAppLink"
+            >
               Отправить ссылку на телефон
             </button>
           </div>
           <div class="cta-benefits">
-            <div class="benefit">✅ Бесплатно</div>
-            <div class="benefit">✅ Без рекламы</div>
-            <div class="benefit">✅ Синхронизация с веб-версией</div>
+            <div class="benefit">
+              ✅ Бесплатно
+            </div>
+            <div class="benefit">
+              ✅ Без рекламы
+            </div>
+            <div class="benefit">
+              ✅ Синхронизация с веб-версией
+            </div>
           </div>
         </div>
       </div>
@@ -260,26 +331,26 @@ const screens = [
     id: 1,
     title: 'Главный экран',
     description: 'Интуитивно понятный интерфейс с быстрым доступом к вашей натальной карте',
-    image: '/app-screens/main-screen.jpg'
+    image: '/app-screens/main-screen.jpg',
   },
   {
     id: 2,
     title: 'Натальная карта',
     description: 'Детальная визуализация вашей карты с возможностью изучения каждой планеты',
-    image: '/app-screens/natal-chart.jpg'
+    image: '/app-screens/natal-chart.jpg',
   },
   {
     id: 3,
     title: 'Ежедневный прогноз',
     description: 'Персональные рекомендации на каждый день на основе транзитов',
-    image: '/app-screens/daily-forecast.jpg'
+    image: '/app-screens/daily-forecast.jpg',
   },
   {
     id: 4,
     title: 'Совместимость',
     description: 'Анализ отношений с партнером и рекомендации по улучшению',
-    image: '/app-screens/compatibility.jpg'
-  }
+    image: '/app-screens/compatibility.jpg',
+  },
 ]
 
 const appFeatures = [
@@ -287,38 +358,38 @@ const appFeatures = [
     id: 1,
     icon: '⚡',
     title: 'Мгновенная синхронизация',
-    description: 'Все изменения мгновенно синхронизируются между устройствами'
+    description: 'Все изменения мгновенно синхронизируются между устройствами',
   },
   {
     id: 2,
     icon: '🔔',
     title: 'Умные уведомления',
-    description: 'Получайте напоминания о важных астрологических событиях'
+    description: 'Получайте напоминания о важных астрологических событиях',
   },
   {
     id: 3,
     icon: '📱',
     title: 'Адаптивный дизайн',
-    description: 'Оптимизированный интерфейс для комфортного использования на смартфоне'
+    description: 'Оптимизированный интерфейс для комфортного использования на смартфоне',
   },
   {
     id: 4,
     icon: '🔒',
     title: 'Биометрическая защита',
-    description: 'Защитите свои данные с помощью отпечатка пальца или Face ID'
+    description: 'Защитите свои данные с помощью отпечатка пальца или Face ID',
   },
   {
     id: 5,
     icon: '🌓',
     title: 'Лунный календарь',
-    description: 'Отслеживайте фазы Луны и их влияние на вашу жизнь'
+    description: 'Отслеживайте фазы Луны и их влияние на вашу жизнь',
   },
   {
     id: 6,
     icon: '🎯',
     title: 'Виджеты',
-    description: 'Добавьте виджет прогноза на главный экран телефона'
-  }
+    description: 'Добавьте виджет прогноза на главный экран телефона',
+  },
 ]
 
 const appReviews = [
@@ -331,9 +402,9 @@ const appReviews = [
     date: '2 дня назад',
     platform: {
       name: 'App Store',
-      icon: '/platforms/app-store-icon.svg'
+      icon: '/platforms/app-store-icon.svg',
     },
-    featured: true
+    featured: true,
   },
   {
     id: 2,
@@ -344,9 +415,9 @@ const appReviews = [
     date: '5 дней назад',
     platform: {
       name: 'Google Play',
-      icon: '/platforms/google-play-icon.svg'
+      icon: '/platforms/google-play-icon.svg',
     },
-    featured: false
+    featured: false,
   },
   {
     id: 3,
@@ -357,10 +428,10 @@ const appReviews = [
     date: '1 неделю назад',
     platform: {
       name: 'App Store',
-      icon: '/platforms/app-store-icon.svg'
+      icon: '/platforms/app-store-icon.svg',
     },
-    featured: false
-  }
+    featured: false,
+  },
 ]
 
 const featureComparisons = [
@@ -371,7 +442,7 @@ const featureComparisons = [
     web: true,
     webNote: 'Полная версия',
     mobile: true,
-    mobileNote: 'Оптимизированная'
+    mobileNote: 'Оптимизированная',
   },
   {
     id: 2,
@@ -380,7 +451,7 @@ const featureComparisons = [
     web: false,
     webNote: 'Недоступно',
     mobile: true,
-    mobileNote: 'Да'
+    mobileNote: 'Да',
   },
   {
     id: 3,
@@ -389,7 +460,7 @@ const featureComparisons = [
     web: false,
     webNote: 'Требует интернет',
     mobile: true,
-    mobileNote: 'Сохраненные данные'
+    mobileNote: 'Сохраненные данные',
   },
   {
     id: 4,
@@ -398,7 +469,7 @@ const featureComparisons = [
     web: false,
     webNote: 'Ручной ввод',
     mobile: true,
-    mobileNote: 'Автоматически'
+    mobileNote: 'Автоматически',
   },
   {
     id: 5,
@@ -407,7 +478,7 @@ const featureComparisons = [
     web: false,
     webNote: 'Недоступно',
     mobile: true,
-    mobileNote: 'Да'
+    mobileNote: 'Да',
   },
   {
     id: 6,
@@ -416,8 +487,8 @@ const featureComparisons = [
     web: true,
     webNote: 'Да',
     mobile: true,
-    mobileNote: 'Адаптивная'
-  }
+    mobileNote: 'Адаптивная',
+  },
 ]
 
 const setCurrentScreen = (index) => {
@@ -430,10 +501,10 @@ const trackDownload = (platform) => {
 }
 
 const scrollToDownload = () => {
-  if (process.client) {
+  if (import.meta.client) {
     const downloadSection = document.querySelector('.download-buttons')
     if (downloadSection) {
-      downloadSection.scrollIntoView({behavior: 'smooth'})
+      downloadSection.scrollIntoView({ behavior: 'smooth' })
     }
   }
 }
