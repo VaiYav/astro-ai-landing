@@ -85,14 +85,17 @@
         <span>{{ $t('hero_badge') }}</span>
       </div>
 
-      <h1
+      <div
         v-motion
-        class="hero-title"
         :initial="{ opacity: 0, y: 50 }"
         :enter="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200 } }"
       >
-        {{ $t('welcome_title') }}
-      </h1>
+        <h1
+          class="hero-title"
+        >
+          {{ $t('welcome_title') }}
+        </h1>
+      </div>
 
       <p
         v-motion
