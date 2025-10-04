@@ -272,6 +272,9 @@
 <script setup>
 import { Icon } from '@iconify/vue'
 import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { useNuxtApp } from '#app'
+
+const { $gtmPush } = useNuxtApp()
 
 const { t, n } = useI18n()
 const { api, getErrorMessage } = useApi()
@@ -418,11 +421,13 @@ const showPopup = () => {
   document.body.style.overflow = 'hidden'
 
   // Трекинг
-  if (typeof gtag !== 'undefined') {
-    gtag('event', 'email_popup_shown', {
-      event_category: 'engagement',
-      trigger_type: props.trigger,
-    })
+  if ($gtmPush) {
+    $gtmPush(
+      {
+        event: 'email_popup_shown',
+        trigger_type: props.trigger,
+      },
+    )
   }
 }
 
@@ -440,9 +445,10 @@ const closePopup = () => {
   emit('close')
 
   // Трекинг
-  if (typeof gtag !== 'undefined') {
-    gtag('event', 'email_popup_closed', {
-      event_category: 'engagement',
+  if ($gtmPush) {
+    $gtmPush({
+      event: 'email_popup_closed',
+      trigger_type: props.trigger,
     })
   }
 }
@@ -541,8 +547,10 @@ const submitEmail = async () => {
     }
 
     // Трекинг ошибки
-    if (typeof gtag !== 'undefined') {
-      gtag('event', 'email_subscription_error', {
+    if ($gtmPush) {
+      $gtmPush({
+        event: 'email_subscription_error',
+        error: errorMessage.value,
         event_category: 'error',
         event_label: error.response?.status || 'unknown',
       })

@@ -1,18 +1,20 @@
 <script setup>
 import { onMounted } from 'vue'
+import { useNuxtApp } from '#app'
+
+const { $gtmPush } = useNuxtApp()
 
 useServerHead({
   htmlAttrs: { lang: 'uk' },
 })
 useSeoMeta({
 })
-
 onMounted(() => {
-  console.log('gtag', gtag)
-  console.log('window.gtag', window?.gtag)
-  if (typeof gtag !== 'undefined') {
-    gtag('event', 'page_opened', {
-      event_category: 'engagement',
+  if ($gtmPush !== 'undefined') {
+    $gtmPush({
+      event: 'page_view',
+      page_path: window.location.pathname,
+      page_title: document.title,
     })
   }
 })
