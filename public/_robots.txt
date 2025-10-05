@@ -16,7 +16,7 @@ Disallow: /api/
 Allow: /
 
 # Sitemap
-Sitemap: https://astro-ai-landing.vercel.app/sitemap.xml
+Sitemap: https://my-zodiac-ai.com/sitemap.xml
 
 # Специальные правила для разных ботов
 User-agent: Googlebot
