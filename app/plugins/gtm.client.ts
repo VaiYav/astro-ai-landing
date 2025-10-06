@@ -1,29 +1,50 @@
+interface DataLayerEvent {
+  event?: string
+  [key: string]: any
+}
+
+declare global {
+  interface Window {
+    dataLayer: DataLayerEvent[]
+  }
+}
+
 export default defineNuxtPlugin(() => {
   if (!import.meta.client) return
 
-  const gtmId = 'GTM-NSN2VZPZ' // замените на свой GTM ID
+  const gtmId = 'GTM-NSN2VZPZ' // ваш GTM ID
 
-  // Создаем dataLayer
-  ;(window as any).dataLayer = (window as any).dataLayer || []
+  // Инициализация dataLayer для GTM
 
-  // gtag — просто пуш в dataLayer
-  const gtag = (...args: any[]) => {
-    ;(window as any).dataLayer.push(args)
-  }
+  window.dataLayer = window.dataLayer || []
 
-  // Подключаем GTM скрипт
+  // Инициализация GTM
+  window.dataLayer.push({
+    'gtm.start': new Date().getTime(),
+    'event': 'gtm.js',
+  })
+
+  // Подключение GTM скрипта
   const script = document.createElement('script')
   script.async = true
   script.src = `https://www.googletagmanager.com/gtm.js?id=${gtmId}`
   document.head.appendChild(script)
 
-  // Инициализация
-  gtag('js', new Date())
-  gtag('config', gtmId)
+  // Helper функция для push событий в dataLayer
+  const gtmPush = (event: DataLayerEvent) => {
+    if (typeof window !== 'undefined' && window.dataLayer) {
+      window.dataLayer.push(event)
+
+      // Дебаг в development режиме
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[GTM Event]', event)
+      }
+    }
+  }
 
   return {
     provide: {
-      gtmPush: gtag,
+      gtmPush,
     },
   }
 })

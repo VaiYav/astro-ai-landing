@@ -1,30 +1,119 @@
 {
-  "name": "My Zodiac AI",
+  "name": "My Zodiac AI - Натальна карта онлайн",
   "short_name": "My Zodiac AI",
-  "description": "Your Personal Natal Chart Online, powered by AI.",
+  "description": "Персональний AI-астролог для створення натальних карт та прогнозів. Отримайте детальний аналіз своєї натальної карти з допомогою штучного інтелекту.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#667eea",
+  "background_color": "#0f0f23",
+  "lang": "uk",
+  "dir": "ltr",
+  "categories": [
+    "lifestyle",
+    "personalization",
+    "astrology",
+    "wellness",
+    "entertainment"
+  ],
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
       "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
-  "display": "standalone",
-  "lang": "uk",
-  "categories": ["lifestyle", "personalization", "astrology"],
-  "screenshots": [
-    {
-      "src": "/demo-chart.svg",
-      "sizes": "500x500",
-      "type": "image/svg+xml",
-      "label": "Пример натальной карты"
+//   "screenshots": [
+//     {
+//       "src": "/screenshots/demo-chart-desktop.png",
+//       "sizes": "1280x720",
+//       "type": "image/png",
+//       "form_factor": "wide",
+//       "label": "Приклад натальної карти на десктопі"
+//     },
+//     {
+//       "src": "/screenshots/demo-chart-mobile.png",
+//       "sizes": "750x1334",
+//       "type": "image/png",
+//       "form_factor": "narrow",
+//       "label": "Приклад натальної карти на мобільному"
+//     }
+//   ],
+//   "shortcuts": [
+//     {
+//       "name": "Створити карту",
+//       "short_name": "Карта",
+//       "description": "Швидке створення натальної карти",
+//       "url": "/create",
+//       "icons": [
+//         {
+//           "src": "/icons/create-chart.png",
+//           "sizes": "96x96",
+//           "type": "image/png"
+//         }
+//       ]
+//     },
+//     {
+//       "name": "Мій гороскоп",
+//       "short_name": "Гороскоп",
+//       "description": "Переглянути щоденний гороскоп",
+//       "url": "/horoscope",
+//       "icons": [
+//         {
+//           "src": "/icons/horoscope.png",
+//           "sizes": "96x96",
+//           "type": "image/png"
+//         }
+//       ]
+//     },
+//     {
+//       "name": "Прогнози",
+//       "short_name": "Прогнози",
+//       "description": "Астрологічні прогнози",
+//       "url": "/forecasts",
+//       "icons": [
+//         {
+//           "src": "/icons/forecast.png",
+//           "sizes": "96x96",
+//           "type": "image/png"
+//         }
+//       ]
+//     }
+//   ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
     }
-  ]
+  }
 }

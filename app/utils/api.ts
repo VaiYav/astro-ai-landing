@@ -79,7 +79,7 @@ export class ApiClient {
     const config = useRuntimeConfig()
 
     this.instance = axios.create({
-      baseURL: config.public.apiBaseUrl || 'http://localhost:3000',
+      baseURL: (config.public.apiBaseUrl || 'http://localhost:3000') as string, // Asserting the type
       timeout: 30000,
       headers: {
         'Content-Type': 'application/json',

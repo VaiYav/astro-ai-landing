@@ -3,8 +3,21 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
   // Модули
   modules: [
-    '@nuxt/eslint',
-    '@nuxtjs/google-fonts',
+    ['@nuxt/eslint', {
+      config: {
+        stylistic: { quotes: 'single' },
+      },
+    }],
+    ['@nuxtjs/google-fonts', {
+      families: {
+        'Cormorant Garamond': { wght: [500, 700] },
+        'Montserrat': { wght: [400, 500] },
+        'Inter': [300, 400, 500, 600, 700],
+        'Space Grotesk': [300, 400, 500, 600, 700],
+      },
+      display: 'swap',
+      preload: true,
+    }],
     '@nuxtjs/i18n',
     '@vueuse/motion/nuxt',
     '@nuxtjs/seo',
@@ -135,22 +148,6 @@ export default defineNuxtConfig({
     plugins: {
       'postcss-nesting': {},
     },
-  },
-
-  eslint: {
-    config: { stylistic: { quotes: 'single' } },
-  },
-
-  // Google Fonts
-  googleFonts: {
-    families: {
-      'Cormorant Garamond': { wght: [500, 700] },
-      'Montserrat': { wght: [400, 500] },
-      'Inter': [300, 400, 500, 600, 700],
-      'Space Grotesk': [300, 400, 500, 600, 700],
-    },
-    display: 'swap',
-    preload: true,
   },
 
   // i18n

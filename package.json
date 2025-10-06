@@ -53,6 +53,7 @@
     "@vite-pwa/nuxt": "^1.0.4",
     "@vueuse/motion": "^3.0.3",
     "axios": "^1.12.2",
+    "lodash-es": "^4.17.21",
     "pinia": "^3.0.3"
   }
 }

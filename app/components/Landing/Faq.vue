@@ -20,7 +20,7 @@
           class="faq-question"
           @click="toggleItem(index)"
         >
-          <span>{{ item.q.body.static }}</span>
+          <span>{{ item.q.body?.static }}</span>
           <Icon
             icon="ph:plus-bold"
             class="icon"
@@ -31,7 +31,7 @@
           v-if="openItem === index"
           class="faq-answer"
         >
-          <p>{{ item.a.body.static }}</p>
+          <p>{{ item.a.body?.static }}</p>
         </div>
       </div>
     </div>

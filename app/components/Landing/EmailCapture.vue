@@ -349,9 +349,8 @@ const proofAvatars = [
 
 // Lifecycle hooks
 onMounted(() => {
-  console.log('render')
   setupTriggers()
-  loadSubscriberStats()
+  // loadSubscriberStats()
 })
 
 onUnmounted(() => {

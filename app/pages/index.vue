@@ -3,68 +3,48 @@
     <!-- Основные секции -->
     <Hero />
     <DemoChart />
-    <!--    <ZodiacCalculator /> -->
-    <!--    <SocialProof /> -->
     <Features />
     <EmailCapture />
-    <!--    <LimitedOffer /> -->
-    <!--    <InteractiveDemo /> -->
     <HowItWorks />
-    <!--    <CompetitorComparison /> -->
-    <!--    <DataSecurity /> -->
-    <!--    <PricingSection /> -->
-    <!--    <MobileApp /> -->
-    <!--    <BlogPreview /> -->
     <Testimonials />
-    <!--    <Partners /> -->
-    <Faq />
-    <FinalCta />
   </div>
 </template>
 
 <script setup>
-// Импорты компонентов
-// import NavigationHeader from '~/components/Landing/NavigationHeader.vue'
 import Hero from '~/components/Landing/Hero.vue'
-// import SocialProof from '~/components/Landing/SocialProof.vue'
 import Features from '~/components/Landing/Features.vue'
-// import InteractiveDemo from '~/components/Landing/InteractiveDemo.vue'
 import HowItWorks from '~/components/Landing/HowItWorks.vue'
-// import CompetitorComparison from '~/components/Landing/CompetitorComparison.vue'
-// import DataSecurity from '~/components/Landing/DataSecurity.vue'
-// import PricingSection from '~/components/Landing/PricingSection.vue'
-// import MobileApp from '~/components/Landing/MobileApp.vue'
-// import BlogPreview from '~/components/Landing/BlogPreview.vue'
 import Testimonials from '~/components/Landing/Testimonials.vue'
-// import Partners from '~/components/Landing/Partners.vue'
-// import Faq from '~/components/Landing/Faq.vue'
-import FinalCta from '~/components/Landing/FinalCta.vue'
-// import ZodiacCalculator from '~/components/Landing/ZodiacCalculator.vue'
 import DemoChart from '~/components/Landing/DemoChart.vue'
 import EmailCapture from '~/components/Landing/EmailCapture.vue'
 import { computed } from 'vue'
-// import LimitedOffer from '~/components/Landing/LimitedOffer.vue'
 
 // SEO и метаданные
 const { t, locale } = useI18n()
+const SITE_URL = 'https://my-zodiac-ai.com' // Единый домен
 
 useHead(() => ({
   htmlAttrs: {
     lang: locale.value,
   },
   title: t('meta.title'),
+  titleTemplate: '%s | My Zodiac AI',
   meta: [
     {
       name: 'description',
       content: t('meta.description'),
     },
     {
+      name: 'keywords',
+      content: t('meta.keywords'),
+    },
+    {
       property: 'og:title',
-      content: t('meta.title'),
+      content: t('meta.ogTitle'),
     },
     {
       property: 'og:description',
-      content: t('meta.description'),
+      content: t('meta.ogDescription'),
     },
     {
       property: 'og:type',
@@ -72,11 +52,23 @@ useHead(() => ({
     },
     {
       property: 'og:image',
-      content: '/og-image.jpg',
+      content: `${SITE_URL}/og-image.jpg`,
+    },
+    {
+      property: 'og:image:width',
+      content: '1200',
+    },
+    {
+      property: 'og:image:height',
+      content: '630',
+    },
+    {
+      property: 'og:image:alt',
+      content: t('meta.ogImageAlt'),
     },
     {
       property: 'og:url',
-      content: 'https://astro-ai.com',
+      content: `${SITE_URL}/${locale.value}`,
     },
     {
       name: 'twitter:card',
@@ -92,44 +84,41 @@ useHead(() => ({
     },
     {
       name: 'twitter:image',
-      content: '/og-image.jpg',
+      content: `${SITE_URL}/og-image.jpg`,
     },
     {
       name: 'robots',
       content: 'index, follow',
     },
     {
-      name: 'keywords',
-      content: 'натальная карта, астрология, ИИ астролог, гороскоп, персональный прогноз, астрологический анализ, совместимость, транзиты',
-    },
-    {
       name: 'author',
       content: 'My Zodiac AI',
-    },
-    {
-      name: 'viewport',
-      content: 'width=device-width, initial-scale=1.0',
     },
   ],
   link: [
     {
       rel: 'canonical',
-      href: 'https://astro-ai.com',
+      href: `${SITE_URL}/${locale.value}`,
     },
     {
       rel: 'alternate',
       hreflang: 'ru',
-      href: 'https://astro-ai.com/ru',
+      href: `${SITE_URL}/ru`,
     },
     {
       rel: 'alternate',
       hreflang: 'uk',
-      href: 'https://astro-ai.com/uk',
+      href: `${SITE_URL}/uk`,
     },
     {
       rel: 'alternate',
       hreflang: 'en',
-      href: 'https://astro-ai.com/en',
+      href: `${SITE_URL}/en`,
+    },
+    {
+      rel: 'alternate',
+      hreflang: 'x-default',
+      href: `${SITE_URL}`,
     },
   ],
 }))
@@ -141,76 +130,116 @@ defineWebPage({
 
 // JSON-LD структурированные данные
 useHead({
-  title: computed(() => t('meta.title')),
-  meta: [
-    { name: 'description', content: computed(() => t('meta.description')) },
-    { name: 'keywords', content: computed(() => t('meta.keywords')) },
-    { property: 'og:title', content: computed(() => t('meta.ogTitle')) },
-    { property: 'og:description', content: computed(() => t('meta.ogDescription')) },
-  ],
-  htmlAttrs: {
-    lang: computed(() => locale.value),
-  },
   script: [
     {
       type: 'application/ld+json',
-      children: JSON.stringify(
-        {
-          '@context': 'https://schema.org',
-          '@type': 'WebApplication',
-          'name': t('meta.title'),
-          'description': t('meta.description'),
-          'applicationCategory': 'LifestyleApplication',
-          'operatingSystem': 'Web',
-          'url': 'https://astro-ai.com',
-          'creator': {
-            '@type': 'Organization',
-            'name': 'My Zodiac AI',
-            'url': 'https://astro-ai.com',
-            'logo': 'https://astro-ai.com/logo.png',
-          },
-          'offers': [
-            {
-              '@type': 'Offer',
-              'name': t('offer_free_name'),
-              'price': '0',
-              'priceCurrency': 'USD',
-              'description': 'Базовая натальная карта и ежедневный гороскоп',
-            },
-            {
-              '@type': 'Offer',
-              'name': 'Премиум план',
-              'price': '19',
-              'priceCurrency': 'USD',
-              'description': 'Полный астрологический анализ и персональные прогнозы',
-            },
-          ],
-          'aggregateRating': {
-            '@type': 'AggregateRating',
-            'ratingValue': '4.9',
-            'ratingCount': '2847',
-            'bestRating': '5',
-            'worstRating': '1',
-          },
-          'review': [
-            {
-              '@type': 'Review',
-              'author': {
-                '@type': 'Person',
-                'name': 'Анна Михайлова',
-              },
-              'reviewRating': {
-                '@type': 'Rating',
-                'ratingValue': '5',
-              },
-              'reviewBody':
-                'Невероятно точный анализ! Натальная карта помогла мне понять свои сильные стороны.',
-            },
-          ],
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebApplication',
+        'name': t('meta.title'),
+        'description': t('meta.description'),
+        'applicationCategory': 'LifestyleApplication',
+        'operatingSystem': 'Web',
+        'url': SITE_URL,
+        'inLanguage': [locale.value],
+        'creator': {
+          '@type': 'Organization',
+          'name': 'My Zodiac AI',
+          'url': SITE_URL,
+          'logo': `${SITE_URL}/logo.png`,
         },
-        null,
-        2,
-      ),
+        'offers': [
+          {
+            '@type': 'Offer',
+            'name': t('pricing.free.name'),
+            'price': '0',
+            'priceCurrency': 'USD',
+            'description': t('pricing.free.description'),
+          },
+          {
+            '@type': 'Offer',
+            'name': t('pricing.premium.name'),
+            'price': '19',
+            'priceCurrency': 'USD',
+            'description': t('pricing.premium.description'),
+          },
+        ],
+        'aggregateRating': {
+          '@type': 'AggregateRating',
+          'ratingValue': '4.9',
+          'ratingCount': '2847',
+          'bestRating': '5',
+          'worstRating': '1',
+        },
+        'review': [
+          {
+            '@type': 'Review',
+            'author': {
+              '@type': 'Person',
+              'name': t('testimonials.user1.name'),
+            },
+            'reviewRating': {
+              '@type': 'Rating',
+              'ratingValue': '5',
+            },
+            'reviewBody': t('testimonials.user1.text'),
+          },
+          {
+            '@type': 'Review',
+            'author': {
+              '@type': 'Person',
+              'name': t('testimonials.user2.name'),
+            },
+            'reviewRating': {
+              '@type': 'Rating',
+              'ratingValue': '5',
+            },
+            'reviewBody': t('testimonials.user2.text'),
+          },
+        ],
+      }),
+    },
+    // Breadcrumb Schema
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        'itemListElement': [
+          {
+            '@type': 'ListItem',
+            'position': 1,
+            'name': t('breadcrumb.home'),
+            'item': `${SITE_URL}/${locale.value}`,
+          },
+        ],
+      }),
+    },
+    // FAQ Schema (если есть FAQ секция)
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        'mainEntity': [
+          {
+            '@type': 'Question',
+            'name': t('faq.question1.title'),
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': t('faq.question1.answer'),
+            },
+          },
+          {
+            '@type': 'Question',
+            'name': t('faq.question2.title'),
+            'acceptedAnswer': {
+              '@type': 'Answer',
+              'text': t('faq.question2.answer'),
+            },
+          },
+        ],
+      }),
     },
   ],
 })
@@ -231,19 +260,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Предзагрузка критических ресурсов */
-@media (min-width: 768px) {
-  .landing-page::before {
-    content: '';
-    position: absolute;
-    left: -9999px;
-    background:
-      url('/hero-bg.svg') no-repeat,
-      url('/zodiac-wheel.svg') no-repeat,
-      url('/demo-chart.svg') no-repeat;
-  }
-}
-
 /* Оптимизация для Core Web Vitals */
 img, video {
   max-width: 100%;
@@ -252,7 +268,9 @@ img, video {
 
 /* Улучшение доступности */
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

@@ -1,0 +1,144 @@
+# .htaccess для My Zodiac AI
+# Только если используется Apache сервер
+
+# Включить rewrite engine
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Принудительный HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Редирект с www на без www (или наоборот, по выбору)
+  RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+  # Защита от hotlinking изображений
+  RewriteCond %{HTTP_REFERER} !^$
+  RewriteCond %{HTTP_REFERER} !^https://(www\.)?my-zodiac-ai\.com [NC]
+  RewriteRule \.(jpg|jpeg|png|gif|webp|svg)$ - [F,L]
+</IfModule>
+
+# Компрессия
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+# Кэширование
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Изображения
+  ExpiresByType image/jpg "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+
+  # CSS и JavaScript
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/javascript "access plus 1 month"
+
+  # Шрифты
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/ttf "access plus 1 year"
+
+  # HTML
+  ExpiresByType text/html "access plus 0 seconds"
+
+  # JSON
+  ExpiresByType application/json "access plus 0 seconds"
+</IfModule>
+
+# Заголовки безопасности
+<IfModule mod_headers.c>
+  # X-Frame-Options
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  # X-Content-Type-Options
+  Header always set X-Content-Type-Options "nosniff"
+
+  # X-XSS-Protection
+  Header always set X-XSS-Protection "1; mode=block"
+
+  # Referrer Policy
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Permissions Policy
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+
+  # Content Security Policy
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com"
+
+  # Cache control для HTML
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+  # Cache control для статики
+  <FilesMatch "\.(css|js|jpg|jpeg|png|gif|webp|svg|woff|woff2|ttf|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+# Защита файлов
+<FilesMatch "^\.">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+
+# Защита важных файлов
+<FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op])|~)$">
+  Order allow,deny
+  Deny from all
+  Satisfy All
+</FilesMatch>
+
+# Блокировка доступа к .git
+<IfModule mod_rewrite.c>
+  RewriteRule ^\.git - [F,L]
+</IfModule>
+
+# MIME types
+<IfModule mod_mime.c>
+  # JavaScript
+  AddType application/javascript js mjs
+
+  # Manifest
+  AddType application/manifest+json webmanifest
+
+  # Fonts
+  AddType font/woff woff
+  AddType font/woff2 woff2
+  AddType font/ttf ttf
+
+  # Images
+  AddType image/webp webp
+  AddType image/svg+xml svg svgz
+
+  # Encoding
+  AddDefaultCharset utf-8
+  AddCharset utf-8 .html .css .js .json .xml .rss .atom
+</IfModule>
+
+# Редиректы для старых URL (если нужно)
+# Redirect 301 /old-page /new-page
+
+# Отключить листинг директорий
+Options -Indexes
+
+# Включить следование по симлинкам
+Options +FollowSymLinks
+
+# Charset по умолчанию
+AddDefaultCharset UTF-8
+
+# Custom error pages
+ErrorDocument 404 /404.html
+ErrorDocument 500 /500.html

@@ -9,25 +9,38 @@
         <button
           v-if="localeInfo"
           class="language-button"
+          :aria-label="`Поточна мова: ${localeInfo.nativeName}. Натисніть для зміни`"
           @click="languageDropdownOpen = !languageDropdownOpen"
         >
-          <span class="language-flag">{{ localeInfo.flag }}</span>
+          <span
+            class="language-flag"
+            aria-hidden="true"
+          >{{ localeInfo.flag }}</span>
           <span class="language-name">{{ localeInfo.nativeName }}</span>
           <Icon
             icon="caret-down"
             class="language-caret"
+            aria-hidden="true"
           />
         </button>
 
-        <div class="language-menu">
+        <div
+          class="language-menu"
+          role="menu"
+        >
           <button
             v-for="availableLocale in availableLocales"
             :key="availableLocale.code"
             class="language-option"
             :class="{ active: availableLocale.code === locale }"
+            role="menuitem"
+            :aria-current="availableLocale.code === locale ? 'true' : 'false'"
             @click="changeLanguage(availableLocale.code)"
           >
-            <span class="language-flag">{{ availableLocale.flag }}</span>
+            <span
+              class="language-flag"
+              aria-hidden="true"
+            >{{ availableLocale.flag }}</span>
             <span class="language-name">{{ availableLocale.nativeName }}</span>
           </button>
         </div>
@@ -35,7 +48,10 @@
     </div>
 
     <!-- Анимированный фон -->
-    <div class="cosmic-background">
+    <div
+      class="cosmic-background"
+      aria-hidden="true"
+    >
       <div class="stars-container">
         <div
           v-for="n in 150"
@@ -55,45 +71,68 @@
     </div>
 
     <!-- Основной контент -->
-    <div class="container">
+    <main class="container">
       <div class="content-wrapper">
         <!-- Логотип/Заголовок -->
-        <div class="header-section">
+        <header class="header-section">
           <div class="logo-container">
             <Icon
               icon="ph:planet"
               class="logo-icon"
+              aria-label="Іконка планети - логотип My Zodiac AI"
             />
-            <h1 class="logo-text">
+            <p
+              class="logo-text"
+              role="heading"
+              aria-level="1"
+            >
               {{ t('comingSoon.logoText') }}
-            </h1>
+            </p>
           </div>
 
           <!-- Статус разработки -->
           <div class="status-badge">
-            <div class="status-indicator" />
+            <div
+              class="status-indicator"
+              aria-label="Активна розробка"
+            />
             <span>{{ t('comingSoon.status') }}</span>
           </div>
-        </div>
+        </header>
 
         <!-- Главное сообщение -->
-        <div class="main-message">
-          <h2 class="title">
+        <section class="main-message">
+          <h1 class="title">
             {{ t('comingSoon.title') }}
             <span class="title-accent">{{ t('comingSoon.titleAccent') }}</span>
-          </h2>
+          </h1>
           <p class="subtitle">
             {{ t('comingSoon.subtitle') }}
           </p>
-        </div>
+        </section>
 
         <!-- Прогресс разработки -->
-        <div class="progress-section">
+        <section
+          class="progress-section"
+          aria-labelledby="progress-label"
+        >
           <div class="progress-info">
-            <span class="progress-label">{{ t('comingSoon.progressLabel') }}</span>
-            <span class="progress-percent">{{ developmentProgress }}%</span>
+            <span
+              id="progress-label"
+              class="progress-label"
+            >{{ t('comingSoon.progressLabel') }}</span>
+            <span
+              class="progress-percent"
+              aria-label="`Прогрес розробки ${developmentProgress} відсотків`"
+            >{{ developmentProgress }}%</span>
           </div>
-          <div class="progress-bar">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            :aria-valuenow="developmentProgress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
             <div
               class="progress-fill"
               :style="{ width: developmentProgress + '%' }"
@@ -106,17 +145,26 @@
               class="feature-item"
               :class="{ completed: feature.completed }"
             >
-              <Icon :icon="feature.completed ? 'ph:check-circle-fill' : 'ph:circle'" />
+              <Icon
+                :icon="feature.completed ? 'ph:check-circle-fill' : 'ph:circle'"
+                :aria-label="feature.completed ? 'Завершено' : 'У процесі'"
+              />
               <span>{{ feature.name }}</span>
             </div>
           </div>
-        </div>
+        </section>
 
         <!-- Email подписка -->
-        <div class="email-section">
-          <h3 class="email-title">
+        <section
+          class="email-section"
+          aria-labelledby="email-title"
+        >
+          <h2
+            id="email-title"
+            class="email-title"
+          >
             {{ t('comingSoon.emailTitle') }}
-          </h3>
+          </h2>
           <p class="email-description">
             {{ t('comingSoon.emailDescription') }}
           </p>
@@ -124,20 +172,29 @@
           <form
             class="email-form"
             :class="{ 'is-loading': isSubmitting, 'has-error': hasError }"
+            aria-label="Форма підписки на новини"
             @submit.prevent="submitEmail"
           >
             <div class="input-group">
               <Icon
                 icon="ph:envelope"
                 class="input-icon"
+                aria-hidden="true"
               />
+              <label
+                for="email-input"
+                class="sr-only"
+              >Email адреса</label>
               <input
+                id="email-input"
                 v-model="email"
                 type="email"
                 :placeholder="t('comingSoon.emailPlaceholder')"
                 class="email-input"
                 :class="{ error: hasError, success: hasSuccess }"
                 :disabled="isSubmitting"
+                :aria-invalid="hasError"
+                :aria-describedby="hasError ? 'email-error' : hasSuccess ? 'email-success' : undefined"
                 required
               >
               <button
@@ -146,19 +203,23 @@
                 :disabled="isSubmitting || !isValidEmailAddress || isAlreadySubscribed()"
                 :class="{ loading: isSubmitting }"
                 :title="submitButtonTitle"
+                :aria-busy="isSubmitting"
               >
                 <Icon
                   v-if="isSubmitting"
                   icon="ph:circle-notch"
                   class="loading-icon"
+                  aria-hidden="true"
                 />
                 <Icon
                   v-else-if="isAlreadySubscribed()"
                   icon="ph:check-circle"
+                  aria-hidden="true"
                 />
                 <Icon
                   v-else
                   icon="ph:paper-plane-tilt"
+                  aria-hidden="true"
                 />
                 {{ submitButtonText }}
               </button>
@@ -168,9 +229,14 @@
             <transition name="fade">
               <div
                 v-if="hasError"
+                id="email-error"
                 class="message error-message"
+                role="alert"
               >
-                <Icon icon="ph:warning-circle" />
+                <Icon
+                  icon="ph:warning-circle"
+                  aria-hidden="true"
+                />
                 {{ error }}
               </div>
             </transition>
@@ -178,103 +244,71 @@
             <transition name="fade">
               <div
                 v-if="hasSuccess"
+                id="email-success"
                 class="message success-message"
+                role="status"
               >
-                <Icon icon="ph:check-circle" />
+                <Icon
+                  icon="ph:check-circle"
+                  aria-hidden="true"
+                />
                 {{ success }}
               </div>
             </transition>
-
-            <!-- Подсказки для пользователя -->
-            <!--            <div -->
-            <!--              v-if="showHints" -->
-            <!--              class="email-hints" -->
-            <!--            > -->
-            <!--              <div class="hint-item"> -->
-            <!--                <Icon -->
-            <!--                  icon="ph:shield-check" -->
-            <!--                  class="hint-icon" -->
-            <!--                /> -->
-            <!--                <span>{{ t('comingSoon.hints.noSpam') }}</span> -->
-            <!--              </div> -->
-            <!--              <div class="hint-item"> -->
-            <!--                <Icon -->
-            <!--                  icon="ph:gift" -->
-            <!--                  class="hint-icon" -->
-            <!--                /> -->
-            <!--                <span>{{ t('comingSoon.hints.firstFree') }}</span> -->
-            <!--              </div> -->
-            <!--              <div class="hint-item"> -->
-            <!--                <Icon -->
-            <!--                  icon="ph:clock" -->
-            <!--                  class="hint-icon" -->
-            <!--                /> -->
-            <!--                <span>{{ t('comingSoon.hints.weeklyUpdates') }}</span> -->
-            <!--              </div> -->
-            <!--            </div> -->
           </form>
-
-          <!-- Счетчик подписчиков -->
-          <!--          <div -->
-          <!--            v-if="formatSubscribersCount" -->
-          <!--            class="subscribers-count" -->
-          <!--          > -->
-          <!--            <Icon icon="ph:users-three" /> -->
-          <!--            <span>{{ t('comingSoon.subscribersCount', { count: formatSubscribersCount }) }}</span> -->
-          <!--          </div> -->
-        </div>
+        </section>
 
         <!-- Что ожидать -->
-        <div class="features-preview">
-          <h3>{{ t('comingSoon.featuresTitle') }}</h3>
+        <section
+          class="features-preview"
+          aria-labelledby="features-title"
+        >
+          <h2 id="features-title">
+            {{ t('comingSoon.featuresTitle') }}
+          </h2>
           <div class="features-grid">
-            <div
+            <article
               v-for="preview in localizedFeaturePreviews"
               :key="preview.title"
               class="feature-card"
             >
-              <div class="feature-icon">
+              <div
+                class="feature-icon"
+                aria-hidden="true"
+              >
                 <Icon :icon="preview.icon" />
               </div>
-              <h4>{{ preview.title }}</h4>
+              <h3>{{ preview.title }}</h3>
               <p>{{ preview.description }}</p>
-            </div>
+            </article>
           </div>
-        </div>
-
-        <!-- Социальные сети -->
-        <!--        <div class="social-section"> -->
-        <!--          <p>{{ t('comingSoon.socialTitle') }}</p> -->
-        <!--          <div class="social-links"> -->
-        <!--            <a -->
-        <!--              v-for="social in localizedSocialLinks" -->
-        <!--              :key="social.name" -->
-        <!--              href="#" -->
-        <!--              class="social-link" -->
-        <!--            > -->
-        <!--              <Icon :icon="social.icon" /> -->
-        <!--              <span>{{ social.name }}</span> -->
-        <!--            </a> -->
-        <!--          </div> -->
-        <!--        </div> -->
+        </section>
       </div>
-    </div>
+    </main>
 
     <!-- Модальное окно успеха -->
     <transition name="modal">
       <div
         v-if="showSuccessModal"
         class="modal-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modal-title"
         @click="closeModal"
       >
         <div
           class="modal-content"
           @click.stop
         >
-          <div class="modal-icon">
+          <div
+            class="modal-icon"
+            aria-hidden="true"
+          >
             <Icon icon="ph:check-circle-fill" />
           </div>
-          <h3>{{ t('comingSoon.successModal.title') }}</h3>
+          <h2 id="modal-title">
+            {{ t('comingSoon.successModal.title') }}
+          </h2>
           <p>{{ t('comingSoon.successModal.description') }}</p>
 
           <!-- Следующие шаги -->
@@ -283,6 +317,7 @@
               <Icon
                 icon="ph:envelope-open"
                 class="step-icon"
+                aria-hidden="true"
               />
               <span>{{ t('comingSoon.successModal.checkEmail') }}</span>
             </div>
@@ -290,6 +325,7 @@
               <Icon
                 icon="ph:bell"
                 class="step-icon"
+                aria-hidden="true"
               />
               <span>{{ t('comingSoon.successModal.enableNotifications') }}</span>
             </div>
@@ -318,22 +354,70 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { Icon } from '@iconify/vue'
+import { cloneDeep } from 'lodash-es'
 
 // Локализация
 const { t, locale, localeInfo, availableLocales, setLocale } = useI18n()
 
 // Meta и SEO
+const SITE_URL = 'https://my-zodiac-ai.com' // Единый домен
+
+const forScript = cloneDeep({
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  // 'name': computed(() => t('comingSoon.meta.title')),
+  // 'description': computed(() => t('comingSoon.meta.description')),
+  'url': `${SITE_URL}/${locale.value}/coming-soon`,
+  'inLanguage': [locale.value],
+  'isPartOf': {
+    '@type': 'WebSite',
+    'name': 'My Zodiac AI',
+    'url': SITE_URL,
+  },
+  'potentialAction': {
+    '@type': 'RegisterAction',
+    'target': {
+      '@type': 'EntryPoint',
+      'urlTemplate': `${SITE_URL}/${locale.value}/coming-soon#email-form`,
+    },
+  },
+})
 useHead({
-  title: computed(() => t('meta.title')),
+  title: computed(() => t('comingSoon.meta.title')),
+  titleTemplate: '%s | My Zodiac AI',
   meta: [
-    { name: 'description', content: computed(() => t('meta.description')) },
-    { name: 'keywords', content: computed(() => t('meta.keywords')) },
-    { property: 'og:title', content: computed(() => t('meta.ogTitle')) },
-    { property: 'og:description', content: computed(() => t('meta.ogDescription')) },
+    { name: 'description', content: computed(() => t('comingSoon.meta.description')) },
+    { name: 'keywords', content: computed(() => t('comingSoon.meta.keywords')) },
+    { name: 'robots', content: 'index, follow' },
+    { property: 'og:title', content: computed(() => t('comingSoon.meta.title')) },
+    { property: 'og:description', content: computed(() => t('comingSoon.meta.description')) },
+    { property: 'og:type', content: 'website' },
+    { property: 'og:url', content: `${SITE_URL}/${locale.value}/coming-soon` },
+    { property: 'og:image', content: `${SITE_URL}/og-coming-soon.jpg` },
+    { property: 'og:image:width', content: '1200' },
+    { property: 'og:image:height', content: '630' },
+    { property: 'og:image:alt', content: computed(() => t('comingSoon.meta.ogImageAlt')) },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: computed(() => t('comingSoon.meta.title')) },
+    { name: 'twitter:description', content: computed(() => t('comingSoon.meta.description')) },
+    { name: 'twitter:image', content: `${SITE_URL}/og-coming-soon.jpg` },
   ],
   htmlAttrs: {
     lang: computed(() => locale.value),
   },
+  link: [
+    { rel: 'canonical', href: `${SITE_URL}/${locale.value}/coming-soon` },
+    { rel: 'alternate', hreflang: 'uk', href: `${SITE_URL}/uk/coming-soon` },
+    { rel: 'alternate', hreflang: 'ru', href: `${SITE_URL}/ru/coming-soon` },
+    { rel: 'alternate', hreflang: 'en', href: `${SITE_URL}/en/coming-soon` },
+    { rel: 'alternate', hreflang: 'x-default', href: `${SITE_URL}/coming-soon` },
+  ],
+  script: [
+    {
+      type: 'application/ld+json',
+      children: JSON.stringify(forScript),
+    },
+  ],
 })
 
 // Composable для работы с email подписками
@@ -410,23 +494,18 @@ const localizedFeaturePreviews = computed(() => [
   },
 ])
 
-const localizedSocialLinks = computed(() => [
-  { name: t('comingSoon.social.telegram'), icon: 'ph:telegram-logo' },
-  { name: t('comingSoon.social.instagram'), icon: 'ph:instagram-logo' },
-  { name: t('comingSoon.social.twitter'), icon: 'ph:x-logo' },
-])
-
 // Звезды для фона
 const constellationLines = ref([])
 
 // Методы
 const changeLanguage = (newLocale) => {
+  const fromLang = locale.value
   setLocale(newLocale)
   languageDropdownOpen.value = false
 
   // Трекинг смены языка
   trackSubscriptionEvent('language_change', {
-    from_language: locale.value,
+    from_language: fromLang,
     to_language: newLocale,
     page: 'coming_soon',
   })
@@ -487,7 +566,6 @@ const shareSubscription = () => {
     if (import.meta.client) {
       navigator.clipboard.writeText(window.location.href).then(() => {
         // Показать уведомление о копировании
-        // Можно добавить toast notification
       }).catch(console.error)
     }
   }
@@ -557,13 +635,25 @@ const handleClickOutside = (event) => {
   }
 }
 
+// Трекинг скролла
+let scrollTracked = false
+const handleScroll = () => {
+  if (scrollTracked) return
+
+  const scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100
+  if (scrolled > 50) {
+    trackSubscriptionEvent('page_scroll_50', {
+      page: 'coming_soon',
+      language: locale.value,
+    })
+    scrollTracked = true
+  }
+}
+
 // Lifecycle
 onMounted(async () => {
   generateConstellation()
   animateProgress()
-
-  // Загружаем счетчик подписчиков
-  // await emailSubscription.loadSubscribersCount()
 
   // Восстанавливаем черновик email, если есть
   const draft = getEmailDraft()
@@ -571,9 +661,10 @@ onMounted(async () => {
     email.value = draft
   }
 
-  // Добавляем слушатель для закрытия дропдауна
+  // Добавляем слушатели
   if (import.meta.client) {
     document.addEventListener('click', handleClickOutside)
+    window.addEventListener('scroll', handleScroll, { passive: true })
   }
 
   // Трекинг загрузки страницы
@@ -581,12 +672,16 @@ onMounted(async () => {
     language: locale.value,
     has_email_draft: !!draft,
     is_already_subscribed: isAlreadySubscribed(),
+    referrer: document.referrer || 'direct',
+    viewport_width: window.innerWidth,
+    viewport_height: window.innerHeight,
   })
 })
 
 onUnmounted(() => {
   if (import.meta.client) {
     document.removeEventListener('click', handleClickOutside)
+    window.removeEventListener('scroll', handleScroll)
   }
 })
 
@@ -606,7 +701,6 @@ watch(email, (newEmail) => {
 
 // Отслеживаем изменения состояний из composable
 watch([hasError, hasSuccess], ([newHasError, newHasSuccess]) => {
-  // Скрываем подсказки при ошибке или успехе
   if (newHasError || newHasSuccess) {
     showHints.value = false
   }
@@ -614,17 +708,22 @@ watch([hasError, hasSuccess], ([newHasError, newHasSuccess]) => {
     showHints.value = true
   }
 })
-
-// Отслеживаем смену локали для обновления мета-тегов
-watch(locale, (newLocale) => {
-  trackSubscriptionEvent('locale_changed', {
-    new_locale: newLocale,
-    page: 'coming_soon',
-  })
-})
 </script>
 
 <style scoped>
+/* Screen reader only класс для доступности */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .coming-soon-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
@@ -663,6 +762,11 @@ watch(locale, (newLocale) => {
 .language-button:hover {
   background: rgba(255, 255, 255, 0.15);
   border-color: rgba(102, 126, 234, 0.4);
+}
+
+.language-button:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
 }
 
 .language-flag {
@@ -718,6 +822,11 @@ watch(locale, (newLocale) => {
 
 .language-option:hover {
   background: rgba(102, 126, 234, 0.2);
+}
+
+.language-option:focus {
+  outline: 2px solid #667eea;
+  outline-offset: -2px;
 }
 
 .language-option.active {
@@ -979,11 +1088,11 @@ watch(locale, (newLocale) => {
 
 .email-form {
   margin-bottom: 1.5rem;
+}
 
-  &.has-error .email-input {
-    border-color: #ef4444;
-    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
-  }
+.email-form.has-error .email-input {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
 }
 
 .input-group {
@@ -1055,6 +1164,11 @@ watch(locale, (newLocale) => {
   box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
 
+.submit-button:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
 .submit-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
@@ -1091,48 +1205,13 @@ watch(locale, (newLocale) => {
   border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
-.email-hints {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-  padding: 1rem;
-  background: rgba(102, 126, 234, 0.05);
-  border-radius: 12px;
-  border: 1px solid rgba(102, 126, 234, 0.2);
-}
-
-.hint-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: #b8c5d1;
-}
-
-.hint-icon {
-  color: #667eea;
-  font-size: 1rem;
-  flex-shrink: 0;
-}
-
-.subscribers-count {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  color: #b8c5d1;
-  font-size: 0.9rem;
-  margin-top: 1rem;
-}
-
 /* Превью функций */
 .features-preview {
   width: 100%;
   max-width: 900px;
 }
 
-.features-preview h3 {
+.features-preview h2 {
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 2rem;
@@ -1159,6 +1238,11 @@ watch(locale, (newLocale) => {
   transform: translateY(-5px);
 }
 
+.feature-card:focus-within {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
 .feature-icon {
   margin-bottom: 1rem;
 }
@@ -1171,7 +1255,7 @@ watch(locale, (newLocale) => {
   background-clip: text;
 }
 
-.feature-card h4 {
+.feature-card h3 {
   font-size: 1.3rem;
   font-weight: 600;
   margin-bottom: 1rem;
@@ -1180,42 +1264,6 @@ watch(locale, (newLocale) => {
 .feature-card p {
   color: #b8c5d1;
   line-height: 1.5;
-}
-
-/* Социальные сети */
-.social-section {
-  text-align: center;
-}
-
-.social-section p {
-  color: #b8c5d1;
-  margin-bottom: 1rem;
-}
-
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.social-link {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 25px;
-  color: #e0e6ed;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.social-link:hover {
-  background: rgba(102, 126, 234, 0.1);
-  border-color: rgba(102, 126, 234, 0.3);
-  transform: translateY(-2px);
 }
 
 /* Модальное окно */
@@ -1248,7 +1296,7 @@ watch(locale, (newLocale) => {
   margin-bottom: 1rem;
 }
 
-.modal-content h3 {
+.modal-content h2 {
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 1rem;
@@ -1297,6 +1345,11 @@ watch(locale, (newLocale) => {
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 1rem;
+}
+
+.modal-button:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
 }
 
 .modal-button.primary {
@@ -1380,11 +1433,6 @@ watch(locale, (newLocale) => {
     grid-template-columns: 1fr;
   }
 
-  .social-links {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .input-group {
     flex-direction: column;
     gap: 1rem;
@@ -1419,10 +1467,16 @@ watch(locale, (newLocale) => {
   .modal-content {
     padding: 2rem;
   }
+}
 
-  .email-hints {
-    margin-top: 1rem;
-    padding: 0.75rem;
+/* Улучшение доступности для prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 </style>
