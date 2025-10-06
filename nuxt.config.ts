@@ -22,7 +22,20 @@ export default defineNuxtConfig({
     '@vueuse/motion/nuxt',
     '@nuxtjs/seo',
     '@pinia/nuxt',
-    '@nuxtjs/sitemap',
+    ['@nuxtjs/sitemap', {
+      hostname: 'https://my-zodiac-ai.com',
+      gzip: true,
+      exclude: [
+        '/admin/**',
+        '/api/**',
+      ],
+      // You can probably remove the 'routes' function (see tip below)
+      defaults: {
+        changefreq: 'daily',
+        priority: 0.8,
+        lastmod: new Date().toISOString(),
+      },
+    }],
   ],
   plugins: [
     '~/plugins/iconify.client.ts',
@@ -102,7 +115,10 @@ export default defineNuxtConfig({
   // CSS
   css: ['@/assets/scss/main.scss'],
   site: {
-    url: 'https://astro-ai-landing.vercel.app/', // <-- ЗАМЕНИТЕ НА ВАШ РЕАЛЬНЫЙ ДОМЕН
+    url: 'https://my-zodiac-ai.com',
+    name: 'My Zodiac AI',
+    description: 'Personal natal chart online with AI analysis',
+    defaultLocale: 'en',
   },
 
   // Runtime Config
@@ -129,9 +145,23 @@ export default defineNuxtConfig({
   },
   future: { compatibilityVersion: 4 },
 
+  // Experimental features для производительности
+  experimental: {
+    payloadExtraction: true,
+    renderJsonPayloads: true,
+    typedPages: true,
+  },
+
   // Nitro (proxy + prerender)
   nitro: {
-    prerender: { routes: ['/'] },
+    compressPublicAssets: true,
+    minify: true,
+    prerender: {
+      routes: [
+        '/',
+        '/coming-soon',
+      ],
+    },
     devProxy: {
       '/api/': {
         target: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://localhost:3001',
@@ -189,6 +219,8 @@ export default defineNuxtConfig({
       useCookie: true, // Использовать cookie для сохранения выбора
       cookieKey: 'i18n_redirected',
       redirectOn: 'root', // Редиректить только с главной страницы
+      alwaysRedirect: true,
     },
   },
+
 })
