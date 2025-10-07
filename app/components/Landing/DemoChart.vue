@@ -253,8 +253,8 @@ const selectedPlanet = ref(null)
 const activeTab = ref('personality')
 
 // Демо данные
-const demoDate = '15 марта 1990, 14:30'
-const demoLocation = 'Киев, Украина'
+const demoDate = '15 April 1990, 14:30'
+const demoLocation = 'Stockholm, Sweden'
 
 // Знаки зодиака
 const zodiacSigns = [

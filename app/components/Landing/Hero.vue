@@ -113,7 +113,7 @@
         :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 600 } }"
       >
         <NuxtLink
-          to="/coming-soon"
+          :to="localePath('/coming-soon')"
           class="cta-button"
         >
           <span>{{ $t('cta_button') }}</span>
@@ -147,6 +147,10 @@
 
 <script setup>
 import { Icon } from '@iconify/vue'
+
+import { useLocalePath } from '#i18n'
+
+const localePath = useLocalePath()
 
 // Массив астрологических символов для анимации
 const floatingSymbols = ['☾', '☿', '♀', '♂', '♃', '♄', '♅', '♆']

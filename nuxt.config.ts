@@ -53,28 +53,27 @@ export default defineNuxtConfig({
   // Настройки head (SEO, мета, JSON-LD)
   app: {
     head: {
-      title: 'My Zodiac AI - Персональная Астрология',
+      title: 'My Zodiac AI - Personal Astrology',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Персональные астрологические прогнозы и натальные карты на основе ИИ' },
-        { name: 'msapplication-config', content: '/browserconfig.xml' },
+        { name: 'description', content: 'Personal AI-powered astrology forecasts and natal charts.' },
         { name: 'theme-color', content: '#667eea' },
 
         // Open Graph
         { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: 'My Zodiac AI - Персональная Астрология' },
-        { property: 'og:description', content: 'Узнайте свое будущее с помощью персональных астрологических прогнозов' },
-        { property: 'og:image', content: '/og-image.jpg' },
-        { property: 'og:locale', content: 'uk_UA' },
-        { property: 'og:locale:alternate', content: 'en_US' },
+        { property: 'og:title', content: 'My Zodiac AI - Personal Astrology' },
+        { property: 'og:description', content: 'Discover your future with personalized astrology forecasts powered by AI.' },
+        { property: 'og:image', content: '/demo-chart.jpg' },
+        { property: 'og:locale', content: 'en_US' },
+        { property: 'og:locale:alternate', content: 'uk_UA' },
         { property: 'og:locale:alternate', content: 'ru_RU' },
 
         // Twitter
         { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'My Zodiac AI - Персональная Астрология' },
-        { name: 'twitter:description', content: 'Персональные астрологические прогнозы на основе ИИ' },
-        { name: 'twitter:image', content: '/twitter-card.jpg' },
+        { name: 'twitter:title', content: 'My Zodiac AI - Personal Astrology' },
+        { name: 'twitter:description', content: 'Personal AI-based astrology forecasts and natal chart analysis.' },
+        { name: 'twitter:image', content: '/demo-chart.jpg' },
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -93,14 +92,14 @@ export default defineNuxtConfig({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
             'name': 'My Zodiac AI',
-            'description': 'Персональные астрологические прогнозы и натальные карты на основе ИИ',
+            'description': 'Personal AI-powered astrology forecasts and natal charts.',
             'url': process.env.NUXT_PUBLIC_SITE_URL,
             'potentialAction': {
               '@type': 'SearchAction',
               'target': `${process.env.NUXT_PUBLIC_SITE_URL}/search?q={search_term_string}`,
               'query-input': 'required name=search_term_string',
             },
-            'inLanguage': ['uk-UA', 'en-US', 'ru-RU'],
+            'inLanguage': ['en-US', 'uk-UA', 'ru-RU'],
             'availableLanguage': [
               { '@type': 'Language', 'name': 'Ukrainian', 'alternateName': 'uk' },
               { '@type': 'Language', 'name': 'English', 'alternateName': 'en' },
@@ -151,6 +150,7 @@ export default defineNuxtConfig({
     renderJsonPayloads: true,
     typedPages: true,
   },
+  compatibilityDate: '2025-10-07',
 
   // Nitro (proxy + prerender)
   nitro: {

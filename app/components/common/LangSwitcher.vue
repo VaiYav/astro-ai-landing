@@ -328,6 +328,7 @@ watch(() => useRoute().fullPath, () => {
 /* Адаптивность */
 @media (max-width: 768px) {
   .language-menu {
+    top: 0;
     right: auto;
     left: 50%;
     transform: translateX(-50%);

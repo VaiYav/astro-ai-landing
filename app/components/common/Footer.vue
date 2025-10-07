@@ -106,29 +106,29 @@
     </div>
 
     <!-- Дополнительная информация -->
-    <div class="footer-additional">
-      <div class="container">
-        <div class="additional-grid">
-          <div class="stats">
-            <h4>{{ $t('footer.stats.title') }}</h4>
-            <div class="stats-grid">
-              <div class="stat">
-                <span class="stat-number">{{ $t('footer.stats.usersCount') }}</span>
-                <span class="stat-label">{{ $t('footer.stats.usersLabel') }}</span>
-              </div>
-              <div class="stat">
-                <span class="stat-number">{{ $t('footer.stats.chartsCount') }}</span>
-                <span class="stat-label">{{ $t('footer.stats.chartsLabel') }}</span>
-              </div>
-              <div class="stat">
-                <span class="stat-number">{{ $t('footer.stats.uptime') }}</span>
-                <span class="stat-label">{{ $t('footer.stats.uptimeLabel') }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!--    <div class="footer-additional"> -->
+    <!--      <div class="container"> -->
+    <!--        <div class="additional-grid"> -->
+    <!--          <div class="stats"> -->
+    <!--            <h4>{{ $t('footer.stats.title') }}</h4> -->
+    <!--            <div class="stats-grid"> -->
+    <!--              <div class="stat"> -->
+    <!--                <span class="stat-number">{{ $t('footer.stats.usersCount') }}</span> -->
+    <!--                <span class="stat-label">{{ $t('footer.stats.usersLabel') }}</span> -->
+    <!--              </div> -->
+    <!--              <div class="stat"> -->
+    <!--                <span class="stat-number">{{ $t('footer.stats.chartsCount') }}</span> -->
+    <!--                <span class="stat-label">{{ $t('footer.stats.chartsLabel') }}</span> -->
+    <!--              </div> -->
+    <!--              <div class="stat"> -->
+    <!--                <span class="stat-number">{{ $t('footer.stats.uptime') }}</span> -->
+    <!--                <span class="stat-label">{{ $t('footer.stats.uptimeLabel') }}</span> -->
+    <!--              </div> -->
+    <!--            </div> -->
+    <!--          </div> -->
+    <!--        </div> -->
+    <!--      </div> -->
+    <!--    </div> -->
 
     <!-- Нижний футер -->
     <div class="footer-bottom">

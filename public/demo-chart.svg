@@ -205,34 +205,11 @@
     <rect x="10" y="10" width="150" height="80" fill="rgba(26, 26, 46, 0.9)"
           stroke="#667eea" stroke-width="1" rx="5" opacity="0.9"/>
 
-    <text x="85" y="25" fill="#667eea" font-size="12" font-weight="bold" text-anchor="middle">Натальная карта</text>
-    <text x="15" y="40" fill="#b8c5d1" font-size="9">Дата: 15.08.1990</text>
-    <text x="15" y="52" fill="#b8c5d1" font-size="9">Время: 14:30</text>
-    <text x="15" y="64" fill="#b8c5d1" font-size="9">Место: Киев, Украина</text>
-    <text x="15" y="76" fill="#b8c5d1" font-size="9">Дома: Плацидус</text>
-  </g>
-
-  <!-- Легенда аспектов -->
-  <g>
-    <rect x="350" y="10" width="140" height="100" fill="rgba(26, 26, 46, 0.9)"
-          stroke="#667eea" stroke-width="1" rx="5" opacity="0.9"/>
-
-    <text x="420" y="25" fill="#667eea" font-size="11" font-weight="bold" text-anchor="middle">Аспекты</text>
-
-    <line x1="355" y1="35" x2="375" y2="35" stroke="#10b981" stroke-dasharray="3,3"/>
-    <text x="380" y="39" fill="#10b981" font-size="8">Тригон (120°)</text>
-
-    <line x1="355" y1="47" x2="375" y2="47" stroke="#667eea" stroke-dasharray="2,2"/>
-    <text x="380" y="51" fill="#667eea" font-size="8">Секстиль (60°)</text>
-
-    <line x1="355" y1="59" x2="375" y2="59" stroke="#ef4444" stroke-dasharray="4,2"/>
-    <text x="380" y="63" fill="#ef4444" font-size="8">Квадрат (90°)</text>
-
-    <line x1="355" y1="71" x2="375" y2="71" stroke="#f59e0b" stroke-dasharray="5,5"/>
-    <text x="380" y="75" fill="#f59e0b" font-size="8">Оппозиция (180°)</text>
-
-    <line x1="355" y1="83" x2="375" y2="83" stroke="#8b5cf6" stroke-width="2"/>
-    <text x="380" y="87" fill="#8b5cf6" font-size="8">Соединение (0°)</text>
+    <text x="85" y="25" fill="#667eea" font-size="12" font-weight="bold" text-anchor="middle">Natal Chart</text>
+    <text x="15" y="40" fill="#b8c5d1" font-size="9">Date: 15.08.1990</text>
+    <text x="15" y="52" fill="#b8c5d1" font-size="9">Time: 14:30</text>
+    <text x="15" y="64" fill="#b8c5d1" font-size="9">Place: Berlin, Germany</text>
+    <text x="15" y="76" fill="#b8c5d1" font-size="9">House: Placidus</text>
   </g>
 
   <!-- Декоративные звезды -->

@@ -1,7 +1,7 @@
 {
-  "name": "My Zodiac AI - Натальна карта онлайн",
+  "name": "My Zodiac AI - Natal Chart Online",
   "short_name": "My Zodiac AI",
-  "description": "Персональний AI-астролог для створення натальних карт та прогнозів. Отримайте детальний аналіз своєї натальної карти з допомогою штучного інтелекту.",
+  "description": "Your personal AI astrologer for creating natal charts and forecasts. Get a detailed analysis of your birth chart with the help of artificial intelligence.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

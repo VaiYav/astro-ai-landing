@@ -356,6 +356,10 @@ import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 import { Icon } from '@iconify/vue'
 import { cloneDeep } from 'lodash-es'
 
+defineOptions({
+  name: 'ComingSoonPage',
+})
+
 // Локализация
 const { t, locale, localeInfo, availableLocales, setLocale } = useI18n()
 
@@ -485,7 +489,7 @@ const localizedFeaturePreviews = computed(() => [
   {
     title: t('comingSoon.features.forecasts.title'),
     description: t('comingSoon.features.forecasts.description'),
-    icon: 'ph:crystal-ball',
+    icon: 'ph:sphere',
   },
   {
     title: t('comingSoon.features.compatibility.title'),

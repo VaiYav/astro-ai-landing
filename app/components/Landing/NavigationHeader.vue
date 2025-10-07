@@ -27,34 +27,26 @@
           :class="{ 'mobile-open': isMobileMenuOpen }"
         >
           <div class="nav-links">
-            <a
-              href="/#features"
+            <NuxtLink
+              :to="{ path: '/', hash: '#features' }"
               class="nav-link"
-              @click="scrollToSection('features')"
             >
               {{ $t('menu.features') }}
-            </a>
-            <a
-              href="/#demo"
+            </NuxtLink>
+
+            <NuxtLink
+              :to="{ path: '/', hash: '#demo' }"
               class="nav-link"
-              @click="scrollToSection('demo')"
             >
               {{ $t('menu.demo') }}
-            </a>
-            <!--            <a -->
-            <!--              href="/#pricing" -->
-            <!--              class="nav-link" -->
-            <!--              @click="scrollToSection('pricing')" -->
-            <!--            > -->
-            <!--              {{ $t('menu.pricing') }} -->
-            <!--            </a> -->
-            <a
-              href="/#testimonials"
+            </NuxtLink>
+
+            <NuxtLink
+              :to="{ path: '/', hash: '#testimonials' }"
               class="nav-link"
-              @click="scrollToSection('testimonials')"
             >
               {{ $t('menu.testimonials') }}
-            </a>
+            </NuxtLink>
 
             <!-- Выпадающее меню (закомментировано, но переведено) -->
             <!--            <div class="nav-dropdown"> -->

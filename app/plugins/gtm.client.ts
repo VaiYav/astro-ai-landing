@@ -10,7 +10,7 @@ declare global {
 }
 
 export default defineNuxtPlugin(() => {
-  if (!import.meta.client) return
+  if (!import.meta.client && process.env.NODE_ENV === 'development') return
 
   const gtmId = 'GTM-NSN2VZPZ' // ваш GTM ID
 

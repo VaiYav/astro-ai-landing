@@ -23,14 +23,6 @@
 
           <!-- Магнит контент -->
           <div class="popup-header">
-            <div class="magic-crystal">
-              <Icon
-                icon="ph:crystal-ball-bold"
-                class="crystal-icon"
-              />
-              <div class="crystal-glow" />
-            </div>
-
             <h2>{{ $t('email_capture_title') }}</h2>
             <p class="subtitle">
               {{ $t('email_capture_subtitle') }}
@@ -119,16 +111,6 @@
                 >
               </div>
             </div>
-
-            <button
-              type="button"
-              class="toggle-optional"
-              :disabled="isLoading"
-              @click="showOptionalFields = !showOptionalFields"
-            >
-              {{ showOptionalFields ? $t('hide_optional') : $t('personalize_more') }}
-              <Icon :icon="showOptionalFields ? 'ph:caret-up-bold' : 'ph:caret-down-bold'" />
-            </button>
 
             <!-- Сообщения об ошибках -->
             <Transition name="fade">
@@ -1104,8 +1086,9 @@ watch([() => formData.value.email, () => formData.value.name], () => {
 // Responsive
 @media (max-width: 768px) {
   .email-capture-popup {
-    padding: 2rem 1.5rem;
+    padding: 2rem 1.5rem 2rem;
     margin: 1rem;
+    top: 2rem;
   }
 
   .subscription-form .form-row {
