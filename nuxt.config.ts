@@ -129,8 +129,8 @@ export default defineNuxtConfig({
       gtmId: process.env.NUXT_PUBLIC_GTM_ID,
       facebookPixelId: process.env.NUXT_PUBLIC_FACEBOOK_PIXEL_ID,
       environment: process.env.NODE_ENV || 'development',
-      defaultLocale: process.env.NUXT_PUBLIC_DEFAULT_LOCALE || 'ua',
-      fallbackLocale: process.env.NUXT_PUBLIC_FALLBACK_LOCALE || 'en',
+      defaultLocale: process.env.NUXT_PUBLIC_DEFAULT_LOCALE || 'en',
+      fallbackLocale: process.env.NUXT_PUBLIC_FALLBACK_LOCALE || 'ua',
       detectBrowserLanguage: process.env.NUXT_PUBLIC_DETECT_BROWSER_LANGUAGE !== 'false',
       detectLocationLanguage: process.env.NUXT_PUBLIC_DETECT_LOCATION_LANGUAGE !== 'false',
     },
@@ -210,7 +210,7 @@ export default defineNuxtConfig({
         flag: '🇷🇺', // Ваше кастомное поле
       },
     ],
-    defaultLocale: 'uk',
+    defaultLocale: 'en',
     strategy: 'prefix_except_default', // Рекомендуемая стратегия
     langDir: 'locales', // Указываем папку с переводами
 
