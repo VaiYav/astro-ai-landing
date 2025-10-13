@@ -28,6 +28,7 @@ Allow: /coming-soon
 Allow: /uk/coming-soon
 Allow: /ru/coming-soon
 Allow: /en/coming-soon
+Allow: /
 
 # Sitemap
 Sitemap: https://my-zodiac-ai.com/sitemap.xml
