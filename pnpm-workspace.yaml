@@ -1,0 +1,8 @@
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@vercel/speed-insights'
+  - better-sqlite3
+  - esbuild
+  - sharp
+  - unrs-resolver
+  - workerd

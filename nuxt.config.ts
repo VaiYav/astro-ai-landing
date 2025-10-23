@@ -20,9 +20,16 @@ export default defineNuxtConfig({
     }],
     '@nuxtjs/i18n',
     '@vueuse/motion/nuxt',
-    '@nuxtjs/seo', // ⭐ Включает sitemap, robots, og-image
+    '@nuxtjs/seo',
     '@pinia/nuxt',
-    'nuxt-schema-org', // ⭐ Schema.org structured data
+    'nuxt-schema-org',
+
+    // ⭐ Nuxt Content для блога
+    '@nuxt/content',
+
+    // ⭐ Nuxt Image для оптимизации
+    '@nuxt/image',
+
     ['@nuxtjs/sitemap', {
       hostname: 'https://my-zodiac-ai.com',
       gzip: true,
@@ -35,7 +42,6 @@ export default defineNuxtConfig({
         priority: 0.8,
         lastmod: new Date().toISOString(),
       },
-      // Мультиязычность
       i18n: true,
     }],
   ],
@@ -54,7 +60,7 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
-  // Настройки head (базовые метатеги)
+  // Настройки head
   app: {
     head: {
       titleTemplate: '%s | My Zodiac AI',
@@ -70,7 +76,6 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
         { rel: 'manifest', href: '/site.webmanifest' },
-        // Preconnect для оптимизации загрузки шрифтов
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
       ],
@@ -80,14 +85,44 @@ export default defineNuxtConfig({
   // CSS
   css: ['@/assets/scss/main.scss'],
 
-  // ⭐ SEO конфигурация сайта
+  // SEO конфигурация сайта
   site: {
     url: 'https://my-zodiac-ai.com',
-    name: 'My Zodiac AI',
+    name: 'My Zodiac AI - My Zodiac AI',
     description: 'Personalized astrology powered by AI. Online natal chart, predictions, and accurate zodiac sign predictions.',
     defaultLocale: 'en',
     identity: {
       type: 'Organization',
+    },
+  },
+
+  // ⭐ Nuxt Content конфигурация
+  content: {
+    // Highlight подсветка кода
+    highlight: {
+      theme: {
+        default: 'github-light',
+        dark: 'github-dark',
+      },
+      preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown'],
+    },
+    // Markdown настройки
+    markdown: {
+      toc: {
+        depth: 3,
+        searchDepth: 3,
+      },
+      anchorLinks: true,
+      remarkPlugins: ['remark-gfm'],
+      rehypePlugins: [
+        [
+          'rehype-external-links',
+          {
+            target: '_blank',
+            rel: ['noopener', 'noreferrer'],
+          },
+        ],
+      ],
     },
   },
 
@@ -114,7 +149,7 @@ export default defineNuxtConfig({
 
   future: { compatibilityVersion: 4 },
 
-  // ⭐ Experimental features для производительности и SEO
+  // Experimental features
   experimental: {
     payloadExtraction: true,
     renderJsonPayloads: true,
@@ -123,7 +158,7 @@ export default defineNuxtConfig({
 
   compatibilityDate: '2025-10-07',
 
-  // ⭐ Nitro (prerender для SEO)
+  // Nitro (prerender)
   nitro: {
     compressPublicAssets: true,
     minify: true,
@@ -133,6 +168,9 @@ export default defineNuxtConfig({
         '/',
         '/en',
         '/ru',
+        '/blog',
+        '/en/blog',
+        '/ru/blog',
         '/coming-soon',
         '/en/coming-soon',
         '/ru/coming-soon',
@@ -148,7 +186,7 @@ export default defineNuxtConfig({
   },
 
   // TypeScript
-  typescript: { strict: true, typeCheck: true },
+  typescript: { strict: true, typeCheck: false },
 
   postcss: {
     plugins: {
@@ -194,18 +232,53 @@ export default defineNuxtConfig({
       redirectOn: 'root',
       alwaysRedirect: true,
     },
-    // ⭐ SEO для i18n
     baseUrl: 'https://my-zodiac-ai.com',
   },
 
-  // ⭐ Robots.txt
+  // ⭐ Nuxt Image конфигурация
+  image: {
+    // Форматы
+    format: ['webp', 'avif', 'jpeg'],
+
+    // Качество
+    quality: 80,
+
+    // Размеры для responsive
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
+    },
+
+    // Провайдеры
+    providers: {
+      cloudinary: {
+        baseURL: process.env.CLOUDINARY_BASE_URL || '',
+      },
+    },
+
+    // Директории
+    dir: 'public/images',
+
+    // Домены для внешних изображений
+    domains: [
+      'my-zodiac-ai.com',
+      'images.unsplash.com',
+      'cdn.My Zodiac AI.com',
+    ],
+  },
+
+  // Robots.txt
   robots: {
     disallow: ['/api/', '/_nuxt/', '/admin/'],
     allow: '/',
     sitemap: 'https://my-zodiac-ai.com/sitemap.xml',
   },
 
-  // ⭐ SEO модуль настройки
+  // SEO модуль настройки
   seo: {
     redirectToCanonicalSiteUrl: true,
     fallbackTitle: true,

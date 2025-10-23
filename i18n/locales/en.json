@@ -515,5 +515,37 @@
       "text": "Didn't find the answer to your question?",
       "contactLink": "Contact us"
     }
+  },
+  "blog": {
+    "title": "Astrology Blog",
+    "subtitle": "Articles, tips and insights from professional astrologers",
+    "search": "Search articles...",
+    "loading": "Loading articles...",
+    "noResults": "No articles found",
+    "tryDifferent": "Try changing your search parameters or filters",
+    "featured": "Featured",
+    "author": "Author",
+    "minRead": "min read",
+    "readFull": "Read full article",
+    "previous": "Previous",
+    "next": "Next",
+    "updated": "Updated",
+    "tableOfContents": "Table of Contents",
+    "share": "Share",
+    "linkCopied": "Link copied!",
+    "relatedArticles": "Related Articles",
+    "categories": {
+      "all": "All",
+      "learning": "Learning",
+      "relationships": "Relationships",
+      "transits": "Transits",
+      "natal-chart": "Natal Chart"
+    },
+    "newsletter": {
+      "title": "Subscribe to our newsletter",
+      "subtitle": "Get new articles and astrological insights straight to your inbox",
+      "placeholder": "Your email address",
+      "subscribe": "Subscribe"
+    }
   }
 }
