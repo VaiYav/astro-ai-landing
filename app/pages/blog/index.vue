@@ -1,6 +1,10 @@
 <template>
   <div class="blog-page">
     <!-- Хедер блога -->
+    <ContentRenderer
+      v-if="home"
+      :value="home"
+    />
     <section class="blog-header">
       <div class="container">
         <h1 class="blog-title">
@@ -137,6 +141,8 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { Icon } from '@iconify/vue'
+import ArticleFeatured from '~/components/Landing/ArticleFeatured.vue'
+import ArticleCard from '~/components/Landing/ArticleCard.vue'
 
 const { t, locale } = useI18n()
 
@@ -148,6 +154,7 @@ useSEO({
   image: '/images/og-blog.png',
   type: 'website',
 })
+const { data: home } = await useAsyncData(() => queryCollection('content').path('/').first())
 
 // Schema.org для страницы блога
 useSchemaOrg([

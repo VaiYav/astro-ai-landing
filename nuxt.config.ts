@@ -98,32 +98,6 @@ export default defineNuxtConfig({
 
   // ⭐ Nuxt Content конфигурация
   content: {
-    // Highlight подсветка кода
-    highlight: {
-      theme: {
-        default: 'github-light',
-        dark: 'github-dark',
-      },
-      preload: ['json', 'js', 'ts', 'html', 'css', 'vue', 'diff', 'shell', 'markdown'],
-    },
-    // Markdown настройки
-    markdown: {
-      toc: {
-        depth: 3,
-        searchDepth: 3,
-      },
-      anchorLinks: true,
-      remarkPlugins: ['remark-gfm'],
-      rehypePlugins: [
-        [
-          'rehype-external-links',
-          {
-            target: '_blank',
-            rel: ['noopener', 'noreferrer'],
-          },
-        ],
-      ],
-    },
   },
 
   // Runtime Config
