@@ -185,7 +185,6 @@ const { data: relatedArticles } = await useAsyncData(
   display: inline-block;
   padding: 8px 16px;
   background: linear-gradient(135deg, #667eea, #764ba2);
-  color: white;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 600;
@@ -196,14 +195,12 @@ const { data: relatedArticles } = await useAsyncData(
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(32px, 5vw, 56px);
   font-weight: 700;
-  color: #1f2937;
   margin-bottom: 16px;
   line-height: 1.2;
 }
 
 .description {
   font-size: 20px;
-  color: #6b7280;
   max-width: 800px;
   margin: 0 auto 32px;
 }
@@ -214,7 +211,6 @@ const { data: relatedArticles } = await useAsyncData(
   justify-content: center;
   gap: 24px;
   flex-wrap: wrap;
-  color: #6b7280;
   font-size: 14px;
 }
 
@@ -253,7 +249,6 @@ const { data: relatedArticles } = await useAsyncData(
   margin: 0 auto;
   font-size: 18px;
   line-height: 1.8;
-  color: #374151;
 }
 
 .prose :deep(h1),
@@ -261,7 +256,6 @@ const { data: relatedArticles } = await useAsyncData(
   font-family: 'Cormorant Garamond', serif;
   font-size: 36px;
   font-weight: 700;
-  color: #1f2937;
   margin: 48px 0 24px;
 }
 
@@ -269,7 +263,6 @@ const { data: relatedArticles } = await useAsyncData(
   font-family: 'Cormorant Garamond', serif;
   font-size: 28px;
   font-weight: 700;
-  color: #1f2937;
   margin: 36px 0 16px;
 }
 
@@ -288,13 +281,11 @@ const { data: relatedArticles } = await useAsyncData(
 }
 
 .prose :deep(a) {
-  color: #667eea;
   text-decoration: underline;
 }
 
 .prose :deep(strong) {
   font-weight: 700;
-  color: #1f2937;
 }
 
 .prose :deep(blockquote) {
@@ -302,7 +293,6 @@ const { data: relatedArticles } = await useAsyncData(
   padding-left: 24px;
   margin: 32px 0;
   font-style: italic;
-  color: #6b7280;
 }
 
 .prose :deep(code) {
@@ -314,7 +304,6 @@ const { data: relatedArticles } = await useAsyncData(
 
 .prose :deep(pre) {
   background: #1f2937;
-  color: #f9fafb;
   padding: 20px;
   border-radius: 12px;
   overflow-x: auto;
@@ -340,8 +329,6 @@ const { data: relatedArticles } = await useAsyncData(
 
 .tag {
   padding: 6px 16px;
-  background: #f3f4f6;
-  color: #6b7280;
   border-radius: 16px;
   font-size: 14px;
 }
@@ -370,7 +357,6 @@ const { data: relatedArticles } = await useAsyncData(
   border-radius: 16px;
   overflow: hidden;
   text-decoration: none;
-  color: inherit;
   transition: transform 0.3s ease;
 }
 
@@ -391,7 +377,6 @@ const { data: relatedArticles } = await useAsyncData(
 }
 
 .card p {
-  color: #6b7280;
   margin: 0 20px 20px;
 }
 
