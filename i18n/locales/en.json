@@ -447,5 +447,73 @@
   "footer.disclaimer": "Astrological forecasts are for entertainment and personal development purposes.",
   "footer.certifications.ssl": "SSL protected",
   "footer.certifications.gdpr": "GDPR",
-  "footer.certifications.pci": "PCI DSS"
+  "footer.certifications.pci": "PCI DSS",
+  "seo": {
+    "keywords": "astrology, natal chart, horoscope, AI astrologer, personal forecast, zodiac signs, compatibility, transits, astrological prediction",
+    "home": {
+      "title": "My Zodiac AI - Personal AI Astrology | Natal Chart Online",
+      "description": "Get personalized astrological forecasts based on your natal chart. AI assistant helps you understand astrology. Free basic horoscope."
+    },
+    "features": {
+      "title": "My Zodiac AI Features - AI Astrology for You",
+      "description": "Natal chart interpretation, daily forecasts, partner compatibility, transit analysis. Everything about your destiny in one app."
+    },
+    "pricing": {
+      "title": "My Zodiac AI Pricing - Choose Your Plan",
+      "description": "Free basic horoscope or premium access to all AI astrologer features. First month 50% off."
+    },
+    "blog": {
+      "title": "Astrology Blog - My Zodiac AI",
+      "description": "Articles about astrology, natal charts, planetary transits, zodiac compatibility. Learn astrology with us."
+    },
+    "article": {
+      "titleTemplate": "%s - My Zodiac AI Blog"
+    },
+    "comingSoon": {
+      "title": "Coming Soon - My Zodiac AI",
+      "description": "Subscribe to our newsletter and get a free premium month when we launch."
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Answers to the most common questions about My Zodiac AI",
+    "items": {
+      "0": {
+        "question": "What is a natal chart?",
+        "answer": "A natal chart is an astrological diagram showing the positions of planets at the time of your birth. It reveals your strengths, talents, challenges, and life purpose. My Zodiac AI creates your chart based on your exact birth date, time, and location."
+      },
+      "1": {
+        "question": "How does AI help with astrological forecasts?",
+        "answer": "Our AI assistant analyzes your natal chart, current planetary transits, and astrological aspects to create personalized forecasts. It combines classical astrological knowledge with modern algorithms for the most accurate interpretations."
+      },
+      "2": {
+        "question": "Is my personal data safe?",
+        "answer": "Yes, security is our priority. All data is stored with encryption, and we never share information with third parties. Birth date and time are used exclusively for natal chart calculations."
+      },
+      "3": {
+        "question": "What are the benefits of premium subscription?",
+        "answer": "Premium subscription provides access to: detailed daily forecasts, partner compatibility analysis, yearly transit predictions, unlimited AI astrologer questions, and priority support."
+      },
+      "4": {
+        "question": "Can I cancel my subscription anytime?",
+        "answer": "Yes, you can cancel your subscription at any time through account settings. Access to premium features will remain until the end of the paid period. Refunds are processed according to our policy."
+      },
+      "5": {
+        "question": "How does the free version work?",
+        "answer": "The free version includes basic daily horoscope for your zodiac sign, general monthly forecasts, and access to basic natal chart information. It's a great way to try the service."
+      },
+      "6": {
+        "question": "Do I need the exact birth time?",
+        "answer": "For the most accurate natal chart, it's best to know your exact birth time (within an hour). If you don't know the time, we'll use noon as an approximate time, but some aspects may be less precise."
+      },
+      "7": {
+        "question": "How often are forecasts updated?",
+        "answer": "Daily forecasts update every day at 00:00 in your timezone. Weekly forecasts update every Monday, monthly ones on the first day of the month. Transits are tracked in real-time."
+      }
+    },
+    "footer": {
+      "text": "Didn't find the answer to your question?",
+      "contactLink": "Contact us"
+    }
+  }
 }

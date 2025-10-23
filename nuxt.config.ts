@@ -20,8 +20,9 @@ export default defineNuxtConfig({
     }],
     '@nuxtjs/i18n',
     '@vueuse/motion/nuxt',
-    '@nuxtjs/seo',
+    '@nuxtjs/seo', // ⭐ Включает sitemap, robots, og-image
     '@pinia/nuxt',
+    'nuxt-schema-org', // ⭐ Schema.org structured data
     ['@nuxtjs/sitemap', {
       hostname: 'https://my-zodiac-ai.com',
       gzip: true,
@@ -29,17 +30,20 @@ export default defineNuxtConfig({
         '/admin/**',
         '/api/**',
       ],
-      // You can probably remove the 'routes' function (see tip below)
       defaults: {
         changefreq: 'daily',
         priority: 0.8,
         lastmod: new Date().toISOString(),
       },
+      // Мультиязычность
+      i18n: true,
     }],
   ],
+
   plugins: [
     '~/plugins/iconify.client.ts',
   ],
+
   ssr: true,
 
   // Автоимпорт компонентов
@@ -50,74 +54,41 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
-  // Настройки head (SEO, мета, JSON-LD)
+  // Настройки head (базовые метатеги)
   app: {
     head: {
-      title: 'My Zodiac AI - Personal Astrology',
+      titleTemplate: '%s | My Zodiac AI',
+      htmlAttrs: {
+        lang: 'en',
+      },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'Personal AI-powered astrology forecasts and natal charts.' },
-        { name: 'theme-color', content: '#667eea' },
-
-        // Open Graph
-        { property: 'og:type', content: 'website' },
-        { property: 'og:title', content: 'My Zodiac AI - Personal Astrology' },
-        { property: 'og:description', content: 'Discover your future with personalized astrology forecasts powered by AI.' },
-        { property: 'og:image', content: '/demo-chart.jpg' },
-        { property: 'og:locale', content: 'en_US' },
-        { property: 'og:locale:alternate', content: 'uk_UA' },
-        { property: 'og:locale:alternate', content: 'ru_RU' },
-
-        // Twitter
-        { name: 'twitter:card', content: 'summary_large_image' },
-        { name: 'twitter:title', content: 'My Zodiac AI - Personal Astrology' },
-        { name: 'twitter:description', content: 'Personal AI-based astrology forecasts and natal chart analysis.' },
-        { name: 'twitter:image', content: '/demo-chart.jpg' },
+        { name: 'format-detection', content: 'telephone=no' },
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'canonical', href: process.env.NUXT_PUBLIC_SITE_URL },
-        { rel: 'alternate', hreflang: 'uk', href: `${process.env.NUXT_PUBLIC_SITE_URL}?lang=ua` },
-        { rel: 'alternate', hreflang: 'en', href: `${process.env.NUXT_PUBLIC_SITE_URL}?lang=en` },
-        { rel: 'alternate', hreflang: 'ru', href: `${process.env.NUXT_PUBLIC_SITE_URL}?lang=ru` },
-        { rel: 'alternate', hreflang: 'x-default', href: process.env.NUXT_PUBLIC_SITE_URL },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
         { rel: 'manifest', href: '/site.webmanifest' },
-      ],
-      script: [
-        {
-          type: 'application/ld+json',
-          innerHTML: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'WebSite',
-            'name': 'My Zodiac AI',
-            'description': 'Personal AI-powered astrology forecasts and natal charts.',
-            'url': process.env.NUXT_PUBLIC_SITE_URL,
-            'potentialAction': {
-              '@type': 'SearchAction',
-              'target': `${process.env.NUXT_PUBLIC_SITE_URL}/search?q={search_term_string}`,
-              'query-input': 'required name=search_term_string',
-            },
-            'inLanguage': ['en-US', 'uk-UA', 'ru-RU'],
-            'availableLanguage': [
-              { '@type': 'Language', 'name': 'Ukrainian', 'alternateName': 'uk' },
-              { '@type': 'Language', 'name': 'English', 'alternateName': 'en' },
-              { '@type': 'Language', 'name': 'Russian', 'alternateName': 'ru' },
-            ],
-          }),
-        },
+        // Preconnect для оптимизации загрузки шрифтов
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
       ],
     },
   },
 
   // CSS
   css: ['@/assets/scss/main.scss'],
+
+  // ⭐ SEO конфигурация сайта
   site: {
     url: 'https://my-zodiac-ai.com',
     name: 'My Zodiac AI',
-    description: 'Personal natal chart online with AI analysis',
+    description: 'Personalized astrology powered by AI. Online natal chart, predictions, and accurate zodiac sign predictions.',
     defaultLocale: 'en',
+    identity: {
+      type: 'Organization',
+    },
   },
 
   // Runtime Config
@@ -125,41 +96,46 @@ export default defineNuxtConfig({
     emailCollectionApiKey: process.env.EMAIL_COLLECTION_API_KEY,
     public: {
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://localhost:3001',
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://my-zodiac-ai.com',
       gtmId: process.env.NUXT_PUBLIC_GTM_ID,
       facebookPixelId: process.env.NUXT_PUBLIC_FACEBOOK_PIXEL_ID,
       environment: process.env.NODE_ENV || 'development',
       defaultLocale: process.env.NUXT_PUBLIC_DEFAULT_LOCALE || 'en',
-      fallbackLocale: process.env.NUXT_PUBLIC_FALLBACK_LOCALE || 'ua',
+      fallbackLocale: process.env.NUXT_PUBLIC_FALLBACK_LOCALE || 'uk',
       detectBrowserLanguage: process.env.NUXT_PUBLIC_DETECT_BROWSER_LANGUAGE !== 'false',
       detectLocationLanguage: process.env.NUXT_PUBLIC_DETECT_LOCATION_LANGUAGE !== 'false',
     },
   },
 
-  // Build
-
   // Optimization
   optimization: {
     keyedComposables: [{ name: 'useI18n', argumentLength: 0 }],
   },
+
   future: { compatibilityVersion: 4 },
 
-  // Experimental features для производительности
+  // ⭐ Experimental features для производительности и SEO
   experimental: {
     payloadExtraction: true,
     renderJsonPayloads: true,
     typedPages: true,
   },
+
   compatibilityDate: '2025-10-07',
 
-  // Nitro (proxy + prerender)
+  // ⭐ Nitro (prerender для SEO)
   nitro: {
     compressPublicAssets: true,
     minify: true,
     prerender: {
+      crawlLinks: true,
       routes: [
         '/',
+        '/en',
+        '/ru',
         '/coming-soon',
+        '/en/coming-soon',
+        '/ru/coming-soon',
       ],
     },
     devProxy: {
@@ -180,9 +156,8 @@ export default defineNuxtConfig({
     },
   },
 
-  // i18n
+  // i18n конфигурация
   i18n: {
-  // Ваши локали
     vueI18n: './i18n.config.ts',
     locales: [
       {
@@ -190,37 +165,49 @@ export default defineNuxtConfig({
         code: 'uk',
         iso: 'uk-UA',
         name: 'Ukrainian',
-        nativeName: 'Українська', // Ваше кастомное поле
-        flag: '🇺🇦', // Ваше кастомное поле
+        nativeName: 'Українська',
+        flag: '🇺🇦',
       },
       {
         file: 'en.json',
         code: 'en',
         iso: 'en-US',
         name: 'English',
-        nativeName: 'English', // Ваше кастомное поле
-        flag: '🇺🇸', // Ваше кастомное поле
+        nativeName: 'English',
+        flag: '🇺🇸',
       },
       {
         file: 'ru.json',
         code: 'ru',
         iso: 'ru-RU',
         name: 'Russian',
-        nativeName: 'Русский', // Ваше кастомное поле
-        flag: '🇷🇺', // Ваше кастомное поле
+        nativeName: 'Русский',
+        flag: '🇷🇺',
       },
     ],
     defaultLocale: 'en',
-    strategy: 'prefix_except_default', // Рекомендуемая стратегия
-    langDir: 'locales', // Указываем папку с переводами
-
-    // Эта опция включает автоматическое определение языка
+    strategy: 'prefix_except_default',
+    langDir: 'locales',
     detectBrowserLanguage: {
-      useCookie: true, // Использовать cookie для сохранения выбора
+      useCookie: true,
       cookieKey: 'i18n_redirected',
-      redirectOn: 'root', // Редиректить только с главной страницы
+      redirectOn: 'root',
       alwaysRedirect: true,
     },
+    // ⭐ SEO для i18n
+    baseUrl: 'https://my-zodiac-ai.com',
   },
 
+  // ⭐ Robots.txt
+  robots: {
+    disallow: ['/api/', '/_nuxt/', '/admin/'],
+    allow: '/',
+    sitemap: 'https://my-zodiac-ai.com/sitemap.xml',
+  },
+
+  // ⭐ SEO модуль настройки
+  seo: {
+    redirectToCanonicalSiteUrl: true,
+    fallbackTitle: true,
+  },
 })

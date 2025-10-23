@@ -4,17 +4,7 @@
   "packageManager": "pnpm@10.17.1",
   "description": "Nuxt Hacker News",
   "author": "Evan You <yyx990803@gmail.com>",
-  "contributors": [
-    {
-      "name": "Sebastien Chopin (@Atinux)"
-    },
-    {
-      "name": "Pooya Parsa (@pi0)"
-    },
-    {
-      "name": "Anthony Fu (@antfu)"
-    }
-  ],
+  "contributors": [],
   "scripts": {
     "dev": "nuxt dev",
     "build": "nuxt build",
@@ -54,6 +44,8 @@
     "@vueuse/motion": "^3.0.3",
     "axios": "^1.12.2",
     "lodash-es": "^4.17.21",
+    "nuxt-schema-org": "^5.0.9",
+    "nuxt-simple-robots": "^4.0.1",
     "pinia": "^3.0.3"
   }
 }

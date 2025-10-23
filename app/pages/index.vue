@@ -1,286 +1,128 @@
 <template>
-  <div class="landing-page">
-    <!-- Основные секции -->
+  <div class="home-page">
+    <!-- Секции лендинга -->
     <Hero />
     <DemoChart />
     <Features />
     <EmailCapture />
     <HowItWorks />
     <Testimonials />
+    <FAQSection />
+    <CTASection />
   </div>
 </template>
 
-<script setup>
-import Hero from '~/components/Landing/Hero.vue'
-import Features from '~/components/Landing/Features.vue'
+<script setup lang="ts">
 import HowItWorks from '~/components/Landing/HowItWorks.vue'
+import FAQSection from '~/components/Landing/FAQSection.vue'
 import Testimonials from '~/components/Landing/Testimonials.vue'
-import DemoChart from '~/components/Landing/DemoChart.vue'
 import EmailCapture from '~/components/Landing/EmailCapture.vue'
-import { computed } from 'vue'
+import Features from '~/components/Landing/Features.vue'
+import DemoChart from '~/components/Landing/DemoChart.vue'
+import Hero from '~/components/Landing/Hero.vue'
 
-// SEO и метаданные
 const { t, locale } = useI18n()
-const SITE_URL = 'https://my-zodiac-ai.com' // Единый домен
 
-useHead(() => ({
-  htmlAttrs: {
-    lang: locale.value,
+// ⭐ SEO оптимизация
+useSEO({
+  title: t('seo.home.title'),
+  description: t('seo.home.description'),
+  keywords: t('seo.keywords'),
+  image: '/images/og-home.png',
+  type: 'website',
+})
+
+// ⭐ Schema.org разметка для главной страницы
+useSchemaOrg([
+  // Организация
+  {
+    '@type': 'Organization',
+    '@id': 'https://my-zodiac-ai.com/#organization',
+    'name': 'My Zodiac AI',
+    'url': 'https://my-zodiac-ai.com',
+    'logo': {
+      '@type': 'ImageObject',
+      'url': 'https://my-zodiac-ai.com/logo.png',
+      'width': 250,
+      'height': 60,
+    },
+    'sameAs': [
+      'https://www.facebook.com/my_zodiac_ai',
+      'https://www.instagram.com/my_zodiac_ai',
+      'https://twitter.com/my_zodiac_ai',
+    ],
+    'contactPoint': {
+      '@type': 'ContactPoint',
+      'contactType': 'Customer Service',
+      'email': 'support@my-zodiac-ai.com',
+      'availableLanguage': ['Ukrainian', 'English', 'Russian'],
+    },
   },
-  title: t('meta.title'),
-  titleTemplate: '%s | My Zodiac AI',
-  meta: [
-    {
-      name: 'description',
-      content: t('meta.description'),
-    },
-    {
-      name: 'keywords',
-      content: t('meta.keywords'),
-    },
-    {
-      property: 'og:title',
-      content: t('meta.ogTitle'),
-    },
-    {
-      property: 'og:description',
-      content: t('meta.ogDescription'),
-    },
-    {
-      property: 'og:type',
-      content: 'website',
-    },
-    {
-      property: 'og:image',
-      content: `${SITE_URL}/og-image.jpg`,
-    },
-    {
-      property: 'og:image:width',
-      content: '1200',
-    },
-    {
-      property: 'og:image:height',
-      content: '630',
-    },
-    {
-      property: 'og:image:alt',
-      content: t('meta.ogImageAlt'),
-    },
-    {
-      property: 'og:url',
-      content: `${SITE_URL}/${locale.value}`,
-    },
-    {
-      name: 'twitter:card',
-      content: 'summary_large_image',
-    },
-    {
-      name: 'twitter:title',
-      content: t('meta.title'),
-    },
-    {
-      name: 'twitter:description',
-      content: t('meta.description'),
-    },
-    {
-      name: 'twitter:image',
-      content: `${SITE_URL}/og-image.jpg`,
-    },
-    {
-      name: 'robots',
-      content: 'index, follow',
-    },
-    {
-      name: 'author',
-      content: 'My Zodiac AI',
-    },
-  ],
-  link: [
-    {
-      rel: 'canonical',
-      href: `${SITE_URL}/${locale.value}`,
-    },
-    {
-      rel: 'alternate',
-      hreflang: 'ru',
-      href: `${SITE_URL}/ru`,
-    },
-    {
-      rel: 'alternate',
-      hreflang: 'uk',
-      href: `${SITE_URL}/uk`,
-    },
-    {
-      rel: 'alternate',
-      hreflang: 'en',
-      href: `${SITE_URL}/en`,
-    },
-    {
-      rel: 'alternate',
-      hreflang: 'x-default',
-      href: `${SITE_URL}`,
-    },
-  ],
-}))
 
-defineWebPage({
-  name: computed(() => t('meta.title')),
-  description: computed(() => t('meta.description')),
-})
+  // Веб-сайт
+  {
+    '@type': 'WebSite',
+    '@id': 'https://my-zodiac-ai.com/#website',
+    'url': 'https://my-zodiac-ai.com',
+    'name': 'My Zodiac AI',
+    'description': t('seo.home.description'),
+    'publisher': {
+      '@id': 'https://my-zodiac-ai.com/#organization',
+    },
+    'inLanguage': locale.value,
+  },
 
-// JSON-LD структурированные данные
-useHead({
-  script: [
-    {
-      type: 'application/ld+json',
-      children: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'WebApplication',
-        'name': t('meta.title'),
-        'description': t('meta.description'),
-        'applicationCategory': 'LifestyleApplication',
-        'operatingSystem': 'Web',
-        'url': SITE_URL,
-        'inLanguage': [locale.value],
-        'creator': {
-          '@type': 'Organization',
-          'name': 'My Zodiac AI',
-          'url': SITE_URL,
-          'logo': `${SITE_URL}/logo.png`,
-        },
-        'offers': [
-          {
-            '@type': 'Offer',
-            'name': t('pricing.free.name'),
-            'price': '0',
-            'priceCurrency': 'USD',
-            'description': t('pricing.free.description'),
-          },
-          {
-            '@type': 'Offer',
-            'name': t('pricing.premium.name'),
-            'price': '19',
-            'priceCurrency': 'USD',
-            'description': t('pricing.premium.description'),
-          },
-        ],
-        'aggregateRating': {
-          '@type': 'AggregateRating',
-          'ratingValue': '4.9',
-          'ratingCount': '2847',
-          'bestRating': '5',
-          'worstRating': '1',
-        },
-        'review': [
-          {
-            '@type': 'Review',
-            'author': {
-              '@type': 'Person',
-              'name': t('testimonials.user1.name'),
-            },
-            'reviewRating': {
-              '@type': 'Rating',
-              'ratingValue': '5',
-            },
-            'reviewBody': t('testimonials.user1.text'),
-          },
-          {
-            '@type': 'Review',
-            'author': {
-              '@type': 'Person',
-              'name': t('testimonials.user2.name'),
-            },
-            'reviewRating': {
-              '@type': 'Rating',
-              'ratingValue': '5',
-            },
-            'reviewBody': t('testimonials.user2.text'),
-          },
-        ],
-      }),
+  // Веб-приложение
+  {
+    '@type': 'WebApplication',
+    'name': 'My Zodiac AI',
+    'applicationCategory': 'LifestyleApplication',
+    'operatingSystem': 'Web Browser',
+    'offers': {
+      '@type': 'Offer',
+      'price': '0',
+      'priceCurrency': 'UAH',
+      'availability': 'https://schema.org/InStock',
     },
-    // Breadcrumb Schema
-    {
-      type: 'application/ld+json',
-      children: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        'itemListElement': [
-          {
-            '@type': 'ListItem',
-            'position': 1,
-            'name': t('breadcrumb.home'),
-            'item': `${SITE_URL}/${locale.value}`,
-          },
-        ],
-      }),
+    'aggregateRating': {
+      '@type': 'AggregateRating',
+      'ratingValue': '4.8',
+      'ratingCount': '1247',
+      'bestRating': '5',
+      'worstRating': '1',
     },
-    // FAQ Schema (если есть FAQ секция)
-    {
-      type: 'application/ld+json',
-      children: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'FAQPage',
-        'mainEntity': [
-          {
-            '@type': 'Question',
-            'name': t('faq.question1.title'),
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': t('faq.question1.answer'),
-            },
-          },
-          {
-            '@type': 'Question',
-            'name': t('faq.question2.title'),
-            'acceptedAnswer': {
-              '@type': 'Answer',
-              'text': t('faq.question2.answer'),
-            },
-          },
-        ],
-      }),
-    },
-  ],
-})
+    'featureList': [
+      'Natal Chart Analysis',
+      'Daily Horoscope',
+      'AI Astrology Assistant',
+      'Compatibility Reports',
+      'Transit Predictions',
+    ],
+  },
+
+  // Хлебные крошки (Breadcrumbs)
+  {
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': 'https://my-zodiac-ai.com',
+      },
+    ],
+  },
+])
 </script>
 
 <style scoped>
-.landing-page {
-  overflow-x: hidden;
+.home-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
 }
 
-/* Глобальные улучшения производительности */
-* {
-  box-sizing: border-box;
-}
-
-/* Оптимизация прокрутки */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Оптимизация для Core Web Vitals */
-img, video {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Улучшение доступности */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* Темная тема по умолчанию для лучшего UX */
-@media (prefers-color-scheme: dark) {
-  .landing-page {
-    color-scheme: dark;
-  }
+/* Глобальные стили для секций */
+:deep(.section) {
+  scroll-margin-top: 80px; /* Для якорных ссылок */
 }
 </style>
