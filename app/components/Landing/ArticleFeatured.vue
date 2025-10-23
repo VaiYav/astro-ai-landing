@@ -89,7 +89,7 @@
             height="48"
           />
           <div class="author-info">
-            <div class="author-name">{{ article.author }}</div>
+            <div class="author-name">{{ article.author.name }}</div>
             <div class="author-role">{{ $t('blog.author') }}</div>
           </div>
         </div>

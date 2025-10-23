@@ -80,7 +80,7 @@
           width="32"
           height="32"
         />
-        <span class="author-name">{{ article.author }}</span>
+        <span class="author-name">{{ article.author.name }}</span>
       </div>
     </div>
   </NuxtLink>
