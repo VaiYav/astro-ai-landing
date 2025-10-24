@@ -1,16 +1,12 @@
 <script setup lang="ts">
 const route = useRoute()
 const { locale } = useI18n()
-const { data: home } = await useAsyncData(() => queryCollection('content').path('/').first())
-
-console.log('home', home)
 // ⭐ ПРАВИЛЬНИЙ спосіб отримання статті в Nuxt Content v3
 const { data: article } = await useAsyncData(
   `blog-${route.params.slug}-${locale.value}`,
-  () => queryContent('blog')
+  () => queryContent(`/blog/${locale.value}`)
     .where({
       _path: { $contains: route.params.slug as string },
-      locale: locale.value,
     })
     .findOne(),
 )
@@ -61,11 +57,6 @@ const { data: relatedArticles } = await useAsyncData(
 
 <template>
   <div class="article-page">
-    <ContentRenderer
-      v-if="home"
-      :value="home"
-    />
-
     <article v-if="article">
       <!-- Header -->
       <header class="article-header">

@@ -113,7 +113,7 @@
         :enter="{ opacity: 1, y: 0, transition: { duration: 600, delay: 600 } }"
       >
         <NuxtLink
-          :to="localePath('/coming-soon')"
+          to="https://app.my-zodiac-ai.com/"
           class="cta-button"
         >
           <span>{{ $t('cta_button') }}</span>

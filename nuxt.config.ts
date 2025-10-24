@@ -149,6 +149,7 @@ export default defineNuxtConfig({
         '/en/coming-soon',
         '/ru/coming-soon',
       ],
+      failOnError: false,
     },
     devProxy: {
       '/api/': {

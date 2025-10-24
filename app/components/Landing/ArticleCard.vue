@@ -1,6 +1,6 @@
 <template>
   <NuxtLink
-    :to="localePath(article._path)"
+    :to="localePath(`/blog/${article.slug || extractSlug(article._path)}`)"
     class="article-card"
   >
     <!-- Изображение -->
