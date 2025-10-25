@@ -145,28 +145,8 @@ import ArticleFeatured from '~/components/Landing/ArticleFeatured.vue'
 import ArticleCard from '~/components/Landing/ArticleCard.vue'
 
 const { t, locale } = useI18n()
-
-// SEO оптимизация
-useSEO({
-  title: t('seo.blog.title'),
-  description: t('seo.blog.description'),
-  keywords: t('seo.keywords'),
-  image: '/images/og-blog.png',
-  type: 'website',
-})
-const { data: home } = await useAsyncData(() => queryCollection('content').path('/').first())
-
-// Schema.org для страницы блога
-useSchemaOrg([
-  {
-    '@type': 'Blog',
-    '@id': 'https://my-zodiac-ai.com/blog',
-    'name': 'AstroPersonal Blog',
-    'description': t('seo.blog.description'),
-    'url': `https://my-zodiac-ai.com/${locale.value === 'en' ? '' : locale.value + '/'}blog`,
-    'inLanguage': locale.value,
-  },
-])
+const route = useRoute()
+const config = useRuntimeConfig()
 
 // Состояние
 const searchQuery = ref('')
@@ -175,6 +155,72 @@ const currentPage = ref(1)
 const articlesPerPage = 9
 const loading = ref(true)
 const email = ref('')
+
+// ⭐ Pagination URLs для SEO
+const baseUrl = config.public.siteUrl || 'https://my-zodiac-ai.com'
+const blogPath = locale.value === 'en' ? '/blog' : `/${locale.value}/blog`
+const getPaginationUrl = (page: number) => `${baseUrl}${blogPath}?page=${page}`
+
+// Вычисляем prevPage и nextPage динамически
+const prevPageUrl = computed(() => currentPage.value > 1 ? getPaginationUrl(currentPage.value - 1) : undefined)
+const nextPageUrl = computed(() => currentPage.value < totalPages.value ? getPaginationUrl(currentPage.value + 1) : undefined)
+
+// SEO оптимизация
+useSEO({
+  title: t('seo.blog.title'),
+  description: t('seo.blog.description'),
+  keywords: t('seo.keywords'),
+  image: '/images/og-blog.png',
+  type: 'website',
+  prevPage: prevPageUrl.value,
+  nextPage: nextPageUrl.value,
+})
+
+// ⭐ Add RSS feed link
+useHead({
+  link: [
+    {
+      rel: 'alternate',
+      type: 'application/rss+xml',
+      title: 'My Zodiac AI Blog RSS Feed',
+      href: `${baseUrl}/rss.xml`,
+    },
+  ],
+})
+
+const { data: home } = await useAsyncData(() => queryCollection('content').path('/').first())
+
+// Schema.org для страницы блога
+const blogUrl = `${baseUrl}/${locale.value === 'en' ? '' : locale.value + '/'}blog`
+
+useSchemaOrg([
+  {
+    '@type': 'Blog',
+    '@id': `${baseUrl}/blog`,
+    'name': 'AstroPersonal Blog',
+    'description': t('seo.blog.description'),
+    'url': blogUrl,
+    'inLanguage': locale.value,
+  },
+  // ⭐ Breadcrumb Schema
+  {
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': baseUrl,
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Blog',
+        'item': blogUrl,
+      },
+    ],
+  },
+])
 
 // Категории
 const categories = ['all', 'learning', 'relationships', 'transits', 'natal-chart']

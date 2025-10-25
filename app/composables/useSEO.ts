@@ -20,6 +20,9 @@ interface SEOOptions {
   publishedTime?: string
   modifiedTime?: string
   noIndex?: boolean
+  // ⭐ Pagination support
+  prevPage?: string
+  nextPage?: string
 }
 
 export const useSEO = (options: SEOOptions) => {
@@ -34,7 +37,7 @@ export const useSEO = (options: SEOOptions) => {
   // Изображение по умолчанию
   const ogImage = options.image
     ? (options.image.startsWith('http') ? options.image : `${baseUrl}${options.image}`)
-    : `${baseUrl}/og-default.png`
+    : `${baseUrl}/og-default.svg`
 
   // Определяем язык для Open Graph
   const ogLocale = locale.value === 'uk'
@@ -47,6 +50,19 @@ export const useSEO = (options: SEOOptions) => {
   const alternateLocales = ['uk', 'en', 'ru']
     .filter(l => l !== locale.value)
     .map(l => l === 'uk' ? 'uk_UA' : l === 'ru' ? 'ru_RU' : 'en_US')
+
+  // ⭐ Динамическая генерация hreflang URLs
+  // Убираем префикс локали из пути
+  const pathWithoutLocale = route.path.replace(/^\/(en|ru|uk)(\/|$)/, '/')
+  // Генерируем URL для каждой локали
+  const getLocalizedUrl = (localeCode: string) => {
+    if (localeCode === 'uk') {
+      // Украинский - default locale без префикса
+      return `${baseUrl}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`
+    }
+    // Другие локали с префиксом
+    return `${baseUrl}/${localeCode}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}`
+  }
 
   // Настраиваем метатеги
   useHead({
@@ -99,20 +115,26 @@ export const useSEO = (options: SEOOptions) => {
       { name: 'twitter:image', content: ogImage },
       { name: 'twitter:image:alt', content: options.title },
 
-      // Дополнительные метатеги
+      // ⭐ Дополнительные метатеги
       { name: 'theme-color', content: '#667eea' },
       { name: 'apple-mobile-web-app-capable', content: 'yes' },
       { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+      // Telegram meta
+      { property: 'telegram:channel', content: '@my_zodiac_ai' },
     ],
     link: [
       // Canonical URL
       { rel: 'canonical', href: fullUrl },
 
-      // Hreflang для мультиязычности
-      { rel: 'alternate', hreflang: 'uk', href: `${baseUrl}/` },
-      { rel: 'alternate', hreflang: 'en', href: `${baseUrl}/en` },
-      { rel: 'alternate', hreflang: 'ru', href: `${baseUrl}/ru` },
-      { rel: 'alternate', hreflang: 'x-default', href: `${baseUrl}/` },
+      // ⭐ Динамические Hreflang для мультиязычности
+      { rel: 'alternate', hreflang: 'uk', href: getLocalizedUrl('uk') },
+      { rel: 'alternate', hreflang: 'en', href: getLocalizedUrl('en') },
+      { rel: 'alternate', hreflang: 'ru', href: getLocalizedUrl('ru') },
+      { rel: 'alternate', hreflang: 'x-default', href: getLocalizedUrl('uk') },
+
+      // ⭐ Pagination links
+      ...(options.prevPage ? [{ rel: 'prev', href: options.prevPage }] : []),
+      ...(options.nextPage ? [{ rel: 'next', href: options.nextPage }] : []),
     ],
   })
 

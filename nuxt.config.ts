@@ -43,6 +43,15 @@ export default defineNuxtConfig({
         lastmod: new Date().toISOString(),
       },
       i18n: true,
+      // ⭐ Include additional sitemaps
+      sitemaps: {
+        'sitemap-images.xml': {
+          defaults: {
+            changefreq: 'weekly',
+            priority: 0.7,
+          },
+        },
+      },
     }],
   ],
 
@@ -148,6 +157,18 @@ export default defineNuxtConfig({
         '/coming-soon',
         '/en/coming-soon',
         '/ru/coming-soon',
+        // ⭐ Blog articles - English
+        '/en/blog/zodiac-compatibility-guide',
+        '/en/blog/mercury-retrograde-guide',
+        '/en/blog/how-to-read-natal-chart',
+        // ⭐ Blog articles - Russian
+        '/ru/blog/kak-chitat-natalnuyu-kartu',
+        '/ru/blog/retrogrradnyy-merkuriy',
+        '/ru/blog/sovmestimost-znakov-zodiaka',
+        // ⭐ Blog articles - Ukrainian (default locale, no prefix)
+        '/blog/retrohradnyi-merkuriy',
+        '/blog/yak-chytaty-natalnu-kartu',
+        '/blog/sumist-znakiv-zodiaku',
       ],
       failOnError: false,
     },
@@ -246,11 +267,33 @@ export default defineNuxtConfig({
     ],
   },
 
-  // Robots.txt
+  // ⭐ Enhanced Robots.txt configuration
   robots: {
-    disallow: ['/api/', '/_nuxt/', '/admin/'],
-    allow: '/',
-    sitemap: 'https://my-zodiac-ai.com/sitemap.xml',
+    rules: [
+      {
+        userAgent: '*',
+        disallow: ['/api/', '/_nuxt/', '/admin/', '/private/'],
+        allow: '/',
+      },
+      {
+        userAgent: 'Googlebot',
+        disallow: ['/api/', '/admin/', '/private/'],
+        allow: '/',
+        crawlDelay: 0,
+      },
+      {
+        userAgent: 'Bingbot',
+        disallow: ['/api/', '/admin/', '/private/'],
+        allow: '/',
+        crawlDelay: 0,
+      },
+    ],
+    sitemap: [
+      'https://my-zodiac-ai.com/sitemap.xml',
+      'https://my-zodiac-ai.com/en/sitemap.xml',
+      'https://my-zodiac-ai.com/ru/sitemap.xml',
+      'https://my-zodiac-ai.com/sitemap-images.xml',
+    ],
   },
 
   // SEO модуль настройки

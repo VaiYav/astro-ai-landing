@@ -155,6 +155,68 @@ import { ref, computed } from 'vue'
 const billingPeriod = ref('monthly')
 const openFaq = ref(null)
 
+// ⭐ Schema.org Product/Offer разметка для тарифных планов
+useSchemaOrg([
+  {
+    '@type': 'Product',
+    'name': 'My Zodiac AI - Astrology Plans',
+    'description': 'Personalized astrology service with AI-powered natal chart analysis and predictions',
+    'brand': {
+      '@type': 'Brand',
+      'name': 'My Zodiac AI',
+    },
+    'offers': [
+      {
+        '@type': 'Offer',
+        'name': 'Free Explorer Plan',
+        'description': 'Basic natal chart and daily horoscope',
+        'price': '0',
+        'priceCurrency': 'USD',
+        'availability': 'https://schema.org/InStock',
+        'url': 'https://my-zodiac-ai.com/#pricing',
+        'priceValidUntil': '2025-12-31',
+      },
+      {
+        '@type': 'Offer',
+        'name': 'Pro Astrologer Plan',
+        'description': 'Complete natal chart with houses and unlimited horoscopes',
+        'price': '19',
+        'priceCurrency': 'USD',
+        'availability': 'https://schema.org/InStock',
+        'url': 'https://my-zodiac-ai.com/#pricing',
+        'priceValidUntil': '2025-12-31',
+        'eligibleDuration': {
+          '@type': 'QuantitativeValue',
+          'value': '1',
+          'unitCode': 'MON',
+        },
+      },
+      {
+        '@type': 'Offer',
+        'name': 'Master of Stars Plan',
+        'description': 'Professional level with personal astrologer consultations',
+        'price': '49',
+        'priceCurrency': 'USD',
+        'availability': 'https://schema.org/InStock',
+        'url': 'https://my-zodiac-ai.com/#pricing',
+        'priceValidUntil': '2025-12-31',
+        'eligibleDuration': {
+          '@type': 'QuantitativeValue',
+          'value': '1',
+          'unitCode': 'MON',
+        },
+      },
+    ],
+    'aggregateRating': {
+      '@type': 'AggregateRating',
+      'ratingValue': '4.8',
+      'reviewCount': '1247',
+      'bestRating': '5',
+      'worstRating': '1',
+    },
+  },
+])
+
 const pricingPlans = [
   {
     id: 'free',

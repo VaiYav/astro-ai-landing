@@ -29,6 +29,12 @@ useSeoMeta({
   ogType: 'article',
 })
 
+// ⭐ Improved Schema.org markup
+const baseUrl = 'https://my-zodiac-ai.com'
+const currentPath = route.path
+const fullUrl = `${baseUrl}${currentPath}`
+const blogUrl = `${baseUrl}/${locale.value === 'en' ? '' : locale.value + '/'}blog`
+
 useSchemaOrg([
   defineArticle({
     headline: article.value.title,
@@ -37,9 +43,36 @@ useSchemaOrg([
     datePublished: article.value.date,
     dateModified: article.value.updatedAt || article.value.date,
     author: {
-      name: article.value.author?.name || 'AstroPersonal Team',
+      '@type': 'Person',
+      'name': article.value.author?.name || 'AstroPersonal Team',
+      'url': article.value.author?.name ? `${baseUrl}/author/${encodeURIComponent(article.value.author.name)}` : baseUrl,
+      ...(article.value.author?.avatar && { 'image': article.value.author.avatar }),
     },
   }),
+  // ⭐ Breadcrumb Schema for blog articles
+  {
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      {
+        '@type': 'ListItem',
+        'position': 1,
+        'name': 'Home',
+        'item': baseUrl,
+      },
+      {
+        '@type': 'ListItem',
+        'position': 2,
+        'name': 'Blog',
+        'item': blogUrl,
+      },
+      {
+        '@type': 'ListItem',
+        'position': 3,
+        'name': article.value.title,
+        'item': fullUrl,
+      },
+    ],
+  },
 ])
 
 // Схожі статті

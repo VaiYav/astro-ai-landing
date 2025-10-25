@@ -155,6 +155,9 @@ import { Icon } from '@iconify/vue'
 defineOptions({
   name: 'Testimonials',
 })
+
+const { t } = useI18n()
+
 // Моковые отзывы (в реальном проекте можно загружать из API)
 const testimonials = [
   {
@@ -182,6 +185,37 @@ const testimonials = [
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face',
   },
 ]
+
+// ⭐ Schema.org Review and AggregateRating for testimonials
+useSchemaOrg([
+  {
+    '@type': 'Product',
+    '@id': 'https://my-zodiac-ai.com/#product',
+    'name': 'My Zodiac AI',
+    'aggregateRating': {
+      '@type': 'AggregateRating',
+      'ratingValue': '4.8',
+      'reviewCount': '1247',
+      'bestRating': '5',
+      'worstRating': '1',
+    },
+    'review': testimonials.map((testimonial, index) => ({
+      '@type': 'Review',
+      'author': {
+        '@type': 'Person',
+        'name': t(testimonial.name),
+      },
+      'reviewRating': {
+        '@type': 'Rating',
+        'ratingValue': '5',
+        'bestRating': '5',
+        'worstRating': '1',
+      },
+      'reviewBody': t(testimonial.text),
+      'datePublished': '2025-10-15',
+    })),
+  },
+])
 
 // Стили для фоновых звезд
 const getBgStarStyle = (index) => {

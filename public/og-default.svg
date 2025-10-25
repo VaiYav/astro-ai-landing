@@ -1,0 +1,55 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+
+  <!-- Decorative circles -->
+  <circle cx="200" cy="150" r="100" fill="url(#glow)" opacity="0.5"/>
+  <circle cx="1000" cy="480" r="150" fill="url(#glow)" opacity="0.5"/>
+
+  <!-- Stars pattern -->
+  <circle cx="150" cy="100" r="3" fill="#ffffff" opacity="0.6"/>
+  <circle cx="300" cy="80" r="2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="450" cy="120" r="2.5" fill="#ffffff" opacity="0.5"/>
+  <circle cx="900" cy="150" r="3" fill="#ffffff" opacity="0.6"/>
+  <circle cx="1050" cy="100" r="2" fill="#ffffff" opacity="0.4"/>
+  <circle cx="250" cy="500" r="2.5" fill="#ffffff" opacity="0.5"/>
+  <circle cx="800" cy="550" r="2" fill="#ffffff" opacity="0.4"/>
+
+  <!-- Zodiac symbol (stylized) -->
+  <g transform="translate(600, 200)">
+    <circle cx="0" cy="0" r="80" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.8"/>
+    <circle cx="0" cy="0" r="60" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.6"/>
+    <path d="M 0,-60 L 0,60 M -60,0 L 60,0" stroke="#ffffff" stroke-width="2" opacity="0.7"/>
+    <circle cx="0" cy="-60" r="8" fill="#f0c373"/>
+    <circle cx="60" cy="0" r="8" fill="#f0c373"/>
+    <circle cx="0" cy="60" r="8" fill="#f0c373"/>
+    <circle cx="-60" cy="0" r="8" fill="#f0c373"/>
+  </g>
+
+  <!-- Main text -->
+  <text x="600" y="380" font-family="'Cormorant Garamond', serif" font-size="72" font-weight="700" fill="#ffffff" text-anchor="middle">
+    My Zodiac AI
+  </text>
+
+  <!-- Subtitle -->
+  <text x="600" y="440" font-family="'Inter', sans-serif" font-size="32" fill="#ffffff" text-anchor="middle" opacity="0.9">
+    Personal AI Astrology
+  </text>
+
+  <!-- Tagline -->
+  <text x="600" y="520" font-family="'Inter', sans-serif" font-size="24" fill="#ffffff" text-anchor="middle" opacity="0.8">
+    Natal Chart • Horoscope • AI Predictions
+  </text>
+</svg>
